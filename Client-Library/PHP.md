@@ -518,74 +518,138 @@ Find by clicking **API info** for the template you want to send.
 
 #### Method
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```php
+    $response = $notifyClient->getTemplateVersion( 'c32e9c89-a423-42d2-85b7-a21cd4486a2a', 1 );
+```
+
 </details>
 
 
 #### Response
 
-XYZ
+If the request is successful, `response` will be an `array`.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```php
+[
+    "id" => "template_id",
+    "type" => "sms|email|letter",
+    "created_at" => "created at",
+    "updated_at" => "updated at",
+    "version" => "version",
+    "created_by" => "someone@example.com",
+    "body" => "body",
+    "subject" => "null|email_subject"
+]
+```
+
+|`error["status_code"]`|`error["errors"]`|
+|:---|:---|
+|`404`|`[{`<br>`"error" => "NoResultFound",`<br>`"message" => "No result found"`<br>`}]`|
+
 </details>
 
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+##### `templateId`
+
+Find by clicking **API info** for the template you want to send.
+
+##### `version`
+
+The version number of the template
+
 </details>
 
 ## Get all templates
 
 #### Method
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```php
+    $this->getAllTemplates(
+      $template_type  // optional
+    );
+```
+This will return the latest version for each template
+
 </details>
 
 
 #### Response
 
-XYZ
+If the request is successful, `response` will be an `array`.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```php
+[
+    "templates"  => [
+        [
+            "id" => "template_id",
+            "type" => "sms|email|letter",
+            "created_at" => "created at",
+            "updated_at" => "updated at",
+            "version" => "version",
+            "created_by" => "someone@example.com",
+            "body" => "body",
+            "subject" => "null|email_subject"
+        ],
+        [
+            ... another template
+        ]
+    ]
+]
+```
+
++If no templates exist for a template type or there no templates for a service, the `response` will be a Dictionary` with an empty `templates` list element:
+
+```php
+[
+    "templates"  => []
+]
+```
+
 </details>
 
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+##### `$templateType`
+
+If omitted all messages are returned. Otherwise you can filter by:
+
+* `email`
+* `sms`
+* `letter`
+
 </details>
 
 
@@ -593,38 +657,99 @@ XYZ
 
 #### Method
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```php
+    $personalisation = [ "foo" => "bar" ];
+    $this->previewTemplate( $templateId, $personalisation );
+```
+
 </details>
 
 
 #### Response
 
-XYZ
+If the request is successful, `response` will be an `array`.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+
+```php
+[
+    "id" => "notify_id",
+    "type" => "sms|email|letter",
+    "version" => "version",
+    "body" => "Hello bar" // with substitution values,
+    "subject" => "null|email_subject"
+]
+```
+
+|`error["status_code"]`|`error["errors"]`|
+|:---|:---|
+|`400`|`[{`<br>`"error" => "BadRequestError",`<br>`"message" => "Missing personalisation => [name]"`<br>`}]`|
+|`404`|`[{`<br>`"error" => "NoResultFound",`<br>`"message" => "No result found"`<br>`}]`|
+
+
 </details>
 
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+##### `$templateId`
+
+Find by clicking **API info** for the template you want to send.
+
+##### `$personalisation`
+
+If a template has placeholders you need to provide their values. For example:
+
+```php
+$personalisation = [
+    'first_name' => 'Amala',
+    'reference_number' => '300241',
+];
+```
+
+Otherwise the parameter can be omitted or `null` can be passed in its place.
+
 </details>
 
+## Development
 
+#### Tests
+
+There are unit and integration tests that can be run to test functionality of the client.
+
+To run the unit tests:
+
+```sh
+vendor/bin/phpspec run spec/unit/ --format=pretty --verbose
+```
+
+To run the integration tests:
+
+```sh
+vendor/bin/phpspec run spec/integration/ --format=pretty --verbose
+```
+
+To run both sets of tests:
+
+```sh
+vendor/bin/phpspec run --format=pretty
+```
+
+## License
+
+The Notify PHP Client is released under the MIT license, a copy of which can be found in [LICENSE](LICENSE.txt).
 

@@ -323,6 +323,18 @@ If the request is successful, `response` will be a `dict`.
 Click here to expand for more information.
 </summary>
 
+#### Arguement
+ <details>
+ <summary>
+ Click here to expand for more information.
+ </summary>
+
+ ##### `notification_id`
+
+ This is the ```id``` field in the response when API is used to send a notification.
+
+ </details>
+
 
 ```python
 {
