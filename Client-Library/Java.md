@@ -1,6 +1,6 @@
 # GOV.UK Notify Java client
 
-This documentatiaon is for developers interested in using this Java client to integrate their government service with GOV.UK Notify.
+This documentation is for developers interested in using this Java client to integrate their government service with GOV.UK Notify.
 
 ## Installation
 
@@ -153,19 +153,26 @@ Otherwise the client will raise a `NotificationClientException`:
 Click here to expand for more information.
 </summary>
 
-#### `phoneNumber`
+##### `phoneNumber`
 The mobile number the SMS notification is sent to.
 
-#### `templateId`
+##### `templateId`
 
 The template id is visible on the template page in the application.
 
-#### `personalisation`
-
-???
-
-#### `reference`
+##### `reference`
 An optional unique identifier for the notification or an identifier for a batch of notifications. `reference` can be an empty string or null.
+
+##### `personalisation`
+
+If a template has placeholders, you need to provide their values, for example:
+
+```java
+personalisation={
+    'first_name': 'Amala',
+    'reference_number': '300241',
+}
+```
 
 </details>
 
@@ -234,7 +241,14 @@ The template id is visible on the template page in the application.
 
 #### `personalisation`
 
-???
+If a template has placeholders, you need to provide their values, for example:
+
+```java
+personalisation={
+    'first_name': 'Amala',
+    'reference_number': '300241',
+}
+```
 
 #### `reference`
 An optional unique identifier for the notification or an identifier for a batch of notifications. `reference` can be an empty string or null.
@@ -639,10 +653,6 @@ Click here to expand for more information.
 If the response is successful, a TemplateList is returned.
 
 If no templates exist for a template type or there no templates for a service, the templates list will be empty.
-
-Otherwise the client will raise a `NotificationClientException`:
-
-???
 
 </details>
 
