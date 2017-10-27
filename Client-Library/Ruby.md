@@ -1,4 +1,4 @@
-# GOV.UK Notify Python client
+# GOV.UK Notify Ruby client
 
 This documentation is for developers interested in using this Ruby client to integrate their government service with GOV.UK Notify.
 
