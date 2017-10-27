@@ -289,149 +289,278 @@ If you omit this argument your default email reply-to address will be set for th
 
 #### Method
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```ruby
+notification = client.get_notification(id) # => Notifications::Client::Notification
+```
+
 </details>
 
 
 #### Response
 
-XYZ
+If successful a `Notifications::Client::Notification` is returned.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```ruby
+notification.id         # => uuid for the notification
+notification.to         # => recipient email address or mobile number
+notification.status     # => status of the message "created|pending|sent|delivered|permanent-failure|temporary-failure"
+notification.created_at # => Date time the message was created
+notification.api_key    # => uuid for the api key (not the actual api key)
+notification.billable_units # => units billable or nil for email
+notification.subject    # => Subject of email or nil for sms
+notification.body       # => Body of message
+notification.job        # => job id if created by a csv or nil if message sent via api
+notification.notification_type # => sms | email
+notification.service    # => uuid for service
+notification.sent_at    # => Date time the message is sent to the provider or nil if status = "created"
+notification.sent_by    # => Name of the provider that sent the message or nil if status = "created"
+notification.template   # => Hash containing template id, name, version, template type sms|email
+notification.template_version # Template version number
+notification.reference  # => reference of the email or nil for sms
+notification.updated_at # => Date time that the notification was last updated
+```
+Otherwise a `Notification::Client::RequestError` is raised
+
+|`error.code`|`error.message`|
+|:---|:---|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
+|`404`|`[{`<br>`"error": "ValidationError",`<br>`"message": "is is not a valid UUID"`<br>`}]`|
+
 </details>
 
 #### Arguments
 
-XYZ
+???
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+???
 </details>
 
-## Get the status of all messages (with pagination)
+## Get the status of all messages
 
 #### Method
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```ruby
+# See section below for a description of the arguments.
+args = {
+  'template_type' => 'sms',
+  'status' => 'failed',
+  'reference' => 'your reference string'
+  'olderThanId' => 'e194efd1-c34d-49c9-9915-e4267e01e92e' # => Notifications::Client::Notification
+}
+notifications = client.get_notifications(args)
+```
+
 </details>
 
 
 #### Response
 
-XYZ
+If the request is successful a `Notifications::Client::NotificationsCollection` is returned.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```ruby
+notifications.links # => Hash containing current => "/notifications?template_type=sms&status=delivered"
+                    #                    next => "/notifications?other_than=last_id_in_list&template_type=sms&status=delivered"
+notifications.collection # => [] (array of notification objects)
+```
+
+Otherwise the client will raise a `Notifications::Client::RequestError`:
+
+|`error.status_code`|`error.message`|
+|:---|:---|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]"`<br>`}]`|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Apple is not one of [sms, email, letter]"`<br>`}]`|
+
 </details>
-
-
 
 #### Arguments
 
-XYZ
+Omit the argument Hash if you do not want to filter the results.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+##### `template_type`
+
+You can filter by:
+
+* `email`
+* `sms`
+* `letter`
+
+You can omit this argument to ignore the filter.
+
+##### `status`
+
+You can filter by:
+
+* `sending` - the message is queued to be sent by the provider.
+* `delivered` - the message was successfully delivered.
+* `failed` - this will return all failure statuses `permanent-failure`, `temporary-failure` and `technical-failure`.
+* `permanent-failure` - the provider was unable to deliver message, email or phone number does not exist; remove this recipient from your list.
+* `temporary-failure` - the provider was unable to deliver message, email box was full or the phone was turned off; you can try to send the message again.
+* `technical-failure` - Notify had a technical failure; you can try to send the message again.
+
+You can omit this argument to ignore the filter.
+
+##### `reference`
+
+This is the `reference` you gave at the time of sending the notification. The `reference` can be a unique identifier for the notification or an identifier for a batch of notifications.
+
+You can omit this argument to ignore the filter.
+
+
+##### `olderThanId`
+You can get the notifications older than a given `Notification.id`.
+You can omit this argument to ignore this filter.
+
 </details>
 
-
-## Get the status of all messages (without pagination)
-
-#### Method
-
-XYZ
-<details>
-<summary>
-Click here to expand for more information.
-</summary>
-
-XYZ
-</details>
-
-#### Response
-
-XYZ
-<details>
-<summary>
-Click here to expand for more information.
-</summary>
-
-XYZ
-</details>
-
-
-#### Arguments
-
-XYZ
-<details>
-<summary>
-Click here to expand for more information.
-</summary>
-
-XYZ
-</details>
 
 
 ## Get a template by ID
 
 #### Method 
 
-XYZ
+This will return the latest version of the template. Use [getTemplateVersion](#get-a-template-by-id-and-version) to retrieve a specific template version.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```ruby
+template = client.get_template_by_id(template_id)
+```
+
 </details>
 
 
 #### Response
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```Ruby
+template.id         # => uuid for the template
+template.type       # => type of template one of email|sms|letter
+template.created_at # => date and time the template was created
+template.updated_at # => date and time the template was last updated, may be null if version 1
+template.created_by # => email address of the person that created the template
+template.version    # => version of the template
+template.body       # => content of the template
+template.subject    # => subject for email templates, will be empty for other template types
+```
+
+Otherwise the client will raise a `Notifications::Client::RequestError`.
+
 </details>
 
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+|`error.code`|`error.message`|
+|:---|:---|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
+|`404`|`[{`<br>`"error": "ValidationError",`<br>`"message": "is is not a valid UUID"`<br>`}]`|
+
+##### `templateId`
+The template id is visible on the template page in the application.
+
+</details>
+
+
+## Get a template by ID and version
+
+#### Method
+
+This will return the template for the given id and version.
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+```ruby
+Template template = client.get_template_version(template_id template_id, version)
+```
+
+</details>
+
+
+#### Response
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+
+```Ruby
+template.id         # => uuid for the template
+template.type       # => type of template one of email|sms|letter
+template.created_at # => date and time the template was created
+template.updated_at # => date and time the template was last updated, may be null if version 1
+template.created_by # => email address of the person that created the template
+template.version    # => version of the template
+template.body       # => content of the template
+template.subject    # => subject for email templates, will be empty for other template types
+```
+
+Otherwise the client will raise a `Notifications::Client::RequestError`.
+
+|`error.code`|`error.message`|
+|:---|:---|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
+|`404`|`[{`<br>`"error": "ValidationError",`<br>`"message": "is is not a valid UUID"`<br>`}]`|
+
+</details>
+
+
+#### Arguments
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+#### `templateId`
+The template id is visible on the template page in the application.
+
+#### `version`
+A history of the template is kept. There is a link to `See previous versions` on the template page in the application.
+
 </details>
 
 
@@ -439,13 +568,21 @@ XYZ
 
 #### Method
 
-XYZ
+This will return the latest version of each template for your service.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```ruby
+args = {
+  'template_type' => 'sms'
+}
+templates = client.get_all_templates(args)
+```
+
+
 </details>
 
 
@@ -457,19 +594,34 @@ XYZ
 Click here to expand for more information.
 </summary>
 
-XYZ
+```ruby
+    TemplateCollection templates;
+```
+If the response is successful, a TemplateCollection is returned.
+
+If no templates exist for a template type or there no templates for a service, the templates list will be empty.
+
+Otherwise the client will raise a `Notifications::Client::RequestError`.
+
 </details>
 
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+##### `templateType`
+You can filter the templates by the following options:
+
+* `email`
+* `sms`
+* `letter`
+You can omit this argument to ignore this filter.
+
+
 </details>
 
 
@@ -477,37 +629,61 @@ XYZ
 
 #### Method
 
-XYZ
+This will return the contents of a template with the placeholders replaced with the given personalisation.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+
+```ruby
+templatePreview = client.generate_template_preview(template_id,
+                                                  personalisation: {
+                                                      name: "name",
+                                                      year: "2016",                      
+                                                    })
+```
+
 </details>
 
 
 #### Response
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```Ruby
+template.id         # => uuid for the template
+template.version    # => version of the template
+template.body       # => content of the template
+template.subject    # => subject for email templates, will be empty for other template types
+```
+Otherwise a `Notifications::Client::RequestError` is thrown.
+
+|`error.code`|`error.message`|
+|:---|:---|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
+|`404`|`[{`<br>`"error": "ValidationError",`<br>`"message": "is is not a valid UUID"`<br>`}]`|
+
 </details>
 
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+##### `templateId`
+The template id is visible on the template page in the application.
+
+##### `personalisation`
+If a template has placeholders, you need to provide their values. `personalisation` can be an empty or null in which case no placeholders are provided for the notification.
+
 </details>
 
 
