@@ -488,7 +488,7 @@ Click here to expand for more information.
 </summary>
 
 ```php
-    $response = $notifyClient->getTemplate( 'c32e9c89-a423-42d2-85b7-a21cd4486a2a' );
+    $response = $notifyClient->getTemplate( 'templateId' );
 ```
 
 </details>
@@ -547,7 +547,7 @@ Click here to expand for more information.
 </summary>
 
 ```php
-    $response = $notifyClient->getTemplateVersion( 'c32e9c89-a423-42d2-85b7-a21cd4486a2a', 1 );
+    $response = $notifyClient->getTemplateVersion( 'templateId', 1 );
 ```
 
 </details>
