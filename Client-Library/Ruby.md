@@ -278,17 +278,10 @@ letter.uri          # => URL of the notification
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
-
-#### `phone_number`
-The phone number of the recipient, only required when using `client.send_sms`.
-
-#### `email_address`
-The email address of the recipient, only required when using `client.send_email`.
 
 #### `template_id`
 Find by clicking **API info** for the template you want to send.
@@ -326,12 +319,6 @@ personalisation: {
 ```
 
 The fields `address_line_1`, `address_line_2` and `postcode` are required.
-
-#### `email_reply_to_id`
-
-Optional. Specifies the identifier of the email reply-to address to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Email reply to addresses'. 
-
-If you omit this argument your default email reply-to address will be set for the notification.
 
 </details>
 
