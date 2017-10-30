@@ -378,13 +378,15 @@ Otherwise a `Notification::Client::RequestError` is raised
 
 #### Arguments
 
-???
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-???
+##### `get_notification(id)`
+
+The ID of the notification.
+
 </details>
 
 ## Get the status of all messages
