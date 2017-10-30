@@ -23,13 +23,11 @@ the **API integration** page.
 ## Send messages
 
 ### Text message
-
-#### Method 
-
-<details>
 <summary>
 Click here to expand for more information.
 </summary>
+<details>
+#### Method 
 
 ```python
 response = notifications_client.send_sms_notification(
@@ -39,15 +37,11 @@ response = notifications_client.send_sms_notification(
     reference=None
 )
 ```
-</details>
+
 
 #### Response
 
 If the request is successful, `response` will be a `dict`. 
-<details>
-<summary>
-Click here to expand for more information.
-</summary>
 
 ```python
 {
@@ -76,14 +70,10 @@ Otherwise the client will raise a `HTTPError`:
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can"t send to this recipient using a team-only API key"`<br>`]}`|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can"t send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|
 
-</details>
+
 
 #### Arguments
 
-<details>
-<summary>
-Click here to expand for more information.
-</summary>
 
 ##### `phone_number`
 
@@ -333,6 +323,18 @@ If the request is successful, `response` will be a `dict`.
 Click here to expand for more information.
 </summary>
 
+#### Arguement
+ <details>
+ <summary>
+ Click here to expand for more information.
+ </summary>
+
+ ##### `notification_id`
+
+ This is the ```id``` field in the response when API is used to send a notification.
+
+ </details>
+
 
 ```python
 {
@@ -361,13 +363,25 @@ Click here to expand for more information.
 	"completed_at:" "date the notification is delivered or failed" # optional
 }
 ```
-
+ 
 Otherwise the client will raise a `HTTPError`:
 
 |`error.status_code`|`error.message`|
 |:---|:---|
 |`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|
+
+</details>
+
+#### Arguement
+<details>
+<summary>
+Click here to expand for more information. 
+</summary>
+
+##### `notification_id`
+
+This is the ```id``` field in the response when API is used to send a notification. 
 
 </details>
 
@@ -610,7 +624,7 @@ This is the `reference` you gave at the time of sending the notification. The `r
 
 #### Method 
 
-This will return the latest version of the template. Use [get_template_version](#get-a-template-by-id-and-version) to retrieve a specific template version. 
+This will return the latest version of the template. Use [```get_template_version```](#get-a-template-by-id-and-version) to retrieve a specific template version. 
 
 <details>
 <summary>
