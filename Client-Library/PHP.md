@@ -444,7 +444,6 @@ Otherwise the client will raise a ``Alphagov\Notifications\Exception\NotifyExcep
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
