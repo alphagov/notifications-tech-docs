@@ -83,13 +83,36 @@ Otherwise the client will raise a `Notifications::Client::RequestError`:
 
 #### Arguments
 
-???
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-???
+##### `phone_number`
+
+The phone number of the recipient, only required for sms notifications.
+
+##### `template_id`
+
+Find by clicking **API info** for the template you want to send.
+
+##### `reference`
+
+An optional identifier you generate. The `reference` can be used as a unique reference for the notification. Because Notify does not require this reference to be unique you could also use this reference to identify a batch or group of notifications.
+
+You can omit this argument if you do not require a reference for the notification.
+
+##### `personalisation`
+
+If a template has placeholders, you need to provide their values, for example:
+
+```python
+personalisation={
+    'first_name': 'Amala',
+    'reference_number': '300241',
+}
+```
+
 </details>
 
 
