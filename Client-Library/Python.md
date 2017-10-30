@@ -518,7 +518,7 @@ This is the `reference` you gave at the time of sending the notification. The `r
 
 You can omit this argument to ignore the filter.
 
-##### `olderThanId`
+##### `older_than`
 
 You can get the notifications older than a given Notification.notificationId.
 
