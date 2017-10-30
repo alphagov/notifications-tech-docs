@@ -351,13 +351,15 @@ Otherwise the client will raise a ``Alphagov\Notifications\Exception\NotifyExcep
 
 #### Arguments
 
-???
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-???
+##### `$notificationId`
+
+The ID of the notification.
+
 </details>
 
 ## Get the status of all messages
