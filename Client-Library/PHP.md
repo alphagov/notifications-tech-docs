@@ -647,7 +647,7 @@ Click here to expand for more information.
 ]
 ```
 
-+If no templates exist for a template type or there no templates for a service, the `response` will be a Dictionary` with an empty `templates` list element:
+If no templates exist for a template type or there no templates for a service, the `response` will be a Dictionary` with an empty `templates` list element:
 
 ```php
 [
