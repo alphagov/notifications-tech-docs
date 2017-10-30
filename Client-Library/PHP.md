@@ -207,11 +207,14 @@ Otherwise the client will raise a ``Alphagov\Notifications\Exception\NotifyExcep
 Click here to expand for more information.
 </summary>
 
-##### `templateId`
+##### `$emailAddress`
+The email address the email notification is sent to.
+
+##### `$templateId`
 
 Find by clicking **API info** for the template you want to send.
 
-##### `personalisation`
+##### `$personalisation`
 
 If a template has placeholders you need to provide their values. For example:
 
@@ -224,11 +227,11 @@ personalisation = [
 
 Otherwise the parameter can be omitted.
 
-##### `reference`
+##### `$reference`
 
 An optional identifier you generate if you don’t want to use Notify’s `id`. It can be used to identify a single  notification or a batch of notifications.
 
-##### `emailReplyToId`
+##### `$emailReplyToId`
 
 Optional. Specifies the identifier of the email reply-to address to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Email reply to addresses'.
 
