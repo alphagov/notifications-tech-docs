@@ -177,7 +177,6 @@ Otherwise the client will return an error `error object`:
 
 #### Arguments
 
-???
 <details>
 <summary>
 Click here to expand for more information.
