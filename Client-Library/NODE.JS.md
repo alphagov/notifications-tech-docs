@@ -163,9 +163,9 @@ Click here to expand for more information.
     }
 }
 ```
-Otherwise the client will return an error `err`:
+Otherwise the client will return an error `error object`:
 
-|`err.error.status_code`|`err.error.errors`|
+|`status_code`|`errors`|
 |:---|:---|
 |`429`|`[{`<br>`"error": "RateLimitError",`<br>`"message": "Exceeded rate limit for key type TEAM of 10 requests per 10 seconds"`<br>`}]`|
 |`429`|`[{`<br>`"error": "TooManyRequestsError",`<br>`"message": "Exceeded send limits (50) for today"`<br>`}]`|
@@ -461,7 +461,7 @@ Click here to expand for more information.
 }
 ```
 
-|`err.error.status_code`|`err.error.errors`|
+|`status_code`|`errors`|
 |:---|:---|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]"`<br>`}]`|
 |`400`|`[{`<br>`"error": "Apple is not one of [sms, email, letter]"`<br>`}]`|
@@ -548,9 +548,9 @@ Click here to expand for more information.
 }
 ```
 
-Otherwise the client will return an error `err`:
+Otherwise the client will return an error `error object`:
 
-|`err.error.status_code`|`err.error.errors`|
+|`status_code`|`errors`|
 |:---|:---|
 |`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
 
@@ -612,9 +612,9 @@ Click here to expand for more information.
     "subject": "null|email_subject"
 }
 ```
-Otherwise the client will return an error `err`:
+Otherwise the client will return an error `error object`:
 
-|`err.error.status_code`|`err.error.errors`|
+|`status_code`|`errors`|
 |:---|:---|
 |`404`|`[{`<br>`"error": "NoResultFound",`<br>`"No result found"`<br>`}]`|
 
@@ -758,9 +758,9 @@ If the request is successful, `response` will be an `object`:
 }
 ```
 
-Otherwise the client will return an error `err`:
+Otherwise the client will return an error `error object`:
 
-|`err.error.status_code`|`err.error.errors`|
+|`status_code`|`errors`|
 |:---|:---|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"Missing personalisation: [name]"`<br>`}]`|
 |`404`|`[{`<br>`"error": "NoResultFound",`<br>`"No result found"`<br>`}]`|
