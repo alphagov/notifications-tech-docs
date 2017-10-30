@@ -371,6 +371,19 @@ Otherwise the client will raise a `HTTPError`:
 
 </details>
 
+#### Arguments
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+##### `notification_id`
+
+The ID of the notification.
+
+</details>
+
 ## Get the status of all messages (with pagination)
 
 #### Method
