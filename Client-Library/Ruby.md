@@ -178,13 +178,41 @@ Otherwise the client will raise a `Notifications::Client::RequestError`:
 
 #### Arguments
 
-???
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-???
+##### `email_address`
+The email address of the recipient, only required for email notifications.
+
+##### `template_id`
+
+Find by clicking **API info** for the template you want to send.
+
+##### `reference`
+
+An optional identifier you generate. The `reference` can be used as a unique reference for the notification. Because Notify does not require this reference to be unique you could also use this reference to identify a batch or group of notifications.
+
+You can omit this argument if you do not require a reference for the notification.
+
+##### `email_reply_to_id`
+
+Optional. Specifies the identifier of the email reply-to address to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Email reply to addresses'. 
+
+If you omit this argument your default email reply-to address will be set for the notification.
+
+##### `personalisation`
+
+If a template has placeholders, you need to provide their values, for example:
+
+```python
+personalisation={
+    'first_name': 'Amala',
+    'application_number': '300241',
+}
+```
+
 </details>
 
 
