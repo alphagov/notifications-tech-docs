@@ -447,19 +447,8 @@ Otherwise the client will raise a `NotificationClientException`.
 
 #### Arguments
 
-
 <details>
 <summary>Click here to expand for more information.</summary>
-
-##### `template_type`
-
-You can filter by:
-
-* `email`
-* `sms`
-* `letter`
-
-You can omit this argument to ignore this filter.
 
 ##### `status`
 
@@ -501,6 +490,14 @@ You can omit this argument to ignore this filter.
 ##### `reference`
 
 This is the `reference` you gave at the time of sending the notification. The `reference` can be a unique identifier for the notification or an identifier for a batch of notifications.
+
+##### `olderThanId`
+
+You can get the notifications older than a given Notification.notificationId.
+
+##### `notificationType`
+
+???
 
 </details>
 
