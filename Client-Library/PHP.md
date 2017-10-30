@@ -101,13 +101,32 @@ Otherwise the client will raise a ``Alphagov\Notifications\Exception\NotifyExcep
 
 #### Arguments
 
-???
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-???
+##### `$phoneNumber`
+The mobile number the SMS notification is sent to.
+
+##### `$templateId`
+
+The template id is visible on the template page in the application.
+
+##### `$reference`
+An optional unique identifier for the notification or an identifier for a batch of notifications. `reference` can be an empty string or null.
+
+##### `$personalisation`
+
+If a template has placeholders, you need to provide their values, for example:
+
+```java
+personalisation={
+    'first_name': 'Amala',
+    'reference_number': '300241',
+}
+```
+
 </details>
 
 
