@@ -153,7 +153,7 @@ Otherwise the client will raise a `NotificationClientException`:
 Click here to expand for more information.
 </summary>
 
-##### `phoneNumber`
+##### `mobileNumber`
 The mobile number the SMS notification is sent to.
 
 ##### `templateId`
