@@ -189,7 +189,7 @@ Click here to expand for more information.
 HashMap<String, String> personalisation = new HashMap<>();
 personalisation.put("name", "Jo");
 personalisation.put("reference_number", "13566");
-SendEmailResponse response = client.sendEmail(templateId, mobileNumber, personalisation, "yourReferenceString");
+SendEmailResponse response = client.sendEmail(templateId, emailAddress, personalisation, reference);
 ```
 
 </details>
@@ -251,7 +251,9 @@ personalisation={
 ```
 
 #### `reference`
-An optional unique identifier for the notification or an identifier for a batch of notifications. `reference` can be an empty string or null.
+An optional identifier you generate. The reference can be used as a unique reference for the notification. Because Notify does not require this reference to be unique you could also use this reference to identify a batch or group of notifications.
+
+You can omit this argument if you do not require a reference for the notification.
 
 </details>
 
