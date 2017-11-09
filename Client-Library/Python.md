@@ -2,6 +2,18 @@
 
 This documentation is for developers interested in using this python client to integrate their government service with GOV.UK Notify.
 
+## Table of Contents
+
+* [Installation](#installation)
+* [Getting started](#getting-started)
+* [Send messages](#send-messages)
+* [Get the status of one message](#get-the-status-of-one-message)
+* [Get the status of all messages](#get-the-status-of-all-messages)
+* [Get a template by ID](#get-a-template-by-id)
+* [Get a template by ID and version](#get-a-template-by-id-and-version)
+* [Get all templates](#get-all-templates)
+* [Generate a preview template](#generate-a-preview-template)
+
 ## Installation
 
 ```shell
