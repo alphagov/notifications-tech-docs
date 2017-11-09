@@ -13,6 +13,8 @@ This documentation is for developers interested in using this PHP client to inte
 * [Get a template by ID and version](#get-a-template-by-id-and-version)
 * [Get all templates](#get-all-templates)
 * [Generate a preview template](#generate-a-preview-template)
+* [Development](#development)
+* [License](#license)
 
 ## Installation
 
