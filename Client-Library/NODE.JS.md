@@ -13,6 +13,7 @@ This documentation is for developers interested in using this Node.js client to 
 * [Get a template by ID and version](#get-a-template-by-id-and-version)
 * [Get all templates](#get-all-templates)
 * [Generate a preview template](#generate-a-preview-template)
+* [Test](#tests)
 
 ## Installation
 
