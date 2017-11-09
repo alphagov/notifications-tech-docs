@@ -640,7 +640,6 @@ templates = client.get_all_templates(args)
 
 #### Response
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
