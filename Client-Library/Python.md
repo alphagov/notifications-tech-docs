@@ -8,8 +8,8 @@ This documentation is for developers interested in using this python client to i
 * [Getting started](#getting-started)
 * [Send messages](#send-messages)
 * [Get the status of one message](#get-the-status-of-one-message)
-* [Get the status of all messages (with pagination)](#get-the-status-of-all-messages--with-pagination-)
-* [Get the status of all messages (without pagination)](#get-the-status-of-all-messages--without-pagination-)
+* [Get the status of all messages with pagination](#get-the-status-of-all-messages-with-pagination)
+* [Get the status of all messages without pagination](#get-the-status-of-all-messages-without-pagination)
 * [Get a template by ID](#get-a-template-by-id)
 * [Get a template by ID and version](#get-a-template-by-id-and-version)
 * [Get all templates](#get-all-templates)
@@ -397,7 +397,7 @@ The ID of the notification.
 
 </details>
 
-## Get the status of all messages (with pagination)
+## Get the status of all messages with pagination
 
 #### Method
 
@@ -539,7 +539,7 @@ You can omit this argument to ignore the filter.
 
 </details>
 
-## Get the status of all messages (without pagination)
+## Get the status of all messages without pagination
 
 #### Method
 
