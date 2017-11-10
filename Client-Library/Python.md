@@ -50,6 +50,7 @@ response = notifications_client.send_sms_notification(
     template_id='f33517ff-2a88-4f6e-b855-c550268ce08a',
     personalisation=None,
     reference=None
+    sms_sender_id=None
 )
 ```
 </details>
@@ -123,6 +124,11 @@ personalisation={
     'reference_number': '300241',
 }
 ```
+##### `sms_sender_id`
+
+Optional. Specifies the identifier of the sms sender to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Text message sender'.
+
+If you omit this argument your default sms sender will be set for the notification.
 
 </details>
 
@@ -198,15 +204,15 @@ Find by clicking **API info** for the template you want to send.
 
 ##### `reference`
 
-An optional identifier you generate. The `reference` can be used as a unique reference for the notification. Because Notify does not require this reference to be unique you could also use this reference to identify a batch or group of notifications.
-
-You can omit this argument if you do not require a reference for the notification.
-
-##### `email_reply_to_id`
-
 Optional. Specifies the identifier of the email reply-to address to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Email reply to addresses'. 
 
 If you omit this argument your default email reply-to address will be set for the notification.
+
+##### `email_reply_to_id`
+
+An optional identifier that you can get from the service email_reply_to ids found  in the service settings / manage email reply to addresses page.
+
+You can omit this argument if you want to use the default service email reply to otherwise add the id from the list of email_reply_to ids associated with the service.
 
 ##### `personalisation`
 
