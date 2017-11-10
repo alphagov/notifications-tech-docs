@@ -63,7 +63,7 @@ Then add the Maven dependency to your project.
     <dependency>
         <groupId>uk.gov.service.notify</groupId>
         <artifactId>notifications-java-client</artifactId>
-        <version>3.4.0-RELEASE</version>
+        <version>3.5.0-RELEASE</version>
     </dependency>
 
 ```
