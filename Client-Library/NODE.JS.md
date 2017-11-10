@@ -197,7 +197,7 @@ Click here to expand for more information.
 
 ##### `emailAddress`
 
-The email address the email notification is sent to.
+The email address of the recipient, only required for email notifications.
 
 ##### `templateId`
 
@@ -216,9 +216,15 @@ If a template has placeholders, you need to provide their values, for example:
 ```javascript
 personalisation={
     'first_name': 'Amala',
-    'reference_number': '300241',
+    'application_number': '300241',
 }
 ```
+
+##### `emailReplyToId`
+
+Optional. Specifies the identifier of the email reply-to address to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Email reply to addresses'. 
+If you omit this argument your default email reply-to address will be set for the notification.
+
 </details>
 
 
