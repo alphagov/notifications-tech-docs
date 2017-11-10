@@ -123,7 +123,7 @@ Click here to expand for more information.
 Map<String, String> personalisation = new HashMap<>();
 personalisation.put("name", "Jo");
 personalisation.put("reference_number", "13566");
-SendSmsResponse response = client.sendSms(templateId, mobileNumber, personalisation, "yourReferenceString");
+SendSmsResponse response = client.sendSms(templateId, mobileNumber, personalisation, "yourReferenceString", emailReplyToId);
 ```
 
 </details>
@@ -186,6 +186,10 @@ personalisation={
 }
 ```
 
+#### `email_reply_to_id`
+Optional. Specifies the identifier of the email reply-to address to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Email reply to addresses'.
+If you omit this argument your default email reply-to address will be set for the notification.
+
 </details>
 
 ### Email
@@ -201,7 +205,7 @@ Click here to expand for more information.
 HashMap<String, String> personalisation = new HashMap<>();
 personalisation.put("name", "Jo");
 personalisation.put("reference_number", "13566");
-SendEmailResponse response = client.sendEmail(templateId, emailAddress, personalisation, reference);
+SendEmailResponse response = client.sendEmail(templateId, emailAddress, personalisation, reference, emailReplyToId);
 ```
 
 </details>
@@ -266,6 +270,10 @@ personalisation={
 An optional identifier you generate. The reference can be used as a unique reference for the notification. Because Notify does not require this reference to be unique you could also use this reference to identify a batch or group of notifications.
 
 You can omit this argument if you do not require a reference for the notification.
+
+#### `email_reply_to_id`
+Optional. Specifies the identifier of the email reply-to address to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Email reply to addresses'.
+If you omit this argument your default email reply-to address will be set for the notification.
 
 </details>
 
