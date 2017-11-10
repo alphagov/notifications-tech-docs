@@ -276,7 +276,7 @@ personalisation={
 
 #### Response
 
-If the request is successful, `response` will be an `object`:
+If the request is successful, `response` will be an `Dictionary`:
 <details>
 <summary>
 Click here to expand for more information.
