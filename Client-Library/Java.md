@@ -85,7 +85,7 @@ repositories {
 }
 
 dependencies {
-    compile('uk.gov.service.notify:notifications-java-client:3.4.0-RELEASE')
+    compile('uk.gov.service.notify:notifications-java-client:3.5.0-RELEASE')
 }
 ```
 </details>
