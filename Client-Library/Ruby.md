@@ -55,6 +55,7 @@ sms = client.send_sms(
     year: "2016",                      
   }
   reference: "your_reference_string"
+  sms_sender_id: sms_sender_id
 ) # => Notifications::Client::ResponseNotification
 ```
 
@@ -124,6 +125,11 @@ personalisation={
     'reference_number': '300241',
 }
 ```
+##### `sms_sender_id`
+
+Optional. Specifies the identifier of the sms sender to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Text message sender'.
+
+If you omit this argument your default sms sender will be set for the notification.
 
 </details>
 
@@ -145,7 +151,7 @@ email = client.send_email(
     name: "name",
     year: "2016"
   },
-  reference: "your_reference_string"
+  reference: "your_reference_string",
   email_reply_to_id: email_reply_to_id
 ) # => Notifications::Client::ResponseNotification
 ```
@@ -213,7 +219,7 @@ You can omit this argument if you do not require a reference for the notificatio
 Optional. Specifies the identifier of the email reply-to address to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Email reply to addresses'. 
 
 If you omit this argument your default email reply-to address will be set for the notification.
-
+  
 ##### `personalisation`
 
 If a template has placeholders, you need to provide their values, for example:
