@@ -60,7 +60,7 @@ Click here to expand for more information.
 
 The method signature is:
 ```php
-sendSms( $phoneNumber, $templateId, array $personalisation = array(), $reference = '' )
+sendSms( $phoneNumber, $templateId, array $personalisation = array(), $reference = '', $smsSenderId = NULL  )
 ```
 
 An example request would look like:
@@ -68,10 +68,15 @@ An example request would look like:
 ```php
 try {
 
-    $response = $notifyClient->sendSms( '+447777111222', 'df10a23e-2c6d-4ea5-87fb-82e520cbf93a', [
-        'name' => 'Betty Smith',
-        'dob'  => '12 July 1968'
-    ]);
+    $response = $notifyClient->sendSms( 
+        '+447777111222', 
+        'df10a23e-2c6d-4ea5-87fb-82e520cbf93a', [
+            'name' => 'Betty Smith',
+            'dob'  => '12 July 1968'
+        ],
+        'unique_ref123',
+        '862bfaaf-9f89-43dd-aafa-2868ce2926a9'
+    );
 
 } catch (NotifyException $e){}
 ```
@@ -125,21 +130,29 @@ The mobile number the SMS notification is sent to.
 
 ##### `$templateId`
 
-The template id is visible on the template page in the application.
+Find by clicking **API info** for the template you want to send.
 
 ##### `$reference`
-An optional unique identifier for the notification or an identifier for a batch of notifications. `reference` can be an empty string or null.
+An optional identifier you generate if you don’t want to use Notify’s `id`. It can be used to identify a single  notification or a batch of notifications.
 
 ##### `$personalisation`
 
 If a template has placeholders, you need to provide their values, for example:
 
-```java
-personalisation={
-    'first_name': 'Amala',
-    'reference_number': '300241',
-}
+```php
+personalisation = [
+    'name' => 'Betty Smith',
+    'dob'  => '12 July 1968'
+]
 ```
+
+Otherwise the parameter can be omitted.
+
+##### `smsSenderId`
+
+Optional. Specifies the identifier of the sms sender to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Text message sender'.
+
+If you omit this argument your default sms sender will be set for the notification.
 
 </details>
 
@@ -155,7 +168,7 @@ Click here to expand for more information.
 
 The method signature is:
 ```php
-sendEmail( $emailAddress, $templateId, array $personalisation = array(), $reference = '' )
+sendEmail( $emailAddress, $templateId, array $personalisation = array(), $reference = '', $emailReplyToId = NULL )
 ```
 
 An example request would look like:
@@ -163,10 +176,15 @@ An example request would look like:
 ```php
 try {
 
-    $response = $notifyClient->sendEmail( 'betty@example.com', 'df10a23e-2c0d-4ea5-87fb-82e520cbf93c', [
-        'name' => 'Betty Smith',
-        'dob'  => '12 July 1968'
-    ]);
+    $response = $notifyClient->sendEmail( 
+        'betty@example.com', 
+        'df10a23e-2c0d-4ea5-87fb-82e520cbf93c', [
+            'name' => 'Betty Smith',
+            'dob'  => '12 July 1968'
+        ],
+        'unique_ref123',
+        '862bfaaf-9f89-43dd-aafa-2868ce2926a9'
+        );
 
 } catch (NotifyException $e){}
 ```
