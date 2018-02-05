@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'faraday', '~> 0.14'
+
 # Middleman Gems
 gem 'middleman', '>= 4.0.0'
 gem 'middleman-livereload'
@@ -11,3 +13,8 @@ gem 'middleman-syntax', '~> 3.0.0'
 gem 'redcarpet', '~> 3.3.2'
 
 gem 'table_of_contents', git: 'https://github.com/alphagov/table_of_contents.git', ref: 'f6d37fe1e837cebf7354abafd891f755148e7efa'
+
+group :test do
+  gem 'rspec', '~> 3.7'
+  gem 'webmock', '~> 3.3'
+end
