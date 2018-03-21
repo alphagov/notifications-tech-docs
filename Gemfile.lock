@@ -45,7 +45,7 @@ GEM
     fast_blank (1.0.0)
     fastimage (2.1.1)
     ffi (1.9.23)
-    govuk_tech_docs (1.0.0)
+    govuk_tech_docs (1.1.0)
       middleman (~> 4.0)
       middleman-autoprefixer (~> 2.7.0)
       middleman-compass (>= 4.0.0)
@@ -176,7 +176,7 @@ PLATFORMS
 
 DEPENDENCIES
   faraday (~> 0.14)
-  govuk_tech_docs
+  govuk_tech_docs (~> 1.1)
   rspec (~> 3.7)
   webmock (~> 3.3)
 
