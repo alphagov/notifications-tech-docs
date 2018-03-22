@@ -56,4 +56,4 @@ You should revoke and re-create these keys on a regular basis. To revoke a key:
 
 You can have more than one active key at a time.
 
-You should never send test messages to invalid numbers or addresses using a live key. If you do, the client will revoke your live API key.
+You should never send test messages to invalid numbers or addresses using a live key. 
