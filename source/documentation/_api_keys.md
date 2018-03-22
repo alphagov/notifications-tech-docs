@@ -24,10 +24,10 @@ To test failure responses with a test key, use the following numbers and address
 
 |Phone number/Email address|Response|
 |:---|:---|
-|07700900003|`temporary failure`|
-|07700900002|`permanent failure`|
-|temp-fail@simulator.notify|`temporary failure`|
-|perm-fail@simulator.notify|`permanent failure`|
+|07700900003|`temporary-failure`|
+|07700900002|`permanent-failure`|
+|temp-fail@simulator.notify|`temporary-failure`|
+|perm-fail@simulator.notify|`permanent-failure`|
 |any other valid number or address|`delivered`|
 
 You do not have to revoke test keys.
