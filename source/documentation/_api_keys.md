@@ -6,7 +6,7 @@ There are three different types of API keys:
 - team and whitelist
 - live
 
-When you first sign up to Notify, you are able to create test and team and whitelist keys. You must have a live service to create a live key.
+When you first sign up to Notify, you can create test and team and whitelist keys. You must have a live service to create a live key.
 
 ## Test
 
@@ -24,23 +24,23 @@ To test failure responses with a test key, use the following numbers and address
 
 |Phone number/Email address|Response|
 |:---|:---|
-|07700900003|temporary failure|
-|07700900002|permanent failure|
-|temp-fail@simulator.notify|temporary failure|
-|perm-fail@simulator.notify|permanent failure|
-|any other valid number or address|delivered|
+|07700900003|`temporary failure`|
+|07700900002|`permanent failure`|
+|temp-fail@simulator.notify|`temporary failure`|
+|perm-fail@simulator.notify|`permanent failure`|
+|any other valid number or address|`delivered`|
 
-Test keys do not have to be revoked.
+You do not have to revoke test keys.
 
 ## Team and whitelist
 
-A team and whitelist key lets you send real messages to your team members and addresses/numbers on your whitelist whilst your account is still in trial mode.
+A team and whitelist key lets you send real messages to your team members and addresses/numbers on your whitelist while your account is still in trial mode.
 
 You will get an error if you use these keys to send messages to anyone who isn't on your team or your whitelist.
 
 Messages sent with a team and whitelist key appear on your dashboard and count against your text message and email allowances.
 
-Team and whitelist keys do not have to be revoked.
+You do not have to revoke team and whitelist keys.
 
 ## Live
 
@@ -51,9 +51,9 @@ Messages sent with a live key appear on your dashboard and count against your te
 You should revoke and re-create these keys on a regular basis. To revoke a key:
 
 1. Log into your GOV.UK Notify account.
-1. Click _API integration_ and then _API keys_.
-1. Click _Revoke_ for the API key you want to revoke.
+1. Select __API integration__ and then __API keys__.
+1. Select __Revoke__ for the API key you want to revoke.
 
 You can have more than one active key at a time.
 
-You should never send test messages to invalid numbers or addresses using a live key. This will lead to your API key being revoked.
+You should never send test messages to invalid numbers or addresses using a live key. If you do, the client will revoke your live API key.
