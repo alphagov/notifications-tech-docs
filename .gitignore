@@ -18,3 +18,7 @@
 .DS_Store
 
 Staticfile.auth
+
+# Ignore manifest.yml and tech-docs.yml, which will get generated per environment
+manifest.yml
+config/tech-docs.yml
