@@ -1,11 +1,11 @@
 class ClientDocs
-  CLIENTS = [
-    "java",
-    "net",
-    "node",
-    "php",
-    "python",
-    "ruby",
+  CLIENTS = %w[
+    java
+    net
+    node
+    php
+    python
+    ruby
   ].freeze
 
   def self.pages
