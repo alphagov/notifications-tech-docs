@@ -5,7 +5,7 @@ RSpec.describe ExternalDoc do
     let(:repository) { 'alphagov/client-library' }
 
     before do
-      stub_request(:get, "https://raw.githubusercontent.com/#{repository}/master/README.md").
+      stub_request(:get, "https://raw.githubusercontent.com/#{repository}/master/DOCUMENTATION.md").
         to_return(body: File.read('spec/fixtures/markdown.md'))
     end
 
