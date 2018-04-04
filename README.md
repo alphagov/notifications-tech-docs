@@ -45,7 +45,7 @@ access it if they are given the link.
 Type the following to start the server:
 
 ```
-bundle exec middleman server
+make run-in-development
 ```
 
 If all goes well something like the following output will be displayed:

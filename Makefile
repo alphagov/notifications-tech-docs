@@ -13,6 +13,12 @@ generate-manifest:
 generate-tech-docs-yml:
 	@erb config/tech-docs.yml.erb > config/tech-docs.yml
 
+.PHONY: development
+development: ## Set environment to development
+	$(eval export ROUTE='localhost:4567')
+	$(eval export HOST='http://localhost:4567')
+	@true
+
 .PHONY: preview
 preview: ## Set environment to preview
 	$(eval export CF_SPACE=preview)
@@ -27,12 +33,16 @@ production: ## Set environment to production
 	$(eval export HOST='https://docs.notifications.service.gov.uk')
 	@true
 
+.PHONY: run-in-development
+run-in-development: development generate-tech-docs-yml ## Runs the app in development
+	bundle exec middleman server
+
 .PHONY: generate-build-files
-generate-build-files:
+generate-build-files: generate-tech-docs-yml ## Generates the build files
 	bundle exec middleman build
 
 .PHONY: cf-deploy
-cf-deploy: generate-manifest generate-tech-docs-yml generate-build-files ## Deploys the app to Cloud Foundry
+cf-deploy: generate-manifest generate-build-files ## Deploys the app to Cloud Foundry
 	$(if ${CF_ORG},,$(error Must specify CF_ORG))
 	$(if ${CF_SPACE},,$(error Must specify CF_SPACE))
 	cf target -o ${CF_ORG} -s ${CF_SPACE}
