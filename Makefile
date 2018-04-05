@@ -1,6 +1,10 @@
 CF_ORG ?= govuk-notify
 CF_APP = notify-tech-docs
 
+DOCKER_BUILDER_IMAGE_NAME = govuk/notify-tech-docs
+BUILD_TAG ?= notifications-tech-docs
+DOCKER_CONTAINER_PREFIX = ${USER}-${BUILD_TAG}
+
 .PHONY: test
 test:
 	./script/run_tests.sh
@@ -54,3 +58,42 @@ cf-deploy: generate-manifest generate-build-files ## Deploys the app to Cloud Fo
 	# get the new GUID, and find all crash events for that. If there were any crashes we will abort the deploy.
 	[ $$(cf curl "/v2/events?q=type:app.crash&q=actee:$$(cf app --guid ${CF_APP})" | jq ".total_results") -eq 0 ]
 	cf delete -f ${CF_APP}-rollback
+
+.PHONY: test-with-docker
+test-with-docker: prepare-docker-runner-image ## Build inside a Docker container
+	docker run -i --rm \
+		--name "${DOCKER_CONTAINER_PREFIX}-build" \
+		-v "`pwd`:/var/project" \
+		-e http_proxy="${HTTP_PROXY}" \
+		-e HTTP_PROXY="${HTTP_PROXY}" \
+		-e https_proxy="${HTTPS_PROXY}" \
+		-e HTTPS_PROXY="${HTTPS_PROXY}" \
+		-e NO_PROXY="${NO_PROXY}" \
+		${DOCKER_BUILDER_IMAGE_NAME} \
+		make test
+
+.PHONY: build-with-docker
+build-with-docker: prepare-docker-runner-image ## Build inside a Docker container
+	$(if ${CF_SPACE},,$(error Must specify CF_SPACE))
+	docker run -i --rm \
+		--name "${DOCKER_CONTAINER_PREFIX}-build" \
+		-v "`pwd`:/var/project" \
+		-e http_proxy="${HTTP_PROXY}" \
+		-e HTTP_PROXY="${HTTP_PROXY}" \
+		-e https_proxy="${HTTPS_PROXY}" \
+		-e HTTPS_PROXY="${HTTPS_PROXY}" \
+		-e NO_PROXY="${NO_PROXY}" \
+		${DOCKER_BUILDER_IMAGE_NAME} \
+		make ${CF_SPACE} generate-build-files
+
+.PHONY: prepare-docker-runner-image
+prepare-docker-runner-image: ## Prepare the Docker builder image
+	docker pull `grep "FROM " Dockerfile | cut -d ' ' -f 2` || true
+	docker build \
+		--build-arg http_proxy="${HTTP_PROXY}" \
+		--build-arg HTTP_PROXY="${HTTP_PROXY}" \
+		--build-arg https_proxy="${HTTPS_PROXY}" \
+		--build-arg HTTPS_PROXY="${HTTPS_PROXY}" \
+		--build-arg NO_PROXY="${NO_PROXY}" \
+		-t govuk/notify-tech-docs \
+		.

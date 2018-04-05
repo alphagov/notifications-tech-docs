@@ -20,7 +20,7 @@ function display_result {
   fi
 }
 
-bundle exec govuk-lint-ruby
+bundle exec govuk-lint-ruby app spec
 display_result $? 1 "Code style check"
 
 bundle exec rspec
