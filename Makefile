@@ -44,6 +44,7 @@ run-in-development: development generate-tech-docs-yml ## Runs the app in develo
 .PHONY: generate-build-files
 generate-build-files: generate-tech-docs-yml ## Generates the build files
 	bundle exec middleman build
+	if [ -f user_group_ids ]; then chown -R `cat user_group_ids` build; rm user_group_ids; fi
 
 .PHONY: cf-deploy
 cf-deploy: generate-manifest ## Deploys the app to Cloud Foundry
@@ -77,6 +78,8 @@ test-with-docker: prepare-docker-runner-image ## Build inside a Docker container
 .PHONY: build-with-docker
 build-with-docker: prepare-docker-runner-image ## Build inside a Docker container
 	$(if ${CF_SPACE},,$(error Must specify CF_SPACE))
+	if [ -d build-${CF_SPACE} ]; then rm -rf build-${CF_SPACE}; fi
+	echo "$(shell id -u `whoami`):$(shell id -g `whoami`)" > user_group_ids
 	docker run -i --rm \
 		--name "${DOCKER_CONTAINER_PREFIX}-build" \
 		-v "`pwd`:/var/project" \
