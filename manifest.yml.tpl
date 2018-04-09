@@ -5,4 +5,4 @@ applications:
   path: ./build
   buildpack: staticfile_buildpack
   routes:
-    - route: <%= ENV.fetch("ROUTE") %>
+    - route: {{ROUTE}}
