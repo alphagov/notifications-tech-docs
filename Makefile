@@ -87,7 +87,7 @@ build-with-docker: prepare-docker-runner-image ## Build inside a Docker containe
 		-e NO_PROXY="${NO_PROXY}" \
 		${DOCKER_BUILDER_IMAGE_NAME} \
 		make ${CF_SPACE} generate-build-files
-		mv build build-${CF_SPACE}
+	mv build build-${CF_SPACE}
 
 .PHONY: prepare-docker-runner-image
 prepare-docker-runner-image: ## Prepare the Docker builder image
