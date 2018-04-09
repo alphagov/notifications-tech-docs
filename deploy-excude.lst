@@ -1,0 +1,13 @@
+.git/*
+app/*
+Client-Library/*
+script/*
+source/*
+spec/*
+.gitignore
+.rspec
+.ruby-version
+.template-version
+config.rb
+LICENCE
+README.md
