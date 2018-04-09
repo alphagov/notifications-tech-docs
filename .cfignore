@@ -1,4 +1,5 @@
 /app
+/build-*
 /Client-Library
 /script
 /source
