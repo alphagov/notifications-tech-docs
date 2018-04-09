@@ -47,9 +47,9 @@ generate-build-files: generate-tech-docs-yml ## Generates the build files
 
 .PHONY: cf-deploy
 cf-deploy: generate-manifest ## Deploys the app to Cloud Foundry
-	@[ ! -d ./build ]; echo "Build files don't exist - Generate the build files"; exit 1;
 	$(if ${CF_ORG},,$(error Must specify CF_ORG))
 	$(if ${CF_SPACE},,$(error Must specify CF_SPACE))
+	cp -r build-${CF_SPACE} build
 	cf target -o ${CF_ORG} -s ${CF_SPACE}
 	@cf app --guid ${CF_APP} || exit 1
 	cf rename ${CF_APP} ${CF_APP}-rollback
@@ -87,6 +87,7 @@ build-with-docker: prepare-docker-runner-image ## Build inside a Docker containe
 		-e NO_PROXY="${NO_PROXY}" \
 		${DOCKER_BUILDER_IMAGE_NAME} \
 		make ${CF_SPACE} generate-build-files
+		mv build build-${CF_SPACE}
 
 .PHONY: prepare-docker-runner-image
 prepare-docker-runner-image: ## Prepare the Docker builder image
