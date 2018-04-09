@@ -78,7 +78,7 @@ test-with-docker: prepare-docker-runner-image ## Build inside a Docker container
 .PHONY: build-with-docker
 build-with-docker: prepare-docker-runner-image ## Build inside a Docker container
 	$(if ${CF_SPACE},,$(error Must specify CF_SPACE))
-	[ -d build-${CF_SPACE} ] && rm -rf build-${CF_SPACE}
+	if [ -d build-${CF_SPACE} ]; then rm -rf build-${CF_SPACE}; fi
 	echo "$(shell id -u `whoami`):$(shell id -g `whoami`)" > user_group_ids
 	docker run -i --rm \
 		--name "${DOCKER_CONTAINER_PREFIX}-build" \
