@@ -13,7 +13,8 @@ test:
 
 .PHONY: generate-manifest
 generate-manifest:
-	@erb manifest.yml.erb > manifest.yml
+	$(if ${ROUTE},,$(error Must specify ROUTE))
+	@sed -e "s/{{ROUTE}}/${ROUTE}/" manifest.yml.tpl > manifest.yml
 
 .PHONY: generate-tech-docs-yml
 generate-tech-docs-yml:
