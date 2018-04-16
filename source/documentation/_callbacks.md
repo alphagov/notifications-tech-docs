@@ -33,6 +33,8 @@ The callback message is formatted in JSON. The key, description and format of th
 |`sent_at`|The time the notification was sent|2017-05-14T12:15:30.000000Z or nil|
 |`notification_type`|The notification type|email / sms / letter|
 
+Contact the GOV.UK Notify team on the [support page](https://www.notifications.service.gov.uk/support) or through the [Slack channel](https://govuk.slack.com/messages/C0AC2LX7E) if you have any questions.
+
 ## For delivery receipts
 
 When you send an email or text message through Notify, Notify will send a receipt to your callback URL with the status of the message. This is an automated method to get the status of messages.  
