@@ -18,7 +18,7 @@ To do this, log into your GOV.UK Notify account, go to __API integration__ and s
 
 If your service receives text messages in Notify, Notify can forward them to your callback URL as soon as they arrive.
 
-Contact the GOV.UK Notify team on the [support page](https://www.notifications.service.gov.uk/support) or through the [Slack channel](https://govuk.slack.com/messages/C0AC2LX7E) to enable "Receive text messages" for your service.
+Contact the GOV.UK Notify team on the [support page](https://www.notifications.service.gov.uk/support) or through the [Slack channel](https://ukgovernmentdigital.slack.com/messages/govuk-notify) to enable "Receive text messages" for your service.
 
 The callback message is formatted in JSON. The key, description and format of the callback message arguments will be:
 
@@ -27,13 +27,13 @@ The callback message is formatted in JSON. The key, description and format of th
 |`id`|Notify’s id for the status receipts|UUID|
 |`reference`|The reference sent by the service|12345678|
 |`to`|The email address of the recipient|hello@gov.uk|
-|`status`|The status of the notification|delivered / permanent-failure / temporary-failure / technical-failure| 
+|`status`|The status of the notification|delivered / permanent-failure / temporary-failure / technical-failure|
 |`created_at`|The time the service sent the request|2017-05-14T12:15:30.000000Z|
 |`completed_at`|The last time the status was updated|2017-05-14T12:15:30.000000Z|
 |`sent_at`|The time the notification was sent|2017-05-14T12:15:30.000000Z or nil|
 |`notification_type`|The notification type|email / sms / letter|
 
-Contact the GOV.UK Notify team on the [support page](https://www.notifications.service.gov.uk/support) or through the [Slack channel](https://govuk.slack.com/messages/C0AC2LX7E) if you have any questions.
+Contact the GOV.UK Notify team on the [support page](https://www.notifications.service.gov.uk/support) or through the [Slack channel](https://ukgovernmentdigital.slack.com/messages/govuk-notify) if you have any questions.
 
 ## For delivery receipts
 
