@@ -6,12 +6,11 @@ There is a rate limit for requests to the API from your account. The limit is 30
 
 ## Service limits
 
-There are limits for the number of messages sent per day. These limits differ depending on the service status and type, and the API key type. Limits reset at midnight.
+There are limits for the number of messages sent per day. These limits depend on whether your service is live, and the API key type. Limits reset at midnight.
 
-|Service status|API Key Type|Service type|Daily limit|
-|:---|:---|:---|:---|
-|Live|Team / Live|Central Government|250,000|
-|Live|Team / Live|Local / NHS|25,000|
-|Live|Test|All|Unlimited|
-|Trial|Team / Live|All|50|
-|Trial|Test|All|Unlimited|
+|Service status|API key type|Daily limit|
+|:---|:---|:---|
+|Live|Team / Live|250,000|
+|Live|Test|Unlimited|
+|Trial|Team / Live|50|
+|Trial|Test|Unlimited|
