@@ -1,6 +1,6 @@
 # Limits
 
-## API Rate limits
+## API rate limits
 
 There is a rate limit for requests to the API from your account. The limit is 3000 per rolling 60 second time period. This limit applies per API key type. If you exceed the limit, you will receive the `429` error `RateLimitError`.
 
