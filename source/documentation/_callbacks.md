@@ -43,8 +43,8 @@ The callback message is formatted in JSON. The key, description and format of th
 
 |Key | Description | Format|
 |:---|:---|:---|
-|id | Notify’s id for the received message | UUID|
-|source_number | The phone number the message was sent from | 447700912345|
-|destination_number | The number the message was sent to (your number) | 07700987654|
-|message | The received message | Hello Notify!|
-|date_received | The UTC datetime that the message was received by Notify | 2017-05-14T12:15:30.000000Z|
+|`id` | Notify’s id for the received message | UUID|
+|`source_number` | The phone number the message was sent from | 447700912345|
+|`destination_number` | The number the message was sent to (your number) | 07700987654|
+|`message` | The received message | Hello Notify!|
+|`date_received` | The UTC datetime that the message was received by Notify | 2017-05-14T12:15:30.000000Z|
