@@ -20,6 +20,6 @@ These limits reset at midnight.
 
 ## Phone network limits
 
-If you repeatedly send send text messages to the same phone number the phone networks will block your messages.
+If you repeatedly send text messages to the same number the phone networks will block your messages.
 
 MORE DETAIL HERE
