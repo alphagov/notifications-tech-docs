@@ -20,10 +20,10 @@ These limits reset at midnight.
 
 ## Phone network limits
 
-If you repeatedly send text messages to the same number the phone networks will block your messages.
+If you repeatedly send text messages to the same number the phone networks will block them.
 
-There is an hourly limit of:
+There’s an hourly limit of:
 - 6 messages with same content
 - 20 messages with any content
 
-Beyond these limits your messages won’t be delivered.
+Your messages will not be delivered if you exceed these limits.
