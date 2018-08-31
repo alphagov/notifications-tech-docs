@@ -23,6 +23,7 @@ These limits reset at midnight.
 If you repeatedly send text messages to the same number the phone networks will block them.
 
 There’s an hourly limit of:
+
 - 6 messages with same content
 - 20 messages with any content
 
