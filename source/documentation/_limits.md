@@ -24,7 +24,7 @@ If you repeatedly send text messages to the same number the phone networks will 
 
 There’s an hourly limit of:
 
-- 6 messages with same content
-- 20 messages with any content
+- 20 messages with same content
+- 100 messages with any content
 
-Your messages will not be delivered if you exceed these limits.
+Your messages may not be delivered if you exceed these limits.
