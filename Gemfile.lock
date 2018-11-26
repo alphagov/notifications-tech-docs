@@ -144,7 +144,7 @@ GEM
       ast (~> 2.4.0)
     powerpack (0.1.2)
     public_suffix (3.0.1)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-livereload (0.3.17)
       rack
     rainbow (3.0.0)
