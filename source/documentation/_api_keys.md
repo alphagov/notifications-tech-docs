@@ -38,6 +38,8 @@ A team and whitelist key lets you send real messages to your team members and ad
 
 You will get an error if you use these keys to send messages to anyone who isn't on your team or your whitelist.
 
+You must send messages using the GOV.UK Notify API when using the team and whitelist key.
+
 Messages sent with a team and whitelist key appear on your dashboard and count against your text message and email allowances.
 
 You do not have to revoke team and whitelist keys.
