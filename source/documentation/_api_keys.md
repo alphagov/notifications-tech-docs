@@ -6,6 +6,8 @@ There are three different types of API keys:
 - team and whitelist
 - live
 
+To get an API key, [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk) and go to the __API integration__ page.
+
 When you first sign up to Notify, you can create test and team and whitelist keys. You must have a live service to create a live key.
 
 ## Test
