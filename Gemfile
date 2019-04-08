@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'faraday', '~> 0.15.4'
 gem 'govuk-lint', '~> 3.11.0'
-gem 'govuk_tech_docs', '~> 1.8.1'
+gem 'govuk_tech_docs', '~> 1.8.2'
 gem 'therubyracer', '~> 0.12.3'
 
 group :test do
