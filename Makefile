@@ -56,14 +56,16 @@ cf-deploy: generate-manifest ## Deploys the app to Cloud Foundry
 	cp -r build-${CF_SPACE} build
 	cf target -o ${CF_ORG} -s ${CF_SPACE}
 	@cf app --guid ${CF_APP} || exit 1
-	cf rename ${CF_APP} ${CF_APP}-rollback
-	cf push -f manifest.yml ${CF_APP}
-	cf scale -i $$(cf curl /v2/apps/$$(cf app --guid ${CF_APP}-rollback) | jq -r ".entity.instances" 2>/dev/null || echo "1") ${CF_APP}
-	cf stop ${CF_APP}-rollback
-	# get the new GUID, and find all crash events for that. If there were any crashes we will abort the deploy.
-	[ $$(cf curl "/v2/events?q=type:app.crash&q=actee:$$(cf app --guid ${CF_APP})" | jq ".total_results") -eq 0 ]
-	cf delete -f ${CF_APP}-rollback
+
+	# cancel any existing deploys to ensure we can apply manifest (if a deploy is in progress you'll see ScaleDisabledDuringDeployment)
+	cf v3-cancel-zdt-push ${CF_APP} || true
+
+	cf v3-apply-manifest ${CF_APP} -f <(make -s generate-manifest)
+	cf v3-zdt-push ${CF_APP} --wait-for-deploy-complete  # fails after 5 mins if deploy doesn't work
+
 	rm -rf ./build/
+
+
 
 .PHONY: test-with-docker
 test-with-docker: prepare-docker-runner-image ## Build inside a Docker container
