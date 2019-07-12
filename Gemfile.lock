@@ -50,7 +50,7 @@ GEM
     fast_blank (1.0.0)
     fastimage (2.1.5)
     ffi (1.11.1)
-    govuk-lint (3.11.4)
+    govuk-lint (3.11.5)
       rubocop (~> 0.72)
       rubocop-rails (~> 2)
       rubocop-rspec (~> 1.28)
@@ -190,7 +190,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
-    rubocop-rails (2.1.0)
+    rubocop-rails (2.2.0)
       rack (>= 1.1)
       rubocop (>= 0.72.0)
     rubocop-rspec (1.33.0)
@@ -232,7 +232,7 @@ PLATFORMS
 
 DEPENDENCIES
   faraday (~> 0.15.4)
-  govuk-lint (~> 3.11.4)
+  govuk-lint (~> 3.11.5)
   govuk_tech_docs (~> 1.8.3)
   rspec (~> 3.8.0)
   therubyracer (~> 0.12.3)
