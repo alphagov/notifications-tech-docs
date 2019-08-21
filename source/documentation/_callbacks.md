@@ -16,7 +16,7 @@ To do this, log into your GOV.UK Notify account, go to __API integration__ and s
 
 ## Delivery receipts
 
-When you send an email or text message through Notify, Notify will send a receipt to your callback URL with the status of the message. This is an automated method to get the status of messages.  
+When you send an email or text message through Notify, Notify will send a receipt to your callback URL with the status of the message. This is an automated method to get the status of messages.
 
 This functionality works with test API keys, but does not work with smoke testing phone numbers or email addresses.
 
@@ -37,7 +37,7 @@ The callback message is formatted in JSON. The key, description and format of th
 
 If your service receives text messages in Notify, Notify can forward them to your callback URL as soon as they arrive.
 
-Contact the GOV.UK Notify team on the [support page](https://www.notifications.service.gov.uk/support) or through the [Slack channel](https://ukgovernmentdigital.slack.com/messages/govuk-notify) to enable receiving text messages for your service.
+Contact the GOV.UK Notify team on the [support page](https://www.notifications.service.gov.uk/support) or through the [Slack channel](https://ukgovernmentdigital.slack.com/messages/C0E1ADVPC) to enable receiving text messages for your service.
 
 The callback message is formatted in JSON. The key, description and format of the callback message arguments will be:
 
