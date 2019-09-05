@@ -6,8 +6,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.6.0)
-      public_suffix (>= 2.0.2, < 4.0)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.0)
     autoprefixer-rails (6.7.7.2)
       execjs
@@ -158,7 +158,7 @@ GEM
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    public_suffix (3.1.1)
+    public_suffix (4.0.1)
     rack (2.0.7)
     rack-livereload (0.3.17)
       rack
@@ -222,7 +222,7 @@ GEM
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.6.0)
-    webmock (3.7.0)
+    webmock (3.7.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -236,7 +236,7 @@ DEPENDENCIES
   govuk_tech_docs (~> 1.8.3)
   rspec (~> 3.8.0)
   therubyracer (~> 0.12.3)
-  webmock (~> 3.7.0)
+  webmock (~> 3.7.2)
 
 BUNDLED WITH
    1.16.3
