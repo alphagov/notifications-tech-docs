@@ -10,9 +10,15 @@ https://api.notifications.service.gov.uk
 ## Headers
 
 ### Authorization header
-The authorization header is an API key that is encoded using Json Web Tokens (JWT) and is required. Go to www.jwt.io for details on encoding your api key. You can find more information in the [API keys](#api-keys) section of this documentation.
 
-Json Web Tokens have a standard header:
+The authorization header is an API key that is encoded using JSON Web Tokens. You must include an authorization header. 
+
+Refer to the:
+
+- [JSON Web Tokens website](www.jwt.io) for more information on encoding your authorization header
+- [API keys](#api-keys) section of this documentation for more information on API key type.
+
+JSON Web Tokens have a standard header:
 
 ```
 {
@@ -21,7 +27,7 @@ Json Web Tokens have a standard header:
 }
 ```
 
-Json Web Tokens have a payload that consist of:
+JSON Web Tokens have a payload that consists of:
 
 ```JSON
 {
@@ -29,14 +35,15 @@ Json Web Tokens have a payload that consist of:
   "iat": 1568818578
 }
 ```
-Where `iat` (issued at) is the current time in UTC in epoch seconds. The token expired within 30 seconds of the current time.
+where `iat` (issued at) is the current time in UTC in epoch seconds. The token expires within 30 seconds of the current time.
 
 ```JSON
 "Authorization": "Bearer encoded_api_key"
 ```
 
 ### Content header
-The content header is application/json
+
+The content header is `application/json`:
 
 ```JSON
 "Content-type": "application/json"
