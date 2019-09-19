@@ -241,7 +241,7 @@ To send a file by email, add a placeholder field to the template then upload a f
 
 #### Upload your file
 
-The file you upload must be a PDF file smaller than 2MB. You'll need to convert the file into a string that is base64 encoded.
+The file you upload must be a PDF file smaller than 2MB. You’ll need to convert the file into a string that is base64 encoded.
 
 Pass the file object as a value into the personalisation argument. For example:
 
@@ -325,7 +325,7 @@ Sign in to GOV.UK Notify and go to the __Templates page__ to find the template I
 
 #### personalisation (required)
 
-The personalisation argument always contains the following required parameters for the letter recipient"s address:
+The personalisation argument always contains the following required parameters for the letter recipient’s address:
 
 - `address_line_1`
 - `address_line_2`
@@ -353,7 +353,7 @@ An identifier you can create if necessary. This reference identifies a single no
 
 #### personalisation (optional)
 
-The following parameters in the letter recipient"s address are optional:
+The following parameters in the letter recipient’s address are optional:
 
 ```JSON
 "personalisation": {
@@ -423,7 +423,7 @@ An identifier you can create if necessary. This reference identifies a single no
 
 #### pdf_file (required)
 
-The precompiled letter must be a PDF file which meets [the GOV.UK Notify PDF letter specification](https://docs.notifications.service.gov.uk/documentation/images/notify-pdf-letter-spec-v2.3.pdf). You'll need to convert the file into a string that is base64 encoded.
+The precompiled letter must be a PDF file which meets [the GOV.UK Notify PDF letter specification](https://docs.notifications.service.gov.uk/documentation/images/notify-pdf-letter-spec-v2.3.pdf). You’ll need to convert the file into a string that is base64 encoded.
 
 ```JSON
 "content": "base64EncodedPDFFile"
@@ -484,7 +484,7 @@ You can only get the status of messages that are 7 days old or newer.
 
 |Status|Information|
 |:---|:---|
-|Pending|GOV.UK Notify is waiting for more delivery information.<br>GOV.UK Notify received a callback from the provider but the recipient's device has not yet responded. Another callback from the provider determines the final status of the notification.|
+|Pending|GOV.UK Notify is waiting for more delivery information.<br>GOV.UK Notify received a callback from the provider but the recipient’s device has not yet responded. Another callback from the provider determines the final status of the notification.|
 |Sent / Sent internationally|The message was sent to an international number. The mobile networks in some countries do not provide any more delivery information. The GOV.UK Notify client API returns this status as `sent`. The GOV.UK Notify client app returns this status as `Sent internationally`.|
 
 ## Status - letter
@@ -615,10 +615,10 @@ You can filter by:
 |sending|GOV.UK Notify has sent the message to the provider. The provider will try to deliver the message to the recipient. GOV.UK Notify is waiting for delivery information.|Yes|Yes|||
 |delivered|The message was successfully delivered|Yes|Yes|||
 |sent / sent internationally|The message was sent to an international number. The mobile networks in some countries do not provide any more delivery information.|Yes||||
-|pending|GOV.UK Notify is waiting for more delivery information.<br>GOV.UK Notify received a callback from the provider but the recipient's device has not yet responded. Another callback from the provider determines the final status of the notification.|Yes||||
+|pending|GOV.UK Notify is waiting for more delivery information.<br>GOV.UK Notify received a callback from the provider but the recipient’s device has not yet responded. Another callback from the provider determines the final status of the notification.|Yes||||
 |failed|This returns all failure statuses:<br>- permanent-failure<br>- temporary-failure<br>- technical-failure|Yes|Yes|||
 |permanent-failure|The provider could not deliver the message because the email address or phone number was wrong. You should remove these email addresses or phone numbers from your database. You’ll still be charged for text messages to numbers that do not exist.|Yes|Yes|||
-|temporary-failure|The provider could not deliver the message after trying for 72 hours. This can happen when the recipient's inbox is full or their phone is off. You can try to send the message again. You’ll still be charged for text messages to phones that are not accepting messages.|Yes|Yes|||
+|temporary-failure|The provider could not deliver the message after trying for 72 hours. This can happen when the recipient’s inbox is full or their phone is off. You can try to send the message again. You’ll still be charged for text messages to phones that are not accepting messages.|Yes|Yes|||
 |technical-failure|Email / Text: Your message was not sent because there was a problem between Notify and the provider.<br>You’ll have to try sending your messages again. You will not be charged for text messages that are affected by a technical failure. <br><br>Letter: Notify had an unexpected error while sending to our printing provider. <br><br>You can leave out this argument to ignore this filter.|Yes|Yes|||
 |accepted|GOV.UK Notify has sent the letter to the provider to be printed.|||Yes||
 |received|The provider has printed and dispatched the letter.|||Yes||
