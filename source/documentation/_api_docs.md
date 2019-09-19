@@ -11,13 +11,13 @@ https://api.notifications.service.gov.uk
 
 ## Headers
 
-### Authorization header
+### Authorisation header
 
-The authorization header is an API key that is encoded using JSON Web Tokens. You must include an authorization header. 
+The authorisation header is an API key that is encoded using JSON Web Tokens. You must include an authorisation header.
 
 Refer to the:
 
-- [JSON Web Tokens website](www.jwt.io) for more information on encoding your authorization header
+- [JSON Web Tokens website](www.jwt.io) for more information on encoding your authorisation header
 - [API keys](#api-keys) section of this documentation for more information on API key type
 
 JSON Web Tokens have a standard header:
