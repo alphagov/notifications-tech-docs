@@ -1,4 +1,4 @@
-require 'faraday'
+require "faraday"
 
 class ExternalDoc
   def self.fetch(repository:)
