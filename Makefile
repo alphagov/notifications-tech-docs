@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 CF_ORG ?= govuk-notify
 CF_APP = notify-tech-docs
 
