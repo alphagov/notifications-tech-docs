@@ -425,7 +425,7 @@ An identifier you can create if necessary. This reference identifies a single no
 
 #### pdf_file (required)
 
-The precompiled letter must be a PDF file which meets [the GOV.UK Notify PDF letter specification](https://docs.notifications.service.gov.uk/documentation/images/notify-pdf-letter-spec-v2.3.pdf). You’ll need to convert the file into a string that is base64 encoded.
+The precompiled letter must be a PDF file which meets [the GOV.UK Notify PDF letter specification](https://docs.notifications.service.gov.uk/documentation/images/notify-pdf-letter-spec-v2.4.pdf). You’ll need to convert the file into a string that is base64 encoded.
 
 ```JSON
 "content": "base64EncodedPDFFile"
