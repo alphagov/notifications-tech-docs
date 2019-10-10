@@ -6,6 +6,6 @@ gem 'govuk_tech_docs', '~> 1.8.3'
 gem 'therubyracer', '~> 0.12.3'
 
 group :test do
-  gem 'rspec', '~> 3.8.0'
+  gem 'rspec', '~> 3.9.0'
   gem 'webmock', '~> 3.7.6'
 end
