@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'faraday', '~> 0.15.4'
+gem 'faraday', '~> 0.17.0'
 gem 'govuk-lint', '~> 4.0.0'
 gem 'govuk_tech_docs', '~> 1.8.3'
 gem 'therubyracer', '~> 0.12.3'
