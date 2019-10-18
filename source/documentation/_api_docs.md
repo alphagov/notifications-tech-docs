@@ -13,14 +13,9 @@ https://api.notifications.service.gov.uk
 
 ### Authorisation header
 
-The authorisation header is an API key that is encoded using JSON Web Tokens. You must include an authorisation header.
+The authorisation header is an [API key](#api-keys) that is encoded using [JSON Web Tokens](https://jwt.io/). You must include an authorisation header.
 
-Refer to the:
-
-- [JSON Web Tokens website](https://jwt.io/) for more information on encoding your authorisation header
-- [API keys](#api-keys) section of this documentation for more information on API key type
-
-JSON Web Tokens have a standard header:
+JSON Web Tokens have a standard header and a payload. The header consists of:
 
 ```json
 {
@@ -29,18 +24,37 @@ JSON Web Tokens have a standard header:
 }
 ```
 
-JSON Web Tokens have a payload that consists of:
+The payload consists of:
 
 ```json
 {
-  "iss": "api key",
+  "iss": "26785a09-ab16-4eb0-8407-a37497a57506",
   "iat": 1568818578
 }
 ```
-where `iat` (issued at) is the current time in UTC in epoch seconds. The token expires within 30 seconds of the current time.
+
+JSON Web Tokens are encoded using a secret key with the following format:
+
+```
+3d844edf-8d35-48ac-975b-e847b4f122b0
+```
+
+Your [API key](#api-keys) follows the format `{key_name}-{iss-uuid}-{secret-key-uuid}`.
+
+For example, if your API key is
+`my_test_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0`:
+
+* your iss is `26785a09-ab16-4eb0-8407-a37497a57506`
+* your secret key is `3d844edf-8d35-48ac-975b-e847b4f122b0`
+
+`iat` (issued at) is the current time in UTC in epoch seconds. The token expires within 30 seconds of the current time.
+
+Refer to the [JSON Web Tokens website](https://jwt.io/) for more information on encoding your authorisation header.
+
+When you have an encoded and signed token, add that token to a header as follows:
 
 ```json
-"Authorization": "Bearer encoded_api_key"
+"Authorization": "Bearer encoded_jwt_token"
 ```
 
 ### Content header
