@@ -13,41 +13,55 @@ https://api.notifications.service.gov.uk
 
 ### Authorisation header
 
-The authorisation header is an API key that is encoded using JSON Web Tokens. You must include an authorisation header.
+The authorisation header is an [API key](#api-keys) that is encoded using [JSON Web Tokens](https://jwt.io/). You must include an authorisation header.
 
-Refer to the:
+JSON Web Tokens have a standard header and a payload. The header consists of:
 
-- [JSON Web Tokens website](https://jwt.io/) for more information on encoding your authorisation header
-- [API keys](#api-keys) section of this documentation for more information on API key type
-
-JSON Web Tokens have a standard header:
-
-```
+```json
 {
-    "typ": "JWT",
-    "alg": "HS256"
+  "typ": "JWT",
+  "alg": "HS256"
 }
 ```
 
-JSON Web Tokens have a payload that consists of:
+The payload consists of:
 
-```JSON
+```json
 {
-  "iss": "api key",
+  "iss": "26785a09-ab16-4eb0-8407-a37497a57506",
   "iat": 1568818578
 }
 ```
-where `iat` (issued at) is the current time in UTC in epoch seconds. The token expires within 30 seconds of the current time.
 
-```JSON
-"Authorization": "Bearer encoded_api_key"
+JSON Web Tokens are encoded using a secret key with the following format:
+
+```
+3d844edf-8d35-48ac-975b-e847b4f122b0
+```
+
+Your [API key](#api-keys) follows the format `{key_name}-{iss-uuid}-{secret-key-uuid}`.
+
+For example, if your API key is
+`my_test_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0`:
+
+* your iss is `26785a09-ab16-4eb0-8407-a37497a57506`
+* your secret key is `3d844edf-8d35-48ac-975b-e847b4f122b0`
+
+`iat` (issued at) is the current time in UTC in epoch seconds. The token expires within 30 seconds of the current time.
+
+Refer to the [JSON Web Tokens website](https://jwt.io/) for more information on encoding your authorisation header.
+
+When you have an encoded and signed token, add that token to a header as follows:
+
+```json
+"Authorization": "Bearer encoded_jwt_token"
 ```
 
 ### Content header
 
 The content header is `application/json`:
 
-```JSON
+```json
 "Content-type": "application/json"
 ```
 
@@ -63,11 +77,11 @@ POST /v2/notifications/sms
 
 ### Request body
 
- ```JSON
-    {
-      "phone_number": "+447900900123",
-      "template_id": "f33517ff-2a88-4f6e-b855-c550268ce08a"
-    }
+```json
+{
+  "phone_number": "+447900900123",
+  "template_id": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+}
  ```
 
 ### Arguments
@@ -85,10 +99,10 @@ Sign in to [GOV.UK Notify](https://www.notifications.service.gov.uk/) and go to 
 If a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:
 
 ```json
-  "personalisation": {
-    "first_name": "Amala",
-    "application_date": "2018-01-01",
-  }
+"personalisation": {
+  "first_name": "Amala",
+  "application_date": "2018-01-01",
+}
 ```
 
 You can leave out this argument if a template does not have any placeholder fields for personalised information.
@@ -117,7 +131,7 @@ You can then either:
 - copy the sender ID that you want to use and paste it into the method
 - select __Change__ to change the default sender that the service will use, and select __Save__
 
-```JSON
+```json
 "sms_sender_id": "8e222534-7f05-4972-86e3-17c5d9f894e2"
 ```
 
@@ -127,7 +141,7 @@ You can leave out this argument if your service only has one text message sender
 
 If the request is successful, the response body is `json` with a status code of `201`:
 
-```JSON
+```json
 {
   "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
   "reference": "STRING",
@@ -169,7 +183,7 @@ POST /v2/notifications/email
 ```
 
 ### Request body
-```JSON
+```json
 {
   "email_address": "sender@something.com",
   "template_id": "f33517ff-2a88-4f6e-b855-c550268ce08a"
@@ -192,8 +206,8 @@ If a template has placeholder fields for personalised information such as name o
 
 ```json
 "personalisation": {
-    "first_name": "Amala",
-    "application_date": "2018-01-01",
+  "first_name": "Amala",
+  "application_date": "2018-01-01",
 }
 ```
 You can leave out this argument if a template does not have any placeholder fields for personalised information.
@@ -219,7 +233,7 @@ This is an email reply-to address specified by you to receive replies from your 
 
 For example:
 
-```JSON
+```json
 "email_reply_to_id": "8e222534-7f05-4972-86e3-17c5d9f894e2"
 ```
 
@@ -247,19 +261,19 @@ The file you upload must be a PDF file smaller than 2MB. You’ll need to conver
 
 Pass the file object as a value into the personalisation argument. For example:
 
-```JSON
+```json
 "personalisation":{
-      "first_name": "Amala",
-      "application_date": "2018-01-01",
-      "link_to_document": "file as base64 encoded string",
-    }
+  "first_name": "Amala",
+  "application_date": "2018-01-01",
+  "link_to_document": "file as base64 encoded string",
+}
 ```
 
 ### Response
 
 If the request to the client is successful, the client returns a `dict`:
 
-```JSON
+```json
 {
   "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
   "reference": "STRING",
@@ -308,14 +322,14 @@ POST /v2/notifications/letter
 
 ### Request body
 
-```JSON
+```json
 {
   "template_id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
   "personalisation": {
-          "address_line_1": "The Occupier",
-          "address_line_2": "123 High Street",
-          "postcode": "SW14 6BH"
-        }
+    "address_line_1": "The Occupier",
+    "address_line_2": "123 High Street",
+    "postcode": "SW14 6BH"
+  }
 }
 ```
 
@@ -357,12 +371,12 @@ An identifier you can create if necessary. This reference identifies a single no
 
 The following parameters in the letter recipient’s address are optional:
 
-```JSON
+```json
 "personalisation": {
-    "address_line_3": "123 High Street", 	
-    "address_line_4": "Richmond upon Thames", 	
-    "address_line_5": "London", 		
-    "address_line_6": "Middlesex",
+  "address_line_3": "123 High Street",
+  "address_line_4": "Richmond upon Thames",
+  "address_line_5": "London",
+  "address_line_6": "Middlesex",
 }
 ```
 
@@ -370,7 +384,7 @@ The following parameters in the letter recipient’s address are optional:
 
 If the request is successful, the response body is `json` and the status code is `201`:
 
-```JSON
+```json
 {
   "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
   "reference": "STRING",
@@ -410,8 +424,8 @@ POST /v2/notifications/letter
 ```
 ### Request body
 
-```JSON
-{   
+```json
+{
   "reference": "STRING",
   "content": "STRING"
 }
@@ -427,7 +441,7 @@ An identifier you can create if necessary. This reference identifies a single no
 
 The precompiled letter must be a PDF file which meets [the GOV.UK Notify PDF letter specification](https://docs.notifications.service.gov.uk/documentation/images/notify-pdf-letter-spec-v2.4.pdf). You’ll need to convert the file into a string that is base64 encoded.
 
-```JSON
+```json
 "content": "base64EncodedPDFFile"
 ```
 
@@ -435,8 +449,8 @@ The precompiled letter must be a PDF file which meets [the GOV.UK Notify PDF let
 
 You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
 
-```JSON
-  "postage": "second"
+```json
+"postage": "second"
 ```
 
 
@@ -444,7 +458,7 @@ You can choose first or second class postage for your precompiled letter. Set th
 
 If the request is successful, the response body is `json` and the status code is `201`:
 
-```JSON
+```json
 {
   "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
   "reference": "your-letter-reference",
@@ -535,7 +549,7 @@ You can filter the returned messages by including the following optional paramet
 
 If the request is successful, the response body is `json` and the status code is `200`:
 
-```JSON
+```json
 {
   "id": "740e5834-3a29-46b4-9a6f-16142fde533a", # required string - notification ID
   "reference": "STRING", # optional string
@@ -632,7 +646,7 @@ You can filter by:
 
 An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
-```JSON
+```json
 "reference": "STRING"
 ```
 
@@ -654,9 +668,9 @@ If the request is successful, the response body is `json` and the status code is
 
 #### All messages
 
-```JSON
-{"notifications":
-  [
+```json
+{
+  "notifications": [
     {
       "id": "740e5834-3a29-46b4-9a6f-16142fde533a", # required string - notification ID
       "reference": "STRING", # optional string - client reference
