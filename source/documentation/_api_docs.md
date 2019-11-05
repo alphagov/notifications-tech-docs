@@ -529,7 +529,7 @@ GET /v2/notifications/{notification_id}
 
 #### notification_id (required)
 
-The ID of the notification. You can find the notification ID in the response to the [original notification method call](/python.html#get-the-status-of-one-message-response).
+The ID of the notification. You can find the notification ID in the response to the [original notification method call](#get-the-status-of-one-message-response).
 
 You can also find it in your [GOV.UK Notify Dashboard](https://www.notifications.service.gov.uk).
 
