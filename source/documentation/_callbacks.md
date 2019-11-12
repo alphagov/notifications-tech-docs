@@ -15,7 +15,7 @@ You must provide:
 To do this:
 
 1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
-1. In the top left corner of the page, check you have selected the correct service. If not, select __Switch service__ in the top right corner of the page and choose the correct one.
+1. In the top left corner of the page, check you're viewing the correct service. If not, select __Switch service__ in the top right corner of the page and choose a different service.
 1. Go to the __API integration__ page and select __Callbacks__.
 
 ## Delivery receipts
@@ -41,7 +41,7 @@ The callback message is formatted in JSON. The key, description and format of th
 
 If your service receives text messages in Notify, Notify can forward them to your callback URL as soon as they arrive.
 
-Contact the GOV.UK Notify team on the [support page](https://www.notifications.service.gov.uk/support) or through the [Slack channel](https://ukgovernmentdigital.slack.com/messages/C0E1ADVPC) to enable receiving text messages for your service.
+To let your service receive text message replies, contact the Notify team using the [support page](https://www.notifications.service.gov.uk/support) or [chat to us on Slack](https://ukgovernmentdigital.slack.com/messages/C0E1ADVPC).
 
 The callback message is formatted in JSON. The key, description and format of the callback message arguments will be:
 
