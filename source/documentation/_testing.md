@@ -4,7 +4,7 @@ All testing takes place in the production environment. There is no test environm
 
 ## Smoke testing
 
-If you need to [smoke test](https://www.gov.uk/service-manual/technology/deploying-software-regularly#using-smoke-tests-after-you-deploy) your integration with GOV.UK Notify on a regular basis, you  must use the smoke test phone numbers and email addresses below.
+If you need to [smoke test](https://www.gov.uk/service-manual/technology/deploying-software-regularly#using-smoke-tests-after-you-deploy) your integration with Notify on a regular basis, you  must use the smoke test phone numbers and email addresses below.
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
@@ -25,7 +25,7 @@ The smoke test phone numbers and email addresses will validate the request and s
 
 You can use these smoke test numbers and addresses with any [type of API key](#api-keys).
 
-You can smoke test all GOV.UK Notify API client functions except:
+You can smoke test all Notify API client functions except:
 
 - Get the status of one message
 - Get the status of all messages
@@ -34,4 +34,4 @@ You cannot use the smoke test phone numbers or email address with these function
 
 ## Other testing
 
-You must use a [test API key](#test) to do non-smoke testing such as performance or integration testing. You can use any non-smoke testing phone numbers or email addresses. You do not need a specific GOV.UK Notify testing account.
+You must use a [test API key](#test) to do non-smoke testing such as performance or integration testing. You can use any non-smoke testing phone numbers or email addresses. You do not need a specific Notify testing account.
