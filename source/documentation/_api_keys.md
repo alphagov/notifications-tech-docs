@@ -11,7 +11,7 @@ When you set up a new service it will start in [trial mode](https://www.notifica
 To create an API key:
 
 1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
-1. In the top left corner of the page, check you’re viewing the correct service. If not, select __Switch service__ in the top right corner of the page and choose the correct service.
+1. In the top left corner of the page, check you’re viewing the correct service. If not, select __Switch service__ in the top right corner of the page and select the relevant service.
 1. Go to the __API integration__ page.
 1. Select __API keys__.
 1. Select __Create an API key__.
@@ -60,7 +60,7 @@ Messages sent with a live key appear on your dashboard and count against your te
 You should revoke and re-create these keys on a regular basis. To revoke a key:
 
 1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
-1. In the top left corner of the page, check you’re viewing the correct service. If not, select __Switch service__ in the top right corner of the page and choose the correct service.
+1. In the top left corner of the page, check you’re viewing the correct service. If not, select __Switch service__ in the top right corner of the page and select the relevant service.
 1. Go to the __API integration__ page.
 1. Select __API keys__.
 1. Select __Revoke__ for the API key you want to revoke.
