@@ -239,7 +239,7 @@ To add a reply-to address:
 1. In the top left corner of the page, check you’re viewing the correct service. If not, select __Switch service__ in the top right corner of the page and choose the correct service.
 1. Go to the __Settings__ page.
 1. In the Email section, select __Manage__ on the __Email reply-to addresses__ row.
-1. __Select Add reply-to address__.
+1. Select __Add reply-to address__.
 1. Enter the email address you want to use, and select __Add__.
 
 For example:
