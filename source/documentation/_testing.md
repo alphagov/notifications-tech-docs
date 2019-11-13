@@ -4,7 +4,7 @@ All testing takes place in the production environment. There is no test environm
 
 ## Smoke testing
 
-If you need to [smoke test](https://www.gov.uk/service-manual/technology/deploying-software-regularly#using-smoke-tests-after-you-deploy) your integration with Notify on a regular basis, you  must use the smoke test phone numbers and email addresses below.
+If you need to [smoke test](https://www.gov.uk/service-manual/technology/deploying-software-regularly#using-smoke-tests-after-you-deploy) your integration with Notify on a regular basis, you  must use the following smoke test phone numbers and email addresses.
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
