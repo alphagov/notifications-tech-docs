@@ -15,7 +15,6 @@ You must provide:
 To do this:
 
 1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
-1. In the top left corner of the page, check you’re viewing the correct service. If not, select __Switch service__ in the top right corner of the page and select the relevant service.
 1. Go to the __API integration__ page.
 1. Select __Callbacks__.
 
