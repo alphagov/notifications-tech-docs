@@ -42,7 +42,7 @@ The callback message is formatted in JSON. The key, description and format of th
 
 If your service receives text messages in Notify, Notify can forward them to your callback URL as soon as they arrive.
 
-To let your service receive text message replies, contact the Notify team using the [support page](https://www.notifications.service.gov.uk/support) or [chat to us on Slack](https://ukgovernmentdigital.slack.com/messages/C0E1ADVPC).
+Contact the Notify team using the [support page](https://www.notifications.service.gov.uk/support) or [chat to us on Slack](https://ukgovernmentdigital.slack.com/messages/C0E1ADVPC) to request a unique number for text message replies.
 
 The callback message is formatted in JSON. The key, description and format of the callback message arguments will be:
 
