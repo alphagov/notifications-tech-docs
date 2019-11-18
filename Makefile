@@ -4,8 +4,6 @@ CF_ORG ?= govuk-notify
 CF_APP = notify-tech-docs
 
 DOCKER_BUILDER_IMAGE_NAME = govuk/notify-tech-docs
-BUILD_NUMBER ?= 0
-DEPLOY_BUILD_NUMBER ?= ${BUILD_NUMBER}
 BUILD_TAG ?= notifications-tech-docs
 DOCKER_CONTAINER_PREFIX = ${USER}-${BUILD_TAG}
 
