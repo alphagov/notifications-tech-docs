@@ -6,9 +6,15 @@ There are three different types of API keys:
 - team and whitelist
 - live
 
-To get an API key, [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk) and go to the __API integration__ page.
+When you set up a new service it will start in [trial mode](https://www.notifications.service.gov.uk/features/trial-mode). A service in trial mode can create test and team and whitelist keys. You must have a live service to create a live key.
 
-When you first sign up to Notify, you can create test and team and whitelist keys. You must have a live service to create a live key.
+To create an API key:
+
+1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
+1. Go to the __API integration__ page.
+1. Select __API keys__.
+1. Select __Create an API key__.
+
 
 ## Test
 
@@ -36,9 +42,9 @@ You do not have to revoke test keys.
 
 ## Team and whitelist
 
-A team and whitelist key lets you send real messages to your team members and addresses/numbers on your whitelist while your account is still in trial mode.
+A team and whitelist key lets you send real messages to your team members and addresses/numbers on your whitelist while your service is still in trial mode.
 
-You will get an error if you use these keys to send messages to anyone who isn't on your team or your whitelist.
+You will get an error if you use these keys to send messages to anyone who is not on your team or your whitelist.
 
 Messages sent with a team and whitelist key appear on your dashboard and count against your text message and email allowances.
 
@@ -52,8 +58,9 @@ Messages sent with a live key appear on your dashboard and count against your te
 
 You should revoke and re-create these keys on a regular basis. To revoke a key:
 
-1. Log into your GOV.UK Notify account.
-1. Select __API integration__ and then __API keys__.
+1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
+1. Go to the __API integration__ page.
+1. Select __API keys__.
 1. Select __Revoke__ for the API key you want to revoke.
 
 You can have more than one active key at a time.

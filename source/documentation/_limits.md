@@ -8,7 +8,7 @@ This limit is calculated on a rolling basis, per API key type. If you exceed the
 
 ## Daily limits
 
-There's a limit to the number of messages you can send each day:
+There’s a limit to the number of messages you can send each day:
 
 |Service status|Type of API key|Daily limit|
 |:---|:---|:---|
