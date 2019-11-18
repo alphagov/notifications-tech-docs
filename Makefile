@@ -107,9 +107,3 @@ prepare-docker-runner-image: ## Prepare the Docker builder image
 		--build-arg NO_PROXY="${NO_PROXY}" \
 		-t govuk/notify-tech-docs \
 		.
-
-.PHONY: build-paas-artifact
-build-paas-artifact: ## Build the deploy artifact for PaaS
-	rm -rf target
-	mkdir -p target
-	zip -y -q -r -x@deploy-exclude.lst target/notifications-tech-docs.zip ./
