@@ -4,8 +4,15 @@
 
 To preview or build the website, we need to use the terminal.
 
-Install Ruby with Rubygems, perferably with a [Ruby version manager][rvm],
-and the [Bundler gem][bundler].
+Install Ruby, perferably with a [Ruby version manager][rvm]. You will need
+to download the version of Ruby that matches the one found in the `.ruby-version`
+file.
+
+Install the [Bundler gem][bundler].
+
+```
+gem install bundler
+```
 
 In the application folder type the following to install the required gems:
 

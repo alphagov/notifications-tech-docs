@@ -3,12 +3,6 @@ SHELL := /bin/bash
 CF_ORG ?= govuk-notify
 CF_APP = notify-tech-docs
 
-DOCKER_BUILDER_IMAGE_NAME = govuk/notify-tech-docs
-BUILD_NUMBER ?= 0
-DEPLOY_BUILD_NUMBER ?= ${BUILD_NUMBER}
-BUILD_TAG ?= notifications-tech-docs
-DOCKER_CONTAINER_PREFIX = ${USER}-${BUILD_TAG}
-
 .PHONY: test
 test:
 	./script/run_tests.sh
@@ -49,7 +43,6 @@ run-in-development: development generate-tech-docs-yml ## Runs the app in develo
 .PHONY: generate-build-files
 generate-build-files: generate-tech-docs-yml ## Generates the build files
 	bundle exec middleman build
-	if [ -f user_group_ids ]; then chown -R `cat user_group_ids` build; rm user_group_ids; fi
 
 .PHONY: cf-deploy
 cf-deploy: generate-manifest ## Deploys the app to Cloud Foundry
@@ -66,59 +59,3 @@ cf-deploy: generate-manifest ## Deploys the app to Cloud Foundry
 	cf v3-zdt-push ${CF_APP} -p ./build --wait-for-deploy-complete  # fails after 5 mins if deploy doesn't work
 
 	rm -rf ./build/
-
-
-
-.PHONY: test-with-docker
-test-with-docker: prepare-docker-runner-image ## Build inside a Docker container
-	docker run -i --rm \
-		--name "${DOCKER_CONTAINER_PREFIX}-build" \
-		-v "`pwd`:/var/project" \
-		-e http_proxy="${HTTP_PROXY}" \
-		-e HTTP_PROXY="${HTTP_PROXY}" \
-		-e https_proxy="${HTTPS_PROXY}" \
-		-e HTTPS_PROXY="${HTTPS_PROXY}" \
-		-e NO_PROXY="${NO_PROXY}" \
-		${DOCKER_BUILDER_IMAGE_NAME} \
-		make test
-
-.PHONY: build-with-docker
-build-with-docker: prepare-docker-runner-image ## Build inside a Docker container
-	$(if ${CF_SPACE},,$(error Must specify CF_SPACE))
-	if [ -d build-${CF_SPACE} ]; then rm -rf build-${CF_SPACE}; fi
-	echo "$(shell id -u `whoami`):$(shell id -g `whoami`)" > user_group_ids
-	docker run -i --rm \
-		--name "${DOCKER_CONTAINER_PREFIX}-build" \
-		-v "`pwd`:/var/project" \
-		-e http_proxy="${HTTP_PROXY}" \
-		-e HTTP_PROXY="${HTTP_PROXY}" \
-		-e https_proxy="${HTTPS_PROXY}" \
-		-e HTTPS_PROXY="${HTTPS_PROXY}" \
-		-e NO_PROXY="${NO_PROXY}" \
-		${DOCKER_BUILDER_IMAGE_NAME} \
-		make ${CF_SPACE} generate-build-files
-	mv build build-${CF_SPACE}
-
-.PHONY: prepare-docker-runner-image
-prepare-docker-runner-image: ## Prepare the Docker builder image
-	docker pull `grep "FROM " Dockerfile | cut -d ' ' -f 2` || true
-	docker build \
-		--build-arg http_proxy="${HTTP_PROXY}" \
-		--build-arg HTTP_PROXY="${HTTP_PROXY}" \
-		--build-arg https_proxy="${HTTPS_PROXY}" \
-		--build-arg HTTPS_PROXY="${HTTPS_PROXY}" \
-		--build-arg NO_PROXY="${NO_PROXY}" \
-		-t govuk/notify-tech-docs \
-		.
-
-.PHONY: build-paas-artifact
-build-paas-artifact: ## Build the deploy artifact for PaaS
-	rm -rf target
-	mkdir -p target
-	zip -y -q -r -x@deploy-exclude.lst target/notifications-tech-docs.zip ./
-
-.PHONY: upload-paas-artifact
-upload-paas-artifact: ## Upload the deploy artifact for PaaS
-	$(if ${DEPLOY_BUILD_NUMBER},,$(error Must specify DEPLOY_BUILD_NUMBER))
-	$(if ${JENKINS_S3_BUCKET},,$(error Must specify JENKINS_S3_BUCKET))
-	aws s3 cp --region eu-west-1 --sse AES256 target/notifications-tech-docs.zip s3://${JENKINS_S3_BUCKET}/build/notifications-tech-docs/${DEPLOY_BUILD_NUMBER}.zip
