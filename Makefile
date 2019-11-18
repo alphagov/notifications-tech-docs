@@ -113,9 +113,3 @@ build-paas-artifact: ## Build the deploy artifact for PaaS
 	rm -rf target
 	mkdir -p target
 	zip -y -q -r -x@deploy-exclude.lst target/notifications-tech-docs.zip ./
-
-.PHONY: upload-paas-artifact
-upload-paas-artifact: ## Upload the deploy artifact for PaaS
-	$(if ${DEPLOY_BUILD_NUMBER},,$(error Must specify DEPLOY_BUILD_NUMBER))
-	$(if ${JENKINS_S3_BUCKET},,$(error Must specify JENKINS_S3_BUCKET))
-	aws s3 cp --region eu-west-1 --sse AES256 target/notifications-tech-docs.zip s3://${JENKINS_S3_BUCKET}/build/notifications-tech-docs/${DEPLOY_BUILD_NUMBER}.zip
