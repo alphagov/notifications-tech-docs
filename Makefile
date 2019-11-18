@@ -47,7 +47,6 @@ run-in-development: development generate-tech-docs-yml ## Runs the app in develo
 .PHONY: generate-build-files
 generate-build-files: generate-tech-docs-yml ## Generates the build files
 	bundle exec middleman build
-	if [ -f user_group_ids ]; then chown -R `cat user_group_ids` build; rm user_group_ids; fi
 
 .PHONY: cf-deploy
 cf-deploy: generate-manifest ## Deploys the app to Cloud Foundry
