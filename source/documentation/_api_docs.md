@@ -269,7 +269,8 @@ To send a file by email, add a placeholder field to the template then upload a f
 
 #### Upload your file
 
-The file you upload must be a PDF file smaller than 2MB. You’ll need to convert the file into a string that is base64 encoded.
+The file you upload must be a PDF or CSV file smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support/ask-question-give-feedback) if you need to send other file types.
+You’ll need to convert the file into a string that is base64 encoded.
 
 Pass the file object as a value into the personalisation argument. For example:
 
