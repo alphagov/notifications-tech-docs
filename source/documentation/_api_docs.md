@@ -123,7 +123,7 @@ You can leave out this argument if you do not have a reference.
 
 #### sms_sender_id (optional)
 
-A unique identifier of the sender of the text message notification. 
+A unique identifier of the sender of the text message notification.
 
 To find the text message sender:
 
@@ -265,20 +265,20 @@ To send a file by email, add a placeholder field to the template then upload a f
 1. Select __Edit__.
 1. Add a placeholder field to the email template using double brackets. For example:
 
-"Download your file at: ((link_to_document))"
+"Download your file at: ((link_to_file))"
 
 #### Upload your file
 
-The file you upload must be a PDF or CSV file smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support/ask-question-give-feedback) if you need to send other file types.
+The file you upload must be a PDF, CSV, text file or Microsoft Word document smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support/ask-question-give-feedback) if you need to send other file types.
 You’ll need to convert the file into a string that is base64 encoded.
 
-Pass the file object as a value into the personalisation argument. For example:
+Pass the encoded string into an object with a `file` key, and put that in the personalisation argument. For example:
 
 ```json
 "personalisation":{
   "first_name": "Amala",
   "application_date": "2018-01-01",
-  "link_to_document": "file as base64 encoded string",
+  "link_to_file": {"file": "file as base64 encoded string"},
 }
 ```
 
@@ -312,8 +312,8 @@ If the request is not successful, the response body is `json`, refer to the tabl
 |:---|:---|:---|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient using a team-only API key"`<br>`]}`|Use the correct type of [API key](#api-keys)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
-|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported document type "{}". Supported types are: {}"`<br>`}]`|The document you upload must be a PDF file|
-|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Document didn't pass the virus scan"`<br>`}]`|The document you upload must be virus free|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported file type '(FILE TYPE)'. Supported types are: '(ALLOWED TYPES)"`<br>`}]`|Wrong file type. You can only upload .pdf, .csv, .txt, .doc or .docx files|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "File did not pass the virus scan"`<br>`}]`|The file contains a virus|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Service is not allowed to send documents"`<br>`}]`|Contact the GOV.UK Notify team|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: signature, API token not found"`<br>`}]`|Use the correct type of [API key](#api-keys)|
