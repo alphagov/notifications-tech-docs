@@ -19,4 +19,12 @@ RSpec.describe ClientDocs::Page do
       expect(page.repository).to eq("alphagov/notifications-ruby-client")
     end
   end
+
+  describe "#title" do
+    it "returns the title for a given client" do
+      page = ClientDocs::Page.new("node")
+
+      expect(page.title).to eq("Node.js client documentation")
+    end
+  end
 end
