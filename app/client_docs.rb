@@ -22,5 +22,18 @@ class ClientDocs
     def repository
       "alphagov/notifications-#{client}-client"
     end
+
+    def title
+      client_titles = {
+        "java" => "Java",
+        "net" => ".NET",
+        "node" => "Node.js",
+        "php" => "PHP",
+        "python" => "Python",
+        "ruby" => "Ruby",
+      }
+
+      "#{client_titles[client]} client documentation"
+    end
   end
 end
