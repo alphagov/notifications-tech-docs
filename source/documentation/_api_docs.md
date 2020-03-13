@@ -39,12 +39,13 @@ JSON Web Tokens are encoded using a secret key with the following format:
 3d844edf-8d35-48ac-975b-e847b4f122b0
 ```
 
-Your [API key](#api-keys) follows the format `{key_name}-{iss-uuid}-{secret-key-uuid}`.
+That secret key forms a part of your [API key](#api-keys), which follows the format `{key_name}-{iss-uuid}-{secret-key-uuid}`.
 
 For example, if your API key is
 `my_test_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0`:
 
-* your iss is `26785a09-ab16-4eb0-8407-a37497a57506`
+* your API key name is `my_test_key`
+* your iss (your service id) is `26785a09-ab16-4eb0-8407-a37497a57506`
 * your secret key is `3d844edf-8d35-48ac-975b-e847b4f122b0`
 
 `iat` (issued at) is the current time in UTC in epoch seconds. The token expires within 30 seconds of the current time.
