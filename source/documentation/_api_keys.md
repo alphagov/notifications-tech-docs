@@ -40,15 +40,15 @@ To test failure responses with a test key, use the following numbers and address
 
 You do not have to revoke test keys.
 
-## Team and whitelist
+## Team and guest list
 
-A team and whitelist key lets you send real messages to your team members and addresses/numbers on your whitelist while your service is still in trial mode.
+A team and guest list key lets you send real messages to your team members and addresses/numbers on your guest list while your service is still in trial mode.
 
-You will get an error if you use these keys to send messages to anyone who is not on your team or your whitelist.
+You will get an error if you use these keys to send messages to anyone who is not on your team or your guest list.
 
-Messages sent with a team and whitelist key appear on your dashboard and count against your text message and email allowances.
+Messages sent with a team and guest list key appear on your dashboard and count against your text message and email allowances.
 
-You do not have to revoke team and whitelist keys.
+You do not have to revoke team and guest list keys.
 
 ## Live
 
