@@ -3,10 +3,10 @@
 There are three different types of API keys:
 
 - test
-- team and whitelist
+- team and guest list
 - live
 
-When you set up a new service it will start in [trial mode](https://www.notifications.service.gov.uk/features/trial-mode). A service in trial mode can create test and team and whitelist keys. You must have a live service to create a live key.
+When you set up a new service it will start in [trial mode](https://www.notifications.service.gov.uk/features/trial-mode). A service in trial mode can create test and team and guest list keys. You must have a live service to create a live key.
 
 To create an API key:
 
