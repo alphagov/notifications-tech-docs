@@ -284,7 +284,19 @@ Pass the encoded string into an object with a `file` key, and put that in the pe
 "personalisation":{
   "first_name": "Amala",
   "application_date": "2018-01-01",
-  "link_to_file": {"file": "file as base64 encoded string"},
+  "link_to_file": {"file": "file as base64 encoded string"}
+}
+```
+
+#### CSV Files
+
+Uploads for CSV files should set the `is_csv` flag as `true` to ensure it is downloaded as a .csv file. For example:
+
+```json
+"personalisation":{
+  "first_name": "Amala",
+  "application_date": "2018-01-01",
+  "link_to_file": {"file": "CSV file as base64 encoded string", "is_csv": true}
 }
 ```
 
