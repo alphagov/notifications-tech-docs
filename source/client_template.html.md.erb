@@ -1,7 +1,35 @@
 ---
 title: <%= title =>
 parent: https://www.notifications.service.gov.uk/documentation
+layout: core
 ---
+
+<% content_for :sidebar do %>
+    <ul>
+        <li>
+            <a href="/<%= client %>.html#<%= client %>-client-documentation"><%= title %></a>
+        </li>
+        <li>
+            <a href="/<%= client %>.html#send-a-message-2">Send a message</a>
+            <ul>
+                <li><a href='/<%= client %>.html#send-a-text-message'>Send a text message</a></li>
+                <li><a href='/<%= client %>.html#send-an-email'>Send an email</a></li>
+                <li><a href='/<%= client %>.html#send-a-file-by-email'>Send a file by email</a></li>
+                <li><a href='/<%= client %>.html#send-a-letter'>Send a letter</a></li>
+                <li><a href='/<%= client %>.html#send-a-precompiled-letter'>Send a precompiled letter</a></li>
+            </ul>
+        </li>
+        <li>
+        <a href="/<%= client %>.html#get-message-status-2">Get message status</a>
+        <ul>
+            <li><a href='/<%= client %>.html#status-email'>Status - email</a></li>
+            <li><a href='/<%= client %>.html#status-text-message'>Status - text message</a></li>
+            <li><a href='/<%= client %>.html#status-letter'>Status - letter</a></li>
+            <li><a href='/<%= client %>.html#status-precompiled-letter'>Status - precompiled letter</a></li>
+        </ul>
+    </li>
+    </ul>
+<% end %>
 
 <%= ExternalDoc.fetch(repository: repo) %>
 <%= partial 'documentation/testing' %>

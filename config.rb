@@ -6,6 +6,7 @@ GovukTechDocs.configure(self)
 
 ClientDocs.pages.each do |page|
   proxy "/#{page.client}.html", "client_template.html", locals: {
+    client: page.client,
     repo: page.repository,
     title: page.title
   }, ignore: true
