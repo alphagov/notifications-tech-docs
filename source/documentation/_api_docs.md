@@ -361,7 +361,7 @@ POST /v2/notifications/letter
   "personalisation": {
     "address_line_1": "The Occupier",
     "address_line_2": "123 High Street",
-    "postcode": "SW14 6BH"
+    "address_line_3": "SW14 6BH"
   }
 }
 ```
@@ -378,11 +378,23 @@ To find the template ID:
 
 #### personalisation (required)
 
-The personalisation argument always contains the following required parameters for the letter recipient’s address:
+The personalisation argument always contains the following parameters for the letter recipient’s address:
 
 - `address_line_1`
 - `address_line_2`
-- `postcode` (this needs to be a real UK postcode)
+– `address_line_3` 
+– `address_line_4` 
+– `address_line_5` 
+– `address_line_6`
+– `address_line_7`
+
+The address must have at least 3 lines.
+
+The last line needs to be a real UK postcode or the name of a country outside the UK.
+
+Notify checks for international addresses and will automatically charge you the correct postage.
+
+The `postcode` personalisation argument has been replaced. If your template still uses `postcode`, Notify will treat it as the last line of the address.
 
 Any other placeholder fields included in the letter template also count as required parameters. You need to provide their values in a dictionary with key value pairs. For example:
 
@@ -390,7 +402,9 @@ Any other placeholder fields included in the letter template also count as requi
 "personalisation":{
   "address_line_1": "The Occupier",
   "address_line_2": "123 High Street",
-  "postcode": "SW14 6BF",
+  'address_line_3': 'Richmond upon Thames',
+  'address_line_4': 'Middlesex',
+  'address_line_5': 'SW14 6BF',
   "name": "John Smith",
   "application_id": "4134325"
 }
@@ -402,19 +416,6 @@ An identifier you can create if necessary. This reference identifies a single no
 
 ```json
 "reference":"STRING"
-```
-
-#### personalisation (optional)
-
-The following parameters in the letter recipient’s address are optional:
-
-```json
-"personalisation": {
-  "address_line_3": "123 High Street",
-  "address_line_4": "Richmond upon Thames",
-  "address_line_5": "London",
-  "address_line_6": "Middlesex",
-}
 ```
 
 ### Response
@@ -445,14 +446,15 @@ If the request is not successful, the response body is json, refer to the table 
 
 |status_code|message|How to fix|
 |:---|:---|:---|
-|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters with a team API key"`<br>`}]`|Use the correct type of [API key](#api-keys)|
-|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in  [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters with a team API key"`<br>`}]`|Use the correct type of [API key](#api-keys).|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in  [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode).|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "personalisation address_line_1 is a required property"`<br>`}]`|Ensure that your template has a field for the first line of the address, check [personalisation](#send-a-letter-arguments-personalisation-optional) for more information.|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Must be a real UK postcode"`<br>`}]`|Ensure that the value for the postcode field in your letter is a real UK postcode|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`429`|`[{`<br>`"error": "RateLimitError",`<br>`"message": "Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds"`<br>`}]`|Refer to [API rate limits](#rate-limits) for more information|
-|`429`|`[{`<br>`"error": "TooManyRequestsError",`<br>`"message": "Exceeded send limits (LIMIT NUMBER) for today"`<br>`}]`|Refer to [service limits](#daily-limits) for the limit number|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Must be a real UK postcode"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Last line of address must be a real UK postcode or another country"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode or the name of a country outside the UK.|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock.|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information.|
+|`429`|`[{`<br>`"error": "RateLimitError",`<br>`"message": "Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds"`<br>`}]`|Refer to [API rate limits](#rate-limits) for more information.|
+|`429`|`[{`<br>`"error": "TooManyRequestsError",`<br>`"message": "Exceeded send limits (LIMIT NUMBER) for today"`<br>`}]`|Refer to [service limits](#daily-limits) for the limit number.|
 |`500`|`[{`<br>`"error": "Exception",`<br>`"message": "Internal server error"`<br>`}]`|Notify was unable to process the request, resend your notification.|
 
 ## Send a precompiled letter
@@ -595,11 +597,11 @@ If the request is successful, the response body is `json` and the status code is
   "phone_number": "+447900900123",  # required string for text messages
   "line_1": "ADDRESS LINE 1", # required string for letter
   "line_2": "ADDRESS LINE 2", # required string for letter
-  "line_3": "ADDRESS LINE 3", # optional string for letter
+  "line_3": "ADDRESS LINE 3", # required string for letter
   "line_4": "ADDRESS LINE 4", # optional string for letter
   "line_5": "ADDRESS LINE 5", # optional string for letter
   "line_6": "ADDRESS LINE 6", # optional string for letter
-  "postcode": "STRING", # required string for letter, must be a real UK postcode
+  "line_7": "ADDRESS LINE 7", # optional string for letter
   "type": "sms / letter / email", # required string
   "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure", # required string
   "template": {
