@@ -1,11 +1,11 @@
-# Callbacks
+## Callbacks
 
 Callbacks are when GOV.UK Notify sends `POST` requests to your service. You can get callbacks when:
 
 - a text message or email you’ve sent is delivered or fails
 - your service receives a text message
 
-## Set up callbacks
+### Set up callbacks
 
 You must provide:
 
@@ -18,7 +18,7 @@ To do this:
 1. Go to the __API integration__ page.
 1. Select __Callbacks__.
 
-## Delivery receipts
+### Delivery receipts
 
 When you send an email or text message, Notify will send a receipt to your callback URL with the status of the message. This is an automated method to get the status of messages.
 
@@ -37,7 +37,7 @@ The callback message is formatted in JSON. The key, description and format of th
 |`sent_at` | The time the notification was sent | `2017-05-14T12:15:30.000000Z` or nil|
 |`notification_type` | The notification type | `email` or `sms`|
 
-## Received text messages
+### Received text messages
 
 If your service receives text messages in Notify, Notify can forward them to your callback URL as soon as they arrive.
 
