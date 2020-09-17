@@ -402,9 +402,9 @@ Any other placeholder fields included in the letter template also count as requi
 "personalisation":{
   "address_line_1": "The Occupier",
   "address_line_2": "123 High Street",
-  'address_line_3': 'Richmond upon Thames',
-  'address_line_4': 'Middlesex',
-  'address_line_5': 'SW14 6BF',
+  "address_line_3": "Richmond upon Thames",
+  "address_line_4": "Middlesex",
+  "address_line_5": "SW14 6BF",
   "name": "John Smith",
   "application_id": "4134325"
 }
