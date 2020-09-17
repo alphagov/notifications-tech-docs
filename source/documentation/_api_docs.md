@@ -448,7 +448,7 @@ If the request is not successful, the response body is json, refer to the table 
 |:---|:---|:---|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters with a team API key"`<br>`}]`|Use the correct type of [API key](#api-keys).|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in  [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode).|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "personalisation address_line_1 is a required property"`<br>`}]`|Ensure that your template has a field for the first line of the address, check [personalisation](#send-a-letter-arguments-personalisation-optional) for more information.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "personalisation address_line_1 is a required property"`<br>`}]`|Ensure that your template has a field for the first line of the address, check [personalisation](#personalisation-required) for more information.|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Must be a real UK postcode"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode.|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Last line of address must be a real UK postcode or another country"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode or the name of a country outside the UK.|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock.|
@@ -582,7 +582,7 @@ You can filter the returned messages by including the following optional paramet
 
 - [`template_type`](#template-type-optional)
 - [`status`](#status-optional)
-- [`reference`](#get-the-status-of-all-messages-arguments-reference-optional)
+- [`reference`](#get-the-status-of-multiple-messages-arguments-reference-optional)
 - [`older_than`](#older-than-optional)
 
 ### Response
@@ -648,7 +648,7 @@ You can filter the returned messages by including the following optional argumen
 
 - [`template_type`](#template-type-optional)
 - [`status`](#status-optional)
-- [`reference`](#get-the-status-of-all-messages-arguments-reference-optional)
+- [`reference`](#get-the-status-of-multiple-messages-arguments-reference-optional)
 - [`older_than`](#older-than-optional)
 
 ### Arguments
