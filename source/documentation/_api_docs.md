@@ -382,9 +382,9 @@ The personalisation argument always contains the following parameters for the le
 
 - `address_line_1`
 - `address_line_2`
-- `address_line_3` 
-- `address_line_4` 
-- `address_line_5` 
+- `address_line_3`
+- `address_line_4`
+- `address_line_5`
 - `address_line_6`
 - `address_line_7`
 
@@ -402,9 +402,9 @@ Any other placeholder fields included in the letter template also count as requi
 "personalisation":{
   "address_line_1": "The Occupier",
   "address_line_2": "123 High Street",
-  'address_line_3': 'Richmond upon Thames',
-  'address_line_4': 'Middlesex',
-  'address_line_5': 'SW14 6BF',
+  "address_line_3": "Richmond upon Thames",
+  "address_line_4": "Middlesex",
+  "address_line_5": "SW14 6BF",
   "name": "John Smith",
   "application_id": "4134325"
 }
@@ -448,7 +448,7 @@ If the request is not successful, the response body is json, refer to the table 
 |:---|:---|:---|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters with a team API key"`<br>`}]`|Use the correct type of [API key](#api-keys).|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in  [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode).|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "personalisation address_line_1 is a required property"`<br>`}]`|Ensure that your template has a field for the first line of the address, check [personalisation](#send-a-letter-arguments-personalisation-optional) for more information.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "personalisation address_line_1 is a required property"`<br>`}]`|Ensure that your template has a field for the first line of the address, check [personalisation](#personalisation-required) for more information.|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Must be a real UK postcode"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode.|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Last line of address must be a real UK postcode or another country"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode or the name of a country outside the UK.|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock.|
@@ -562,7 +562,7 @@ You can only get the status of messages that are 7 days old or newer.
 |:---|:---|
 |Pending virus check|GOV.UK Notify has not completed a virus scan of the precompiled letter file.|
 |Virus scan failed|GOV.UK Notify found a potential virus in the precompiled letter file.|
-|Validation failed|Content in the precompiled letter file is outside the printable area. See the [GOV.UK Notify PDF letter specification](https://docs.notifications.service.gov.uk/documentation/images/notify-pdf-letter-spec-v2.3.pdf) for more information.|
+|Validation failed|Content in the precompiled letter file is outside the printable area. See the [GOV.UK Notify PDF letter specification](https://docs.notifications.service.gov.uk/documentation/images/notify-pdf-letter-spec-v2.4.pdf) for more information.|
 
 ## Get the status of one message
 
@@ -582,7 +582,7 @@ You can filter the returned messages by including the following optional paramet
 
 - [`template_type`](#template-type-optional)
 - [`status`](#status-optional)
-- [`reference`](#get-the-status-of-all-messages-arguments-reference-optional)
+- [`reference`](#get-the-status-of-multiple-messages-arguments-reference-optional)
 - [`older_than`](#older-than-optional)
 
 ### Response
@@ -648,7 +648,7 @@ You can filter the returned messages by including the following optional argumen
 
 - [`template_type`](#template-type-optional)
 - [`status`](#status-optional)
-- [`reference`](#get-the-status-of-all-messages-arguments-reference-optional)
+- [`reference`](#get-the-status-of-multiple-messages-arguments-reference-optional)
 - [`older_than`](#older-than-optional)
 
 ### Arguments
