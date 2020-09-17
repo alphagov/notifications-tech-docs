@@ -172,7 +172,7 @@ All messages sent using the [team and guest list](#team-and-guest-list) or [live
 
 If the request is not successful, the response body is `json`, refer to the table below for details.
 
-|status_code|message|How to fix|
+|status_code|errors|How to fix|
 |:---|:---|:---|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient using a team-only API key"`<br>`}]`|Use the correct type of [API key](#api-keys)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
@@ -336,7 +336,7 @@ If the request to the client is successful, the client returns a `dict`:
 
 If the request is not successful, the response body is `json`, refer to the table below for details.
 
-|status_code|message|How to fix|
+|status_code|errors|How to fix|
 |:---|:---|:---|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient using a team-only API key"`<br>`}]`|Use the correct type of [API key](#api-keys)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
@@ -455,7 +455,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If the request is not successful, the response body is json, refer to the table below for details.
 
-|status_code|message|How to fix|
+|status_code|errors|How to fix|
 |:---|:---|:---|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters with a team API key"`<br>`}]`|Use the correct type of [API key](#api-keys).|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in  [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode).|
@@ -521,7 +521,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If the request is not successful, the response body is json, refer to the table below for details.
 
-|status_code|message|How to fix|
+|status_code|errors|How to fix|
 |:---|:---|:---|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters with a team API key"`<br>`}]`|Use the correct type of [API key](#api-keys)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Letter content is not a valid PDF"`<br>`}]`|PDF file format is required|
@@ -596,7 +596,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If the request is not successful, the response body is `json`, refer to the table below for details.
 
-|status_code|message|How to fix|
+|status_code|errors|How to fix|
 |:---|:---|:---|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|Check the notification ID|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
@@ -716,7 +716,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If the request is not successful, the response body is `json`, refer to the table below for details.
 
-|status_code|message|How to fix|
+|status_code|errors|How to fix|
 |:---|:---|:---|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|Check the notification ID|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
