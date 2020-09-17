@@ -4,14 +4,14 @@ This documentation is for developers interested in using the GOV.UK Notify API t
 
 You can use it to integrate directly with the API if you cannot use one of our 6 client libraries.
 
-### Base URL
+## Base URL
 ```
 https://api.notifications.service.gov.uk
 ```
 
-### Headers
+## Headers
 
-#### Authorisation header
+### Authorisation header
 
 The authorisation header is an [API key](#api-keys) that is encoded using [JSON Web Tokens](https://jwt.io/). You must include an authorisation header.
 
@@ -58,7 +58,7 @@ When you have an encoded and signed token, add that token to a header as follows
 "Authorization": "Bearer encoded_jwt_token"
 ```
 
-#### Content header
+### Content header
 
 The content header is `application/json`:
 
