@@ -41,7 +41,7 @@
 1. The service requests a notification status from Notify.
 1. Notify queries the database and retrieves the notification status.
 1. Notify sends the API response with notification status to the service.
-1. The service received the API response.
+1. The service receives the API response.
 
 ## Architecture for get received text messages
 
