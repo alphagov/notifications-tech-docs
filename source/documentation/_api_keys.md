@@ -1,4 +1,4 @@
-# API keys
+## API keys
 
 There are three different types of API keys:
 
@@ -16,7 +16,7 @@ To create an API key:
 1. Select __Create an API key__.
 
 
-## Test
+### Test
 
 Use a test key to test the performance of your service and its integration with GOV.UK Notify.
 
@@ -40,7 +40,7 @@ To test failure responses with a test key, use the following numbers and address
 
 You do not have to revoke test keys.
 
-## Team and guest list
+### Team and guest list
 
 A team and guest list key lets you send real messages to your team members and addresses/numbers on your guest list while your service is still in trial mode.
 
@@ -50,7 +50,7 @@ Messages sent with a team and guest list key appear on your dashboard and count 
 
 You do not have to revoke team and guest list keys.
 
-## Live
+### Live
 
 You can only create live keys once your service is live. You can use live keys to send messages to anyone.
 

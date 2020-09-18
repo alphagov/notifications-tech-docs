@@ -1,4 +1,4 @@
-# Support
+## Support
 
 Report any problems via the [GOV.UK Notify support page](https://www.notifications.service.gov.uk/support).
 
