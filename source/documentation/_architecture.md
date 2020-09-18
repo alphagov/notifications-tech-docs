@@ -30,7 +30,8 @@
 
 1. The service sends a letter notification to Notify.
 1. Notify sends the letter to the provider.
-1. The provider prints and posts the letter.
+1. The provider prints the letter and posts it.
+1. The postal service delivers the letter.
 1. The recipient receives the letter.
 
 ## Get status of one or all messages - architecture
