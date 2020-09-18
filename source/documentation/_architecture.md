@@ -1,6 +1,6 @@
 # API architecture
 
-## Architecture for send a text message
+### Architecture for send a text message
 
 ![](documentation/images/notify-send-a-message.png)
 
@@ -12,7 +12,7 @@
 1. Notify receives the delivery receipt and sends an API response to the service.
 1. The service receives the API response.
 
-## Architecture for send an email
+### Architecture for send an email
 
 ![](documentation/images/notify-send-a-message.png)
 
@@ -24,7 +24,7 @@
 1. Notify receives the delivery receipt and sends an API response to the service.
 1. The service receives the API response.
 
-## Architecture for send a letter
+### Architecture for send a letter
 
 ![](documentation/images/notify-send-a-message.png)
 
@@ -34,7 +34,7 @@
 1. The postal service delivers the letter.
 1. The recipient receives the letter.
 
-## Architecture for get message status
+### Architecture for get message status
 
 ![](documentation/images/notify-get-message-status.png)
 
@@ -43,7 +43,7 @@
 1. Notify sends the API response with notification status to the service.
 1. The service receives the API response.
 
-## Architecture for get received text messages
+### Architecture for get received text messages
 
 ![](documentation/images/notify-get-inbound-messages.png)
 
