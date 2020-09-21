@@ -1,4 +1,4 @@
-# API architecture
+## API architecture
 
 ### Architecture for send a text message
 

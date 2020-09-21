@@ -1,12 +1,12 @@
-# Limits
+## Limits
 
-## Rate limits
+### Rate limits
 
 You’re limited to sending 3,000 messages per minute.
 
 This limit is calculated on a rolling basis, per API key type. If you exceed the limit, you will get a `429` error `RateLimitError`.
 
-## Daily limits
+### Daily limits
 
 There’s a limit to the number of messages you can send each day:
 
@@ -18,7 +18,7 @@ There’s a limit to the number of messages you can send each day:
 
 These limits reset at midnight.
 
-## Phone network limits
+### Phone network limits
 
 If you repeatedly send text messages to the same number the phone networks will block them.
 

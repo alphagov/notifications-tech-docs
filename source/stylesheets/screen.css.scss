@@ -1,1 +1,18 @@
 @import "govuk_tech_docs";
+
+.toc__list {
+  & li li li a:visited,
+  & li li li a:link {
+    padding-left: 10px;
+  }
+
+  & > ul > li > ul > li > a {
+    @include govuk-font(19, $weight: bold);
+  }
+}
+
+@include govuk-media-query($until: tablet) {
+    .js .toc li li li {
+        display: list-item;
+    }
+}
