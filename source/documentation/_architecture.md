@@ -14,7 +14,7 @@
 
 ### Architecture for send an email
 
-![](documentation/images/notify-architecture-email-2020.png )
+![](documentation/images/notify-architecture-email-2020.png)
 
 1. The service sends an email notification to Notify.
 1. Notify sends the email to the provider.
@@ -26,7 +26,7 @@
 
 ### Architecture for send a letter
 
-![](documentation/images/notify-architecture-letter-2020.png )
+![](documentation/images/notify-architecture-letter-2020.png)
 
 1. The service sends a letter notification to Notify.
 1. Notify sends the letter to the provider.
@@ -36,7 +36,7 @@
 
 ### Architecture for get message status
 
-![](documentation/images/notify-architecture-get-status-2020.png )
+![](documentation/images/notify-architecture-get-status-2020.png)
 
 1. The service requests a notification status from Notify.
 1. Notify queries the database and retrieves the notification status.
