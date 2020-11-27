@@ -24,7 +24,7 @@ When you send an email or text message, Notify will send a receipt to your callb
 
 This functionality works with test API keys, but does not work with smoke testing phone numbers or email addresses.
 
-The callback message is formatted in JSON. The key, description and format of the callback message arguments will be:
+The callback message is formatted in JSON. All of the values are strings. The key, description and format of the callback message arguments will be:
 
 |Key | Description | Format|
 |:---|:---|:---|
@@ -43,7 +43,7 @@ If your service receives text messages in Notify, Notify can forward them to you
 
 Contact the Notify team using the [support page](https://www.notifications.service.gov.uk/support) or [chat to us on Slack](https://ukgovernmentdigital.slack.com/messages/C0E1ADVPC) to request a unique number for text message replies.
 
-The callback message is formatted in JSON. The key, description and format of the callback message arguments will be:
+The callback message is formatted in JSON. All of the values are strings. The key, description and format of the callback message arguments will be:
 
 |Key | Description | Format|
 |:---|:---|:---|
