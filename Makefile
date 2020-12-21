@@ -2,6 +2,7 @@ SHELL := /bin/bash
 
 CF_ORG ?= govuk-notify
 CF_APP = notify-tech-docs
+CF_MANIFEST_PATH ?= manifest.yml
 
 .PHONY: test
 test:
@@ -10,7 +11,7 @@ test:
 .PHONY: generate-manifest
 generate-manifest:
 	$(if ${ROUTE},,$(error Must specify ROUTE))
-	@sed -e "s/{{ROUTE}}/${ROUTE}/" manifest.yml.tpl > manifest.yml
+	@sed -e "s/{{ROUTE}}/${ROUTE}/" manifest.yml.tpl > ${CF_MANIFEST_PATH}
 
 .PHONY: generate-tech-docs-yml
 generate-tech-docs-yml:
@@ -53,9 +54,8 @@ cf-deploy: generate-manifest ## Deploys the app to Cloud Foundry
 	@cf app --guid ${CF_APP} || exit 1
 
 	# cancel any existing deploys to ensure we can apply manifest (if a deploy is in progress you'll see ScaleDisabledDuringDeployment)
-	cf v3-cancel-zdt-push ${CF_APP} || true
+	cf cancel-deployment ${CF_APP} || true
 
-	cf v3-apply-manifest ${CF_APP} -f manifest.yml
-	cf v3-zdt-push ${CF_APP} -p ./build --wait-for-deploy-complete  # fails after 5 mins if deploy doesn't work
+	cf push ${CF_APP} -p ./build --strategy=rolling -f ${CF_MANIFEST_PATH}
 
 	rm -rf ./build/
