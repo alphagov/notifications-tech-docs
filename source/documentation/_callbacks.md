@@ -29,12 +29,12 @@ The callback message is formatted in JSON. All of the values are strings. The ke
 |Key | Description | Format|
 |:---|:---|:---|
 |`id` | Notify’s id for the status receipts | UUID|
-|`reference` | The reference sent by the service | 12345678|
-|`to` | The email address or phone number of the recipient | hello@gov.uk or 07700912345|
+|`reference` | The reference sent by the service | `12345678` or null|
+|`to` | The email address or phone number of the recipient | `hello@gov.uk` or `07700912345`|
 |`status` | The status of the notification | `delivered`, `permanent-failure`, `temporary-failure` or `technical-failure`|
 |`created_at` | The time the service sent the request | `2017-05-14T12:15:30.000000Z`|
-|`completed_at` | The last time the status was updated | `2017-05-14T12:15:30.000000Z` or nil|
-|`sent_at` | The time the notification was sent | `2017-05-14T12:15:30.000000Z` or nil|
+|`completed_at` | The last time the status was updated | `2017-05-14T12:15:30.000000Z` or null|
+|`sent_at` | The time the notification was sent | `2017-05-14T12:15:30.000000Z` or null|
 |`notification_type` | The notification type | `email` or `sms`|
 
 ### Received text messages
