@@ -24,7 +24,7 @@ When you send an email or text message, Notify will send a receipt to your callb
 
 This functionality works with test API keys, but does not work with smoke testing phone numbers or email addresses.
 
-The callback message is formatted in JSON. All of the values are strings. The key, description and format of the callback message arguments will be:
+The callback message is formatted in JSON. All of the values are strings, apart from the template version, which is a number. The key, description and format of the callback message arguments will be:
 
 |Key | Description | Format|
 |:---|:---|:---|
@@ -36,6 +36,8 @@ The callback message is formatted in JSON. All of the values are strings. The ke
 |`completed_at` | The last time the status was updated | `2017-05-14T12:15:30.000000Z` or null|
 |`sent_at` | The time the notification was sent | `2017-05-14T12:15:30.000000Z` or null|
 |`notification_type` | The notification type | `email` or `sms`|
+|`template_id` | The id of the template that was used | UUID|
+|`template_version` | The version number of the template that was used | `1`|
 
 ### Received text messages
 
