@@ -1,6 +1,6 @@
 ---
 title: Accessibility statement for GOV.UK Notify’s documentation
-last_reviewed_on: 2020-09-21
+last_reviewed_on: 2021-03-29
 review_in: 6 months
 hide_in_navigation: true
 ---
@@ -23,10 +23,7 @@ The text should be clear and simple to understand.
 
 ## How accessible this website is
 
-We know some parts of this website are not fully accessible for the following reasons:
-
-- some pages have adjacent links that go to the same URL
-- there are issues caused by our Technical Documentation Template
+We know this website is not fully accessible because some pages have adjacent links that go to the same URL.
 
 ## Feedback and contact information
 
@@ -59,8 +56,6 @@ The content listed below is non-accessible for the following reasons.
 
 Some pages have adjacent links that go to the same URL. This is not a fail, but should be looked at under [WCAG 2.1 success criterion 2.4.4 Link Purpose (In Context)](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-refs.html).
 
-Some parts of this website are not fully accessible because of [issues caused by our Technical Documentation Template](https://tdt-documentation.london.cloudapps.digital/accessibility/#using-the-technical-documentation-template-for-your-own-documentation).
-
 ## How we tested this website
 
 We last tested this website for accessibility issues in August 2020.
@@ -80,10 +75,10 @@ We used manual and automated tests to look for issues such as:
 
 ## What we’re doing to improve accessibility
 
-We plan to look at the redundant links and fix the accessibility issues with the Technical Documentation Template by the end of March 2021.
+We plan to look at the redundant links by the end of March 2021.
 
 ## Preparation of this accessibility statement
 
-This statement was prepared on 3 September 2020. It was last reviewed on 23 December 2020.
+This statement was prepared on 3 September 2020. It was last reviewed on 29 March 2021.
 
 This website was last tested in August 2020. The test was carried out by the technical writing team at GDS. We used the [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org/) and a checklist we created with the help of the GDS accessibility team. We tested a selection of the website’s pages.
