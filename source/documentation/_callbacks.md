@@ -28,16 +28,16 @@ The callback message is formatted in JSON. All of the values are strings, apart 
 
 |Key | Description | Format|
 |:---|:---|:---|
-|`id` | Notify’s id for the status receipts | UUID|
-|`reference` | The reference sent by the service | `12345678` or null|
-|`to` | The email address or phone number of the recipient | `hello@gov.uk` or `07700912345`|
-|`status` | The status of the notification | `delivered`, `permanent-failure`, `temporary-failure` or `technical-failure`|
-|`created_at` | The time the service sent the request | `2017-05-14T12:15:30.000000Z`|
-|`completed_at` | The last time the status was updated | `2017-05-14T12:15:30.000000Z` or null|
-|`sent_at` | The time the notification was sent | `2017-05-14T12:15:30.000000Z` or null|
-|`notification_type` | The notification type | `email` or `sms`|
-|`template_id` | The id of the template that was used | UUID|
-|`template_version` | The version number of the template that was used | `1`|
+|#`id` | Notify’s id for the status receipts | UUID|
+|#`reference` | The reference sent by the service | `12345678` or null|
+|#`to` | The email address or phone number of the recipient | `hello@gov.uk` or `07700912345`|
+|#`status` | The status of the notification | `delivered`, `permanent-failure`, `temporary-failure` or `technical-failure`|
+|#`created_at` | The time the service sent the request | `2017-05-14T12:15:30.000000Z`|
+|#`completed_at` | The last time the status was updated | `2017-05-14T12:15:30.000000Z` or null|
+|#`sent_at` | The time the notification was sent | `2017-05-14T12:15:30.000000Z` or null|
+|#`notification_type` | The notification type | `email` or `sms`|
+|#`template_id` | The id of the template that was used | UUID|
+|#`template_version` | The version number of the template that was used | `1`|
 
 ### Received text messages
 
@@ -49,8 +49,8 @@ The callback message is formatted in JSON. All of the values are strings. The ke
 
 |Key | Description | Format|
 |:---|:---|:---|
-|`id` | Notify’s id for the received message | UUID|
-|`source_number` | The phone number the message was sent from | 447700912345|
-|`destination_number` | The number the message was sent to (your number) | 07700987654|
-|`message` | The received message | Hello Notify!|
-|`date_received` | The UTC datetime that the message was received by Notify | 2017-05-14T12:15:30.000000Z|
+|#`id` | Notify’s id for the received message | UUID|
+|#`source_number` | The phone number the message was sent from | 447700912345|
+|#`destination_number` | The number the message was sent to (your number) | 07700987654|
+|#`message` | The received message | Hello Notify!|
+|#`date_received` | The UTC datetime that the message was received by Notify | 2017-05-14T12:15:30.000000Z|
