@@ -6,20 +6,17 @@ All testing takes place in the production environment. There is no test environm
 
 If you need to [smoke test](https://www.gov.uk/service-manual/technology/deploying-software-regularly#using-smoke-tests-after-you-deploy) your integration with Notify on a regular basis, you  must use the following smoke test phone numbers and email addresses.
 
-<div style="height:1px;font-size:1px;">&nbsp;</div>
+#### Phone numbers
 
-|Phone number|
-|:---|
-|07700900000|
-|07700900111|
-|07700900222|
+- 07700900000
+- 07700900111
+- 07700900222
 
+#### Email addresses
 
-|Email address|
-|:---|
-|simulate-delivered@notifications.service.gov.uk|
-|simulate-delivered-2@notifications.service.gov.uk|
-|simulate-delivered-3@notifications.service.gov.uk|
+- simulate-delivered@notifications.service.gov.uk
+- simulate-delivered-2@notifications.service.gov.uk
+- simulate-delivered-3@notifications.service.gov.uk
 
 The smoke test phone numbers and email addresses will validate the request and simulate a successful response, but will not send a real message, produce a delivery receipt or persist the notification to the database.
 
