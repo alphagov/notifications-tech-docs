@@ -25,7 +25,7 @@ The text should be clear and simple to understand.
 
 We know this website is not fully accessible because:
 - some pages have adjacent links that go to the same URL
-- there are issues caused by our technical documentation template
+- there are [issues caused by our technical documentation template](https://tdt-documentation.london.cloudapps.digital/accessibility/#using-the-technical-documentation-template-for-your-own-documentation)
 
 ## Feedback and contact information
 
