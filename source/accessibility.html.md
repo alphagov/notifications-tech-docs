@@ -23,7 +23,9 @@ The text should be clear and simple to understand.
 
 ## How accessible this website is
 
-We know this website is not fully accessible because some pages have adjacent links that go to the same URL.
+We know this website is not fully accessible because:
+- some pages have adjacent links that go to the same URL
+- there are issues caused by our technical documentation template
 
 ## Feedback and contact information
 
