@@ -2,28 +2,20 @@
 
 ## Getting started
 
-To preview or build the website, we need to use the terminal.
+### Docker container
 
-Install Ruby, perferably with a [Ruby version manager][rvm]. You will need
-to download the version of Ruby that matches the one found in the `.ruby-version`
-file.
+This app uses dependencies that are difficult to install locally. In order to make local development easy, we run app commands through a Docker container. Run the following to set this up:
 
-Install the [Bundler gem][bundler].
-
-```
-gem install bundler
+```shell
+make bootstrap-with-docker
 ```
 
-In the application folder type the following to install the required gems:
-
-```
-make bootstrap
-```
+Because the container caches things like packages, you will need to run this again if you change the package versions.
 
 ## To run the application
 
 ```
-make run
+make run-with-docker
 ```
 
 If all goes well something like the following output will be displayed:
@@ -40,7 +32,7 @@ You should now be able to view a live preview at http://localhost:4567.
 ## To test the application
 
 ```
-make test
+make test-with-docker
 ```
 
 ## Making changes
@@ -62,9 +54,6 @@ generated output.
 
 Including files manually like this lets us specify the position they appear in
 the page.
-
-[rvm]: https://www.ruby-lang.org/en/documentation/installation/#managers
-[bundler]: http://bundler.io/
 
 ## Licence
 
