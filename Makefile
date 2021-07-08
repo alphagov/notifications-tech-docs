@@ -10,7 +10,8 @@ bootstrap: ## Install dependencies
 
 .PHONY: test
 test:
-	./script/run_tests.sh
+	bundle exec govuk-lint-ruby app spec
+	bundle exec rspec
 
 .PHONY: generate-manifest
 generate-manifest:
