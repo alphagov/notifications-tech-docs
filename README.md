@@ -20,6 +20,23 @@ In the application folder type the following to install the required gems:
 make bootstrap
 ```
 
+## To run the application
+
+```
+make run
+```
+
+If all goes well something like the following output will be displayed:
+
+```
+== The Middleman is loading
+== LiveReload accepting connections from ws://192.168.0.8:35729
+== View your site at "http://Laptop.local:4567", "http://192.168.0.8:4567"
+== Inspect your site configuration at "http://Laptop.local:4567/__middleman", "http://192.168.0.8:4567/__middleman"
+```
+
+You should now be able to view a live preview at http://localhost:4567.
+
 ## Making changes
 
 To make changes edit the source files in the `source` folder.
@@ -39,23 +56,6 @@ generated output.
 
 Including files manually like this lets us specify the position they appear in
 the page.
-
-## To run the application
-
-```
-make run
-```
-
-If all goes well something like the following output will be displayed:
-
-```
-== The Middleman is loading
-== LiveReload accepting connections from ws://192.168.0.8:35729
-== View your site at "http://Laptop.local:4567", "http://192.168.0.8:4567"
-== Inspect your site configuration at "http://Laptop.local:4567/__middleman", "http://192.168.0.8:4567/__middleman"
-```
-
-You should now be able to view a live preview at http://localhost:4567.
 
 [rvm]: https://www.ruby-lang.org/en/documentation/installation/#managers
 [bundler]: http://bundler.io/
