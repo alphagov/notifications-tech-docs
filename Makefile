@@ -13,14 +13,18 @@ test:
 	bundle exec govuk-lint-ruby app spec
 	bundle exec rspec
 
-.PHONY: generate-manifest
-generate-manifest:
-	$(if ${ROUTE},,$(error Must specify ROUTE))
-	@sed -e "s/{{ROUTE}}/${ROUTE}/" manifest.yml.tpl > ${CF_MANIFEST_PATH}
+.PHONY: run
+run: development generate-tech-docs-yml ## Runs the app in development
+	bundle exec middleman server
 
 .PHONY: generate-tech-docs-yml
 generate-tech-docs-yml:
 	@erb config/tech-docs.yml.erb > config/tech-docs.yml
+
+.PHONY: generate-manifest
+generate-manifest:
+	$(if ${ROUTE},,$(error Must specify ROUTE))
+	@sed -e "s/{{ROUTE}}/${ROUTE}/" manifest.yml.tpl > ${CF_MANIFEST_PATH}
 
 .PHONY: development
 development: ## Set environment to development
@@ -41,10 +45,6 @@ production: ## Set environment to production
 	$(eval export ROUTE='docs.notifications.service.gov.uk')
 	$(eval export HOST='https://docs.notifications.service.gov.uk')
 	@true
-
-.PHONY: run
-run: development generate-tech-docs-yml ## Runs the app in development
-	bundle exec middleman server
 
 .PHONY: cf-deploy
 cf-deploy: generate-manifest ## Deploys the app to Cloud Foundry
