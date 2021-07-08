@@ -41,10 +41,6 @@ production: ## Set environment to production
 run-in-development: development generate-tech-docs-yml ## Runs the app in development
 	bundle exec middleman server
 
-.PHONY: generate-build-files
-generate-build-files: generate-tech-docs-yml ## Generates the build files
-	bundle exec middleman build
-
 .PHONY: cf-deploy
 cf-deploy: generate-manifest ## Deploys the app to Cloud Foundry
 	$(if ${CF_ORG},,$(error Must specify CF_ORG))

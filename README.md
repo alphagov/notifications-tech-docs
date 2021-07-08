@@ -66,20 +66,6 @@ If all goes well something like the following output will be displayed:
 
 You should now be able to view a live preview at http://localhost:4567.
 
-## Build
-
-If you want to publish the website without using a build script you may need to
-build the static HTML files.
-
-Type the following to build the HTML:
-
-```
-bundle exec middleman build
-```
-
-This will create a `build` subfolder in the application folder which contains
-the HTML and asset files ready to be published.
-
 [rvm]: https://www.ruby-lang.org/en/documentation/installation/#managers
 [bundler]: http://bundler.io/
 
