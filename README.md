@@ -37,6 +37,12 @@ If all goes well something like the following output will be displayed:
 
 You should now be able to view a live preview at http://localhost:4567.
 
+## To test the application
+
+```
+make test
+```
+
 ## Making changes
 
 To make changes edit the source files in the `source` folder.
