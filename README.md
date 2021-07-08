@@ -17,7 +17,7 @@ gem install bundler
 In the application folder type the following to install the required gems:
 
 ```
-bundle install
+make bootstrap
 ```
 
 ## Making changes
@@ -52,7 +52,7 @@ access it if they are given the link.
 Type the following to start the server:
 
 ```
-make run-in-development
+make run
 ```
 
 If all goes well something like the following output will be displayed:

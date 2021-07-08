@@ -4,6 +4,10 @@ CF_ORG ?= govuk-notify
 CF_APP = notify-tech-docs
 CF_MANIFEST_PATH ?= manifest.yml
 
+.PHONY: bootstrap
+bootstrap: ## Install dependencies
+	bundle install
+
 .PHONY: test
 test:
 	./script/run_tests.sh
@@ -37,8 +41,8 @@ production: ## Set environment to production
 	$(eval export HOST='https://docs.notifications.service.gov.uk')
 	@true
 
-.PHONY: run-in-development
-run-in-development: development generate-tech-docs-yml ## Runs the app in development
+.PHONY: run
+run: development generate-tech-docs-yml ## Runs the app in development
 	bundle exec middleman server
 
 .PHONY: cf-deploy
