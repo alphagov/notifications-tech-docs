@@ -1,6 +1,6 @@
 ---
 title: Accessibility statement for GOV.UK Notify’s documentation
-last_reviewed_on: 2021-07-02
+last_reviewed_on: 2021-07-29
 review_in: 6 months
 hide_in_navigation: true
 ---
@@ -82,6 +82,6 @@ We plan to look at the redundant links by the end of September 2021.
 
 ## Preparation of this accessibility statement
 
-This statement was prepared on 3 September 2020. It was last reviewed on 2 July 2021.
+This statement was prepared on 3 September 2020. It was last reviewed on 29 July 2021.
 
 This website was last tested in August 2020. The test was carried out by the technical writing team at GDS. We used the [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org/) and a checklist we created with the help of the GDS accessibility team. We tested a selection of the website’s pages.
