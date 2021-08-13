@@ -283,6 +283,7 @@ You can upload the following file types:
 - CSV (.csv)
 - Text (.odt, .txt, .rtf)
 - MS Word Document (.doc, .docx)
+- Ms Excel Spreadsheet (.xlsx)
 
 Your file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support/ask-question-give-feedback) if you need to send other file types.
 You’ll need to convert the file into a string that is base64 encoded.
