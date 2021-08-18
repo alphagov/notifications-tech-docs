@@ -31,7 +31,7 @@ test-with-docker:
 
 .PHONY: run-with-docker
 run-with-docker:
-	export DOCKER_ARGS="-p 4567:4567" && \
+	export DOCKER_ARGS="-p 4567:4567 -p 35729:35729" && \
 		./scripts/run_with_docker.sh make run
 
 .PHONY: generate-manifest
