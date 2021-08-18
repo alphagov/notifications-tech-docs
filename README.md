@@ -2,22 +2,37 @@
 
 ## Getting started
 
-To preview or build the website, we need to use the terminal.
+### Docker container
 
-Install Ruby, perferably with a [Ruby version manager][rvm]. You will need
-to download the version of Ruby that matches the one found in the `.ruby-version`
-file.
+This app uses dependencies that are difficult to install locally. In order to make local development easy, we run app commands through a Docker container. Run the following to set this up:
 
-Install the [Bundler gem][bundler].
-
-```
-gem install bundler
+```shell
+make bootstrap-with-docker
 ```
 
-In the application folder type the following to install the required gems:
+Because the container caches things like packages, you will need to run this again if you change the package versions.
+
+## To run the application
 
 ```
-bundle install
+make run-with-docker
+```
+
+If all goes well something like the following output will be displayed:
+
+```
+== The Middleman is loading
+== LiveReload accepting connections from ws://192.168.0.8:35729
+== View your site at "http://Laptop.local:4567", "http://192.168.0.8:4567"
+== Inspect your site configuration at "http://Laptop.local:4567/__middleman", "http://192.168.0.8:4567/__middleman"
+```
+
+You should now be able to view a live preview at http://localhost:4567.
+
+## To test the application
+
+```
+make test-with-docker
 ```
 
 ## Making changes
@@ -39,49 +54,6 @@ generated output.
 
 Including files manually like this lets us specify the position they appear in
 the page.
-
-## Preview
-
-Whilst writing documentation we can run a middleman server to preview how the
-published version will look in the browser. After saving a change the preview in
-the browser will automatically refresh.
-
-The preview is only available on our own computer. Others won't be able to
-access it if they are given the link.
-
-Type the following to start the server:
-
-```
-make run-in-development
-```
-
-If all goes well something like the following output will be displayed:
-
-```
-== The Middleman is loading
-== LiveReload accepting connections from ws://192.168.0.8:35729
-== View your site at "http://Laptop.local:4567", "http://192.168.0.8:4567"
-== Inspect your site configuration at "http://Laptop.local:4567/__middleman", "http://192.168.0.8:4567/__middleman"
-```
-
-You should now be able to view a live preview at http://localhost:4567.
-
-## Build
-
-If you want to publish the website without using a build script you may need to
-build the static HTML files.
-
-Type the following to build the HTML:
-
-```
-bundle exec middleman build
-```
-
-This will create a `build` subfolder in the application folder which contains
-the HTML and asset files ready to be published.
-
-[rvm]: https://www.ruby-lang.org/en/documentation/installation/#managers
-[bundler]: http://bundler.io/
 
 ## Licence
 

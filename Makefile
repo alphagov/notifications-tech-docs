@@ -4,18 +4,40 @@ CF_ORG ?= govuk-notify
 CF_APP = notify-tech-docs
 CF_MANIFEST_PATH ?= manifest.yml
 
+.PHONY: bootstrap
+bootstrap: ## Install dependencies
+	bundle install
+
 .PHONY: test
 test:
-	./script/run_tests.sh
+	bundle exec govuk-lint-ruby app spec
+	bundle exec rspec
+
+.PHONY: run
+run: development generate-tech-docs-yml ## Runs the app in development
+	bundle exec middleman server
+
+.PHONY: generate-tech-docs-yml
+generate-tech-docs-yml:
+	@erb config/tech-docs.yml.erb > config/tech-docs.yml
+
+.PHONY: bootstrap-with-docker
+bootstrap-with-docker: ## Prepare the Docker builder image
+	docker build -t notifications-tech-docs .
+
+.PHONY: test-with-docker
+test-with-docker:
+	./scripts/run_with_docker.sh make test
+
+.PHONY: run-with-docker
+run-with-docker:
+	export DOCKER_ARGS="-p 4567:4567 -p 35729:35729" && \
+		./scripts/run_with_docker.sh make run
 
 .PHONY: generate-manifest
 generate-manifest:
 	$(if ${ROUTE},,$(error Must specify ROUTE))
 	@sed -e "s/{{ROUTE}}/${ROUTE}/" manifest.yml.tpl > ${CF_MANIFEST_PATH}
-
-.PHONY: generate-tech-docs-yml
-generate-tech-docs-yml:
-	@erb config/tech-docs.yml.erb > config/tech-docs.yml
 
 .PHONY: development
 development: ## Set environment to development
@@ -36,14 +58,6 @@ production: ## Set environment to production
 	$(eval export ROUTE='docs.notifications.service.gov.uk')
 	$(eval export HOST='https://docs.notifications.service.gov.uk')
 	@true
-
-.PHONY: run-in-development
-run-in-development: development generate-tech-docs-yml ## Runs the app in development
-	bundle exec middleman server
-
-.PHONY: generate-build-files
-generate-build-files: generate-tech-docs-yml ## Generates the build files
-	bundle exec middleman build
 
 .PHONY: cf-deploy
 cf-deploy: generate-manifest ## Deploys the app to Cloud Foundry

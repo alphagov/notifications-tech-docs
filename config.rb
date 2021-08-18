@@ -2,7 +2,9 @@ require 'govuk_tech_docs'
 require 'app/client_docs'
 require 'app/external_doc'
 
-GovukTechDocs.configure(self)
+GovukTechDocs.configure(self, {
+  livereload: { js_host: 'localhost' }
+})
 
 ClientDocs.pages.each do |page|
   proxy "/#{page.client}.html", "client_template.html", locals: {
