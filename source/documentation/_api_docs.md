@@ -310,9 +310,14 @@ If the request is not successful, the API returns `json` containing the relevant
 
 To send a file by email, add a placeholder to the template then upload a file. The placeholder will contain a secure link to download the file.
 
-The file will be available for the recipient to download for 18 months.
-
 The links are unique and unguessable. GOV.UK Notify cannot access or decrypt your file.
+
+Your file will be available to download for a default period of 78 weeks (18 months). From 29 March 2023 we will reduce this to 26 weeks (6 months) for all new files. Files sent before 29 March will not be affected.
+
+To help protect your files you can also:
+
+* ask recipients to confirm their email address before downloading
+* choose the length of time that a file is available to download
 
 #### Add contact details to the file download page
 
@@ -326,9 +331,9 @@ The links are unique and unguessable. GOV.UK Notify cannot access or decrypt you
 1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
 1. Go to the __Templates__ page and select the relevant email template.
 1. Select __Edit__.
-1. Add a placeholder to the email template using double brackets. For example:
+1. Add a placeholder to the email template using double brackets. For example: "Download your file at: ((link_to_file))"
 
-"Download your file at: ((link_to_file))"
+Your email should also tell recipients how long the file will be available to download.
 
 #### Upload your file
 
@@ -341,6 +346,7 @@ You can upload the following file types:
 - Ms Excel Spreadsheet (.xlsx)
 
 Your file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support/ask-question-give-feedback) if you need to send other file types.
+
 You’ll need to convert the file into a string that is base64 encoded.
 
 Pass the encoded string into an object with a `file` key, and put that in the personalisation argument. For example:
@@ -355,13 +361,72 @@ Pass the encoded string into an object with a `file` key, and put that in the pe
 
 ##### CSV Files
 
-Uploads for CSV files should set the `is_csv` flag as `true` to ensure it is downloaded as a .csv file. For example:
+Uploads for CSV files should set the `is_csv` flag as `true` to ensure it’s downloaded as a .csv file. For example:
 
 ```json
 "personalisation":{
   "first_name": "Amala",
   "application_date": "2018-01-01",
   "link_to_file": {"file": "CSV file as base64 encoded string", "is_csv": true}
+}
+```
+
+#### Ask recipients to confirm their email address before they can download the file
+
+This new security feature is optional. You should use it if you send files that are sensitive - for example, because they contain personal information about your users.
+
+When a recipient clicks the link in the email you’ve sent them, they have to enter their email address. Only someone who knows the recipient’s email address can download the file.
+
+From 29 March 2023, we will turn this feature on by default for every file you send. Files sent before 29 March will not be affected.
+
+##### Turn on email address check
+
+To make the recipient confirm their email address before downloading the file, set the `confirm_email_before_download` flag to `True`.
+
+You will not need to do this after 29 March.
+
+```json
+"personalisation":{
+  "first_name": "Amala",
+  "application_date": "2018-01-01",
+  "link_to_file": {"file": "file as base64 encoded string", "confirm_email_before_download": true}
+}
+```
+
+##### Turn off email address check (not recommended)
+
+If you do not want to use this feature after 29 March 2023, you can turn it off on a file-by-file basis.
+
+You should not turn this feature off if you send files that contain:
+
+* personally identifiable information
+* commercially sensitive information
+* information classified as ‘OFFICIAL’ or ‘OFFICIAL-SENSITIVE’ under the [Government Security Classifications](https://www.gov.uk/government/publications/government-security-classifications) policy
+
+To let the recipient download the file without confirming their email address, set the `confirm_email_before_download` flag to `False`.
+
+
+```json
+"personalisation":{
+  "first_name": "Amala",
+  "application_date": "2018-01-01",
+  "link_to_file": {"file": "file as base64 encoded string", "confirm_email_before_download": false}
+}
+```
+
+#### Choose the length of time that a file is available to download
+
+Set the number of weeks you want the file to be available using the `retention_period` key.
+
+You can choose any value between 1 week and 78 weeks.
+
+If you do not choose a value, the file will be available for the default period of 78 weeks (18 months).
+
+```json
+"personalisation":{
+  "first_name": "Amala",
+  "application_date": "2018-01-01",
+  "link_to_file": {"file": "file as base64 encoded string", "retention_period": "4 weeks"}
 }
 ```
 
@@ -405,6 +470,8 @@ If the request is not successful, the API returns `json` containing the relevant
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient using a team-only API key"`<br>`}]`|Use the correct type of [API key](#api-keys)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported file type '(FILE TYPE)'. Supported types are: '(ALLOWED TYPES)"`<br>`}]`|Wrong file type. You can only upload certain file formats.|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported value for retention_period '(PERIOD)'. Supported periods are from 1 to 78 weeks."`<br>`}]`|Choose a period between 1 and 78 weeks|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported value for confirm_email_before_download: '(VALUE)'. Use a boolean true or false value."`<br>`}]`|Use either true or false|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "File did not pass the virus scan"`<br>`}]`|The file contains a virus|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Send files by email has not been set up - add contact details for your service at https://www.notifications.service.gov.uk/services/(SERVICE ID)/service-settings/send-files-by-email"`<br>`}]`|See how to [add contact details to the file download page](#add-contact-details-to-the-file-download-page)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can only send a file by email"`<br>`}]`|Make sure you are using an email template|
