@@ -260,6 +260,52 @@ For example:
 
 You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.
 
+#### Response
+
+If the request to the client is successful, the client returns a `dict`:
+
+```json
+{
+  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
+  "reference": "STRING",
+  "content": {
+    "subject": "SUBJECT TEXT",
+    "body": "MESSAGE TEXT",
+    "from_email": "SENDER EMAIL"
+  },
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",
+  "template": {
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
+    "version": 1,
+    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
+  }
+}
+```
+
+#### Errors
+
+If the request is not successful, the API returns `json` containing the relevant error code. For example:
+
+```json
+{
+  "status_code": 400,
+  "errors": [
+    {"error": "BadRequestError", "message": "Can't send to this recipient using a team-only API key"}
+  ]
+}
+```
+
+|status_code|Error message|How to fix|
+|:---|:---|:---|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient using a team-only API key"`<br>`}]`|Use the correct type of [API key](#api-keys)|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
+|`429`|`[{`<br>`"error": "RateLimitError",`<br>`"message": "Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds"`<br>`}]`|Refer to [API rate limits](#rate-limits) for more information|
+|`429`|`[{`<br>`"error": "TooManyRequestsError",`<br>`"message": "Exceeded send limits (LIMIT NUMBER) for today"`<br>`}]`|Refer to [service limits](#daily-limits) for the limit number|
+|`500`|`[{`<br>`"error": "Exception",`<br>`"message": "Internal server error"`<br>`}]`|Notify was unable to process the request, resend your notification.|
+
+
 ### Send a file by email
 
 To send a file by email, add a placeholder to the template then upload a file. The placeholder will contain a secure link to download the file.
