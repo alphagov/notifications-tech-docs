@@ -24,3 +24,5 @@ manifest.yml
 config/tech-docs.yml
 
 .envrc
+
+vendor

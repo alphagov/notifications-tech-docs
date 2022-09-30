@@ -55,6 +55,12 @@ generated output.
 Including files manually like this lets us specify the position they appear in
 the page.
 
+## Deployment
+
+The tech docs are built and deployed in a concourse pipeline, using a container image built from the Dockerfile at the root of this repository.
+
+If tech docs fail to deploy and the container needs to be updated, run the `build-tech-docs-image` task in Concourse after making and committing any required changes to the Dockerfile.
+
 ## Licence
 
 Unless stated otherwise, the codebase is released under [the MIT licence](./LICENSE).
