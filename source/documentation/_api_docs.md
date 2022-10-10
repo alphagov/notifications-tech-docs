@@ -381,7 +381,7 @@ From 29 March 2023, we will turn this feature on by default for every file you s
 
 ##### Turn on email address check
 
-To make the recipient confirm their email address before downloading the file, set the `confirm_email_before_download` flag to `True`.
+To make the recipient confirm their email address before downloading the file, set the `confirm_email_before_download` flag to `true`.
 
 You will not need to do this after 29 March.
 
@@ -403,7 +403,7 @@ You should not turn this feature off if you send files that contain:
 * commercially sensitive information
 * information classified as ‘OFFICIAL’ or ‘OFFICIAL-SENSITIVE’ under the [Government Security Classifications](https://www.gov.uk/government/publications/government-security-classifications) policy
 
-To let the recipient download the file without confirming their email address, set the `confirm_email_before_download` flag to `False`.
+To let the recipient download the file without confirming their email address, set the `confirm_email_before_download` flag to `false`.
 
 
 ```json
