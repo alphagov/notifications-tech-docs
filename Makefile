@@ -10,7 +10,7 @@ bootstrap: ## Install dependencies
 
 .PHONY: test
 test:
-	bundle exec govuk-lint-ruby app spec
+	bundle exec rubocop app spec
 	bundle exec rspec
 
 .PHONY: run
