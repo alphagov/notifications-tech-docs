@@ -12,8 +12,8 @@ There’s a limit to the number of messages you can send each day:
 
 |Service status|Type of API key|Daily limit|
 |:---|:---|:---|
-|Live|Team or live|250,000|
-|Trial|Team|50|
+|Live|Team or live|<ul class="govuk-list govuk-!-font-size-16"><li>250,000 emails</li><li>250,000 text messages</li><li>20,000 letters</li></ul>|
+|Trial|Team|50 emails or text messages|
 |Live or trial|Test|Unlimited|
 
 These limits reset at midnight.
