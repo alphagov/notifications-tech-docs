@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.0.4.1)
+    activesupport (7.0.4.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -31,7 +31,7 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
-    concurrent-ruby (1.1.10)
+    concurrent-ruby (1.2.2)
     contracts (0.16.1)
     crack (0.4.5)
       rexml
@@ -137,7 +137,7 @@ GEM
     mini_portile2 (2.8.0)
     mini_racer (0.6.3)
       libv8-node (~> 16.10.0.0)
-    minitest (5.17.0)
+    minitest (5.18.0)
     multi_json (1.15.0)
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
@@ -219,7 +219,7 @@ GEM
     tilt (2.0.11)
     toml (0.3.0)
       parslet (>= 1.8.0, < 3.0.0)
-    tzinfo (2.0.5)
+    tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
