@@ -420,7 +420,7 @@ Set the number of weeks you want the file to be available using the `retention_p
 
 You can choose any value between 1 week and 78 weeks.
 
-If you do not choose a value, the file will be available for the default period of 26 weeks (6 months).
+If you do not choose a value, the file will be available for the default period of 78 weeks (18 months).
 
 ```json
 "personalisation":{
