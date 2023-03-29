@@ -312,7 +312,7 @@ To send a file by email, add a placeholder to the template then upload a file. T
 
 The links are unique and unguessable. GOV.UK Notify cannot access or decrypt your file.
 
-Your file will be available to download for a default period of 78 weeks (18 months). From 29 March 2023 we will reduce this to 26 weeks (6 months) for all new files. Files sent before 29 March will not be affected.
+Your file will be available to download for a default period of 78 weeks (18 months). From 12 April 2023 we will reduce this to 26 weeks (6 months) for all new files. Files sent before 12 April will not be affected.
 
 To help protect your files you can also:
 
@@ -377,13 +377,13 @@ This new security feature is optional. You should use it if you send files that 
 
 When a recipient clicks the link in the email you’ve sent them, they have to enter their email address. Only someone who knows the recipient’s email address can download the file.
 
-From 29 March 2023, we will turn this feature on by default for every file you send. Files sent before 29 March will not be affected.
+From 12 April 2023, we will turn this feature on by default for every file you send. Files sent before 12 April will not be affected.
 
 ##### Turn on email address check
 
 To make the recipient confirm their email address before downloading the file, set the `confirm_email_before_download` flag to `true`.
 
-You will not need to do this after 29 March.
+You will not need to do this after 12 April.
 
 ```json
 "personalisation":{
@@ -395,7 +395,7 @@ You will not need to do this after 29 March.
 
 ##### Turn off email address check (not recommended)
 
-If you do not want to use this feature after 29 March 2023, you can turn it off on a file-by-file basis.
+If you do not want to use this feature after 12 April 2023, you can turn it off on a file-by-file basis.
 
 You should not turn this feature off if you send files that contain:
 
@@ -418,9 +418,9 @@ To let the recipient download the file without confirming their email address, s
 
 Set the number of weeks you want the file to be available using the `retention_period` key.
 
-You can choose any value between 1 week and 78 weeks.
+You can choose any value between 1 week and 26 weeks (6 months).
 
-If you do not choose a value, the file will be available for the default period of 78 weeks (18 months).
+If you do not choose a value, the file will be available for the default period of 26 weeks (6 months).
 
 ```json
 "personalisation":{
@@ -470,7 +470,7 @@ If the request is not successful, the API returns `json` containing the relevant
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient using a team-only API key"`<br>`}]`|Use the correct type of [API key](#api-keys)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported file type '(FILE TYPE)'. Supported types are: '(ALLOWED TYPES)"`<br>`}]`|Wrong file type. You can only upload certain file formats.|
-|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported value for retention_period '(PERIOD)'. Supported periods are from 1 to 78 weeks."`<br>`}]`|Choose a period between 1 and 78 weeks|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported value for retention_period '(PERIOD)'. Supported periods are from 1 to 26 weeks."`<br>`}]`|Choose a period between 1 and 26 weeks|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported value for confirm_email_before_download: '(VALUE)'. Use a boolean true or false value."`<br>`}]`|Use either true or false|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "File did not pass the virus scan"`<br>`}]`|The file contains a virus|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Send files by email has not been set up - add contact details for your service at https://www.notifications.service.gov.uk/services/(SERVICE ID)/service-settings/send-files-by-email"`<br>`}]`|See how to [add contact details to the file download page](#add-contact-details-to-the-file-download-page)|
