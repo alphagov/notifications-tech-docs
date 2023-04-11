@@ -312,7 +312,7 @@ To send a file by email, add a placeholder to the template then upload a file. T
 
 The links are unique and unguessable. GOV.UK Notify cannot access or decrypt your file.
 
-Your file will be available to download for a default period of 78 weeks (18 months). From 12 April 2023 we will reduce this to 26 weeks (6 months) for all new files. Files sent before 12 April will not be affected.
+Your file will be available to download for a default period of 26 weeks (6 months).
 
 To help protect your files you can also:
 
@@ -373,29 +373,13 @@ Uploads for CSV files should set the `is_csv` flag as `true` to ensure it’s do
 
 #### Ask recipients to confirm their email address before they can download the file
 
-This new security feature is optional. You should use it if you send files that are sensitive - for example, because they contain personal information about your users.
-
 When a recipient clicks the link in the email you’ve sent them, they have to enter their email address. Only someone who knows the recipient’s email address can download the file.
 
-From 12 April 2023, we will turn this feature on by default for every file you send. Files sent before 12 April will not be affected.
-
-##### Turn on email address check
-
-To make the recipient confirm their email address before downloading the file, set the `confirm_email_before_download` flag to `true`.
-
-You will not need to do this after 12 April.
-
-```json
-"personalisation":{
-  "first_name": "Amala",
-  "application_date": "2018-01-01",
-  "link_to_file": {"file": "file as base64 encoded string", "confirm_email_before_download": true}
-}
-```
+This security feature is turned on by default.
 
 ##### Turn off email address check (not recommended)
 
-If you do not want to use this feature after 12 April 2023, you can turn it off on a file-by-file basis.
+If you do not want to use this feature, you can turn it off on a file-by-file basis.
 
 You should not turn this feature off if you send files that contain:
 
@@ -420,7 +404,9 @@ Set the number of weeks you want the file to be available using the `retention_p
 
 You can choose any value between 1 week and 78 weeks.
 
-If you do not choose a value, the file will be available for the default period of 78 weeks (18 months).
+If you do not choose a value, the file will be available for the default period of 26 weeks (6 months).
+
+Files sent before 12 April 2023 had a longer default period of 78 weeks (18 months).
 
 ```json
 "personalisation":{
