@@ -1,4 +1,4 @@
-FROM ghcr.io/alphagov/notify/ruby:2.7.6-bullseye
+FROM ghcr.io/alphagov/notify/ruby:3.2-bookworm
 
 RUN \
 	echo "Install Debian packages" \

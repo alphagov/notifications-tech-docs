@@ -10,7 +10,7 @@ RSpec.describe ExternalDoc do
     end
 
     it "returns a GitHub page as a string" do
-      page_contents = ExternalDoc.fetch(repository: repository)
+      page_contents = ExternalDoc.fetch(repository:)
 
       expect(page_contents).to be_a(String)
       expect(page_contents).to include("Example markdown file")

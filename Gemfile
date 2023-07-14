@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'faraday', '~> 2.7.2'
-gem 'govuk_tech_docs', '~> 3.3.1'
-gem 'mini_racer', '~> 0.6.3'
+gem 'faraday', '~> 2.7.10'
+gem 'govuk_tech_docs', '~> 3.4.0'
+gem 'mini_racer', '~> 0.8.0'
 
 group :test do
   gem 'rspec', '~> 3.12.0'
