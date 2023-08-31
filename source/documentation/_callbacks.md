@@ -18,7 +18,7 @@ To do this:
 1. Go to the __API integration__ page.
 1. Select __Callbacks__.
 
-#### Retry behaviour
+### Retry callbacks
 
 If Notify sends a `POST` request to your service, but the request fails then we will retry.
 
