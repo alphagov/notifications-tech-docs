@@ -18,6 +18,12 @@ To do this:
 1. Go to the __API integration__ page.
 1. Select __Callbacks__.
 
+#### Retry behaviour
+
+If Notify sends a `POST` request to your service, but the request fails then we will retry.
+
+We will retry every 5 minutes, up to a maximum of 5 times.
+
 ### Delivery receipts
 
 When you send an email or text message, Notify will send a receipt to your callback URL with the status of the message. This is an automated method to get the status of messages.
