@@ -402,7 +402,10 @@ To let the recipient download the file without confirming their email address, s
 
 Set the number of weeks you want the file to be available using the `retention_period` key.
 
-You can choose any value between 1 week and 78 weeks.
+You can choose any value between 1 week and 78 weeks. When deciding this, you should consider:
+
+* the need to protect the recipient’s personal information
+* whether the recipient will need to download the file again later
 
 If you do not choose a value, the file will be available for the default period of 26 weeks (6 months).
 
