@@ -980,10 +980,8 @@ If the request is not successful, the client will return an `HTTPError` containi
 
 This returns the latest version of the template.
 
-```python
-response = notifications_client.get_template(
-  'f33517ff-2a88-4f6e-b855-c550268ce08a' # required string - template ID
-)
+```
+GET /v2/template/{template_id}
 ```
 
 #### Arguments
@@ -994,11 +992,13 @@ The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.ser
 
 #### Response
 
-If the request to the client is successful, the client returns a `dict`.
+If the request is successful, the response body is `json` and the status code is `200`.
 
-```python
+##### All messages
+
+```json
 {
-    "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
     "name": "STRING", # required string - template name
     "type": "sms / email / letter" , # required string
     "created_at": "STRING", # required string - date and time template created
@@ -1026,11 +1026,8 @@ If the request is not successful, the client returns an `HTTPError` containing t
 
 #### Method
 
-```python
-response = notifications_client.get_template_version(
-    'f33517ff-2a88-4f6e-b855-c550268ce08a' # required string - template ID
-    'version': INTEGER,
-)
+```
+GET /v2/template/{template_id}/version/{version}
 ```
 
 #### Arguments
@@ -1045,11 +1042,11 @@ The version number of the template.
 
 #### Response
 
-If the request to the client is successful, the client returns a `dict`.
+If the request is successful, the response body is `json` and the status code is `200`.
 
-```python
+```json
 {
-    "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
     "name": "STRING", # required string - template name
     "type": "sms / email / letter" , # required string
     "created_at": "STRING", # required string - date and time template created
@@ -1080,12 +1077,10 @@ If the request is not successful, the client returns an `HTTPError` containing t
 This returns the latest version of all templates.
 
 ```python
-response = notifications_client.get_all_templates(
-    template_type="sms / letter / email" # optional string
-)
+GET /v2/templates
 ```
 
-#### Arguments
+#### Query parameters
 
 ##### template_type (optional)
 
@@ -1097,13 +1092,13 @@ If you leave out this argument, the method returns all templates. Otherwise you 
 
 #### Response
 
-If the request to the client is successful, the client returns a `dict`.
+If the request is successful, the response body is `json` and the status code is `200`.
 
-```python
+```json
 {
     "templates": [
         {
-            "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
+            "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
             "name": "STRING", # required string - template name
             "type": "sms / email / letter" , # required string
             "created_at": "STRING", # required string - date and time template created
@@ -1136,14 +1131,7 @@ If no templates exist for a template type or there no templates for a service, t
 This generates a preview version of a template.
 
 ```python
-response = notifications_client.post_template_preview(
-    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
-    personalisation={
-        'KEY': 'VALUE',
-        'KEY': 'VALUE',
-        ...
-        }, # required dict - specifies template parameters
-)
+POST /v2/templates/{template_id}/preview
 ```
 
 The parameters in the personalisation argument must match the placeholder fields in the actual template. The API notification client will ignore any extra fields in the method.
@@ -1154,22 +1142,26 @@ The parameters in the personalisation argument must match the placeholder fields
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
 
-##### personalisation (required)
+#### Request body
+
+##### personalisation (optional)
 
 If a template has placeholder fields for personalised information such as name or reference number, you need to provide their values in a dictionary with key value pairs. For example:
 
-```python
-personalisation={
-    'first_name': 'Amala',
-    'application_date': '2018-01-01',
+```json
+{
+  "personalisation": {
+    "first_name": "Amala",
+    "application_date": "2018-01-01",
+  }
 }
 ```
 
 #### Response
 
-If the request to the client is successful, you receive a `dict` response.
+If the request is successful, the response body is `json` and the status code is `200`.
 
-```python
+```json
 {
     "id": "740e5834-3a29-46b4-9a6f-16142fde533a", # required string - notification ID
     "type": "sms / email / letter" , # required string
