@@ -959,8 +959,6 @@ If the request is not successful, the API returns `json` containing the relevant
 }
 ```
 
-If the request is not successful, the client will return an `HTTPError` containing the relevant error code:
-
 |error.status_code|error.message|How to fix|
 |:---|:---|:---|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|Check the notification ID|
@@ -1013,13 +1011,22 @@ If the request is successful, the response body is `json` and the status code is
 
 #### Error codes
 
-If the request is not successful, the client returns an `HTTPError` containing the relevant error code:
+If the request is not successful, the API returns `json` containing the relevant error code. For example:
+
+```json
+{
+  "status_code": 404,
+  "errors": [
+    {"error": "NoResultFound", "message": "No result found"}
+  ]
+}
+```
 
 |error.status_code|error.message|How to fix|
 |:---|:---|:---|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-arguments-template-id-required)|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-arguments-template-id-required)|
 
 
 ### Get a template by ID and version
@@ -1061,13 +1068,22 @@ If the request is successful, the response body is `json` and the status code is
 
 #### Error codes
 
-If the request is not successful, the client returns an `HTTPError` containing the relevant error code:
+If the request is not successful, the API returns `json` containing the relevant error code. For example:
+
+```json
+{
+  "status_code": 404,
+  "errors": [
+    {"error": "NoResultFound", "message": "No result found"}
+  ]
+}
+```
 
 |error.status_code|error.message|How to fix|
 |:---|:---|:---|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-and-version-arguments-template-id-required) and [version](#version-required)|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result Found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-and-version-arguments-template-id-required) and [version](#version-required)|
 
 
 ### Get all templates
@@ -1082,7 +1098,7 @@ GET /v2/templates
 
 #### Query parameters
 
-##### template_type (optional)
+##### type (optional)
 
 If you leave out this argument, the method returns all templates. Otherwise you can filter by:
 
@@ -1123,6 +1139,26 @@ If no templates exist for a template type or there no templates for a service, t
     "templates": []
 }
 ```
+
+#### Error codes
+
+If the request is not successful, the API returns `json` containing the relevant error code. For example:
+
+```json
+{
+  "status_code": 400,
+  "errors": [
+    {"error": "ValidationError", "message": "type blah is not one of [sms, email, letter, broadcast]"}
+  ]
+}
+```
+
+|error.status_code|error.message|Notes|
+|:---|:---|:---|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "type <TYPE> is not one of [sms, email, letter, broadcast]"`<br>`}]`|Make sure that the provided `type` is one of: email, sms, letter |
+|`400`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|Check the [template ID](#generate-a-preview-template-arguments-template-id-required)|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 
 ### Generate a preview template
 
@@ -1173,7 +1209,7 @@ If the request is successful, the response body is `json` and the status code is
 
 #### Error codes
 
-If the request is not successful, the client returns an `HTTPError` containing the relevant error code:
+If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
 |error.status_code|error.message|Notes|
 |:---|:---|:---|
