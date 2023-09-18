@@ -971,3 +971,304 @@ If the request is not successful, the client will return an `HTTPError` containi
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 |`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|Check the notification ID|
+
+## Get a template
+
+### Get a template by ID
+
+#### Method
+
+This returns the latest version of the template.
+
+```python
+response = notifications_client.get_template(
+  'f33517ff-2a88-4f6e-b855-c550268ce08a' # required string - template ID
+)
+```
+
+#### Arguments
+
+##### template_id (required)
+
+The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
+
+#### Response
+
+If the request to the client is successful, the client returns a `dict`.
+
+```python
+{
+    "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
+    "name": "STRING", # required string - template name
+    "type": "sms / email / letter" , # required string
+    "created_at": "STRING", # required string - date and time template created
+    "updated_at": "STRING", # required string - date and time template last updated
+    "version": INTEGER,
+    "created_by": "someone@example.com", # required string
+    "body": "STRING", # required string - body of notification
+    "subject": "STRING" # required string for email - subject of email
+    "letter_contact_block": "STRING" # optional string - None if not a letter template or contact block not set
+}
+```
+
+#### Error codes
+
+If the request is not successful, the client returns an `HTTPError` containing the relevant error code:
+
+|error.status_code|error.message|How to fix|
+|:---|:---|:---|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-arguments-template-id-required)|
+
+
+### Get a template by ID and version
+
+#### Method
+
+```python
+response = notifications_client.get_template_version(
+    'f33517ff-2a88-4f6e-b855-c550268ce08a' # required string - template ID
+    'version': INTEGER,
+)
+```
+
+#### Arguments
+
+##### template_id (required)
+
+The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
+
+##### version (required)
+
+The version number of the template.
+
+#### Response
+
+If the request to the client is successful, the client returns a `dict`.
+
+```python
+{
+    "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
+    "name": "STRING", # required string - template name
+    "type": "sms / email / letter" , # required string
+    "created_at": "STRING", # required string - date and time template created
+    "updated_at": "STRING", # required string - date and time template last updated
+    "version": INTEGER,
+    "created_by": "someone@example.com", # required string
+    "body": "STRING", # required string - body of notification
+    "subject": "STRING" # required string for email - subject of email
+    "letter_contact_block": "STRING" # optional string - None if not a letter template or contact block not set
+}
+```
+
+#### Error codes
+
+If the request is not successful, the client returns an `HTTPError` containing the relevant error code:
+
+|error.status_code|error.message|How to fix|
+|:---|:---|:---|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-and-version-arguments-template-id-required) and [version](#version-required)|
+
+
+### Get all templates
+
+#### Method
+
+This returns the latest version of all templates.
+
+```python
+response = notifications_client.get_all_templates(
+    template_type="sms / letter / email" # optional string
+)
+```
+
+#### Arguments
+
+##### template_type (optional)
+
+If you leave out this argument, the method returns all templates. Otherwise you can filter by:
+
+- `email`
+- `sms`
+- `letter`
+
+#### Response
+
+If the request to the client is successful, the client returns a `dict`.
+
+```python
+{
+    "templates": [
+        {
+            "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
+            "name": "STRING", # required string - template name
+            "type": "sms / email / letter" , # required string
+            "created_at": "STRING", # required string - date and time template created
+            "updated_at": "STRING", # required string - date and time template last updated
+            "version": NUMBER, # required string - template version
+            "created_by": "someone@example.com", # required string
+            "body": "STRING", # required string - body of notification
+            "subject": "STRING" # required string for email - subject of email
+            "letter_contact_block": "STRING" # optional string - None if not a letter template or contact block not set
+        },
+        {
+            ...another template
+        }
+    ]
+}
+```
+
+If no templates exist for a template type or there no templates for a service, the client returns a `dict` with an empty `templates` list element:
+
+```python
+{
+    "templates": []
+}
+```
+
+### Generate a preview template
+
+#### Method
+
+This generates a preview version of a template.
+
+```python
+response = notifications_client.post_template_preview(
+    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
+    personalisation={
+        'KEY': 'VALUE',
+        'KEY': 'VALUE',
+        ...
+        }, # required dict - specifies template parameters
+)
+```
+
+The parameters in the personalisation argument must match the placeholder fields in the actual template. The API notification client will ignore any extra fields in the method.
+
+#### Arguments
+
+##### template_id (required)
+
+The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
+
+##### personalisation (required)
+
+If a template has placeholder fields for personalised information such as name or reference number, you need to provide their values in a dictionary with key value pairs. For example:
+
+```python
+personalisation={
+    'first_name': 'Amala',
+    'application_date': '2018-01-01',
+}
+```
+
+#### Response
+
+If the request to the client is successful, you receive a `dict` response.
+
+```python
+{
+    "id": "740e5834-3a29-46b4-9a6f-16142fde533a", # required string - notification ID
+    "type": "sms / email / letter" , # required string
+    "version": INTEGER,
+    "body": "STRING", # required string - body of notification
+    "subject": "STRING" # required string for email - subject of email
+}
+```
+
+#### Error codes
+
+If the request is not successful, the client returns an `HTTPError` containing the relevant error code:
+
+|error.status_code|error.message|Notes|
+|:---|:---|:---|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Missing personalisation: [PERSONALISATION FIELD]"`<br>`}]`|Check that the personalisation arguments in the method match the placeholder fields in the template|
+|`400`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|Check the [template ID](#generate-a-preview-template-arguments-template-id-required)|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
+
+
+## Get received text messages
+
+This API call returns one page of up to 250 received text messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the older_than argument.
+
+You can only get the status of messages that are 7 days old or newer.
+
+### Get all received text messages
+
+This method returns a `<generator object>` with all received text messages.
+
+#### Method
+
+```python
+response = get_received_texts_iterator()
+```
+
+#### Response
+
+If the request to the client is successful, the client will return a `<generator object>` that will return all received text messages.
+
+```python
+<generator object NotificationsAPIClient.get_received_texts_iterator at 0x1026c7410>
+```
+
+### Get one page of received text messages
+
+This will return one page of up to 250 text messages.
+
+#### Method
+
+```python
+response = client.get_received_texts(older_than)
+```
+
+You can specify which text messages to receive by inputting the ID of a received text message into the [`older_than`](#get-one-page-of-received-text-messages-arguments-older-than-optional) argument.
+
+#### Arguments
+
+##### older_than (optional)
+
+Input the ID of a received text message into this argument. If you use this argument, the method returns the next 250 received text messages older than the given ID.
+
+```python
+older_than='740e5834-3a29-46b4-9a6f-16142fde533a' # optional string - notification ID
+```
+
+If you leave out this argument, the method returns the most recent 250 text messages.
+
+#### Response
+
+If the request to the client is successful, the client returns a `dict`.
+
+```python
+{
+  "received_text_messages":
+  [
+    {
+      "id": "STRING", # required string - ID of received text message
+      "user_number": "STRING", # required string
+      "notify_number": "STRING", # required string - receiving number
+      "created_at": "STRING", # required string - date and time template created
+      "service_id": "STRING", # required string - service ID
+      "content": "STRING" # required string - text content
+    },
+    …
+  ],
+  "links": {
+    "current": "/received-text-messages",
+    "next": "/received-text-messages?other_than=last_id_in_list"
+  }
+}
+```
+
+#### Error codes
+
+If the request is not successful, the client returns an `HTTPError` containing the relevant error code.
+
+|error.status_code|error.message|How to fix|
+|:---|:---|:---|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
+|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
