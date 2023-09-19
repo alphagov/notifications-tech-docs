@@ -1221,6 +1221,10 @@ If the request is not successful, the API returns `json` containing the relevant
 
 ## Get received text messages
 
+This API call returns one page of up to 250 received text messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the older_than argument.
+
+You can only get the status of messages that are 7 days old or newer.
+
 ### Enable received text messages
 
 To receive text messages:
@@ -1228,23 +1232,19 @@ To receive text messages:
 1. Go to the **Text message settings** section of the **Settings** page.
 1. Select **Change** on the **Receive text messages** row.
 
-#### Method
-
-This API call returns one page of up to 250 received text messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the older_than argument.
-
-You can only get the status of messages that are 7 days old or newer.
+### Method
 
 ```
 GET /v2/received-text-messages
 ```
 
-#### Query parameters
+### Query parameters
 
-##### older_than (optional)
+#### older_than (optional)
 
 The ID of a received text message. If this is passed, the response will only list text messages received before that message.
 
-#### Response
+### Response
 
 If the request is successful, the response body is `json` and the status code is `200`.
 
@@ -1268,7 +1268,7 @@ If the request is successful, the response body is `json` and the status code is
 }
 ```
 
-#### Error codes
+### Error codes
 
 If the request is not successful, the client returns an `HTTPError` containing the relevant error code.
 
