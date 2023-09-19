@@ -1221,6 +1221,13 @@ If the request is not successful, the API returns `json` containing the relevant
 
 ## Get received text messages
 
+### Enable received text messages
+
+To receive text messages:
+
+1. Go to the **Text message settings** section of the **Settings** page.
+1. Select **Change** on the **Receive text messages** row.
+
 #### Method
 
 This API call returns one page of up to 250 received text messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the older_than argument.
