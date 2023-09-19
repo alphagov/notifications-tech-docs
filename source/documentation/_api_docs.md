@@ -1092,7 +1092,7 @@ If the request is not successful, the API returns `json` containing the relevant
 
 This returns the latest version of all templates.
 
-```python
+```
 GET /v2/templates
 ```
 
@@ -1134,7 +1134,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If no templates exist for a template type or there no templates for a service, the client returns a `dict` with an empty `templates` list element:
 
-```python
+```json
 {
     "templates": []
 }
@@ -1166,7 +1166,7 @@ If the request is not successful, the API returns `json` containing the relevant
 
 This generates a preview version of a template.
 
-```python
+```
 POST /v2/templates/{template_id}/preview
 ```
 
@@ -1221,73 +1221,42 @@ If the request is not successful, the API returns `json` containing the relevant
 
 ## Get received text messages
 
+#### Method
+
 This API call returns one page of up to 250 received text messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the older_than argument.
 
 You can only get the status of messages that are 7 days old or newer.
 
-### Get all received text messages
-
-This method returns a `<generator object>` with all received text messages.
-
-#### Method
-
-```python
-response = get_received_texts_iterator()
+```
+GET /v2/received-text-messages
 ```
 
-#### Response
-
-If the request to the client is successful, the client will return a `<generator object>` that will return all received text messages.
-
-```python
-<generator object NotificationsAPIClient.get_received_texts_iterator at 0x1026c7410>
-```
-
-### Get one page of received text messages
-
-This will return one page of up to 250 text messages.
-
-#### Method
-
-```python
-response = client.get_received_texts(older_than)
-```
-
-You can specify which text messages to receive by inputting the ID of a received text message into the [`older_than`](#get-one-page-of-received-text-messages-arguments-older-than-optional) argument.
-
-#### Arguments
+#### Query parameters
 
 ##### older_than (optional)
 
-Input the ID of a received text message into this argument. If you use this argument, the method returns the next 250 received text messages older than the given ID.
-
-```python
-older_than='740e5834-3a29-46b4-9a6f-16142fde533a' # optional string - notification ID
-```
-
-If you leave out this argument, the method returns the most recent 250 text messages.
+The ID of a received text message. If this is passed, the response will only list text messages received before that message.
 
 #### Response
 
-If the request to the client is successful, the client returns a `dict`.
+If the request is successful, the response body is `json` and the status code is `200`.
 
-```python
+```json
 {
-  "received_text_messages":
-  [
+  "received_text_messages": [
     {
-      "id": "STRING", # required string - ID of received text message
-      "user_number": "STRING", # required string
-      "notify_number": "STRING", # required string - receiving number
+      "id": "740e5834-3a29-46b4-9a6f-16142fde533a", # required string - notification ID
       "created_at": "STRING", # required string - date and time template created
       "service_id": "STRING", # required string - service ID
+      "notify_number": "STRING", # required string - receiving number
+      "user_number": "STRING", # required string
       "content": "STRING" # required string - text content
     },
-    …
+    ...
   ],
   "links": {
-    "current": "/received-text-messages",
-    "next": "/received-text-messages?other_than=last_id_in_list"
+    "current": "STRING", # required string - the requested URL
+    "next": "STRING" # optional string - the URL to request for the next batch of messages
   }
 }
 ```
