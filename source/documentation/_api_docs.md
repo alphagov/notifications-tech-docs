@@ -262,7 +262,7 @@ You can leave out this argument if your service only has one reply-to email addr
 
 #### Response
 
-If the request to the client is successful, the client returns a `dict`:
+If the request is successful, the response body is `json` with a status code of `201`:
 
 ```json
 {
@@ -421,7 +421,7 @@ Files sent before 12 April 2023 had a longer default period of 78 weeks (18 mont
 
 #### Response
 
-If the request to the client is successful, the client returns a `dict`:
+If the request is successful, the response body is `json` with a status code of `201`:
 
 ```json
 {
@@ -1132,7 +1132,7 @@ If the request is successful, the response body is `json` and the status code is
 }
 ```
 
-If no templates exist for a template type or there no templates for a service, the client returns a `dict` with an empty `templates` list element:
+If no templates exist for a template type or there no templates for a service, the API returns a `json` object with a `templates` key for an empty array:
 
 ```json
 {
@@ -1270,7 +1270,7 @@ If the request is successful, the response body is `json` and the status code is
 
 ### Error codes
 
-If the request is not successful, the client returns an `HTTPError` containing the relevant error code.
+If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
 |error.status_code|error.message|How to fix|
 |:---|:---|:---|
