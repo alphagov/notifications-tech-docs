@@ -341,7 +341,7 @@ You can upload the following file types:
 
 - PDF (.pdf)
 - CSV (.csv)
-- Text (.odt, .txt, .rtf)
+- Text (.odt, .txt, .rtf, .json)
 - MS Word Document (.doc, .docx)
 - Ms Excel Spreadsheet (.xlsx)
 
