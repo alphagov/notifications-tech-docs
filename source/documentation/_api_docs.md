@@ -840,7 +840,7 @@ If the request is successful, the response body is `json` and the status code is
       "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure", # required string
       "template": {
         "version": 1
-        "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a' # required string - template ID
+        "id": "f33517ff-2a88-4f6e-b855-c550268ce08a" # required string - template ID
         "uri": "/v2/template/{id}/{version}", # required
       },
       "body": "STRING", # required string - body of notification
