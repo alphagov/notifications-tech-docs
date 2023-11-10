@@ -1,6 +1,7 @@
 ---
 applications:
 - name: notify-tech-docs
+  instances: 2
   memory: 64M
   buildpack: staticfile_buildpack
   health-check-type: http
