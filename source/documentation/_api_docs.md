@@ -71,7 +71,7 @@ The content header is `application/json`:
 Error messages consist of:
 
 - a status_code, for example ‘400’
-- an error, for example’BadRequestError’
+- an error, for example ’BadRequestError’
 - a message, for example ‘Mobile numbers can only include: 0 1 2 3 4 5 6 7 8 9 ( ) + -‘
 
 Do not use the content of the message despcriptions in your code. These can sometimes change, which may affect your API integration.
