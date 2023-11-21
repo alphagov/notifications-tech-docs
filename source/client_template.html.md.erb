@@ -4,6 +4,7 @@ parent: https://www.notifications.service.gov.uk/documentation
 ---
 
 <%= ExternalDoc.fetch(repository: repo) %>
+<%= partial 'documentation/error_messages' %>
 <%= partial 'documentation/testing' %>
 <%= partial 'documentation/api_keys' %>
 <%= partial 'documentation/limits' %>
