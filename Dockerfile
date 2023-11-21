@@ -1,4 +1,4 @@
-FROM ghcr.io/alphagov/notify/ruby:3.2-bookworm
+FROM ruby:slim-bookworm
 
 RUN \
 	echo "Install Debian packages" \
