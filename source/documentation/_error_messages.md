@@ -6,7 +6,7 @@ Error messages consist of:
 - an error, for example ’BadRequestError’
 - a message, for example ‘Mobile numbers can only include: 0 1 2 3 4 5 6 7 8 9 ( ) + -‘
 
-Do not use the content of the message descriptions in your code. These can sometimes change, which may affect your API integration.
+Do not use the content of the message in your code. These can sometimes change, which may affect your API integration.
 
 Use the status_code or the error instead, as these will not change.
 
