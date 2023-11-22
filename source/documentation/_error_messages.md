@@ -10,7 +10,7 @@ Do not use the content of the message in your code. These can sometimes change, 
 
 Use the status_code or the error instead, as these will not change.
 
-Find more information on error codes in:
+Find error codes in:
 
 - [send a message](#send-a-message)
 - [get message status](#get-message-status)
