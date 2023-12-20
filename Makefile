@@ -8,11 +8,6 @@ CF_MANIFEST_PATH ?= manifest.yml
 bootstrap: ## Install dependencies
 	bundle install
 
-.PHONY: test
-test:
-	bundle exec rubocop app spec
-	bundle exec rspec
-
 .PHONY: run
 run: development generate-tech-docs-yml ## Runs the app in development
 	bundle exec middleman server
@@ -24,10 +19,6 @@ generate-tech-docs-yml:
 .PHONY: bootstrap-with-docker
 bootstrap-with-docker: ## Prepare the Docker builder image
 	docker build -t notifications-tech-docs .
-
-.PHONY: test-with-docker
-test-with-docker:
-	./scripts/run_with_docker.sh make test
 
 .PHONY: run-with-docker
 run-with-docker:
