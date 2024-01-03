@@ -8,6 +8,10 @@ CF_MANIFEST_PATH ?= manifest.yml
 bootstrap: ## Install dependencies
 	bundle install
 
+.PHONY: test
+test:
+	exit 0
+
 .PHONY: run
 run: development generate-tech-docs-yml ## Runs the app in development
 	bundle exec middleman server
