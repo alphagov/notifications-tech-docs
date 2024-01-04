@@ -376,9 +376,22 @@ Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 };
 ```
 
-##### CSV files
+#### Set the filename
 
-Uploads for CSV files should use the `isCsv` parameter on the `PrepareUpload()` function. For example:
+To do this you will need version 7.0.0 of the .NET client library, or a more recent version.
+
+You should provide a filename when you upload your file.
+
+The filename should tell the recipient what the file contains. A memorable filename can help the recipient to find the file again later.
+
+The filename must end with a file extension. For example, `.csv` for a CSV file. If you include the wrong file extension, recipients may not be able to open your file.
+
+If you do not provide a filename for your file, Notify will:
+
+* generate a random filename
+* try to add the correct file extension
+
+If Notify cannot add the correct file extension, recipients may not be able to open your file.
 
 ```csharp
 
@@ -387,7 +400,7 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents, isCsv = true)}
+    { "link_to_file", NotificationClient.PrepareUpload(documentContents, filename = "2023-12-25-daily-report.csv")}
 };
 ```
 
@@ -458,6 +471,8 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient using a team-only API key"`<br>`}]`|Use the correct type of [API key](#api-keys)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported file type '(FILE TYPE)'. Supported types are: '(ALLOWED TYPES)'"`<br>`}]`|Wrong file type. You can only upload .pdf, .csv, .txt, .doc, .docx, .xlsx, .rtf or .odt files|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>```"message": "`filename` cannot be longer than 100 characters"```<br>`}]`|Choose a shorter filename|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>```"message": "`filename` must end with a file extension. For example, filename.csv"```<br>`}]`|Include the file extension in your filename|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported value for retention_period '(PERIOD)'. Supported periods are from 1 to 78 weeks."`<br>`}]`|Choose a period between 1 and 78 weeks|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported value for confirm_email_before_download: '(VALUE)'. Use a boolean true or false value."`<br>`}]`|Use either true or false|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "File did not pass the virus scan"`<br>`}]`|The file contains a virus|

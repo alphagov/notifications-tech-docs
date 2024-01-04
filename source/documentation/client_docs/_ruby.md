@@ -272,9 +272,22 @@ File.open("file.pdf", "rb") do |f|
 end
 ```
 
-##### CSV Files
+#### Set the filename
 
-Uploads for CSV files should use the `is_csv` parameter on the `prepare_upload()` helper method.  For example:
+To do this you will need version 6.0.0 of the Ruby client library, or a more recent version.
+
+You should provide a filename when you upload your file.
+
+The filename should tell the recipient what the file contains. A memorable filename can help the recipient to find the file again later.
+
+The filename must end with a file extension. For example, `.csv` for a CSV file. If you include the wrong file extension, recipients may not be able to open your file.
+
+If you do not provide a filename for your file, Notify will:
+
+* generate a random filename
+* try to add the correct file extension
+
+If Notify cannot add the correct file extension, recipients may not be able to open your file.
 
 ```ruby
 File.open("file.csv", "rb") do |f|
@@ -282,7 +295,7 @@ File.open("file.csv", "rb") do |f|
     personalisation: {
       first_name: "Amala",
       application_date: "2018-01-01",
-      link_to_file: Notifications.prepare_upload(f, is_csv=true),
+      link_to_file: Notifications.prepare_upload(f, filename="2023-12-25-daily-report.csv"),
     }
 end
 ```
@@ -369,6 +382,8 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |`400`|`BadRequestError: Can't send to this recipient using a team-only API key`|`BadRequestError`|Use the correct type of [API key](#api-keys)|
 |`400`|`BadRequestError: Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
 |`400`|`BadRequestError: Unsupported file type '(FILE TYPE)'. Supported types are: '(ALLOWED TYPES)'`|`BadRequestError`|Wrong file type. You can only upload .pdf, .csv, .txt, .doc, .docx, .xlsx, .rtf or .odt files|
+|`400`|```BadRequestError: `filename` cannot be longer than 100 characters"```|`BadRequestError`|Choose a shorter filename|
+|`400`|```BadRequestError: `filename` must end with a file extension. For example, filename.csv"```|`BadRequestError`|Include the file extension in your filename|
 |`400`|`BadRequestError: Unsupported value for retention_period '(PERIOD)'. Supported periods are from 1 to 78 weeks.`|`BadRequestError`|Choose a period between 1 and 78 weeks|
 |`400`|`BadRequestError: Unsupported value for confirm_email_before_download: '(VALUE)'. Use a boolean true or false value.`|`BadRequestError`|Use either true or false|
 |`400`|`BadRequestError: File did not pass the virus scan`|`BadRequestError`|The file contains a virus|

@@ -342,20 +342,32 @@ The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/Java
 - resolve with a `response` if successful
 - fail with an `err` if unsuccessful
 
-##### CSV Files
+#### Set the filename
 
-Uploads for CSV files should use the `isCsv` option on the `prepareUpload()` function.  For example:
+To do this you will need version 8.0.0 of the Node client library, or a more recent version.
+
+You should provide a filename when you upload your file.
+
+The filename should tell the recipient what the file contains. A memorable filename can help the recipient to find the file again later.
+
+The filename must end with a file extension. For example, `.csv` for a CSV file. If you include the wrong file extension, recipients may not be able to open your file.
+
+If you do not provide a filename for your file, Notify will:
+
+* generate a random filename
+* try to add the correct file extension
+
+If Notify cannot add the correct file extension, recipients may not be able to open your file.
 
 ```javascript
 var fs = require('fs')
-
 fs.readFile('path/to/document.csv', function (err, csvFile) {
   console.log(err)
   notifyClient.sendEmail(templateId, emailAddress, {
     personalisation: {
       first_name: 'Amala',
       application_date: '2018-01-01',
-      link_to_file: notifyClient.prepareUpload(csvFile, { isCsv: true })
+      link_to_file: notifyClient.prepareUpload(csvFile, { filename: '2023-12-25-daily-report.csv' })
     }
   }).then(response => console.log(response)).catch(err => console.error(err))
 })
@@ -457,6 +469,8 @@ If the request is not successful, the promise fails with an `err`.
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient using a team-only API key"`<br>`}]`|Use the correct type of [API key](#api-keys)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported file type '(FILE TYPE)'. Supported types are: '(ALLOWED TYPES)'"`<br>`}]`|Wrong file type. You can only upload .pdf, .csv, .txt, .doc, .docx, .xlsx, .rtf or .odt files|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>```"message": "`filename` cannot be longer than 100 characters"```<br>`}]`|Choose a shorter filename|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>```"message": "`filename` must end with a file extension. For example, filename.csv"```<br>`}]`|Include the file extension in your filename|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported value for retention_period '(PERIOD)'. Supported periods are from 1 to 78 weeks."`<br>`}]`|Choose a period between 1 and 78 weeks|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Unsupported value for confirm_email_before_download: '(VALUE)'. Use a boolean true or false value."`<br>`}]`|Use either true or false|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "File did not pass the virus scan"`<br>`}]`|The file contains a virus|
