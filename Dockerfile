@@ -1,4 +1,4 @@
-FROM ruby:slim-bookworm
+FROM ruby:3.2-slim-bookworm
 
 RUN \
 	echo "Install Debian packages" \
