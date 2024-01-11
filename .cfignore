@@ -1,10 +1,7 @@
 /app
 /build-*
-/Client-Library
 /script
 /source
-/spec
-.rspec
 .ruby-version
 .template_version
 config.rb
