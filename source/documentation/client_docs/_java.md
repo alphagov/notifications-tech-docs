@@ -63,7 +63,7 @@ To find the template ID:
 
 For example:
 
-```
+```java
 String templateId="f33517ff-2a88-4f6e-b855-c550268ce08a";
 ```
 
@@ -71,7 +71,7 @@ String templateId="f33517ff-2a88-4f6e-b855-c550268ce08a";
 
 The phone number of the recipient of the text message. This number can be a UK or international number.
 
-```
+```java
 String phoneNumber="+447900900123";
 ```
 
@@ -92,7 +92,7 @@ If a template does not have any placeholder fields for personalised information,
 
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. If you do not have a reference, you must pass in an empty string or `null`.
 
-```
+```java
 String reference='STRING';
 ```
 
@@ -111,7 +111,7 @@ You can then either:
   - copy the sender ID that you want to use and paste it into the method
   - select __Change__ to change the default sender that the service will use, and select __Save__
 
-```
+```java
 String smsSenderId='8e222534-7f05-4972-86e3-17c5d9f894e2'
 ```
 
@@ -177,7 +177,7 @@ To find the template ID:
 
 For example:
 
-```
+```java
 String templateId="f33517ff-2a88-4f6e-b855-c550268ce08a";
 ```
 
@@ -185,7 +185,7 @@ String templateId="f33517ff-2a88-4f6e-b855-c550268ce08a";
 
 The email address of the recipient.
 
-```
+```java
 String emailAddress='sender@something.com';
 ```
 
@@ -201,13 +201,14 @@ personalisation.put("application_date", "2018-01-01");
 personalisation.put("list", listOfItems);
 
 ```
+
 If a template does not have any placeholder fields for personalised information, you must pass in an empty map or `null`.
 
 ##### reference (required)
 
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. If you do not have a reference, you must pass in an empty string or `null`.
 
-```
+```java
 String reference='STRING';
 ```
 
@@ -223,7 +224,7 @@ To add a reply-to email address:
 1. Select __Add reply-to address__.
 1. Enter the email address you want to use, and select __Add__.
 
-```
+```java
 String emailReplyToId='8e222534-7f05-4972-86e3-17c5d9f894e2'
 ```
 
@@ -467,7 +468,7 @@ To find the template ID:
 
 For example:
 
-```
+```java
 String templateId = "f33517ff-2a88-4f6e-b855-c550268ce08a";
 ```
 
@@ -510,7 +511,7 @@ If a template does not have any placeholder fields for personalised information,
 
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. If you do not have a reference, you must pass in an empty string or `null`.
 
-```
+```java
 String reference='STRING';
 ```
 
@@ -585,7 +586,7 @@ LetterResponse response = client.sendPrecompiledLetterWithInputStream(
 
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address.
 
-```
+```java
 String reference="STRING";
 ```
 
@@ -754,7 +755,7 @@ You can filter by:
 
 A unique identifier you create if necessary. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address.
 
-```
+```java
 String reference='STRING';
 ```
 
@@ -762,7 +763,7 @@ String reference='STRING';
 
 Input the ID of a notification into this argument. If you use this argument, the client returns the next 250 received notifications older than the given ID.
 
-```
+```java
 String olderThanId='8e222534-7f05-4972-86e3-17c5d9f894e2'
 ```
 
@@ -940,7 +941,7 @@ Template template = client.getTemplateVersion(templateId, version);
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
 
-```
+```java
 String templateId='f33517ff-2a88-4f6e-b855-c550268ce08a';
 ```
 
@@ -1029,7 +1030,7 @@ The parameters in the personalisation argument must match the placeholder fields
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
 
-```
+```java
 String templateId='f33517ff-2a88-4f6e-b855-c550268ce08a';
 ```
 
@@ -1102,7 +1103,7 @@ To get older messages, pass the ID of an older notification into the `olderThanI
 
 Input the ID of a received text message into this argument. If you use this argument, the client returns the next 250 received text messages older than the given ID.
 
-```
+```java
 String olderThanId='8e222534-7f05-4972-86e3-17c5d9f894e2'
 ```
 
