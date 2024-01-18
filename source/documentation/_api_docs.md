@@ -788,6 +788,7 @@ You can filter the returned messages by including the following optional argumen
 - [`status`](#status-optional)
 - [`reference`](#get-the-status-of-multiple-messages-arguments-reference-optional)
 - [`older_than`](#older-than-optional)
+- [`include_jobs`](#include-jobs-optional)
 
 #### Arguments
 
@@ -831,6 +832,13 @@ Input the ID of a notification into this argument. If you use this argument, the
 If you leave out this argument, the method returns the most recent 250 notifications.
 
 The client only returns notifications that are 7 days old or newer. If the notification specified in this argument is older than 7 days, the client returns an empty response.
+
+##### include_jobs (optional)
+
+Includes notifications sent as part of a batch upload.
+
+If you leave out this argument, the method only returns notifications sent using the API.
+
 
 #### Response
 
