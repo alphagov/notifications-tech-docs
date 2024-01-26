@@ -8,3 +8,4 @@ config.rb
 Gemfile
 Gemfile.lock
 README.md
+nginx.conf

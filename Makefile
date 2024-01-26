@@ -22,7 +22,7 @@ generate-tech-docs-yml:
 
 .PHONY: bootstrap-with-docker
 bootstrap-with-docker: ## Prepare the Docker builder image
-	docker build -f docker/Dockerfile -t notifications-tech-docs .
+	docker build -f docker/Dockerfile --target ruby_build -t notifications-tech-docs .
 
 .PHONY: run-with-docker
 run-with-docker:
