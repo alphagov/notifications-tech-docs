@@ -4,7 +4,7 @@
 
 ### Docker container
 
-This app uses dependencies that are difficult to install locally. In order to make local development easy, we run app commands through a Docker container. Run the following to set this up:
+In order to make local development easy, we run app commands through a Docker container. Run the following to set this up:
 
 ```shell
 make bootstrap-with-docker
@@ -51,9 +51,10 @@ the page.
 
 ## Deployment
 
-The tech docs are built and deployed in a concourse pipeline, using a container image built from the Dockerfile at the root of this repository.
+The tech docs are built and deployed in a Concourse pipeline, using a container image built from the Dockerfile in the `docker` directory.
 
-If tech docs fail to deploy and the container needs to be updated, run the `build-tech-docs-image` task in Concourse after making and committing any required changes to the Dockerfile.
+When running locally we use the `ruby_build` target, which runs the app using the Middleman server. When running in preview or production
+(the app is not deployed in staging) we use the `production` target which runs with NGINX.
 
 ## Licence
 
