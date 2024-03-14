@@ -1192,7 +1192,7 @@ If the request is not successful, the API returns `json` containing the relevant
 This generates a preview version of a template.
 
 ```
-POST /v2/templates/{template_id}/preview
+POST /v2/template/{template_id}/preview
 ```
 
 The parameters in the personalisation argument must match the placeholder fields in the actual template. The API notification client will ignore any extra fields in the method.
