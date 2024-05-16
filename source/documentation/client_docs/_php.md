@@ -157,7 +157,7 @@ If the request is not successful, the client returns an `Alphagov\Notifications\
 #### Method
 
 ```php
-sendEmail( $emailAddress, $templateId, array $personalisation = array(), $reference = '', $emailReplyToId = NULL )
+sendEmail( $emailAddress, $templateId, array $personalisation = array(), $reference = '', $emailReplyToId = NULL, $oneClickUnsubscribeURL = NULL )
 ```
 For example:
 
@@ -171,7 +171,8 @@ try {
             'dob'  => '12 July 1968'
         ],
         'unique_ref123',
-        '862bfaaf-9f89-43dd-aafa-2868ce2926a9'
+        '862bfaaf-9f89-43dd-aafa-2868ce2926a9',
+        'https://example.com/unsubscribe.html?opaque=123456789'
         );
 
 } catch (ApiException $e){}
@@ -214,8 +215,25 @@ A unique identifier you can create if necessary. This reference identifies a sin
 ```php
 $reference = 'STRING';
 ```
-
 You can leave out this argument if you do not have a reference.
+
+##### one_click_unsubscribe_url (optional)
+
+The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
+
+This is an optional argument that is only required for subscription emails.
+
+Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links). 
+
+```php
+$one_click_unsubscribe_url = 'https://example.com/unsubscribe.html?opaque=123456789'
+```
+
+The one-click unsubscribe URL must respond to an empty POST request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
+
+Your unsubscribe URL and response must comply with the guidance specified in [Section 3.1 of IETF RFC 8058](https://www.rfcreader.com/#rfc8058_line139).
+
+You can leave out this argument if the email being sent is not a subscription email.
 
 ##### emailReplyToId (optional)
 
