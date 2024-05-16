@@ -228,7 +228,6 @@ The one-click unsubscribe URL must respond to an empty POST request by unsubscri
 
 Your unsubscribe URL and response must comply with the guidance specified in [Section 3.1 of IETF RFC 8058](https://www.rfcreader.com/#rfc8058_line139).
 
-
 ##### emailReplyToId (optional)
 
 This is an email address specified by you to receive replies from your users. You must add at least one reply-to email address before your service can go live.
