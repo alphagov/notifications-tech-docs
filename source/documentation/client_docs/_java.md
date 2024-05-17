@@ -224,7 +224,7 @@ Read our Using Notify page for more information about [unsubscribe links](https:
 URI oneClickUnsubscribeURL = 'https://example.com/unsubscribe.html?opaque=123456789'
 ```
 
-The one-click unsubscribe URL must respond to an empty POST request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
+The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
 
 Your unsubscribe URL and response must comply with the guidance specified in [Section 3.1 of IETF RFC 8058](https://www.rfcreader.com/#rfc8058_line139).
 
