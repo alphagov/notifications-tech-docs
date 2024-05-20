@@ -16,7 +16,7 @@ There’s a limit to the number of messages you can send each day:
 |Trial|Team|50 emails or text messages|
 |Live or trial|Test|Unlimited|
 
-These limits reset at midnight.
+These limits reset at midnight UTC.
 
 ### Phone network limits
 
