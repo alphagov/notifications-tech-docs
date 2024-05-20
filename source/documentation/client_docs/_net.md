@@ -268,6 +268,22 @@ string reference: "STRING";
 ```
 You can leave out this argument if you do not have a reference.
 
+##### oneClickUnsubscribeURL (optional)
+
+The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
+
+Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links). 
+
+```csharp
+string oneClickUnsubscribeURL : 'https://example.com/unsubscribe.html?opaque=123456789';
+```
+
+The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
+
+Your unsubscribe URL and response must comply with the guidance specified in [Section 3.1 of IETF RFC 8058](https://www.rfcreader.com/#rfc8058_line139).
+
+You can leave out this argument if the email being sent is not a subscription email.
+
 ##### emailReplyToId (optional)
 
 This is an email address specified by you to receive replies from your users. You must add at least one reply-to email address before your service can go live.
@@ -295,6 +311,7 @@ If the request to the client is successful, the client returns an `EmailNotifica
 ```csharp
 public String id;
 public String reference;
+public String oneClickUnsubscribeURL;
 public String uri;
 public Template template;
 public EmailResponseContent content;
