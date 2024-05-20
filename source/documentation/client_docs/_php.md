@@ -172,7 +172,6 @@ try {
         ],
         'unique_ref123',
         '862bfaaf-9f89-43dd-aafa-2868ce2926a9',
-        'https://example.com/unsubscribe.html?opaque=123456789'
         );
 
 } catch (ApiException $e){}
