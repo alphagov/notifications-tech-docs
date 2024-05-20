@@ -221,8 +221,6 @@ You can leave out this argument if you do not have a reference.
 
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
-This is an optional argument that is only required for subscription emails.
-
 Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links). 
 
 ```php
