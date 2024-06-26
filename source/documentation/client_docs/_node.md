@@ -39,6 +39,18 @@ notifyClient.setProxy(proxyConfig)
 
 where the `proxyConfig` should be an object supported by [axios](https://github.com/axios/axios).
 
+#### Provide your own underlying Axios client (optional)
+
+You can provide your own Axios client to the Notify client. This is useful if you want to use a custom Axios client with specific settings, like custom interceptors.
+
+Add this code to your application:
+
+```javascript
+notifyClient.setClient(customAxiosClient)
+```
+
+where `customAxiosClient` is an instance of Axios.
+
 ## Send a message
 
 You can use GOV.UK Notify to send text messages, emails (including documents) and letters.
