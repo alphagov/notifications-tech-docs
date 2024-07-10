@@ -766,7 +766,7 @@ If the request is successful, the response body is `json` and the status code is
     # for text messages:
     "billable_sms_fragments": 1 # optional integer - number of billable sms fragments in your text message
     "international_rate_multiplier": 1 # optional integer - for international sms rate is multiplied by this value
-    "rate": 0.0027 # optional number - cost of 1 sms fragment
+    "sms_rate": 0.0027 # optional number - cost of 1 sms fragment
 
     # for letters:
     "billable_sheets_of_paper": 2 # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
@@ -908,7 +908,7 @@ If the request is successful, the response body is `json` and the status code is
         # for text messages:
         "billable_sms_fragments": 1 # optional integer - number of billable sms fragments in your text message
         "international_rate_multiplier": 1 # optional integer - for international sms rate is multiplied by this value
-        "rate": 0.0027 # optional number - cost of 1 sms fragment
+        "sms_rate": 0.0027 # optional number - cost of 1 sms fragment
 
         # for letters:
         "billable_sheets_of_paper": 2 # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
