@@ -53,7 +53,7 @@ where `customAxiosClient` is an instance of Axios.
 
 ## Send a message
 
-You can use GOV.UK Notify to send text messages, emails (including documents) and letters.
+You can use GOV.UK Notify to send emails, text messages and letters.
 
 ### Send a text message
 
@@ -187,7 +187,7 @@ notifyClient
   .sendEmail(templateId, emailAddress, {
     personalisation: personalisation,
     reference: reference,
-    oneClickUnsubscribeURL: oneClickUnsubscribeURL,  
+    oneClickUnsubscribeURL: oneClickUnsubscribeURL,
     emailReplyToId: emailReplyToId
   })
   .then(response => console.log(response))
@@ -250,7 +250,7 @@ A unique identifier you create. This reference identifies a single unique notifi
 
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
-Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links). 
+Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).
 
 ```javascript
 oneClickUnsubscribeURL = 'https://example.com/unsubscribe.html?opaque=123456789'
@@ -288,7 +288,7 @@ If the request is successful, the promise resolves with a `response` `object`. F
 {
   'id': 'bfb50d92-100d-4b8b-b559-14fa3b091cda',
   'reference': null,
-  'oneClickUnsubscribeURL': null,      
+  'oneClickUnsubscribeURL': null,
   'content': {
     'subject': 'Licence renewal',
     'body': 'Dear Bill, your licence is due for renewal on 3 January 2016.',

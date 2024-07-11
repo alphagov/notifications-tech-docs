@@ -68,7 +68,7 @@ The content header is `application/json`:
 
 ## Send a message
 
-You can use GOV.UK Notify to send text messages, emails and letters.
+You can use GOV.UK Notify to send emails, text messages and letters.
 
 ### Send a text message
 
@@ -246,7 +246,7 @@ You can leave out this argument if you do not have a reference.
 
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
-Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links). 
+Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).
 
 ```json
 "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789"
