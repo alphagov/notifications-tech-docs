@@ -763,15 +763,15 @@ If the request is successful, the response body is `json` and the status code is
   "is_cost_data_ready": True/False, # this field is True if cost data is ready, and False if it isn't
   "cost_in_pounds": 0.0027, # optional number - cost of the notification in pounds. The cost does not take free allowance into account
   "cost_details": {
-    # for text messages:
-    "billable_sms_fragments": 1 # optional integer - number of billable sms fragments in your text message
-    "international_rate_multiplier": 1 # optional integer - for international sms rate is multiplied by this value
-    "sms_rate": 0.0027 # optional number - cost of 1 sms fragment
+        # for text messages:
+        "billable_sms_fragments": 1, # optional integer - number of billable sms fragments in your text message
+        "international_rate_multiplier": 1, # optional integer - for international sms rate is multiplied by this value
+        "sms_rate": 0.0027, # optional number - cost of 1 sms fragment
 
-    # for letters:
-    "billable_sheets_of_paper": 2 # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
-    "postage": "first / second / europe / rest-of-world" # optional string
-  }
+        # for letters:
+        "billable_sheets_of_paper": 2, # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
+        "postage": "first / second / europe / rest-of-world" # optional string
+      }
 }
 ```
 
@@ -906,12 +906,12 @@ If the request is successful, the response body is `json` and the status code is
       "cost_in_pounds": 0.0027, # optional number - cost of the notification in pounds. The cost does not take free allowance into account
       "cost_details": {
         # for text messages:
-        "billable_sms_fragments": 1 # optional integer - number of billable sms fragments in your text message
-        "international_rate_multiplier": 1 # optional integer - for international sms rate is multiplied by this value
-        "sms_rate": 0.0027 # optional number - cost of 1 sms fragment
+        "billable_sms_fragments": 1, # optional integer - number of billable sms fragments in your text message
+        "international_rate_multiplier": 1, # optional integer - for international sms rate is multiplied by this value
+        "sms_rate": 0.0027, # optional number - cost of 1 sms fragment
 
         # for letters:
-        "billable_sheets_of_paper": 2 # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
+        "billable_sheets_of_paper": 2, # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
         "postage": "first / second / europe / rest-of-world" # optional string
       }
     },
