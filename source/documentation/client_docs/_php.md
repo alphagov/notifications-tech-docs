@@ -457,8 +457,6 @@ If the request is not successful, the client returns an `Alphagov\Notifications\
 
 ### Send a letter
 
-#### Prerequisites
-
 When you add a new service it will start in [trial mode](https://www.notifications.service.gov.uk/features/trial-mode). You can only send letters when your service is live.
 
 To send Notify a request to go live:
