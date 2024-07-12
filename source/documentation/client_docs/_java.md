@@ -686,30 +686,51 @@ The ID of the notification. To find the notification ID, you can either:
 If the request to the client is successful, the client returns a `Notification`:
 
 ```java
-UUID id;
-Optional<String> reference;
-Optional<String> emailAddress;
-Optional<String> phoneNumber;
-Optional<String> line1;
-Optional<String> line2;
-Optional<String> line3;
-Optional<String> line4;
-Optional<String> line5;
-Optional<String> line6;
-Optional<String> line7;
-Optional<String> postage;
-String notificationType;
-String status;
-UUID templateId;
-int templateVersion;
-String templateUri;
-String body;
-Optional<String subject;
-ZonedDateTime createdAt;
-Optional<ZonedDateTime> sentAt;
-Optional<ZonedDateTime> completedAt;
-Optional<ZonedDateTime> estimatedDelivery;
-Optional<String> createdByName;
+public class Notification {
+    private UUID id;  // required string - notification ID
+    private Optional<String> reference;  // optional string - client reference
+    private Optional<String> emailAddress;  // required string for emails
+    private Optional<String> phoneNumber;  // required string for text messages
+    private Optional<String> line1;  // required string for letter
+    private Optional<String> line2;  // required string for letter
+    private Optional<String> line3;  // required string for letter
+    private Optional<String> line4;  // optional string for letter
+    private Optional<String> line5;  // optional string for letter
+    private Optional<String> line6;  // optional string for letter
+    private Optional<String> line7;  // optional string for letter
+    private Optional<String> postage;  // required string for letter
+    private String notificationType;  // required string
+    private String status;  // required string
+    private Template template;  // template details
+    private String body;  // required string - body of notification
+    private Optional<String> subject;  // required string for email - subject of email
+    private ZonedDateTime createdAt;  // required string - date and time notification created
+    private Optional<ZonedDateTime> sentAt;  // optional string - date and time notification sent to provider
+    private Optional<ZonedDateTime> completedAt;  // optional string - date and time notification delivered or failed
+    private Optional<ZonedDateTime> scheduledFor;  // optional string - date and time notification has been scheduled to be sent at
+    private Optional<String> oneClickUnsubscribe;  // optional string, email only - URL that you provided so your recipients can unsubscribe
+    private boolean isCostDataReady;  // required boolean, this field is true if cost data is ready, and false if it isn't
+    private double costInPounds;  // optional number - cost of the notification in pounds. The cost does not take free allowance into account
+    private CostDetails costDetails;  // cost details for messages
+    private Optional<String> createdByName;  // optional string - name of the person who sent the notification if sent manually
+}
+
+class Template {
+    private UUID id;  // required string - template ID
+    private String uri;  // required string
+    private int version;  // required integer
+}
+
+class CostDetails {
+// required for sms only
+    private Optional<Integer> billableSmsFragments;  // optional integer - number of billable SMS fragments in your text message
+    private Optional<Integer> internationalRateMultiplier;  // optional integer - for international SMS rate is multiplied by this value
+    private Optional<Double> smsRate;  // optional number - cost of 1 SMS fragment
+    
+// required for letters only
+    private Optional<Integer> billableSheetsOfPaper;  // optional integer - number of sheets of paper in the letter you sent, that you will be charged for
+    private Optional<String> postage;  // optional string
+}
 ```
 
 #### Error codes
