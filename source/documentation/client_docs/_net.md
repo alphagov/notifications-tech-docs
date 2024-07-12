@@ -718,27 +718,35 @@ The ID of the notification. To find the notification ID, you can either:
 If the request to the client is successful, the client returns a `Notification`.
 
 ```csharp
-public String id;
-public String completedAt;
-public String createdAt;
-public String emailAddress;
-public String body;
-public String subject;
-public String line1;
-public String line2;
-public String line3;
-public String line4;
-public String line5;
-public String line6;
-public String line7;
-public String phoneNumber;
-public String postage;
-public String reference;
-public String sentAt;
-public String status;
-public Template template;
-public String type;
-public string createdByName;
+public class Notification
+{
+    public string id;  // required string - notification ID
+    public string reference;  // optional string - client reference
+    public string emailAddress;  // required string for emails
+    public string phoneNumber;  // required string for text messages
+    public string line1;  // required string for letter
+    public string line2;  // required string for letter
+    public string line3;  // required string for letter
+    public string line4;  // optional string for letter
+    public string line5;  // optional string for letter
+    public string line6;  // optional string for letter
+    public string line7;  // optional string for letter
+    public string postage;  // required string for letter
+    public string type;  // required string
+    public string status;  // required string
+    public Template template;  // template details
+    public string body;  // required string - body of notification
+    public string subject;  // required string for email - subject of email
+    public string createdAt;  // required string - date and time notification created
+    public string createdByName;  // optional string - name of the person who sent the notification if sent manually
+    public string sentAt;  // optional string - date and time notification sent to provider
+    public string completedAt;  // optional string - date and time notification delivered or failed
+    public string scheduledFor;  // optional string - date and time notification has been scheduled to be sent at
+    public string oneClickUnsubscribe;  // optional string, email only - URL that you provided so your recipients can unsubscribe
+    public bool isCostDataReady;  // required boolean, this field is true if cost data is ready, and false if it isn't
+    public double costInPounds;  // optional number - cost of the notification in pounds. The cost does not take free allowance into account
+    public CostDetails costDetails;  // cost details for messages
+}
 
 public class Template
 {
@@ -747,6 +755,16 @@ public class Template
     public Int32 version;
 }
 
+public class CostDetails
+{
+    // for text messages:
+    public int billableSmsFragments;  // optional integer - number of billable SMS fragments in your text message
+    public int internationalRateMultiplier;  // optional integer - for international SMS rate is multiplied by this value
+    public double smsRate;  // optional number - cost of 1 SMS fragment
+    // for letters:
+    public int billableSheetsOfPaper;  // optional integer - number of sheets of paper in the letter you sent, that you will be charged for
+    public string postage;  // optional string
+}
 
 ```
 
