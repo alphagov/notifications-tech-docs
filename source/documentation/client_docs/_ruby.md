@@ -632,6 +632,15 @@ You can then call different methods on this object to return the requested infor
 |#`response.created_at`|Date and time notification created|String|
 |#`response.completed_at`|Date and time notification delivered or failed|String|
 |#`response.created_by_name`|Name of sender if notification sent manually|String|
+|#`response.scheduled_for`|Date and time notification has been scheduled to be sent at|String|
+|#`response.one_click_unsubscribe`|URL that you provided so your recipients can unsubscribe (email only)|String|
+|#`response.is_cost_data_ready`|This field is true if cost data is ready, and false if it isn't|Boolean|
+|#`response.cost_in_pounds`|Cost of the notification in pounds. The cost does not take free allowance into account|Float|
+|#`response.cost_details.billable_sms_fragments`|Number of billable SMS fragments in your text message (SMS only)|Integer|
+|#`response.cost_details.international_rate_multiplier`|For international SMS rate is multiplied by this value (SMS only)|Integer|
+|#`response.cost_details.sms_rate`|Cost of 1 SMS fragment (SMS only)|Float|
+|#`response.cost_details.billable_sheets_of_paper`|Number of sheets of paper in the letter you sent, that you will be charged for (letter only)|Integer|
+|#`response.cost_details.postage`|Postage class of the notification sent (letter only)|String|
 
 #### Error codes
 
@@ -734,7 +743,8 @@ If you call the `collection` method on this object to return a notification arra
 |#`response.line_4`|Recipient address line 4 of the address (letter only)|String|
 |#`response.line_5`|Recipient address line 5 of the address (letter only)|String|
 |#`response.line_6`|Recipient address line 6 of the address (letter only)|String|
-|#`response.postcode`|Recipient postcode (letter only)|String|
+|#`response.line_7`|Recipient address line 7 of the address (letter only)|String|
+|#`response.postage`|Postage class of the notification sent (letter only)|String|
 |#`response.type`|Type of notification sent (sms, email or letter)|String|
 |#`response.status`|Notification status (sending / delivered / permanent-failure / temporary-failure / technical-failure)|String|
 |#`response.template`|Template UUID|String|
@@ -744,6 +754,15 @@ If you call the `collection` method on this object to return a notification arra
 |#`response.created_at`|Date and time notification created|String|
 |#`response.completed_at`|Date and time notification delivered or failed|String|
 |#`response.created_by_name`|Name of sender if notification sent manually|String|
+|#`response.scheduled_for`|Date and time notification has been scheduled to be sent at|String|
+|#`response.one_click_unsubscribe`|URL that you provided so your recipients can unsubscribe (email only)|String|
+|#`response.is_cost_data_ready`|This field is true if cost data is ready, and false if it isn't|Boolean|
+|#`response.cost_in_pounds`|Cost of the notification in pounds. The cost does not take free allowance into account|Float|
+|#`response.cost_details.billable_sms_fragments`|Number of billable SMS fragments in your text message (SMS only)|Integer|
+|#`response.cost_details.international_rate_multiplier`|For international SMS rate is multiplied by this value (SMS only)|Integer|
+|#`response.cost_details.sms_rate`|Cost of 1 SMS fragment (SMS only)|Float|
+|#`response.cost_details.billable_sheets_of_paper`|Number of sheets of paper in the letter you sent, that you will be charged for (letter only)|Integer|
+|#`response.cost_details.postage`|Postage class of the notification sent (letter only)|String|
 
 If the notification specified in the `older_than` argument is older than 7 days, the client returns an empty `collection` response.
 
