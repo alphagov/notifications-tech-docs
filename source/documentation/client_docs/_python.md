@@ -618,22 +618,23 @@ If the request to the client is successful, the client will return a `dict`:
 ```python
 {
     "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
-    "reference": "STRING",  # optional string
+    "reference": "STRING",  # optional string - client reference
     "email_address": "sender@something.com",  # required string for emails
     "phone_number": "+447900900123",  # required string for text messages
     "line_1": "ADDRESS LINE 1",  # required string for letter
     "line_2": "ADDRESS LINE 2",  # required string for letter
-    "line_3": "ADDRESS LINE 3",  # optional string for letter
+    "line_3": "ADDRESS LINE 3",  # required string for letter
     "line_4": "ADDRESS LINE 4",  # optional string for letter
     "line_5": "ADDRESS LINE 5",  # optional string for letter
     "line_6": "ADDRESS LINE 6",  # optional string for letter
-    "line_7": "ADDRESS LINE 7",  # optional string for letter
+    "line_7": "ADDRESS LINE 7", # optional string for letter
+    "postage": "first / second / europe / rest-of-world", # required string for letter
     "type": "sms / letter / email",  # required string
     "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  # required string
     "template": {
-        "Version": 1,
+        "version": 1, # required integer
         "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",  # required string - template ID
-        "uri": "/v2/template/{id}/{version}"  # required
+        "uri": "/v2/template/{id}/{version}"  # required string
     },
     "body": "STRING",  # required string - body of notification
     "subject": "STRING",  # required string for email - subject of email
@@ -641,7 +642,9 @@ If the request to the client is successful, the client will return a `dict`:
     "created_by_name": "STRING",  # optional string - name of the person who sent the notification if sent manually
     "sent_at": "2024-05-17 15:58:30.143000",  # optional string - date and time notification sent to provider
     "completed_at": "2024-05-17 15:59:10.321000",  # optional string - date and time notification delivered or failed
-    "is_cost_data_ready": true,  # this field is true if cost data is ready, and false if it isn't
+    "scheduled_for": "2024-05-17 9:00:00.000000", # optional string - date and time notification has been scheduled to be sent at
+    "one_click_unsubscribe": "STRING", # optional string, email only - URL that you provided so your recipients can unsubscribe
+    "is_cost_data_ready": True,  # required boolean, this field is true if cost data is ready, and false if it isn't
     "cost_in_pounds": 0.0027,  # optional number - cost of the notification in pounds. The cost does not take free allowance into account
     "cost_details": {
         # for text messages:
@@ -793,17 +796,18 @@ If the request to the client is successful, the client returns a `dict`.
             "phone_number": "+447900900123",  # required string for text messages
             "line_1": "ADDRESS LINE 1",  # required string for letter
             "line_2": "ADDRESS LINE 2",  # required string for letter
-            "line_3": "ADDRESS LINE 3",  # optional string for letter
+            "line_3": "ADDRESS LINE 3",  # required string for letter
             "line_4": "ADDRESS LINE 4",  # optional string for letter
             "line_5": "ADDRESS LINE 5",  # optional string for letter
             "line_6": "ADDRESS LINE 6",  # optional string for letter
-            "postcode": "STRING",  # required string for letter, must be a real UK postcode
+            "line_7": "ADDRESS LINE 7", # optional string for letter
+            "postage": "first / second / europe / rest-of-world", # required string for letter
             "type": "sms / letter / email",  # required string
             "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  # required string
             "template": {
-                "version": 1,
+                "version": 1, # required integer
                 "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",  # required string - template ID
-                "uri": "/v2/template/{id}/{version}"  # required
+                "uri": "/v2/template/{id}/{version}"  # required string
             },
             "body": "STRING",  # required string - body of notification
             "subject": "STRING",  # required string for email - subject of email
@@ -811,7 +815,9 @@ If the request to the client is successful, the client returns a `dict`.
             "created_by_name": "STRING",  # optional string - name of the person who sent the notification if sent manually
             "sent_at": "2024-05-17 15:58:30.143000",  # optional string - date and time notification sent to provider
             "completed_at": "2024-05-17 15:59:10.321000",  # optional string - date and time notification delivered or failed
-            "is_cost_data_ready": true,  # this field is true if cost data is ready, and false if it isn't
+            "scheduled_for": "2024-05-17 9:00:00.000000", # optional string - date and time notification has been scheduled to be sent at
+            "one_click_unsubscribe": "STRING", # optional string, email only - URL that you provided so your recipients can unsubscribe
+            "is_cost_data_ready": True,  # required boolean, this field is true if cost data is ready, and false if it isn't
             "cost_in_pounds": 0.0027,  # optional number - cost of the notification in pounds. The cost does not take free allowance into account
             "cost_details": {
                 # for text messages:
