@@ -747,6 +747,7 @@ If the request is successful, the response body is `json` and the status code is
   "line_5": "ADDRESS LINE 5", # optional string for letter
   "line_6": "ADDRESS LINE 6", # optional string for letter
   "line_7": "ADDRESS LINE 7", # optional string for letter
+  "postage": "first / second / europe / rest-of-world", # required string for letter
   "type": "sms / letter / email", # required string
   "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure", # required string
   "template": {
@@ -755,11 +756,25 @@ If the request is successful, the response body is `json` and the status code is
     "uri": "/v2/template/{id}/{version}", # required
   },
   "body": "STRING", # required string - body of notification
-  "subject": "STRING" # required string for email - subject of email
-  "created_at": "STRING", # required string - date and time notification created
+  "subject": "STRING", # required string for email - subject of email
+  "created_at": "2024-05-17 15:58:38.342838", # required string - date and time notification created
   "created_by_name": "STRING", # optional string - name of the person who sent the notification if sent manually
-  "sent_at": "STRING", # optional string - date and time notification sent to provider
-  "completed_at:" "STRING" # optional string - date and time notification delivered or failed
+  "sent_at": "2024-05-17 15:58:30.143000", # optional string - date and time notification sent to provider
+  "completed_at": "2024-05-17 15:59:10.321000", # optional string - date and time notification delivered or failed
+  "scheduled_for": "2024-05-17 9:00:00.000000", # optional string - date and time notification has been scheduled to be sent at
+  "one_click_unsubscribe": "STRING", # optional string, email only - URL that you provided so your recipients can unsubscribe
+  "is_cost_data_ready": True/False, # this field is True if cost data is ready, and False if it isn't
+  "cost_in_pounds": 0.0027, # optional number - cost of the notification in pounds. The cost does not take free allowance into account
+  "cost_details": {
+        # for text messages:
+        "billable_sms_fragments": 1, # optional integer - number of billable sms fragments in your text message
+        "international_rate_multiplier": 1, # optional integer - for international sms rate is multiplied by this value
+        "sms_rate": 0.0027, # optional number - cost of 1 sms fragment
+
+        # for letters:
+        "billable_sheets_of_paper": 2, # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
+        "postage": "first / second / europe / rest-of-world" # optional string
+      }
 }
 ```
 
@@ -872,11 +887,12 @@ If the request is successful, the response body is `json` and the status code is
       "phone_number": "+447900900123",  # required string for text messages
       "line_1": "ADDRESS LINE 1", # required string for letter
       "line_2": "ADDRESS LINE 2", # required string for letter
-      "line_3": "ADDRESS LINE 3", # optional string for letter
+      "line_3": "ADDRESS LINE 3", # required string for letter
       "line_4": "ADDRESS LINE 4", # optional string for letter
       "line_5": "ADDRESS LINE 5", # optional string for letter
       "line_6": "ADDRESS LINE 6", # optional string for letter
-      "postcode": "STRING", # required for string letter, must be a real UK postcode
+      "line_7": "ADDRESS LINE 7", # optional string for letter
+      "postage": "first / second / europe / rest-of-world", # required string for letter
       "type": "sms / letter / email", # required string
       "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure", # required string
       "template": {
@@ -885,11 +901,25 @@ If the request is successful, the response body is `json` and the status code is
         "uri": "/v2/template/{id}/{version}", # required
       },
       "body": "STRING", # required string - body of notification
-      "subject": "STRING" # required string for email - subject of email
-      "created_at": "STRING", # required string - date and time notification created
+      "subject": "STRING", # required string for email - subject of email
+      "created_at": "2024-05-17 15:58:38.342838", # required string - date and time notification created
       "created_by_name": "STRING", # optional string - name of the person who sent the notification if sent manually
-      "sent_at": " STRING", # optional string - date and time notification sent to provider
-      "completed_at": "STRING" # optional string - date and time notification delivered or failed
+      "sent_at": "2024-05-17 15:58:30.143000", # optional string - date and time notification sent to provider
+      "completed_at": "2024-05-17 15:59:10.321000", # optional string - date and time notification delivered or failed
+      "scheduled_for": "2024-05-17 9:00:00.000000", # optional string - date and time notification has been scheduled to be sent at
+      "one_click_unsubscribe": "STRING", # optional string, email only - URL that you provided so your recipients can unsubscribe
+      "is_cost_data_ready": True/False, # this field is True if cost data is ready, and False if it isn't
+      "cost_in_pounds": 0.0027, # optional number - cost of the notification in pounds. The cost does not take free allowance into account
+      "cost_details": {
+        # for text messages:
+        "billable_sms_fragments": 1, # optional integer - number of billable sms fragments in your text message
+        "international_rate_multiplier": 1, # optional integer - for international sms rate is multiplied by this value
+        "sms_rate": 0.0027, # optional number - cost of 1 sms fragment
+
+        # for letters:
+        "billable_sheets_of_paper": 2, # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
+        "postage": "first / second / europe / rest-of-world" # optional string
+      }
     },
     …
   ],
