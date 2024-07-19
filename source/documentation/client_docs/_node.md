@@ -871,7 +871,7 @@ If you pass in an empty argument or `null`, the client returns the most recent 2
 
 If the request is successful, the promise resolves with a `response` `object`. For example, the `response.data` property will look like this:
 
-```json
+```javascript
 {
   "notifications": [
     {
