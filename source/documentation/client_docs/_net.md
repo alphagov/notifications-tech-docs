@@ -739,6 +739,9 @@ public String status;
 public Template template;
 public String type;
 public string createdByName;
+public bool isCostDataReady;  
+public double costInPounds;
+public CostDetails costDetails; 
 
 public class Template
 {
@@ -747,7 +750,22 @@ public class Template
     public Int32 version;
 }
 
+public class CostDetails
+{
+    [JsonProperty("billable_sms_fragments")]
+    public int? billableSmsFragments;
 
+    [JsonProperty("international_rate_multiplier")]
+    public double? internationalRateMultiplier;
+
+    [JsonProperty("sms_rate")]
+    public double? smsRate;
+
+    [JsonProperty("billable_sheets_of_paper")]
+    public int? billableSheetsOfPaper;
+
+    public string? postage;
+}
 ```
 
 #### Error codes
