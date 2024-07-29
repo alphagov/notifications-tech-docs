@@ -704,12 +704,19 @@ UUID templateId;
 int templateVersion;
 String templateUri;
 String body;
-Optional<String subject;
+Optional<String> subject;
 ZonedDateTime createdAt;
 Optional<ZonedDateTime> sentAt;
 Optional<ZonedDateTime> completedAt;
 Optional<ZonedDateTime> estimatedDelivery;
 Optional<String> createdByName;
+boolean isCostDataReady;
+double costInPounds;
+Optional<Integer> billableSmsFragments;
+Optional<Double> internationalRateMultiplier;
+Optional<Double> smsRate;
+Optional<Integer> billableSheetsOfPaper;
+Optional<String> postageType;
 ```
 
 #### Error codes
