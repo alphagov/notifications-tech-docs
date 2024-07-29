@@ -715,7 +715,7 @@ If the request to the client is successful, the client returns an `array`:
     "template" => [
         "version" => 1,
         "id" => "f33517ff-2a88-4f6e-b855-c550268ce08a",
-        "uri" => "/v2/template/{id}/{version}"
+        "uri" => "/template/{id}/{version}"
     ],
     "body" => "STRING",
     "subject" => "STRING",
@@ -844,11 +844,11 @@ If the request to the client is successful, the client returns an `array`.
             "postcode" => "postcode",
             "postage" => "null|first|second",
             "type" => "sms | letter | email",
-            "status" => sending | delivered | permanent-failure | temporary-failure | technical-failure,
+            "status" => sending | delivered | permanent-failure | temporary-failure | technical-failure",
             "template" => [
                 "version" => 1,
                 "id" => "f33517ff-2a88-4f6e-b855-c550268ce08a",
-                "uri" => "/v2/template/{id}/{version}"
+                "uri" => "/template/{id}/{version}"
             ],
             "body" => "STRING",
             "subject" => "STRING",
