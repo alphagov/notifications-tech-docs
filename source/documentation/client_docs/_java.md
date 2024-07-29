@@ -716,7 +716,7 @@ Optional<Integer> billableSmsFragments;
 Optional<Double> internationalRateMultiplier;
 Optional<Double> smsRate;
 Optional<Integer> billableSheetsOfPaper;
-Optional<String> costPostage;
+Optional<String> postageType;
 ```
 
 #### Error codes
