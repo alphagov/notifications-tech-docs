@@ -764,7 +764,7 @@ public class CostDetails
     [JsonProperty("billable_sheets_of_paper")]
     public int? billableSheetsOfPaper;
 
-    public string? postage;
+    public string postage;
 }
 ```
 
