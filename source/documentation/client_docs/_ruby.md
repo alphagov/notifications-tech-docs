@@ -631,7 +631,6 @@ You can then call different methods on this object to return the requested infor
 |#`response.created_at`|Date and time notification created|String|
 |#`response.completed_at`|Date and time notification delivered or failed|String|
 |#`response.created_by_name`|Name of sender if notification sent manually|String|
-|#`response.scheduled_for`|Date and time notification has been scheduled to be sent at|String|
 |#`response.one_click_unsubscribe`|URL that you provided so your recipients can unsubscribe (email only)|String|
 |#`response.is_cost_data_ready`|This field is true if cost data is ready, and false if it isn't|Boolean|
 |#`response.cost_in_pounds`|Cost of the notification in pounds. The cost does not take free allowance into account|Float|
@@ -753,7 +752,6 @@ If you call the `collection` method on this object to return a notification arra
 |#`response.created_at`|Date and time notification created|String|
 |#`response.completed_at`|Date and time notification delivered or failed|String|
 |#`response.created_by_name`|Name of sender if notification sent manually|String|
-|#`response.scheduled_for`|Date and time notification has been scheduled to be sent at|String|
 |#`response.one_click_unsubscribe`|URL that you provided so your recipients can unsubscribe (email only)|String|
 |#`response.is_cost_data_ready`|This field is true if cost data is ready, and false if it isn't|Boolean|
 |#`response.cost_in_pounds`|Cost of the notification in pounds. The cost does not take free allowance into account|Float|
