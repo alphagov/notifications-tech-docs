@@ -711,14 +711,31 @@ If the request to the client is successful, the client returns an `array`:
     "line_7" => "Postcode or country",
     "postage" => "null|first|second",
     "type" => "sms|letter|email",
-    "status" => "current status",
+    "status" => "sending / delivered / permanent-failure / temporary-failure / technical-failure",
     "template" => [
         "version" => 1,
-        "id" => 1,
+        "id" => "f33517ff-2a88-4f6e-b855-c550268ce08a",
         "uri" => "/template/{id}/{version}"
-     ],
-    "created_at" => "created at",
-    "sent_at" => "sent to provider at",
+    ],
+    "body" => "STRING",
+    "subject" => "STRING",
+    "created_at" => "2024-05-17 15:58:38.342838",
+    "created_by_name" => "STRING",
+    "sent_at" => "2024-05-17 15:58:30.143000",
+    "completed_at" => "2024-05-17 15:59:10.321000",
+    "scheduled_for" => "2024-05-17 9:00:00.000000",
+    "one_click_unsubscribe" => "STRING",
+    "is_cost_data_ready" => true,
+    "cost_in_pounds" => 0.0027,
+    "cost_details" => [
+        // for text messages:
+        "billable_sms_fragments" => 1,
+        "international_rate_multiplier" => 1,
+        "sms_rate" => 0.0027,
+        // for letters:
+        "billable_sheets_of_paper" => 2,
+        "postage" => "first / second / europe / rest-of-world"
+    ]
 ];
 ```
 
@@ -813,6 +830,7 @@ If the request to the client is successful, the client returns an `array`.
 ```php
 [
     "notifications" => [
+        [
             "id" => "notify_id",
             "reference" => "client reference",
             "email_address" => "email address",
@@ -826,21 +844,37 @@ If the request to the client is successful, the client returns an `array`.
             "postcode" => "postcode",
             "postage" => "null|first|second",
             "type" => "sms | letter | email",
-            "status" => sending | delivered | permanent-failure | temporary-failure | technical-failure
+            "status" => sending | delivered | permanent-failure | temporary-failure | technical-failure",
             "template" => [
-            "version" => 1,
-            "id" => 1,
-            "uri" => "/template/{id}/{version}"
-        ],
-        "created_at" => "created at",
-        "sent_at" => "sent to provider at",
-        ],
-        …
-  ],
-  "links" => [
-     "current" => "/notifications?template_type=sms&status=delivered",
-     "next" => "/notifications?older_than=last_id_in_list&template_type=sms&status=delivered"
-  ]
+                "version" => 1,
+                "id" => "f33517ff-2a88-4f6e-b855-c550268ce08a",
+                "uri" => "/template/{id}/{version}"
+            ],
+            "body" => "STRING",
+            "subject" => "STRING",
+            "created_at" => "2024-05-17 15:58:38.342838",
+            "created_by_name" => "STRING",
+            "sent_at" => "2024-05-17 15:58:30.143000",
+            "completed_at" => "2024-05-17 15:59:10.321000",
+            "scheduled_for" => "2024-05-17 9:00:00.000000",
+            "one_click_unsubscribe" => "STRING",
+            "is_cost_data_ready" => true,
+            "cost_in_pounds" => 0.0027,
+            "cost_details" => [
+                // for text messages:
+                "billable_sms_fragments" => 1,
+                "international_rate_multiplier" => 1,
+                "sms_rate" => 0.0027,
+                // for letters:
+                "billable_sheets_of_paper" => 2,
+                "postage" => "first / second / europe / rest-of-world"
+            ]
+        ]
+    ],
+    "links" => [
+        "current" => "/notifications?template_type=sms&status=delivered",
+        "next" => "/notifications?other_than=last_id_in_list&template_type=sms&status=delivered"
+    ]
 ];
 ```
 
