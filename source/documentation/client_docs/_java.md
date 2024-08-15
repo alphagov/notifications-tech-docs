@@ -212,11 +212,11 @@ A unique identifier you create. This reference identifies a single unique notifi
 String reference='STRING';
 ```
 
-##### oneClickUnsubscribeURL (optional)
+##### oneClickUnsubscribeURL (required)
+
+If you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).
 
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
-
-Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).
 
 ```java
 URI oneClickUnsubscribeURL = 'https://example.com/unsubscribe.html?opaque=123456789'
@@ -227,6 +227,24 @@ The one-click unsubscribe URL must respond to an empty `POST` request by unsubsc
 Your unsubscribe URL and response must comply with the guidance specified in [Section 3.1 of IETF RFC 8058](https://www.rfcreader.com/#rfc8058_line139).
 
 You can leave out this argument if the email being sent is not a subscription email.
+
+##### Unsubscribe link at the bottom of the email (recommended)
+
+To add an unsubscribe link at the bottom of your email, use square brackets around the link text and round brackets around the URL. Make sure there are no spaces between the brackets or the link will not work.
+
+Use this example if you have a webpage for users to manage their email subscriptions:
+
+```java
+[Unsubscribe](https://www.example.gov.uk/unsubscribe)
+```
+Your webpage should ask the recipients to confirm that they want to unsubscribe. 
+
+If you do not have your own webpage, you can add a ‘mailto’ link to let users send an email to your team instead. For example:
+
+```java
+[Unsubscribe](mailto:example@gov.uk?subject=unsubscribe)
+```
+The email address should be a shared inbox managed by your team, not your own email address.
 
 ##### emailReplyToId (optional)
 
