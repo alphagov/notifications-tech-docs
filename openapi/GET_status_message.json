@@ -1,0 +1,69 @@
+{
+    "get": {
+        "description": "You can use this endpoint to get status of one message. Message status depends on the type of message you have sent.<br />You can only get the status of messages sent within the retention period. The default retention period is 7 days.<br />You can omit any of these optional arguments to ignore these filters.",
+        "operationId": "getMessageStatus",
+        "parameters": [
+            {
+                "description": "The ID of the notification. You can find the notification ID in the response to the original notification method call.",
+                "example": "740e5834-3a29-46b4-9a6f-16142fde533a",
+                "in": "path",
+                "name": "notification_id",
+                "schema": {
+                    "type": "string"
+                },
+                "required": true
+            }
+        ],
+        "responses": {
+            "200": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/GetOneMessageResponse"
+                        }
+                    }
+                },
+                "description": "Success"
+            },
+            "400": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/GetMessageValidationError"
+                        }
+                    }
+                },
+                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+            },
+            "403": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/AuthError"
+                        }
+                    }
+                },
+                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+            },
+            "404": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/GetMessageNoResultFoundError"
+                        }
+                    }
+                },
+                "description": "Result not found. Check the `message` in the response to find out why your request failed."
+            }
+        },
+        "security": [
+            {
+                "BearerAuth": []
+            }
+        ],
+        "summary": "Get the status of one message",
+        "tags": [
+            "Get message status"
+        ]
+    }
+}

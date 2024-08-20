@@ -1,0 +1,70 @@
+{
+    "get": {
+        "description": "You can use this endpoint to get PDF contents of a letter.",
+        "operationId": "getLetterPdfContents",
+        "parameters": [
+            {
+                "description": "The ID of the notification. You can find the notification ID in the response to the original notification method call.\nYou can also find it by [signing in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and going to the **API integration** page.",
+                "example": "740e5834-3a29-46b4-9a6f-16142fde533a",
+                "in": "path",
+                "name": "notification_id",
+                "schema": {
+                    "type": "string"
+                },
+                "required": true
+            }
+        ],
+        "responses": {
+            "200": {
+                "content": {
+                    "application/pdf": {
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                },
+                "description": "If the request to the client is successful, the client will return bytes representing the raw PDF data."
+            },
+            "400": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/GetMessageValidationError"
+                        }
+                    }
+                },
+                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+            },
+            "403": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/AuthError"
+                        }
+                    }
+                },
+                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+            },
+            "404": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/GetMessageNoResultFoundError"
+                        }
+                    }
+                },
+                "description": "Result not found. Check the `message` in the response to find out why your request failed."
+            }
+        },
+        "security": [
+            {
+                "BearerAuth": []
+            }
+        ],
+        "summary": "Get the the PDF contents of a letter",
+        "tags": [
+            "Get message status"
+        ]
+    }
+}

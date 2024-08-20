@@ -1,0 +1,8 @@
+{
+    "description": "You can use this endpoint to get PDF contents of a letter.",
+    "operationId": "getLetterPdfContents",
+    "summary": "Get the the PDF contents of a letter",
+    "tags": [
+        "Get message status"
+    ]
+}

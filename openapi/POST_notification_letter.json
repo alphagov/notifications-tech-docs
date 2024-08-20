@@ -1,0 +1,125 @@
+{
+    "post": {
+        "description": "You can use this endpoint to send letter.",
+        "operationId": "sendLetter",
+        "requestBody": {
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "$ref": "./schema.json#/components/schemas/SendLetterRequest"
+                    },
+                    "examples": {
+                        "Letter": {
+                            "value": {
+                                "template_id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
+                                "personalisation": {
+                                    "address_line_1": "The Occupier",
+                                    "address_line_2": "123 High Street",
+                                    "address_line_3": "Richmond upon Thames",
+                                    "address_line_4": "Middlesex",
+                                    "address_line_5": "SW14 6BF",
+                                    "address_line_6": "string",
+                                    "address_line_7": "string",
+                                    "name": "John Smith",
+                                    "application_id": "4134325",
+                                    "required_documents": [
+                                        "passport",
+                                        "utility bill",
+                                        "other id"
+                                    ]
+                                },
+                                "reference": "STRING"
+                            }
+                        },
+                        "Precompiled Letter": {
+                            "value": {
+                                "reference": "STRING",
+                                "content": "base64EncodedPDFFile",
+                                "postage": "second"
+                            }
+                        }
+                    }
+                }
+            },
+            "description": "requestPayload",
+            "required": true
+        },
+        "responses": {
+            "201": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/SendLetterResponse"
+                        },
+                        "examples": {
+                            "Letter": {
+                                "value": {
+                                    "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
+                                    "reference": "STRING",
+                                    "content": {
+                                        "subject": "SUBJECT TEXT",
+                                        "body": "LETTER TEXT"
+                                    },
+                                    "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",
+                                    "template": {
+                                        "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
+                                        "version": 1,
+                                        "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
+                                    },
+                                    "scheduled_for": null
+                                }
+                            },
+                            "Precompiled Letter": {
+                                "value": {
+                                    "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
+                                    "reference": "your-letter-reference",
+                                    "postage": "postage-you-have-set-or-default"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "Created"
+            },
+            "400": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/SendNotificaitonRequestError"
+                        }
+                    }
+                },
+                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+            },
+            "403": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/AuthError"
+                        }
+                    }
+                },
+                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+            },
+            "429": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/LimitError"
+                        }
+                    }
+                },
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed."
+            }
+        },
+        "security": [
+            {
+                "BearerAuth": []
+            }
+        ],
+        "summary": "Send a letter",
+        "tags": [
+            "Send a message"
+        ]
+    }
+}
