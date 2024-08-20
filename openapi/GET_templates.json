@@ -1,0 +1,207 @@
+{
+    "get": {
+        "description": "This returns the latest version of all templates.",
+        "operationId": "GetTemplates",
+        "parameters": [  { 
+            "name": "type",
+            "in":"query",   
+            "description":"If you leave out this argument, the method returns all templates. Otherwise you can filter by: email, sms, letter",
+            "required":false,
+            "schema": {
+                "$ref": "schema.json#/components/schemas/TemplatesRequest"
+            },
+            "examples": {
+                "sms": {
+                    "summary": "type=sms",
+                    "description": "Show templates of type SMS",
+                    "value": "sms"
+                },
+                "email": {
+                        "summary": "type=email",
+                        "description": "Show templates of type email",
+                        "value": "email"
+                    },
+                "letter": {
+                        "summary": "type=letter",
+                        "description": "Show templates of type email",
+                        "value": "letter"
+                    }  
+            }    
+        }],
+        "responses": {
+            "200": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/TemplatesResponse"
+                        },
+                        "examples": {
+                            "sms": {
+                                "value": {
+                                    "templates":
+                                    [{
+                                        "id":"b7a59abd-0ab2-4538-b619-8da9f9089e08",
+                                        "name":"Test SMS Template",
+                                        "type":"sms",
+                                        "created_at":"2024-08-12T11:03:12.000000Z",
+                                        "updated_at":"2024-08-12T11:03:34.994540Z",
+                                        "version":2,
+                                        "created_by":"someone@example.com",
+                                        "body":"Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
+                                        "subject":null,
+                                        "postage":null,
+                                        "letter_contact_block":null,
+                                        "personalisation":{"date": {"required": true},"firstname": {"required": true}}
+                                    }]
+                                }
+                            },
+                            "email": {
+                                "value": {
+                                    "templates":
+                                    [{
+                                        "id":"8604d595-c65e-4d80-ae33-34fd08c736a5",
+                                        "name":"Test Email Template",
+                                        "type":"email",
+                                        "created_at":"2024-08-12T10:40:20.000000Z",
+                                        "updated_at":"2024-08-12T10:45:47.890097Z",
+                                        "version":3,
+                                        "created_by":"someone@example.com",
+                                        "body":"Hi ((firstname)),\r\nWe have received your letter dated ((date)).\r\n No further action is required.",
+                                        "subject":"Test Email",
+                                        "letter_contact_block":null,
+                                        "postage":null,
+                                        "personalisation":{"date": {"required": true},"firstname": {"required": true}}
+                                    }]
+                                }
+                            },
+                            "letter": {
+                                "value": {
+                                    "templates":
+                                    [{
+                                        "id":"142d3a1b-f6cb-4bbb-9732-e1d9f9f2fed4",
+                                        "name":"Test Letter Template",
+                                        "type":"letter",
+                                        "postage": "second",
+                                        "created_at":"2024-08-20T19:50:43.000000Z",
+                                        "updated_at":"2024-08-20T19:51:51.980848Z",
+                                        "version":2,
+                                        "created_by":"someone@example.com",
+                                        "body":"Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
+                                        "subject":"Test Letter",
+                                        "letter_contact_block":"From Address\nCity",
+                                        "personalisation":{"date": {"required": true},"firstname": {"required": true}}
+                                    }]
+                                }
+                            },
+                            "type not set": {
+                                "value": {
+                                    "templates":
+                                    [{
+                                        "id":"b7a59abd-0ab2-4538-b619-8da9f9089e08",
+                                        "name":"Test SMS Template",
+                                        "type":"sms",
+                                        "created_at":"2024-08-12T11:03:12.000000Z",
+                                        "updated_at":"2024-08-12T11:03:34.994540Z",
+                                        "version":2,
+                                        "created_by":"someone@example.com",
+                                        "body":"Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
+                                        "subject":null,
+                                        "postage":null,
+                                        "letter_contact_block":null,
+                                        "personalisation":{"date": {"required": true},"firstname": {"required": true}}
+                                    },
+                                    {
+                                        "id":"8604d595-c65e-4d80-ae33-34fd08c736a5",
+                                        "name":"Test Email Template",
+                                        "type":"email",
+                                        "created_at":"2024-08-12T10:40:20.000000Z",
+                                        "updated_at":"2024-08-12T10:45:47.890097Z",
+                                        "version":3,
+                                        "created_by":"someone@example.com",
+                                        "body":"Hi ((firstname)),\r\nWe have received your letter dated ((date)).\r\n No further action is required.",
+                                        "subject":"Test Email",
+                                        "letter_contact_block":null,
+                                        "postage":null,
+                                        "personalisation":{"date": {"required": true},"firstname": {"required": true}}
+                                    },
+                                    {
+                                        "id":"142d3a1b-f6cb-4bbb-9732-e1d9f9f2fed4",
+                                        "name":"Test Letter Template",
+                                        "type":"letter",
+                                        "postage": "second",
+                                        "created_at":"2024-08-20T19:50:43.000000Z",
+                                        "updated_at":"2024-08-20T19:51:51.980848Z",
+                                        "version":2,
+                                        "created_by":"someone@example.com",
+                                        "body":"Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
+                                        "subject":"Test Letter",
+                                        "letter_contact_block":"From Address\nCity",
+                                        "personalisation":{"date": {"required": true},"firstname": {"required": true}}
+                                    }]
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "If the request is successful, the response body is json and the status code is 200"
+            },
+            "400": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/TemplatesRequestError"
+                        },
+                        "example": {
+                                    "errors":
+                                    [{
+                                        "error":"ValidationError",
+                                        "message":"type pigeon is not one of [sms, email, letter, broadcast]"
+                                    }],
+                                    "status_code": 400
+                        }
+                    }
+                },
+                "description": "Make sure that the provided type is one of: email, sms, letter"
+            },
+            "403": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/AuthError"
+                        }
+                    }
+                },
+                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+            },
+            "429": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/LimitError"
+                        }
+                    }
+                },
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed."
+            },
+            "500": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/ServerError"
+                        }
+                    }
+                },
+                "description": "Internal server error. Check the `message` in the response to find out why your request failed."
+            }
+        },
+        "security": [
+            {
+                "BearerAuth": []
+            }
+        ],
+        "summary": "Get all templates",
+        "tags": [
+            "Get a template"
+        ]
+    }
+}
