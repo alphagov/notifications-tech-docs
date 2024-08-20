@@ -1,0 +1,649 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "description": "All errors - usage example: {'$ref': 'errors.json#/ServerError'} (swap quotes for double quotes)",
+    "components": {
+        "schemas": {
+            "SendTextMessageRequest": {
+                "type": "object",
+                "description": "The Send Text Message Request Payload",
+                "properties": {
+                    "phone_number": {
+                        "type": "string",
+                        "description": "The phone number of the recipient of the text message. This can be a UK or international number.",
+                        "example": "+447900900123",
+                        "maxLength": 15,
+                        "minLength": 7
+                    },
+                    "template_id": {
+                        "type": "string",
+                        "description": "<p>To find the template ID:</p><ol><li><a href='https://www.notifications.service.gov.uk/sign-in'>Sign in to GOV.UK Notify</a>.</li><li>Go to the <strong>Templates</strong> page and select the relevant template.</li><li>Select <strong>Copy template ID to clipboard</strong>.</li></ol>",
+                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                    },
+                    "personalisation": {
+                        "type": "object",
+                        "description": "You can leave out this argument if a template does not have any placeholder fields for personalised information.<br/>If a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:",
+                        "properties": {
+                            "first_name": {
+                                "type": "string",
+                                "example": "Amala"
+                            },
+                            "application_date": {
+                                "type": "string",
+                                "example": "2018-01-01"
+                            }
+                        }
+                    },
+                    "reference": {
+                        "type": "string",
+                        "description": "You can leave out this argument if you do not have a reference. An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
+                        "example": "STRING"
+                    },
+                    "sms_sender_id": {
+                        "type": "string",
+                        "description": "<br/><p>A unique identifier of the sender of the text message notification.</p><p>To find the text message sender:</p><ol><li><a href='https://www.notifications.service.gov.uk/sign-in'>Sign in to GOV.UK Notify</a>.</li><li>Go to the <strong>Settings</strong> page.</li><li>In the <strong>Text Messages</strong> section, select <strong>Manage</strong> on the <strong>Text Message sender</strong> row.</li></ol><p>You can then either:</p><ul><li>copy the sender ID that you want to use and paste it into the method</li><li>select <strong>Change</strong> to change the default sender that the service will use, and select <strong>Save</strong></li></ul><p>You can leave out this argument if your service only has one text message sender, or if you want to use the default sender.</p>",
+                        "example": "8e222534-7f05-4972-86e3-17c5d9f894e2"
+                    }
+                },
+                "required": [
+                    "phone_number",
+                    "template_id"
+                ]
+            },
+            "SendEmailRequest": {
+                "type": "object",
+                "description": "The Send Email Request Payload",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "The email address of the recipient.",
+                        "example": "sender@something.com",
+                        "maxLength": 250,
+                        "minLength": 5
+                    },
+                    "template_id": {
+                        "type": "string",
+                        "description": "<p>To find the template ID:</p><ol><li><a href='https://www.notifications.service.gov.uk/sign-in'>Sign in to GOV.UK Notify</a>.</li><li>Go to the <strong>Templates</strong> page and select the relevant template.</li><li>Select <strong>Copy template ID to clipboard</strong>.</li></ol>",
+                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                    },
+                    "one_click_unsubscribe_url": {
+                        "type": "string",
+                        "description": "You can leave out this argument if the email being sent is not a subscription email. <p>If you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about <a href='https://www.notifications.service.gov.uk/using-notify/unsubscribe-links'>unsubscribe links</a>.</p><p>The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.</p><p>The one-click unsubscribe URL must respond to an empty <code>POST</code> request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.</p><p>Your unsubscribe URL and response must comply with the guidance specified in <a href='https://www.rfcreader.com/#rfc8058_line139'>Section 3.1 of IETF RFC 8058</a>.</p><p><a href='https://docs.notifications.service.gov.uk/rest-api.html#unsubscribe-link-at-the-bottom-of-the-email-recommended'>Unsubscribe link at the bottom of the email (recommended)</a></p>",
+                        "example": "https://example.com/unsubscribe.html?opaque=123456789"
+                    },
+                    "personalisation": {
+                        "type": "object",
+                        "description": "You can leave out this argument if a template does not have any placeholder fields for personalised information.<br/>If a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:",
+                        "properties": {
+                            "first_name": {
+                                "type": "string",
+                                "example": "Amala"
+                            },
+                            "application_date": {
+                                "type": "string",
+                                "example": "2018-01-01"
+                            },
+                            "required_documents": {
+                                "type": "array",
+                                "description": "Pass in a list and it will appear as bullet points in the message.",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "example": [
+                                    "passport",
+                                    "utility bill",
+                                    "other id"
+                                ]
+                            }
+                        }
+                    },
+                    "reference": {
+                        "type": "string",
+                        "description": "You can leave out this argument if you do not have a reference. An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
+                        "example": "STRING"
+                    },
+                    "email_reply_to_id": {
+                        "type": "string",
+                        "description": "<p>You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.</p><p>This is an email address specified by you to receive replies from your users. You must add at least one reply-to email address before your service can go live.</p><p>To add a reply-to email address:</p><ol><li><a href='https://www.notifications.service.gov.uk/sign-in'>Sign in to GOV.UK Notify</a>.</li><li>Go to the <strong>Settings</strong> page.</li><li>In the <strong>Email</strong> section, select <strong>Manage</strong> on the <strong>Reply-to email addresses</strong> row.</li><li>Select <strong>Add reply-to address</strong>.</li><li>Enter the email address you want to use, and select <strong>Add</strong>.</li></ol>",
+                        "example": "STRING"
+                    }
+                },
+                "required": [
+                    "email",
+                    "template_id",
+                    "one_click_unsubscribe_url"
+                ]
+            },
+            "SendLetterRequest": {
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/SendNormalLetterRequest"
+                    },
+                    {
+                        "$ref": "#/components/schemas/SendPrecompiledLetterRequest"
+                    }
+                ]
+            },
+            "SendNormalLetterRequest": {
+                "type": "object",
+                "description": "The Letter Request Payload",
+                "properties": {
+                    "template_id": {
+                        "type": "string",
+                        "description": "<p>To find the template ID:</p><ol><li><a href='https://www.notifications.service.gov.uk/sign-in'>Sign in to GOV.UK Notify</a>.</li><li>Go to the <strong>Templates</strong> page and select the relevant template.</li><li>Select <strong>Copy template ID to clipboard</strong>.</li></ol>",
+                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                    },
+                    "personalisation": {
+                        "type": "object",
+                        "description": "<p>The personalisation argument always contains the following parameters for the letter recipient’s address:</p><p><b>The address must have at least 3 lines.</b></p><p>The last line needs to be a real UK postcode or the name of a country outside the UK.</p><p>Notify checks for international addresses and will automatically charge you the correct postage.</p><p>The <code>postcode</code> personalisation argument has been replaced. If your template still uses <code>postcode</code>, Notify will treat it as the last line of the address.</p><p>Any other placeholder fields included in the letter template also count as required parameters. You need to provide their values in a dictionary with key value pairs. For example:</p>",
+                        "properties": {
+                            "address_line_1": {
+                                "type": "string",
+                                "example": "The Occupier"
+                            },
+                            "address_line_2": {
+                                "type": "string",
+                                "example": "123 High Street"
+                            },
+                            "address_line_3": {
+                                "type": "string",
+                                "example": "Richmond upon Thames"
+                            },
+                            "address_line_4": {
+                                "type": "string",
+                                "example": "Middlesex"
+                            },
+                            "address_line_5": {
+                                "type": "string",
+                                "example": "SW14 6BF"
+                            },
+                            "address_line_6": {
+                                "type": "string"
+                            },
+                            "address_line_7": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "John Smith"
+                            },
+                            "application_id": {
+                                "type": "string",
+                                "example": "4134325"
+                            },
+                            "required_documents": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "example": [
+                                    "passport",
+                                    "utility bill",
+                                    "other id"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "address_line_1",
+                            "address_line_2",
+                            "address_line_3"
+                        ]
+                    },
+                    "reference": {
+                        "type": "string",
+                        "description": "You can leave out this argument if you do not have a reference. An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
+                        "example": "STRING"
+                    }
+                },
+                "required": [
+                    "template_id",
+                    "personalisation"
+                ]
+            },
+            "SendPrecompiledLetterRequest": {
+                "type": "object",
+                "description": "The Precompiled Send Letter Request Payload",
+                "properties": {
+                    "reference": {
+                        "type": "string",
+                        "description": "<p>An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.</p>",
+                        "example": "STRING"
+                    },
+                    "content": {
+                        "type": "string",
+                        "description": "<p>The precompiled letter must be a PDF file which meets <a href='https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification'>the GOV.UK Notify letter specification</a>. You’ll need to convert the file into a string that is base64 encoded.</p>",
+                        "example": "base64EncodedPDFFile"
+                    },
+                    "postage": {
+                        "type": "string",
+                        "description": "<p>You can choose first or second class postage for your precompiled letter. Set the value to <code>first</code> for first class, or <code>second</code> for second class. If you do not pass in this argument, the postage will default to second class.</p>",
+                        "example": "base64EncodedPDFFile"
+                    }
+                },
+                "required": [
+                    "reference",
+                    "content"
+                ]
+            },
+            "SendTextMessageResponse": {
+                "type": "object",
+                "description": "The Send Text Message Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "content": {
+                        "type": "object",
+                        "properties": {
+                            "body": {
+                                "type": "string",
+                                "example": "MESSAGE TEXT"
+                            },
+                            "from_number": {
+                                "type": "string",
+                                "example": "SENDER"
+                            }
+                        }
+                    },
+                    "uri": {
+                        "type": "string",
+                        "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "template": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            },
+                            "version": {
+                                "type": "number",
+                                "example": 1
+                            },
+                            "uri": {
+                                "type": "string",
+                                "example": "https://api.notifications.service.gov.uk/v2/template/ceb50d92-100d-4b8b-b559-14fa3b091cd"
+                            }
+                        }
+                    }
+                }
+            },
+            "SendEmailResponse": {
+                "type": "object",
+                "description": "The Send Email Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "content": {
+                        "type": "object",
+                        "properties": {
+                            "subject": {
+                                "type": "string",
+                                "example": "SUBJECT TEXT"
+                            },
+                            "body": {
+                                "type": "string",
+                                "example": "MESSAGE TEXT"
+                            },
+                            "from_email": {
+                                "type": "string",
+                                "example": "SENDER EMAIL"
+                            }
+                        }
+                    },
+                    "uri": {
+                        "type": "string",
+                        "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "template": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            },
+                            "version": {
+                                "type": "number",
+                                "example": 1
+                            },
+                            "uri": {
+                                "type": "string",
+                                "example": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            }
+                        }
+                    }
+                }
+            },
+            "SendLetterResponse": {
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/SendNormalLetterResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/SendPrecompiledLetterResponse"
+                    }
+                ]
+            },
+            "SendNormalLetterResponse": {
+                "type": "object",
+                "description": "The Send Normal Letter Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "content": {
+                        "type": "object",
+                        "properties": {
+                            "subject": {
+                                "type": "string",
+                                "example": "SUBJECT TEXT"
+                            },
+                            "body": {
+                                "type": "string",
+                                "example": "LETTER TEXT"
+                            }
+                        }
+                    },
+                    "uri": {
+                        "type": "string",
+                        "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "template": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            },
+                            "version": {
+                                "type": "number",
+                                "example": 1
+                            },
+                            "uri": {
+                                "type": "string",
+                                "example": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            },
+                            "scheduled_for": {
+                                "type": "string",
+                                "example": ""
+                            }
+                        }
+                    }
+                }
+            },
+            "SendPrecompiledLetterResponse": {
+                "type": "object",
+                "description": "The Send Precompiled Letter Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "postage": {
+                        "type": "string",
+                        "example": "postage-you-have-set-or-None"
+                    }
+                }
+            },
+            "SendNotificaitonRequestError": {
+                "type": "array",
+                "description": "Bad request error response",
+                "items": {
+                    "oneOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "BadRequestError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Can't send to this recipient using a team-only API key",
+                                    "description": "<p>Use the correct type of <a href='https://docs.notifications.service.gov.uk/rest-api.html#api-keys'>API key</a></p>"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "BadRequestError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode",
+                                    "description": "<p>Your service cannot send this notification in <a href='https://www.notifications.service.gov.uk/features/using-notify#trial-mode'>trial mode</a></p>"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "SendLetterNotificaitonRequestError": {
+                "type": "array",
+                "description": "Bad request error response",
+                "items": {
+                    "oneOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "BadRequestError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Can't send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode",
+                                    "description": "<p>Your service cannot send this notification in <a href='https://www.notifications.service.gov.uk/features/using-notify#trial-mode'>trial mode</a></p>"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "BadRequestError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "personalisation address_line_1 is a required property",
+                                    "description": "<p>Ensure that your template has a field for the first line of the address, check <a href='https://docs.notifications.service.gov.uk/rest-api.html#personalisation-required'>personalisation</a> for more information.</p"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "BadRequestError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Must be a real UK postcode",
+                                    "description": "<p>Ensure that the value for the last line of the address is a real UK postcode.</p"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "BadRequestError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Last line of address must be a real UK postcode or another country",
+                                    "description": "<p>Ensure that the value for the last line of the address is a real UK postcode or the name of a country outside the UK.</p"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "AuthError": {
+                "type": "array",
+                "description": "Auth error response",
+                "items": {
+                    "oneOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "AuthError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Error: Your system clock must be accurate to within 30 seconds",
+                                    "description": "Check your system clock"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "AuthError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Invalid token: API key not found",
+                                    "description": "<p>Use the correct API key. Refer to <a href='https://docs.notifications.service.gov.uk/rest-api.html#api-keys'>API keys</a> for more information</p>"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "SendLetterAuthError": {
+                "type": "array",
+                "description": "Auth error response",
+                "items": {
+                    "oneOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "AuthError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Error: Your system clock must be accurate to within 30 seconds",
+                                    "description": "Check your system clock"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "AuthError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Invalid token: API key not found",
+                                    "description": "<p>Use the correct API key. Refer to <a href='https://docs.notifications.service.gov.uk/rest-api.html#api-keys'>API keys</a> for more information</p>"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "BadRequestError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Can't send letters with a team API key",
+                                    "description": "<p>Use the correct type of <a href='https://docs.notifications.service.gov.uk/rest-api.html#api-keys'>API key</a>.</p>"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "LimitError": {
+                "type": "array",
+                "description": "Rate or service limit error response",
+                "items": {
+                    "oneOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "RateLimitError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Invalid token: API key not found",
+                                    "description": "<p>Refer to <a href='https://docs.notifications.service.gov.uk/rest-api.html#rate-limits'>API rate limits</a> for more information</p>"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "TooManyRequestsError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds",
+                                    "description": "<p>Refer to <a href='https://docs.notifications.service.gov.uk/rest-api.html#daily-limits'>service limits</a> for the limit number</p>"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "ServerError": {
+                "type": "array",
+                "description": "Rate or service limit error response",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "error": {
+                            "type": "string",
+                            "example": "Exception"
+                        },
+                        "message": {
+                            "type": "string",
+                            "example": "Internal server error",
+                            "description": "<p>Notify was unable to process the request, resend your notification.</p>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

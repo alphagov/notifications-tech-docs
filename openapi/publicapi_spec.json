@@ -1,0 +1,48 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "description": "The GOV.UK Notify REST API. Read [our documentation](https://www.notifications.service.gov.uk/using-notify/api-documentation) for more details.",
+        "title": "GOV.UK Notify API",
+        "version": "1.0.3"
+    },
+    "servers": [
+        {
+            "url": "https://api.notifications.service.gov.uk"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Send a message"
+        },
+        {
+            "name": "Get message status"
+        },
+        {
+            "name": "Get a template"
+        },
+        {
+            "name": "Get received text messages"
+        }
+    ],
+    "paths": {
+        "/v2/notifications/sms": {
+            "$ref": "POST_notification_sms.json#"
+        },
+        "/v2/notifications/email": {
+            "$ref": "POST_notification_email.json#"
+        },
+        "/v2/notifications/letter": {
+            "$ref": "POST_notification_letter.json#"
+        }
+    },
+    "components": {
+        "schemas": {},
+        "securitySchemes": {
+            "BearerAuth": {
+                "description": "GOV.UK Notify authenticates API calls with [OAuth2 HTTP bearer tokens](http://tools.ietf.org/html/rfc6750). You need to use an `\"Authorization\"` HTTP header to provide your API key, with a `\"Bearer\"` prefix. For example: `Authorization: Bearer {YOUR_API_KEY_HERE}`",
+                "scheme": "bearer",
+                "type": "http"
+            }
+        }
+    }
+}
