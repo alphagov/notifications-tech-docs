@@ -224,6 +224,10 @@
                     "content"
                 ]
             },
+            "TemplatesRequest":{
+                "type":"string",
+                "enum":["sms","email","letter"]
+            },
             "SendTextMessageResponse": {
                 "type": "object",
                 "description": "The Send Text Message Response Payload",
@@ -401,6 +405,72 @@
                     "postage": {
                         "type": "string",
                         "example": "postage-you-have-set-or-None"
+                    }
+                }
+            },
+            "TemplatesResponse":{
+                "type": "object",
+                "description": "If the request is successful, the response body is json and the status code is 200",
+                "properties": {
+                    "id": {
+                        "name":"id",
+                        "type": "string",
+                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a",
+                        "description": "required string - template ID",
+                        "required": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Test template",
+                        "description": "required string - template name",
+                        "required": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": ["sms","email","letter"],
+                        "example": "sms",
+                        "description":"required string",
+                        "required": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "2024-08-12T10:40:20.000000Z",
+                        "description":"required string - date and time template created",
+                        "required": true
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "example": "2024-08-12T10:45:47.890097Z",
+                        "description":"required string - date and time template last updated",
+                        "required": true
+                    },
+                    "version": {
+                        "type": "integer",
+                        "example": "3",
+                        "required": true
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "example": "someone@example.com",
+                        "description":"required string",
+                        "required": true
+                    },
+                    "body": {
+                        "type": "string",
+                        "example": "Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
+                        "description": "required string - body of notification",
+                        "required": true
+                    },
+                    "subject": {
+                        "type": "string",
+                        "example": "Test sms",
+                        "description": "required string for email - subject of email",
+                        "required": true
+                    },
+                    "letter_contact_block": {
+                        "type": ["string","null"],
+                        "example": "",
+                        "description": "optional string - None if not a letter template or contact block not set"
                     }
                 }
             },

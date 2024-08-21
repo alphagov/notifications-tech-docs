@@ -33,7 +33,10 @@
         },
         "/v2/notifications/letter": {
             "$ref": "POST_notification_letter.json#"
-        }
+        },
+        "/v2/templates": {
+            "$ref": "GET_templates.json#"
+        } 
     },
     "components": {
         "schemas": {},
