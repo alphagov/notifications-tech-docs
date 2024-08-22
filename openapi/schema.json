@@ -416,61 +416,62 @@
                         "name":"id",
                         "type": "string",
                         "example": "f33517ff-2a88-4f6e-b855-c550268ce08a",
-                        "description": "required string - template ID",
-                        "required": true
+                        "description": "required string - template ID"
                     },
                     "name": {
                         "type": "string",
                         "example": "Test template",
-                        "description": "required string - template name",
-                        "required": true
+                        "description": "required string - template name"
                     },
                     "type": {
                         "type": "string",
                         "enum": ["sms","email","letter"],
                         "example": "sms",
-                        "description":"required string",
-                        "required": true
+                        "description":"required string"
                     },
                     "created_at": {
                         "type": "string",
                         "example": "2024-08-12T10:40:20.000000Z",
-                        "description":"required string - date and time template created",
-                        "required": true
+                        "description":"required string - date and time template created"
                     },
                     "updated_at": {
                         "type": "string",
                         "example": "2024-08-12T10:45:47.890097Z",
-                        "description":"required string - date and time template last updated",
-                        "required": true
+                        "description":"required string - date and time template last updated"
                     },
                     "version": {
                         "type": "integer",
-                        "example": "3",
-                        "required": true
+                        "example": "3"
                     },
                     "created_by": {
                         "type": "string",
                         "example": "someone@example.com",
-                        "description":"required string",
-                        "required": true
+                        "description":"required string"
                     },
                     "body": {
                         "type": "string",
                         "example": "Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
-                        "description": "required string - body of notification",
-                        "required": true
+                        "description": "required string - body of notification"
                     },
                     "subject": {
-                        "type": "string",
-                        "example": "Test sms",
-                        "description": "required string for email - subject of email",
-                        "required": true
+                        "type": ["string","null"],
+                        "example": "Test",
+                        "description": "required string for email - subject of email, otherwise null"
+                    },
+                    "postage": {
+                        "type": ["string","null"],
+                        "example": "second",
+                        "description": "required string for letter - postage type, otherwise null"
+                    },
+                    "personalisation": {
+                        "type": "object",
+                        "example": {"date": {"required": true},"firstname": {"required": true}},
+                        "description": "object containaing personalisation parameters - empty if no personalisation in the template"
                     },
                     "letter_contact_block": {
                         "type": ["string","null"],
                         "example": "",
-                        "description": "optional string - None if not a letter template or contact block not set"
+                        "description": "optional string - null if not a letter template or contact block not set"
                     }
                 }
             },
@@ -573,6 +574,32 @@
                         }
                     ]
                 }
+            },
+            "TemplatesRequestError": {
+                "type": "object",
+                "description": "If the request is successful, the response body is json and the status code is 200",
+                "properties": {
+                    "errors": [
+                        {
+                            "error": {
+                                "type": "string",
+                                "example": "ValidationError"
+                            }
+                        },
+                        {
+                            "message": {
+                                "type": "string",
+                                "example": "type pigeon is not one of [sms, email, letter, broadcast]",
+                                "description": "Make sure that the provided type is one of: email, sms, letter"
+                            }
+
+                        }
+                    ],
+                    "status_code": {
+                        "type": "integer",
+                        "example" : 400
+                    }
+                }    
             },
             "AuthError": {
                 "type": "array",
