@@ -18,7 +18,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "schema.json#/components/schemas/SendEmailResponse"
+                            "$ref": "schema.json#/components/schemas/SendTextMessageResponse"
                         }
                     }
                 },
