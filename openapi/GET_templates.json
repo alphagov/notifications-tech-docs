@@ -148,7 +148,7 @@
                         }
                     }
                 },
-                "description": "OK"
+                "description": "If the request is successful, the response body is json and the status code is 200"
             },
             "400": {
                 "content": {
@@ -168,7 +168,37 @@
                         }
                     }
                 },
-                "description": "Bad Request"
+                "description": "Make sure that the provided type is one of: email, sms, letter"
+            },
+            "403": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/AuthError"
+                        }
+                    }
+                },
+                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+            },
+            "429": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/LimitError"
+                        }
+                    }
+                },
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed."
+            },
+            "500": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/ServerError"
+                        }
+                    }
+                },
+                "description": "Internal server error. Check the `message` in the response to find out why your request failed."
             }
         },
         "security": [
@@ -176,7 +206,7 @@
                 "BearerAuth": []
             }
         ],
-        "summary": "Get a template",
+        "summary": "Get all templates",
         "tags": [
             "Get a template"
         ]

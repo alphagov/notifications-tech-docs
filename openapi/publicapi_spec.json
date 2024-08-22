@@ -48,7 +48,16 @@
         },
         "/v2/templates": {
             "$ref": "GET_templates.json#"
-        } 
+        },
+        "/v2/template/{template_id}": {
+            "$ref": "GET_template_by_id.json#"
+        },
+        "/v2/template/{template_id}/version/{version}": {
+            "$ref": "GET_template_by_id_and_version.json#"
+        },
+        "/v2/template/{template_id}/preview": {
+            "$ref": "POST_template_preview.json#"
+        }  
     },
     "components": {
         "schemas": {},
