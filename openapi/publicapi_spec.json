@@ -33,6 +33,18 @@
         },
         "/v2/notifications/letter": {
             "$ref": "POST_notification_letter.json#"
+        },
+        "/v2/notifications/{notification_id}": {
+            "$ref": "GET_status_message.json#"
+        },
+        "/v2/notifications": {
+            "$ref": "GET_status_messages.json#"
+        },
+        "/v2/notifications/{notification_id}/pdf": {
+            "$ref": "GET_PDF_For_Letter.json#"
+        },
+        "/v2/received-text-messages": {
+            "$ref": "GET_received_text_messages.json#"
         }
     },
     "components": {

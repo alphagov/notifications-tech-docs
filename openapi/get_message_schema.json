@@ -1,0 +1,434 @@
+{
+    "description": "All errors - usage example: {'$ref': 'errors.json#/ServerError'} (swap quotes for double quotes)",
+    "components": {
+        "schemas": {
+            "GetOneMessageResponse": {
+                "type": "object",
+                "description": "The Send Text Message Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "content": {
+                        "type": "object",
+                        "properties": {
+                            "body": {
+                                "type": "string",
+                                "example": "MESSAGE TEXT"
+                            },
+                            "from_number": {
+                                "type": "string",
+                                "example": "SENDER"
+                            }
+                        }
+                    },
+                    "uri": {
+                        "type": "string",
+                        "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "template": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            },
+                            "version": {
+                                "type": "number",
+                                "example": 1
+                            },
+                            "uri": {
+                                "type": "string",
+                                "example": "https://api.notifications.service.gov.uk/v2/template/ceb50d92-100d-4b8b-b559-14fa3b091cd"
+                            }
+                        }
+                    }
+                }
+            },
+            "GetMultipleMessagesResponse": {
+                "type": "object",
+                "description": "The Send Text Message Response Payload",
+                "properties": {
+                    "notifications": {
+                        "type": "array",
+                        "description": "Multiple message notifications",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetOneMessageResponse"
+                                }
+                            }
+                        }
+                    },
+                    "links": {
+                        "type": "object",
+                        "description": "Pagination links",
+                        "properties": {
+                            "current": {
+                                "type": "string",
+                                "example": "/notifications?template_type=sms&status=delivered"
+                            },
+                            "id": {
+                                "type": "string",
+                                "example": "/notifications?other_than=last_id_in_list&template_type=sms&status=delivered"
+                            }
+                        }
+                    }
+                }
+            },
+            "SendEmailResponse": {
+                "type": "object",
+                "description": "The Send Email Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Required - notification ID",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "description": "Optional",
+                        "example": "STRING"
+                    },
+                    "email_address": {
+                        "type": "string",
+                        "description": "Required for emails",
+                        "example": "sender@something.com"
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "description": "Required for text messages",
+                        "example": "+447900900123"
+                    },
+                    "line_1": {
+                        "type": "string",
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 1"
+                    },
+                    "line_2": {
+                        "type": "string",
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 2"
+                    },
+                    "line_3": {
+                        "type": "string",
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 3"
+                    },
+                    "line_4": {
+                        "type": "string",
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 4"
+                    },
+                    "line_5": {
+                        "type": "string",
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 5"
+                    },
+                    "line_6": {
+                        "type": "string",
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 6"
+                    },
+                    "line_7": {
+                        "type": "string",
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 7"
+                    },
+                    "postage": {
+                        "type": "string",
+                        "description": "Required for letter",
+                        "example": "first / second / europe / rest-of-world"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Required",
+                        "example": "sms / letter / email"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Required",
+                        "example": "sending / delivered / permanent-failure / temporary-failure / technical-failure"
+                    },
+                    "template": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "Required - template ID",
+                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            },
+                            "version": {
+                                "type": "number",
+                                "example": 1
+                            },
+                            "uri": {
+                                "type": "string",
+                                "description": "Required",
+                                "example": "/v2/template/{id}/{version}"
+                            }
+                        }
+                    },
+                    "body": {
+                        "type": "string",
+                        "description": "Required - body of notification",
+                        "example": "STRING"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "description": "Required for email- subject of email",
+                        "example": "STRING"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "description": "Required - date and time notification created",
+                        "example": "2024-05-17 15:58:38.342838"
+                    },
+                    "created_by_name": {
+                        "type": "string",
+                        "description": "Optional - name of the person who sent the notification if sent manually",
+                        "example": "STRING"
+                    },
+                    "sent_at": {
+                        "type": "string",
+                        "description": "Optional - date and time notification sent to provider",
+                        "example": "2024-05-17 15:58:30.143000"
+                    },
+                    "completed_at": {
+                        "type": "string",
+                        "description": "Optional - date and time notification delivered or failed",
+                        "example": "2024-05-17 15:59:10.321000"
+                    },
+                    "scheduled_for": {
+                        "type": "string",
+                        "description": "Optional - date and time notification has been scheduled to be sent at",
+                        "example": "2024-05-17 9:00:00.000000"
+                    },
+                    "one_click_unsubscribe": {
+                        "type": "string",
+                        "description": "Optional - URL that you provided so your recipients can unsubscribe",
+                        "example": "STRING"
+                    },
+                    "is_cost_data_ready": {
+                        "type": "string",
+                        "description": "`true` if cost data is ready, and `false` if it isn't",
+                        "example": true
+                    },
+                    "cost_in_pounds": {
+                        "type": "number",
+                        "description": "Optional - cost of the notification in pounds. The cost does not take free allowance into account",
+                        "example": 0.0027
+                    },
+                    "cost_details": {
+                        "type": "object",
+                        "description": "Optional - date and time notification sent to provider",
+                        "example": {
+                            "billable_sms_fragments": {
+                                "type": "number",
+                                "description": "Optional - for text messages, number of billable sms fragments in your text message",
+                                "example": 1
+                            },
+                            "international_rate_multiplier": {
+                                "type": "number",
+                                "description": "Optional - for text messages, for international sms rate is multiplied by this value",
+                                "example": 1
+                            },
+                            "sms_rate": {
+                                "type": "number",
+                                "description": "Optional - for text messages, cost of 1 sms fragment",
+                                "example": 0.0027
+                            },
+                            "billable_sheets_of_paper": {
+                                "type": "number",
+                                "description": "Optional - for letters, number of sheets of paper in the letter you sent",
+                                "example": 2
+                            },
+                            "postage": {
+                                "type": "string",
+                                "description": "Optional - for letters",
+                                "example": "first / second / europe / rest-of-world"
+                            }
+                        }
+                    },
+                    "content": {
+                        "type": "object",
+                        "properties": {
+                            "subject": {
+                                "type": "string",
+                                "example": "SUBJECT TEXT"
+                            },
+                            "body": {
+                                "type": "string",
+                                "example": "MESSAGE TEXT"
+                            },
+                            "from_email": {
+                                "type": "string",
+                                "example": "SENDER EMAIL"
+                            }
+                        }
+                    },
+                    "uri": {
+                        "type": "string",
+                        "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
+                    }
+                }
+            },
+            "GetMessageNoResultFoundError": {
+                "type": "array",
+                "description": "No result found error response",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "error": {
+                            "type": "string",
+                            "example": "NoResultFound"
+                        },
+                        "message": {
+                            "type": "string",
+                            "example": "No result found",
+                            "description": "<p>Check the notification ID</p>"
+                        }
+                    }
+                }
+            },
+            "GetMessageValidationErrorError": {
+                "type": "array",
+                "description": "Validation error response",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "error": {
+                            "type": "string",
+                            "example": "NoResultFound"
+                        },
+                        "message": {
+                            "type": "string",
+                            "example": "id is not a valid UUID",
+                            "description": "<p>Check the notification ID</p>"
+                        }
+                    }
+                }
+            },
+            "GetPDFLetterValidationErrorError": {
+                "type": "array",
+                "description": "Validation error response",
+                "items": {
+                    "oneOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "ValidationError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "id is not a valid UUID",
+                                    "description": "<p>Check the notification ID</p>"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "PDFNotReadyError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "PDF not available yet, try again later",
+                                    "description": "<p>Wait for the letter to finish processing. This usually takes a few seconds</p>"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "BadRequestError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "File did not pass the virus scan",
+                                    "description": "<p>You cannot retrieve the contents of a letter that contains a virus</p>"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "BadRequestError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "PDF not available for letters in technical-failure",
+                                    "description": "<p>You cannot retrieve the contents of a letter in technical-failure</p>"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "ValidationError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Notification is not a letter",
+                                    "description": "<p>Check that you are looking up the correct notification</p>"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "AuthError": {
+                "type": "array",
+                "description": "Auth error response",
+                "items": {
+                    "oneOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "AuthError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Error: Your system clock must be accurate to within 30 seconds",
+                                    "description": "Check your system clock"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "AuthError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Invalid token: API key not found",
+                                    "description": "<p>Use the correct API key. Refer to <a href='https://docs.notifications.service.gov.uk/rest-api.html#api-keys'>API keys</a> for more information</p>"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

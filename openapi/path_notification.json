@@ -4,7 +4,7 @@
         "/v2/notifications/sms": {
             "post": {
                 "description": "You can use this endpoint to send text message.",
-                "operationId": "Send a text message",
+                "operationId": "sendTextMessage",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -82,7 +82,7 @@
         "/v2/notifications/email": {
             "post": {
                 "description": "You can use this endpoint to send email.",
-                "operationId": "Send an email",
+                "operationId": "sendEmail",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -160,7 +160,7 @@
         "/v2/notifications/letter": {
             "post": {
                 "description": "You can use this endpoint to send letter.",
-                "operationId": "Send a letter",
+                "operationId": "sendLetter",
                 "requestBody": {
                     "content": {
                         "application/json": {

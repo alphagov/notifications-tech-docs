@@ -1,8 +1,7 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
     "post": {
         "description": "You can use this endpoint to send text message.",
-        "operationId": "Send a text message",
+        "operationId": "sendTextMessage",
         "requestBody": {
             "content": {
                 "application/json": {

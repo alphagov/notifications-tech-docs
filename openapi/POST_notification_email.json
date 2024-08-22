@@ -1,8 +1,7 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
     "post": {
         "description": "You can use this endpoint to send email.",
-        "operationId": "Send an email",
+        "operationId": "sendEmail",
         "requestBody": {
             "content": {
                 "application/json": {

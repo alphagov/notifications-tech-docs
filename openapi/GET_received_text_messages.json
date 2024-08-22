@@ -1,0 +1,67 @@
+{
+    "get": {
+        "description": "<b>Enable received text messages</b><p>To receive text messages:</p><ol><li>Go to the <strong>Text message settings</strong> section of the <strong>Settings</strong> page.</li><li>Select <strong>Change</strong> on the <strong>Receive text messages</strong> row.</li></ol>",
+        "operationId": "getReceivedMessagesStatus",
+        "parameters": [
+            {
+                "description": "The ID of a received text message. If this is passed, the response will only list text messages received before that message.",
+                "in": "query",
+                "name": "older_than",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "responses": {
+            "200": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "get_received_text_message_schema.json#/components/schemas/GetReceivedTextMessagesResponse"
+                        }
+                    }
+                },
+                "description": "Success"
+            },
+            "400": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "get_message_schema.json#/components/schemas/GetMessageValidationErrorError"
+                        }
+                    }
+                },
+                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+            },
+            "403": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/AuthError"
+                        }
+                    }
+                },
+                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+            },
+            "404": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "get_message_schema.json#/components/schemas/GetMessageNoResultFoundError"
+                        }
+                    }
+                },
+                "description": "Result not found. Check the `message` in the response to find out why your request failed."
+            }
+        },
+        "security": [
+            {
+                "BearerAuth": []
+            }
+        ],
+        "summary": "Get the status of multiple messages",
+        "tags": [
+            "Get received text messages"
+        ]
+    }
+}
