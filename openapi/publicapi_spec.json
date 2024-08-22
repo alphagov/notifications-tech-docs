@@ -45,7 +45,10 @@
         },
         "/v2/received-text-messages": {
             "$ref": "GET_received_text_messages.json#"
-        }
+        },
+        "/v2/templates": {
+            "$ref": "GET_templates.json#"
+        } 
     },
     "components": {
         "schemas": {},
