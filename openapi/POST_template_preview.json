@@ -10,10 +10,7 @@
             "schema": {
                 "$ref": "schema.json#/components/schemas/TemplateByIdRequest"
             },
-            "example": {
-                    "description": "template ID",
-                    "value": "b7a59abd-0ab2-4538-b619-8da9f9089e08"  
-            }    
+            "example": "b7a59abd-0ab2-4538-b619-8da9f9089e08"  
         }],
         "requestBody": {
             "content": {

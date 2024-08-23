@@ -1,9 +1,7 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
     "get": {
         "description": "This returns the latest version of the template.",
         "operationId": "GetTemplatesByIdAndVersion",
-
         "parameters": [  { 
             "name": "template_id",
             "in":"path",   
@@ -12,10 +10,7 @@
             "schema": {
                 "$ref": "schema.json#/components/schemas/TemplateByIdRequest"
             },
-            "example": {
-                    "description": "template ID",
-                    "value": "b7a59abd-0ab2-4538-b619-8da9f9089e08"  
-            }    
+            "example": "b7a59abd-0ab2-4538-b619-8da9f9089e08"  
         },
         {
             "name": "version",
@@ -25,10 +20,7 @@
             "schema": {
                 "$ref": "schema.json#/components/schemas/TemplateByIdAndVersionRequest"
             },
-            "example": {
-                    "description": "version",
-                    "value": 1 
-            }  
+            "example": 1
         }],
         "responses": {
             "200": {
@@ -38,7 +30,6 @@
                             "$ref": "schema.json#/components/schemas/TemplateResponse"
                         },
                         "example": {
-                            "value": [{
                                 "id":"b7a59abd-0ab2-4538-b619-8da9f9089e08",
                                 "name":"Test SMS Template",
                                 "type":"sms",
@@ -51,7 +42,6 @@
                                 "postage":null,
                                 "letter_contact_block":null,
                                 "personalisation":{"date": {"required": true},"firstname": {"required": true}}
-                            }]
                         }
                     }
                 },
@@ -64,14 +54,12 @@
                             "$ref": "schema.json#/components/schemas/TemplatesRequestValidationError"
                         },
                         "example": {
-                                "value": [{
                                     "errors":
                                     [{
                                         "error":"ValidationError",
                                         "message":"id is not a valid UUID"
                                     }],
                                     "status_code": 400
-                                }]
                         }
                     }
                 },
@@ -94,14 +82,12 @@
                             "$ref": "schema.json#/components/schemas/TemplateNoResultError"
                         },
                         "example": {
-                                "value": [{
                                     "errors":
                                     [{
                                         "error":"NoResultFound",
                                         "message":"No result found"
                                     }],
                                     "status_code": 404
-                                }]
                         }
                     }
                 },

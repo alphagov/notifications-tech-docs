@@ -3,7 +3,11 @@
     "info": {
         "description": "The GOV.UK Notify REST API. Read [our documentation](https://www.notifications.service.gov.uk/using-notify/api-documentation) for more details.",
         "title": "GOV.UK Notify API",
-        "version": "1.0.3"
+        "version": "1.0.3",
+        "license": {
+            "name": "Open Government Licence v3.0",
+            "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+        }
     },
     "servers": [
         {
@@ -12,16 +16,20 @@
     ],
     "tags": [
         {
-            "name": "Send a message"
+            "name": "Send a message",
+            "description": "Send a message"
         },
         {
-            "name": "Get message status"
+            "name": "Get message status",
+            "description": "Get message status"
         },
         {
-            "name": "Get a template"
+            "name": "Get a template",
+            "description": "Get a template"
         },
         {
-            "name": "Get received text messages"
+            "name": "Get received text messages",
+            "description": "Get received text messages"
         }
     ],
     "paths": {

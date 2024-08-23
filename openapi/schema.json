@@ -483,12 +483,14 @@
                                 "description": "required string - body of notification"
                             },
                             "subject": {
-                                "type": ["string","null"],
+                                "type": "string",
+                                "nullable":true,
                                 "example": "Test",
                                 "description": "required string for email - subject of email, otherwise null"
                             },
                             "postage": {
-                                "type": ["string","null"],
+                                "type": "string",
+                                "nullable":true,
                                 "example": "second",
                                 "description": "required string for letter - postage type, otherwise null"
                             },
@@ -498,7 +500,8 @@
                                 "description": "object containaing personalisation parameters - empty if no personalisation in the template"
                             },
                             "letter_contact_block": {
-                                "type": ["string","null"],
+                                "type": "string",
+                                "nullable":true,
                                 "example": "",
                                 "description": "optional string - null if not a letter template or contact block not set"
                             }
@@ -511,7 +514,6 @@
                 "description": "If the request is successful, the response body is json and the status code is 200",
                 "properties": {
                     "id": {
-                        "name":"id",
                         "type": "string",
                         "example": "f33517ff-2a88-4f6e-b855-c550268ce08a",
                         "description": "required string - template ID"
@@ -552,12 +554,14 @@
                         "description": "required string - body of notification"
                     },
                     "subject": {
-                        "type": ["string","null"],
+                        "type": "string",
+                        "nullable":true,
                         "example": "Test",
                         "description": "required string for email - subject of email, otherwise null"
                     },
                     "postage": {
-                        "type": ["string","null"],
+                        "type": "string",
+                        "nullable":true,
                         "example": "second",
                         "description": "required string for letter - postage type, otherwise null"
                     },
@@ -567,7 +571,8 @@
                         "description": "object containaing personalisation parameters - empty if no personalisation in the template"
                     },
                     "letter_contact_block": {
-                        "type": ["string","null"],
+                        "type": "string",
+                        "nullable":true,
                         "example": "",
                         "description": "optional string - null if not a letter template or contact block not set"
                     }
@@ -597,17 +602,20 @@
                         "description": "required string - body of notification"
                     },
                     "html": {
-                        "type":["string","null"],
+                        "type": "string",
+                        "nullable":true,
                         "example":null,
                         "description":"html representation of the notification to be sent - null for sms"
                     },
                     "subject": {
-                        "type": ["string","null"],
+                        "type": "string",
+                        "nullable":true,
                         "example": null,
                         "description": "required string for email - subject of email, otherwise null"
                     },
                     "postage": {
-                        "type": ["string","null"],
+                        "type": "string",
+                        "nullable":true,
                         "example": null,
                         "description": "required string for letter - postage type, otherwise null"
                     }
