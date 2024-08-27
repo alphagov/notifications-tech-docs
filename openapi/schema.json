@@ -439,74 +439,78 @@
                 "type": "object",
                 "description": "If the request is successful, the response body is json and the status code is 200",
                 "properties": {
-                    "templates": [
-                        {                    
-                            "id": {
-                                "name":"id",
-                                "type": "string",
-                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a",
-                                "description": "required string - template ID"
-                            },
-                            "name": {
-                                "type": "string",
-                                "example": "Test template",
-                                "description": "required string - template name"
-                            },
-                            "type": {
-                                "type": "string",
-                                "enum": ["sms","email","letter"],
-                                "example": "sms",
-                                "description":"required string"
-                            },
-                            "created_at": {
-                                "type": "string",
-                                "example": "2024-08-12T10:40:20.000000Z",
-                                "description":"required string - date and time template created"
-                            },
-                            "updated_at": {
-                                "type": "string",
-                                "example": "2024-08-12T10:45:47.890097Z",
-                                "description":"required string - date and time template last updated"
-                            },
-                            "version": {
-                                "type": "integer",
-                                "example": 3
-                            },
-                            "created_by": {
-                                "type": "string",
-                                "example": "someone@example.com",
-                                "description":"required string"
-                            },
-                            "body": {
-                                "type": "string",
-                                "example": "Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
-                                "description": "required string - body of notification"
-                            },
-                            "subject": {
-                                "type": "string",
-                                "nullable":true,
-                                "example": "Test",
-                                "description": "required string for email - subject of email, otherwise null"
-                            },
-                            "postage": {
-                                "type": "string",
-                                "nullable":true,
-                                "example": "second",
-                                "description": "required string for letter - postage type, otherwise null"
-                            },
-                            "personalisation": {
-                                "type": "object",
-                                "example": {"date": {"required": true},"firstname": {"required": true}},
-                                "description": "object containaing personalisation parameters - empty if no personalisation in the template"
-                            },
-                            "letter_contact_block": {
-                                "type": "string",
-                                "nullable":true,
-                                "example": "",
-                                "description": "optional string - null if not a letter template or contact block not set"
+                    "templates": {
+                        "type":"array",
+                        "items":
+                        {
+                            "type":"object",    
+                            "properties": {                
+                                "id": {
+                                    "type": "string",
+                                    "example": "f33517ff-2a88-4f6e-b855-c550268ce08a",
+                                    "description": "required string - template ID"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "example": "Test template",
+                                    "description": "required string - template name"
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "enum": ["sms","email","letter"],
+                                    "example": "sms",
+                                    "description":"required string"
+                                },
+                                "created_at": {
+                                    "type": "string",
+                                    "example": "2024-08-12T10:40:20.000000Z",
+                                    "description":"required string - date and time template created"
+                                },
+                                "updated_at": {
+                                    "type": "string",
+                                    "example": "2024-08-12T10:45:47.890097Z",
+                                    "description":"required string - date and time template last updated"
+                                },
+                                "version": {
+                                    "type": "integer",
+                                    "example": 3
+                                },
+                                "created_by": {
+                                    "type": "string",
+                                    "example": "someone@example.com",
+                                    "description":"required string"
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
+                                    "description": "required string - body of notification"
+                                },
+                                "subject": {
+                                    "type": "string",
+                                    "nullable":true,
+                                    "example": "Test",
+                                    "description": "required string for email - subject of email, otherwise null"
+                                },
+                                "postage": {
+                                    "type": "string",
+                                    "nullable":true,
+                                    "example": "second",
+                                    "description": "required string for letter - postage type, otherwise null"
+                                },
+                                "personalisation": {
+                                    "type": "object",
+                                    "example": {"date": {"required": true},"firstname": {"required": true}},
+                                    "description": "object containaing personalisation parameters - empty if no personalisation in the template"
+                                },
+                                "letter_contact_block": {
+                                    "type": "string",
+                                    "nullable":true,
+                                    "example": "",
+                                    "description": "optional string - null if not a letter template or contact block not set"
+                                }
                             }
                         }
-                    ]
+                    }
                 }
             },
             "TemplateResponse":{
@@ -725,22 +729,23 @@
                 "type": "object",
                 "description": "If the request is not successful, the API returns json containing the relevant error code. ",
                 "properties": {
-                    "errors": [
-                        {
-                            "error": {
-                                "type": "string",
-                                "example": "ValidationError"
+                    "errors": {
+                        "type":"array",
+                        "items":{
+                            "type":"object" ,
+                            "properties":{
+                                "error": {
+                                    "type": "string",
+                                    "example": "ValidationError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "type pigeon is not one of [sms, email, letter, broadcast]",
+                                    "description": "Make sure that the provided type is one of: email, sms, letter"
+                                }
                             }
-                        },
-                        {
-                            "message": {
-                                "type": "string",
-                                "example": "type pigeon is not one of [sms, email, letter, broadcast]",
-                                "description": "Make sure that the provided type is one of: email, sms, letter"
-                            }
-
                         }
-                    ],
+                    },
                     "status_code": {
                         "type": "integer",
                         "example" : 400
@@ -751,22 +756,23 @@
                 "type": "object",
                 "description": "If the request is not successful, the API returns json containing the relevant error code. ",
                 "properties": {
-                    "errors": [
-                        {
-                            "error": {
-                                "type": "string",
-                                "example": "ValidationError"
+                    "errors": {
+                        "type":"array",
+                        "items":{
+                            "type":"object" ,
+                            "properties":{
+                                "error": {
+                                    "type": "string",
+                                    "example": "ValidationError"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "id is not a valid UUID",
+                                    "description": "There is a data validation error, check the message for the reason description"
+                                }
                             }
-                        },
-                        {
-                            "message": {
-                                "type": "string",
-                                "example": "id is not a valid UUID",
-                                "description": "There is a data validation error, check the message for the reason description"
-                            }
-
                         }
-                    ],
+                    },
                     "status_code": {
                         "type": "integer",
                         "example" : 400
@@ -777,22 +783,25 @@
                 "type": "object",
                 "description": "If the request is not successful, the API returns json containing the relevant error code.",
                 "properties": {
-                    "errors": [
-                        {
-                            "error": {
-                                "type": "string",
-                                "example": "NoResultFound"
+                    "errors": {
+                        "type":"array",
+                        "items":{
+                            "type":"object" ,
+                            "properties":
+                                {
+                                    "error": {
+                                        "type": "string",
+                                        "example": "NoResultFound"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "No result found",
+                                        "description": "Check your <a href='https://docs.notifications.service.gov.uk/rest-api.html#get-a-template-by-id-arguments-template-id-required'>template ID</a>"
+                                    }
+
+                                }
                             }
                         },
-                        {
-                            "message": {
-                                "type": "string",
-                                "example": "No result found",
-                                "description": "Check your <a href='https://docs.notifications.service.gov.uk/rest-api.html#get-a-template-by-id-arguments-template-id-required'>template ID</a>"
-                            }
-
-                        }
-                    ],
                     "status_code": {
                         "type": "integer",
                         "example" : 404
@@ -807,17 +816,24 @@
                         {
                             "type": "object",
                             "properties": {
-                                "errors":[{
-                                    "error": {
-                                        "type": "string",
-                                        "example": "BadRequestError"
-                                    },
-                                    "message": {
-                                        "type": "string",
-                                        "example": "Missing personalisation: [PERSONALISATION FIELD]",
-                                        "description": "Check that the personalisation arguments in the method match the placeholder fields in the template"
+                                "errors":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"object" ,
+                                        "properties":
+                                        {
+                                            "error": {
+                                                "type": "string",
+                                                "example": "BadRequestError"
+                                            },
+                                            "message": {
+                                                "type": "string",
+                                                "example": "Missing personalisation: [PERSONALISATION FIELD]",
+                                                "description": "Check that the personalisation arguments in the method match the placeholder fields in the template"
+                                            }
+                                        }
                                     }
-                                }],
+                                },
                                 "status_code":{
                                     "type":"integer",
                                     "example":400
@@ -827,17 +843,23 @@
                         {
                             "type": "object",
                             "properties": {
-                                "errors":[{
-                                    "error": {
-                                        "type": "string",
-                                        "example": "NoResultFound"
-                                    },
-                                    "message": {
-                                        "type": "string",
-                                        "example": "No result found",
-                                        "description": "Check your <a href='https://docs.notifications.service.gov.uk/rest-api.html#get-a-template-by-id-arguments-template-id-required'>template ID</a>"
+                                "errors":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"object" ,
+                                        "properties":{
+                                            "error": {
+                                                "type": "string",
+                                                "example": "NoResultFound"
+                                            },
+                                            "message": {
+                                                "type": "string",
+                                                "example": "No result found",
+                                                "description": "Check your <a href='https://docs.notifications.service.gov.uk/rest-api.html#get-a-template-by-id-arguments-template-id-required'>template ID</a>"
+                                            }
+                                        }
                                     }
-                                }],
+                                },
                                 "status_code":{
                                     "type":"integer",
                                     "example":400
