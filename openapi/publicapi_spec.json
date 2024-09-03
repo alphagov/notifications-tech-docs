@@ -7,6 +7,10 @@
         "license": {
             "name": "Open Government Licence v3.0",
             "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+        },
+        "x-logo": {
+            "url": "https://assets.publishing.service.gov.uk/media/65d342e5e1bdec7737322247/s300_Untitled__1_.png",
+            "altText": "GOV.UK Notify"
         }
     },
     "servers": [
@@ -65,7 +69,7 @@
         },
         "/v2/template/{template_id}/preview": {
             "$ref": "POST_template_preview.json#"
-        }  
+        }
     },
     "components": {
         "schemas": {},

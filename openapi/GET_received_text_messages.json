@@ -1,6 +1,6 @@
 {
     "get": {
-        "description": "<b>Enable received text messages</b><p>To receive text messages:</p><ol><li>Go to the <strong>Text message settings</strong> section of the <strong>Settings</strong> page.</li><li>Select <strong>Change</strong> on the <strong>Receive text messages</strong> row.</li></ol>",
+        "description": "**Enable received text messages**\nTo receive text messages:\n1.  Go to the **Text message settings** section of the **Settings** page.\n2.  Select **Change** on the **Receive text messages** row.",
         "operationId": "getReceivedMessagesStatus",
         "parameters": [
             {
@@ -17,7 +17,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "get_received_text_message_schema.json#/components/schemas/GetReceivedTextMessagesResponse"
+                            "$ref": "get_message_schema.json#/components/schemas/GetReceivedTextMessagesResponse"
                         }
                     }
                 },

@@ -2,54 +2,6 @@
     "description": "All errors - usage example: {'$ref': 'errors.json#/ServerError'} (swap quotes for double quotes)",
     "components": {
         "schemas": {
-            "GetOneMessageResponse": {
-                "type": "object",
-                "description": "The Send Text Message Response Payload",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
-                    },
-                    "reference": {
-                        "type": "string",
-                        "example": "STRING"
-                    },
-                    "content": {
-                        "type": "object",
-                        "properties": {
-                            "body": {
-                                "type": "string",
-                                "example": "MESSAGE TEXT"
-                            },
-                            "from_number": {
-                                "type": "string",
-                                "example": "SENDER"
-                            }
-                        }
-                    },
-                    "uri": {
-                        "type": "string",
-                        "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
-                    },
-                    "template": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string",
-                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
-                            },
-                            "version": {
-                                "type": "number",
-                                "example": 1
-                            },
-                            "uri": {
-                                "type": "string",
-                                "example": "https://api.notifications.service.gov.uk/v2/template/ceb50d92-100d-4b8b-b559-14fa3b091cd"
-                            }
-                        }
-                    }
-                }
-            },
             "GetMultipleMessagesResponse": {
                 "type": "object",
                 "description": "The Send Text Message Response Payload",
@@ -58,12 +10,7 @@
                         "type": "array",
                         "description": "Multiple message notifications",
                         "items": {
-                            "type": "object",
-                            "properties": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GetOneMessageResponse"
-                                }
-                            }
+                            "$ref": "#/components/schemas/GetOneMessageResponse"
                         }
                     },
                     "links": {
@@ -74,7 +21,7 @@
                                 "type": "string",
                                 "example": "/notifications?template_type=sms&status=delivered"
                             },
-                            "id": {
+                            "next": {
                                 "type": "string",
                                 "example": "/notifications?other_than=last_id_in_list&template_type=sms&status=delivered"
                             }
@@ -82,7 +29,7 @@
                     }
                 }
             },
-            "SendEmailResponse": {
+            "GetOneMessageResponse": {
                 "type": "object",
                 "description": "The Send Email Response Payload",
                 "properties": {
@@ -136,10 +83,10 @@
                         "description": "Required for letter",
                         "example": "ADDRESS LINE 6"
                     },
-                    "line_7": {
+                    "postcode": {
                         "type": "string",
                         "description": "Required for letter",
-                        "example": "ADDRESS LINE 7"
+                        "example": "NW1 2TZ"
                     },
                     "postage": {
                         "type": "string",
@@ -210,7 +157,7 @@
                         "description": "Optional - date and time notification has been scheduled to be sent at",
                         "example": "2024-05-17 9:00:00.000000"
                     },
-                    "one_click_unsubscribe": {
+                    "one_click_unsubscribe_url": {
                         "type": "string",
                         "description": "Optional - URL that you provided so your recipients can unsubscribe",
                         "example": "STRING"
@@ -228,7 +175,7 @@
                     "cost_details": {
                         "type": "object",
                         "description": "Optional - date and time notification sent to provider",
-                        "example": {
+                        "properties": {
                             "billable_sms_fragments": {
                                 "type": "number",
                                 "description": "Optional - for text messages, number of billable sms fragments in your text message",
@@ -256,26 +203,72 @@
                             }
                         }
                     },
-                    "content": {
-                        "type": "object",
-                        "properties": {
-                            "subject": {
-                                "type": "string",
-                                "example": "SUBJECT TEXT"
-                            },
-                            "body": {
-                                "type": "string",
-                                "example": "MESSAGE TEXT"
-                            },
-                            "from_email": {
-                                "type": "string",
-                                "example": "SENDER EMAIL"
-                            }
-                        }
-                    },
                     "uri": {
                         "type": "string",
                         "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
+                    }
+                }
+            },
+            "GetReceivedTextMessageResponse": {
+                "type": "object",
+                "description": "The Send Text Message Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a",
+                        "required": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "service_id": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "notify_number": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "user_number": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "STRING"
+                    }
+                }
+            },
+            "GetReceivedTextMessagesResponse": {
+                "type": "object",
+                "description": "The Send Text Message Response Payload",
+                "properties": {
+                    "notifications": {
+                        "type": "array",
+                        "description": "Multiple message notifications",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetReceivedTextMessageResponse"
+                                }
+                            }
+                        }
+                    },
+                    "links": {
+                        "type": "object",
+                        "description": "Pagination links",
+                        "properties": {
+                            "current": {
+                                "type": "string",
+                                "example": "/notifications?template_type=sms&status=delivered"
+                            },
+                            "id": {
+                                "type": "string",
+                                "example": "/notifications?other_than=last_id_in_list&template_type=sms&status=delivered"
+                            }
+                        }
                     }
                 }
             },
@@ -292,7 +285,7 @@
                         "message": {
                             "type": "string",
                             "example": "No result found",
-                            "description": "<p>Check the notification ID</p>"
+                            "description": "Check the notification ID"
                         }
                     }
                 }
@@ -310,18 +303,19 @@
                         "message": {
                             "type": "string",
                             "example": "id is not a valid UUID",
-                            "description": "<p>Check the notification ID</p>"
+                            "description": "Check the notification ID"
                         }
                     }
                 }
             },
-            "GetPDFLetterValidationErrorError": {
+            "GetPDFLetterValidationError": {
                 "type": "array",
                 "description": "Validation error response",
                 "items": {
                     "oneOf": [
                         {
                             "type": "object",
+                            "title": "Validation Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -330,12 +324,13 @@
                                 "message": {
                                     "type": "string",
                                     "example": "id is not a valid UUID",
-                                    "description": "<p>Check the notification ID</p>"
+                                    "description": "Check the notification ID"
                                 }
                             }
                         },
                         {
                             "type": "object",
+                            "title": "PDF Not Ready Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -344,12 +339,13 @@
                                 "message": {
                                     "type": "string",
                                     "example": "PDF not available yet, try again later",
-                                    "description": "<p>Wait for the letter to finish processing. This usually takes a few seconds</p>"
+                                    "description": "Wait for the letter to finish processing. This usually takes a few seconds"
                                 }
                             }
                         },
                         {
                             "type": "object",
+                            "title": "Bad Request Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -358,12 +354,13 @@
                                 "message": {
                                     "type": "string",
                                     "example": "File did not pass the virus scan",
-                                    "description": "<p>You cannot retrieve the contents of a letter that contains a virus</p>"
+                                    "description": "You cannot retrieve the contents of a letter that contains a virus"
                                 }
                             }
                         },
                         {
                             "type": "object",
+                            "title": "Bad Request Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -372,12 +369,13 @@
                                 "message": {
                                     "type": "string",
                                     "example": "PDF not available for letters in technical-failure",
-                                    "description": "<p>You cannot retrieve the contents of a letter in technical-failure</p>"
+                                    "description": "You cannot retrieve the contents of a letter in technical-failure"
                                 }
                             }
                         },
                         {
                             "type": "object",
+                            "title": "Validation Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -386,43 +384,7 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Notification is not a letter",
-                                    "description": "<p>Check that you are looking up the correct notification</p>"
-                                }
-                            }
-                        }
-                    ]
-                }
-            },
-            "AuthError": {
-                "type": "array",
-                "description": "Auth error response",
-                "items": {
-                    "oneOf": [
-                        {
-                            "type": "object",
-                            "properties": {
-                                "error": {
-                                    "type": "string",
-                                    "example": "AuthError"
-                                },
-                                "message": {
-                                    "type": "string",
-                                    "example": "Error: Your system clock must be accurate to within 30 seconds",
-                                    "description": "Check your system clock"
-                                }
-                            }
-                        },
-                        {
-                            "type": "object",
-                            "properties": {
-                                "error": {
-                                    "type": "string",
-                                    "example": "AuthError"
-                                },
-                                "message": {
-                                    "type": "string",
-                                    "example": "Invalid token: API key not found",
-                                    "description": "<p>Use the correct API key. Refer to <a href='https://docs.notifications.service.gov.uk/rest-api.html#api-keys'>API keys</a> for more information</p>"
+                                    "description": "Check that you are looking up the correct notification"
                                 }
                             }
                         }

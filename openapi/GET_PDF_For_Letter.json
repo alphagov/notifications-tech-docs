@@ -4,7 +4,7 @@
         "operationId": "getLetterPdfContents",
         "parameters": [
             {
-                "description": "The ID of the notification. You can find the notification ID in the response to the original notification method call.<br />You can also find it by <a href='https://www.notifications.service.gov.uk/sign-in'>signing in to GOV.UK Notify</a> and going to the <strong>API integration</strong> page.",
+                "description": "The ID of the notification. You can find the notification ID in the response to the original notification method call.\nYou can also find it by [signing in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and going to the **API integration** page.",
                 "example": "740e5834-3a29-46b4-9a6f-16142fde533a",
                 "in": "path",
                 "name": "notification_id",
@@ -30,7 +30,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "get_message_schema.json#/components/schemas/GetPDFLetterValidationErrorError"
+                            "$ref": "get_message_schema.json#/components/schemas/GetPDFLetterValidationError"
                         }
                     }
                 },

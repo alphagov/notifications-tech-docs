@@ -5,7 +5,7 @@
         "parameters": [  { 
             "name": "template_id",
             "in":"path",   
-            "description":"The ID of the template. <a href='https://www.notifications.service.gov.uk/sign-in'>Sign in to GOV.UK Notify</a> and go to the Templates page to find it.",
+            "description":"The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the Templates page to find it.",
             "required":true,
             "schema": {
                 "$ref": "schema.json#/components/schemas/TemplateByIdRequest"

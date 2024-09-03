@@ -15,7 +15,7 @@
                     },
                     "template_id": {
                         "type": "string",
-                        "description": "<p>To find the template ID:</p><ol><li><a href='https://www.notifications.service.gov.uk/sign-in'>Sign in to GOV.UK Notify</a>.</li><li>Go to the <strong>Templates</strong> page and select the relevant template.</li><li>Select <strong>Copy template ID to clipboard</strong>.</li></ol>",
+                        "description": "To find the template ID:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Templates** page and select the relevant template.\n3.  Select **Copy template ID to clipboard**.",
                         "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
                     },
                     "personalisation": {
@@ -39,7 +39,7 @@
                     },
                     "sms_sender_id": {
                         "type": "string",
-                        "description": "<br/><p>A unique identifier of the sender of the text message notification.</p><p>To find the text message sender:</p><ol><li><a href='https://www.notifications.service.gov.uk/sign-in'>Sign in to GOV.UK Notify</a>.</li><li>Go to the <strong>Settings</strong> page.</li><li>In the <strong>Text Messages</strong> section, select <strong>Manage</strong> on the <strong>Text Message sender</strong> row.</li></ol><p>You can then either:</p><ul><li>copy the sender ID that you want to use and paste it into the method</li><li>select <strong>Change</strong> to change the default sender that the service will use, and select <strong>Save</strong></li></ul><p>You can leave out this argument if your service only has one text message sender, or if you want to use the default sender.</p>",
+                        "description": "\nA unique identifier of the sender of the text message notification.\nTo find the text message sender:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Settings** page.\n3.  In the **Text Messages** section, select **Manage** on the **Text Message sender** row.\n\nYou can then either:\n\n*   copy the sender ID that you want to use and paste it into the method\n*   select **Change** to change the default sender that the service will use, and select **Save**\n\nYou can leave out this argument if your service only has one text message sender, or if you want to use the default sender.",
                         "example": "8e222534-7f05-4972-86e3-17c5d9f894e2"
                     }
                 },
@@ -61,17 +61,17 @@
                     },
                     "template_id": {
                         "type": "string",
-                        "description": "<p>To find the template ID:</p><ol><li><a href='https://www.notifications.service.gov.uk/sign-in'>Sign in to GOV.UK Notify</a>.</li><li>Go to the <strong>Templates</strong> page and select the relevant template.</li><li>Select <strong>Copy template ID to clipboard</strong>.</li></ol>",
+                        "description": "To find the template ID:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Templates** page and select the relevant template.\n3.  Select **Copy template ID to clipboard**.",
                         "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
                     },
                     "one_click_unsubscribe_url": {
                         "type": "string",
-                        "description": "You can leave out this argument if the email being sent is not a subscription email. <p>If you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about <a href='https://www.notifications.service.gov.uk/using-notify/unsubscribe-links'>unsubscribe links</a>.</p><p>The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.</p><p>The one-click unsubscribe URL must respond to an empty <code>POST</code> request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.</p><p>Your unsubscribe URL and response must comply with the guidance specified in <a href='https://www.rfcreader.com/#rfc8058_line139'>Section 3.1 of IETF RFC 8058</a>.</p><p><a href='https://docs.notifications.service.gov.uk/rest-api.html#unsubscribe-link-at-the-bottom-of-the-email-recommended'>Unsubscribe link at the bottom of the email (recommended)</a></p>",
+                        "description": "You can leave out this argument if the email being sent is not a subscription email.\n\nIf you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).\n\nThe one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.\n\nThe one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.\n\nYour unsubscribe URL and response must comply with the guidance specified in [Section 3.1 of IETF RFC 8058](https://www.rfcreader.com/#rfc8058_line139).\n\n**Unsubscribe link at the bottom of the email (recommended)**\n\nTo add an unsubscribe link at the bottom of your email, use square brackets around the link text and round brackets around the URL. Make sure there are no spaces between the brackets or the link will not work.\n\nUse this example if you have a webpage for users to manage their email subscriptions:\n\n```json\n[Unsubscribe](https://www.example.gov.uk/unsubscribe)\n```\nYour webpage should ask the recipients to confirm that they want to unsubscribe. \n\nIf you do not have your own webpage, you can add a ‘mailto’ link to let users send an email to your team instead. For example:\n\n```json\n[Unsubscribe](mailto:example@gov.uk?subject=unsubscribe)\n```\nThe email address should be a shared inbox managed by your team, not your own email address.",
                         "example": "https://example.com/unsubscribe.html?opaque=123456789"
                     },
                     "personalisation": {
                         "type": "object",
-                        "description": "You can leave out this argument if a template does not have any placeholder fields for personalised information.<br/>If a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:",
+                        "description": "You can leave out this argument if a template does not have any placeholder fields for personalised information.\n\nIf a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:",
                         "properties": {
                             "first_name": {
                                 "type": "string",
@@ -92,24 +92,50 @@
                                     "utility bill",
                                     "other id"
                                 ]
+                            },
+                            "link_to_file": {
+                                "type": "object",
+                                "description": "You can leave out this argument if you do not have any file to attach.\n\nTo send a file by email, add a placeholder to the template then upload a file. The placeholder will contain a secure link to download the file.\n\nThe links are unique and unguessable. GOV.UK Notify cannot access or decrypt your file.\n\nYour file will be available to download for a default period of 26 weeks (6 months).\n\nTo help protect your files you can also:\n\n* ask recipients to confirm their email address before downloading\n* choose the length of time that a file is available to download**Add contact details to the file download page**\n\n1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n1. Go to the __Settings__ page.\n1. In the __Email__ section, select __Manage__ on the __Send files by email__ row.\n1. Enter the contact details you want to use, and select __Save__. \n\n**Add a placeholder to the template**\n\n1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n1. Go to the __Templates__ page and select the relevant email template.\n1. Select __Edit__.\n1. Add a placeholder to the email template using double brackets. For example: 'Download your file at: ((link_to_file))'\n\nYour email should also tell recipients how long the file will be available to download.\n\n**Upload your file**\n\nYou can upload the following file types:\n\n- PDF (.pdf)\n- CSV (.csv)\n- Text (.odt, .txt, .rtf, .json)\n- MS Word Document (.doc, .docx)\n- Ms Excel Spreadsheet (.xlsx)\n\nYour file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support/ask-question-give-feedback) if you need to send other file types.\n\nYou’ll need to convert the file into a string that is base64 encoded.\n\nPass the encoded string into an object with a `file` key, and put that in the personalisation argument.\n\n**Set the filename**\n\nYou should provide a filename when you upload your file.\n\nThe filename should tell the recipient what the file contains. A memorable filename can help the recipient to find the file again later.\n\nThe filename must end with a file extension. For example, `.csv` for a CSV file. If you include the wrong file extension, recipients may not be able to open your file.\n\nIf you do not provide a filename for your file, Notify will:\n\n* generate a random filename\n* try to add the correct file extension\n\nIf Notify cannot add the correct file extension, recipients may not be able to open your file.\n\n**Ask recipients to confirm their email address before they can download the file**\n\nWhen a recipient clicks the link in the email you’ve sent them, they have to enter their email address. Only someone who knows the recipient’s email address can download the file.\n\nThis security feature is turned on by default.\n\n**Turn off email address check (not recommended)**\n\nIf you do not want to use this feature, you can turn it off on a file-by-file basis.\n\nYou should not turn this feature off if you send files that contain:\n\n* personally identifiable information\n* commercially sensitive information\n* information classified as ‘OFFICIAL’ or ‘OFFICIAL-SENSITIVE’ under the [Government Security Classifications](https://www.gov.uk/government/publications/government-security-classifications) policy\n\nTo let the recipient download the file without confirming their email address, set the `confirm_email_before_download` flag to `false`.\n\n**Choose the length of time that a file is available to download**\n\nSet the number of weeks you want the file to be available using the `retention_period` key.\n\nYou can choose any value between 1 week and 78 weeks. When deciding this, you should consider:\n\n* the need to protect the recipient’s personal information\n* whether the recipient will need to download the file again later\n\nIf you do not choose a value, the file will be available for the default period of 26 weeks (6 months).\n\nFiles sent before 12 April 2023 had a longer default period of 78 weeks (18 months).",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "description": "File as base64 encoded string",
+                                        "example": "file as base64 encoded string"
+                                    },
+                                    "filename": {
+                                        "type": "string",
+                                        "description": "File name",
+                                        "example": "report.csv"
+                                    },
+                                    "confirm_email_before_download": {
+                                        "type": "boolean",
+                                        "description": "To let the recipient download the file without confirming their email address, set the `confirm_email_before_download` flag to `false`.",
+                                        "example": false
+                                    },
+                                    "retention_period": {
+                                        "type": "string",
+                                        "description": "The length of time that a file is available to download",
+                                        "example": "4 weeks"
+                                    }
+                                },
+                                "required": ["file"]
                             }
                         }
                     },
                     "reference": {
                         "type": "string",
-                        "description": "You can leave out this argument if you do not have a reference. An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
+                        "description": "You can leave out this argument if you do not have a reference.\n\nAn identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
                         "example": "STRING"
                     },
                     "email_reply_to_id": {
                         "type": "string",
-                        "description": "<p>You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.</p><p>This is an email address specified by you to receive replies from your users. You must add at least one reply-to email address before your service can go live.</p><p>To add a reply-to email address:</p><ol><li><a href='https://www.notifications.service.gov.uk/sign-in'>Sign in to GOV.UK Notify</a>.</li><li>Go to the <strong>Settings</strong> page.</li><li>In the <strong>Email</strong> section, select <strong>Manage</strong> on the <strong>Reply-to email addresses</strong> row.</li><li>Select <strong>Add reply-to address</strong>.</li><li>Enter the email address you want to use, and select <strong>Add</strong>.</li></ol>",
+                        "description": "You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.\n\nThis is an email address specified by you to receive replies from your users. You must add at least one reply-to email address before your service can go live.\n\nTo add a reply-to email address:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Settings** page.\n3.  In the **Email** section, select **Manage** on the **Reply-to email addresses** row.\n4.  Select **Add reply-to address**.\n5.  Enter the email address you want to use, and select **Add**.",
                         "example": "STRING"
                     }
                 },
                 "required": [
                     "email",
-                    "template_id",
-                    "one_click_unsubscribe_url"
+                    "template_id"
                 ]
             },
             "SendLetterRequest": {
@@ -128,12 +154,12 @@
                 "properties": {
                     "template_id": {
                         "type": "string",
-                        "description": "<p>To find the template ID:</p><ol><li><a href='https://www.notifications.service.gov.uk/sign-in'>Sign in to GOV.UK Notify</a>.</li><li>Go to the <strong>Templates</strong> page and select the relevant template.</li><li>Select <strong>Copy template ID to clipboard</strong>.</li></ol>",
+                        "description": "To find the template ID:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Templates** page and select the relevant template.\n3.  Select **Copy template ID to clipboard**.",
                         "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
                     },
                     "personalisation": {
                         "type": "object",
-                        "description": "<p>The personalisation argument always contains the following parameters for the letter recipient’s address:</p><p><b>The address must have at least 3 lines.</b></p><p>The last line needs to be a real UK postcode or the name of a country outside the UK.</p><p>Notify checks for international addresses and will automatically charge you the correct postage.</p><p>The <code>postcode</code> personalisation argument has been replaced. If your template still uses <code>postcode</code>, Notify will treat it as the last line of the address.</p><p>Any other placeholder fields included in the letter template also count as required parameters. You need to provide their values in a dictionary with key value pairs. For example:</p>",
+                        "description": "The personalisation argument always contains the following parameters for the letter recipient’s address:\n\n**The address must have at least 3 lines.**\n\nThe last line needs to be a real UK postcode or the name of a country outside the UK.\n\nNotify checks for international addresses and will automatically charge you the correct postage.\n\nThe `postcode` personalisation argument has been replaced. If your template still uses `postcode`, Notify will treat it as the last line of the address.\n\nAny other placeholder fields included in the letter template also count as required parameters. You need to provide their values in a dictionary with key value pairs. For example:",
                         "properties": {
                             "address_line_1": {
                                 "type": "string",
@@ -204,17 +230,17 @@
                 "properties": {
                     "reference": {
                         "type": "string",
-                        "description": "<p>An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.</p>",
+                        "description": "An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
                         "example": "STRING"
                     },
                     "content": {
                         "type": "string",
-                        "description": "<p>The precompiled letter must be a PDF file which meets <a href='https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification'>the GOV.UK Notify letter specification</a>. You’ll need to convert the file into a string that is base64 encoded.</p>",
+                        "description": "The precompiled letter must be a PDF file which meets [the GOV.UK Notify letter specification](https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification). You’ll need to convert the file into a string that is base64 encoded.",
                         "example": "base64EncodedPDFFile"
                     },
                     "postage": {
                         "type": "string",
-                        "description": "<p>You can choose first or second class postage for your precompiled letter. Set the value to <code>first</code> for first class, or <code>second</code> for second class. If you do not pass in this argument, the postage will default to second class.</p>",
+                        "description": "You can choose first or second class postage for your precompiled letter. Set the value to <code>first</code> for first class, or <code>second</code> for second class. If you do not pass in this argument, the postage will default to second class.",
                         "example": "base64EncodedPDFFile"
                     }
                 },
@@ -329,6 +355,11 @@
                             "from_email": {
                                 "type": "string",
                                 "example": "SENDER EMAIL"
+                            },
+                            "one_click_unsubscribe_url": {
+                                "type": "string",
+                                "example": "https://example.com/unsubscribe.html?opaque=123456789",
+                                "nullable": true
                             }
                         }
                     },
@@ -632,6 +663,7 @@
                     "oneOf": [
                         {
                             "type": "object",
+                            "title": "Teams Only API Key",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -640,12 +672,13 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Can't send to this recipient using a team-only API key",
-                                    "description": "<p>Use the correct type of <a href='https://docs.notifications.service.gov.uk/rest-api.html#api-keys'>API key</a></p>"
+                                    "description": "Use the correct type of [API key](https://docs.notifications.service.gov.uk/rest-api.html#api-keys)"
                                 }
                             }
                         },
                         {
                             "type": "object",
+                            "title": "Trial Mode",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -654,7 +687,7 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode",
-                                    "description": "<p>Your service cannot send this notification in <a href='https://www.notifications.service.gov.uk/features/using-notify#trial-mode'>trial mode</a></p>"
+                                    "description": "Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)"
                                 }
                             }
                         }
@@ -668,6 +701,7 @@
                     "oneOf": [
                         {
                             "type": "object",
+                            "title": "Trial Mode",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -676,12 +710,13 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Can't send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode",
-                                    "description": "<p>Your service cannot send this notification in <a href='https://www.notifications.service.gov.uk/features/using-notify#trial-mode'>trial mode</a></p>"
+                                    "description": "Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)"
                                 }
                             }
                         },
                         {
                             "type": "object",
+                            "title": "Address Line Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -690,12 +725,13 @@
                                 "message": {
                                     "type": "string",
                                     "example": "personalisation address_line_1 is a required property",
-                                    "description": "<p>Ensure that your template has a field for the first line of the address, check <a href='https://docs.notifications.service.gov.uk/rest-api.html#personalisation-required'>personalisation</a> for more information.</p"
+                                    "description": "Ensure that your template has a field for the first line of the address, check [personalisation](https://docs.notifications.service.gov.uk/rest-api.html#personalisation-required) for more information."
                                 }
                             }
                         },
                         {
                             "type": "object",
+                            "title": "Postcode Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -704,12 +740,13 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Must be a real UK postcode",
-                                    "description": "<p>Ensure that the value for the last line of the address is a real UK postcode.</p"
+                                    "description": "Ensure that the value for the last line of the address is a real UK postcode."
                                 }
                             }
                         },
                         {
                             "type": "object",
+                            "title": "Last Line of Address Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -718,7 +755,7 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Last line of address must be a real UK postcode or another country",
-                                    "description": "<p>Ensure that the value for the last line of the address is a real UK postcode or the name of a country outside the UK.</p"
+                                    "description": "Ensure that the value for the last line of the address is a real UK postcode or the name of a country outside the UK."
                                 }
                             }
                         }
@@ -796,7 +833,7 @@
                                     "message": {
                                         "type": "string",
                                         "example": "No result found",
-                                        "description": "Check your <a href='https://docs.notifications.service.gov.uk/rest-api.html#get-a-template-by-id-arguments-template-id-required'>template ID</a>"
+                                        "description": "Check your [template ID](https://docs.notifications.service.gov.uk/rest-api.html#get-a-template-by-id-arguments-template-id-required)"
                                     }
 
                                 }
@@ -855,7 +892,7 @@
                                             "message": {
                                                 "type": "string",
                                                 "example": "No result found",
-                                                "description": "Check your <a href='https://docs.notifications.service.gov.uk/rest-api.html#get-a-template-by-id-arguments-template-id-required'>template ID</a>"
+                                                "description": "Check your [template ID](https://docs.notifications.service.gov.uk/rest-api.html#get-a-template-by-id-arguments-template-id-required)"
                                             }
                                         }
                                     }
@@ -876,6 +913,7 @@
                     "oneOf": [
                         {
                             "type": "object",
+                            "title": "System Clock",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -890,6 +928,7 @@
                         },
                         {
                             "type": "object",
+                            "title": "Invalid API Key",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -898,7 +937,7 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Invalid token: API key not found",
-                                    "description": "<p>Use the correct API key. Refer to <a href='https://docs.notifications.service.gov.uk/rest-api.html#api-keys'>API keys</a> for more information</p>"
+                                    "description": "Use the correct API key. Refer to [API keys](https://docs.notifications.service.gov.uk/rest-api.html#api-keys) for more information"
                                 }
                             }
                         }
@@ -912,6 +951,7 @@
                     "oneOf": [
                         {
                             "type": "object",
+                            "title": "System Clock",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -926,6 +966,7 @@
                         },
                         {
                             "type": "object",
+                            "title": "Invalid API Key",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -934,12 +975,13 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Invalid token: API key not found",
-                                    "description": "<p>Use the correct API key. Refer to <a href='https://docs.notifications.service.gov.uk/rest-api.html#api-keys'>API keys</a> for more information</p>"
+                                    "description": "Use the correct API key. Refer to [API keys](https://docs.notifications.service.gov.uk/rest-api.html#api-keys) for more information"
                                 }
                             }
                         },
                         {
                             "type": "object",
+                            "title": "Invalid API Key Type",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -948,7 +990,7 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Can't send letters with a team API key",
-                                    "description": "<p>Use the correct type of <a href='https://docs.notifications.service.gov.uk/rest-api.html#api-keys'>API key</a>.</p>"
+                                    "description": "Use the correct type of [API key](https://docs.notifications.service.gov.uk/rest-api.html#api-keys)."
                                 }
                             }
                         }
@@ -962,6 +1004,7 @@
                     "oneOf": [
                         {
                             "type": "object",
+                            "title": "Rate Limit Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -970,12 +1013,13 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Invalid token: API key not found",
-                                    "description": "<p>Refer to <a href='https://docs.notifications.service.gov.uk/rest-api.html#rate-limits'>API rate limits</a> for more information</p>"
+                                    "description": "Refer to [API rate limits](https://docs.notifications.service.gov.uk/rest-api.html#rate-limits) for more information"
                                 }
                             }
                         },
                         {
                             "type": "object",
+                            "title": "Too Many Requests Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
@@ -984,7 +1028,7 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds",
-                                    "description": "<p>Refer to <a href='https://docs.notifications.service.gov.uk/rest-api.html#daily-limits'>service limits</a> for the limit number</p>"
+                                    "description": "Refer to [service limits](https://docs.notifications.service.gov.uk/rest-api.html#daily-limits) for the limit number"
                                 }
                             }
                         }
@@ -1004,7 +1048,7 @@
                         "message": {
                             "type": "string",
                             "example": "Internal server error",
-                            "description": "<p>Notify was unable to process the request, resend your notification.</p>"
+                            "description": "Notify was unable to process the request, resend your notification."
                         }
                     }
                 }
