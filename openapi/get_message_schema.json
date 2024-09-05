@@ -40,56 +40,67 @@
                     },
                     "reference": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Optional",
                         "example": "STRING"
                     },
                     "email_address": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Required for emails",
                         "example": "sender@something.com"
                     },
                     "phone_number": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Required for text messages",
                         "example": "+447900900123"
                     },
                     "line_1": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Required for letter",
                         "example": "ADDRESS LINE 1"
                     },
                     "line_2": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Required for letter",
                         "example": "ADDRESS LINE 2"
                     },
                     "line_3": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Required for letter",
                         "example": "ADDRESS LINE 3"
                     },
                     "line_4": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Required for letter",
                         "example": "ADDRESS LINE 4"
                     },
                     "line_5": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Required for letter",
                         "example": "ADDRESS LINE 5"
                     },
                     "line_6": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Required for letter",
                         "example": "ADDRESS LINE 6"
                     },
                     "postcode": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Required for letter",
                         "example": "NW1 2TZ"
                     },
                     "postage": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Required for letter",
                         "example": "first / second / europe / rest-of-world"
                     },
@@ -129,6 +140,7 @@
                     },
                     "subject": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Required for email- subject of email",
                         "example": "STRING"
                     },
@@ -139,6 +151,7 @@
                     },
                     "created_by_name": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Optional - name of the person who sent the notification if sent manually",
                         "example": "STRING"
                     },
@@ -154,11 +167,13 @@
                     },
                     "scheduled_for": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Optional - date and time notification has been scheduled to be sent at",
                         "example": "2024-05-17 9:00:00.000000"
                     },
                     "one_click_unsubscribe_url": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Optional - URL that you provided so your recipients can unsubscribe",
                         "example": "STRING"
                     },

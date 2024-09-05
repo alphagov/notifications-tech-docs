@@ -35,7 +35,7 @@
                             "value": {
                                 "reference": "STRING",
                                 "content": "base64EncodedPDFFile",
-                                "postage": "base64EncodedPDFFile"
+                                "postage": "second"
                             }
                         }
                     }
@@ -66,14 +66,14 @@
                                         "version": 1,
                                         "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
                                     },
-                                    "scheduled_for": ""
+                                    "scheduled_for": null
                                 }
                             },
                             "Precompiled Letter": {
                                 "value": {
                                     "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
                                     "reference": "your-letter-reference",
-                                    "postage": "postage-you-have-set-or-None"
+                                    "postage": "postage-you-have-set-or-default"
                                 }
                             }
                         }
@@ -85,65 +85,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "schema.json#/components/schemas/SendLetterNotificaitonRequestError"
-                        },
-                        "examples": {
-                            "Trial Mode": {
-                                "value": [
-                                    {
-                                        "error": "BadRequestError",
-                                        "message": "Can't send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"
-                                    }
-                                ]
-                            },
-                            "Template Field": {
-                                "value": [
-                                    {
-                                        "error": "ValidationError",
-                                        "message": "personalisation address_line_1 is a required property"
-                                    }
-                                ]
-                            },
-                            "Invalid Postcode": {
-                                "value": [
-                                    {
-                                        "error": "ValidationError",
-                                        "message": "Must be a real UK postcode"
-                                    }
-                                ]
-                            },
-                            "Invalid Last Addressline": {
-                                "value": [
-                                    {
-                                        "error": "ValidationError",
-                                        "message": "Last line of address must be a real UK postcode or another country"
-                                    }
-                                ]
-                            },
-                            "Invalid Letter PDF": {
-                                "value": [
-                                    {
-                                        "error": "BadRequestError",
-                                        "message": "Letter content is not a valid PDF"
-                                    }
-                                ]
-                            },
-                            "Missing Refrence": {
-                                "value": [
-                                    {
-                                        "error": "ValidationError",
-                                        "message": "reference is a required property"
-                                    }
-                                ]
-                            },
-                            "Invalid Postage": {
-                                "value": [
-                                    {
-                                        "error": "ValidationError",
-                                        "message": "postage invalid. It must be either first or second."
-                                    }
-                                ]
-                            }
+                            "$ref": "schema.json#/components/schemas/SendNotificaitonRequestError"
                         }
                     }
                 },
@@ -153,33 +95,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "schema.json#/components/schemas/SendLetterAuthError"
-                        },
-                        "examples": {
-                            "System Clock": {
-                                "value": [
-                                    {
-                                        "error": "AuthError",
-                                        "message": "Error: Your system clock must be accurate to within 30 seconds"
-                                    }
-                                ]
-                            },
-                            "API Key Missing": {
-                                "value": [
-                                    {
-                                        "error": "AuthError",
-                                        "message": "Invalid token: API key not found"
-                                    }
-                                ]
-                            },
-                            "Invalid API Key": {
-                                "value": [
-                                    {
-                                        "error": "BadRequestError",
-                                        "message": "Can't send letters with a team API key"
-                                    }
-                                ]
-                            }
+                            "$ref": "schema.json#/components/schemas/AuthError"
                         }
                     }
                 },
