@@ -15,15 +15,17 @@
                     },
                     "links": {
                         "type": "object",
+                        "required":["current"],
                         "description": "Pagination links",
                         "properties": {
                             "current": {
                                 "type": "string",
-                                "example": "/notifications?template_type=sms&status=delivered"
+                                "example": "https://api.notifications.service.gov.uk/v2/notifications?template_type=sms&status=delivered"
                             },
                             "next": {
                                 "type": "string",
-                                "example": "/notifications?other_than=last_id_in_list&template_type=sms&status=delivered"
+                                "description": "Optional property, only included if the query parameter filers return some data",
+                                "example": "https://api.notifications.service.gov.uk/v2/notifications?older_than=last_id_in_list&template_type=sms&status=delivered"
                             }
                         }
                     }
@@ -102,11 +104,13 @@
                         "type": "string",
                         "nullable": true,
                         "description": "Required for letter",
+                        "enum": ["first","second","europe","rest-of-world"],
                         "example": "first / second / europe / rest-of-world"
                     },
                     "type": {
                         "type": "string",
                         "description": "Required",
+                        "enum": ["sms","letter","email"],
                         "example": "sms / letter / email"
                     },
                     "status": {
@@ -178,60 +182,73 @@
                         "example": "STRING"
                     },
                     "is_cost_data_ready": {
-                        "type": "string",
+                        "type": "boolean",
                         "description": "`true` if cost data is ready, and `false` if it isn't",
                         "example": true
                     },
                     "cost_in_pounds": {
                         "type": "number",
+                        "format": "float",
                         "description": "Optional - cost of the notification in pounds. The cost does not take free allowance into account",
                         "example": 0.0027
                     },
                     "cost_details": {
-                        "type": "object",
-                        "description": "Optional - date and time notification sent to provider",
-                        "properties": {
-                            "billable_sms_fragments": {
-                                "type": "number",
-                                "description": "Optional - for text messages, number of billable sms fragments in your text message",
-                                "example": 1
+                        "oneOf": [
+                            {
+                                "type": "object",
+                                "title": "sms",
+                                "properties": {
+                                    "billable_sms_fragments": {
+                                        "type": "number",
+                                        "description": "Optional - for text messages, number of billable sms fragments in your text message",
+                                        "example": 1
+                                    },
+                                    "international_rate_multiplier": {
+                                        "type": "number",
+                                        "description": "Optional - for text messages, for international sms rate is multiplied by this value",
+                                        "example": 1
+                                    },
+                                    "sms_rate": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "description": "Optional - for text messages, cost of 1 sms fragment",
+                                        "example": 0.0027
+                                    }
+                                }
                             },
-                            "international_rate_multiplier": {
-                                "type": "number",
-                                "description": "Optional - for text messages, for international sms rate is multiplied by this value",
-                                "example": 1
+                            {
+                                "type": "object",
+                                "title": "letter",
+                                "properties": {
+                                    "billable_sheets_of_paper": {
+                                        "type": "number",
+                                        "description": "Optional - for letters, number of sheets of paper in the letter you sent",
+                                        "example": 2
+                                    },
+                                    "postage": {
+                                        "type": "string",
+                                        "description": "Optional - for letters",
+                                        "enum": ["first","second","europe","rest-of-world"],
+                                        "example": "first / second / europe / rest-of-world"
+                                    }
+                                }
                             },
-                            "sms_rate": {
-                                "type": "number",
-                                "description": "Optional - for text messages, cost of 1 sms fragment",
-                                "example": 0.0027
-                            },
-                            "billable_sheets_of_paper": {
-                                "type": "number",
-                                "description": "Optional - for letters, number of sheets of paper in the letter you sent",
-                                "example": 2
-                            },
-                            "postage": {
-                                "type": "string",
-                                "description": "Optional - for letters",
-                                "example": "first / second / europe / rest-of-world"
+                            {
+                                "type": "object",
+                                "title": "email",
+                                "properties": {}
                             }
-                        }
-                    },
-                    "uri": {
-                        "type": "string",
-                        "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
+                        ]
                     }
                 }
             },
             "GetReceivedTextMessageResponse": {
                 "type": "object",
-                "description": "The Send Text Message Response Payload",
+                "description": "The received text message payload",
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a",
-                        "required": true
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
                     },
                     "created_at": {
                         "type": "string",
@@ -257,84 +274,71 @@
             },
             "GetReceivedTextMessagesResponse": {
                 "type": "object",
-                "description": "The Send Text Message Response Payload",
+                "description": "Recieved text messages",
                 "properties": {
-                    "notifications": {
+                    "received_text_messages": {
                         "type": "array",
-                        "description": "Multiple message notifications",
+                        "description": "Multiple received text messages, empty if no text messages received",
                         "items": {
-                            "type": "object",
-                            "properties": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GetReceivedTextMessageResponse"
-                                }
-                            }
+                            "$ref": "#/components/schemas/GetReceivedTextMessageResponse"
                         }
                     },
                     "links": {
                         "type": "object",
+                        "required" : ["current"],
                         "description": "Pagination links",
                         "properties": {
                             "current": {
                                 "type": "string",
-                                "example": "/notifications?template_type=sms&status=delivered"
+                                "example": "https://api.notifications.service.gov.uk/v2/received-text-messages"
                             },
-                            "id": {
+                            "next": {
                                 "type": "string",
-                                "example": "/notifications?other_than=last_id_in_list&template_type=sms&status=delivered"
+                                "example": "https://api.notifications.service.gov.uk/v2/received-text-messages?older_than=last_id_in_list"
                             }
                         }
                     }
                 }
             },
             "GetMessageNoResultFoundError": {
-                "type": "array",
+                "type": "object",
                 "description": "No result found error response",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "error": {
-                            "type": "string",
-                            "example": "NoResultFound"
-                        },
-                        "message": {
-                            "type": "string",
-                            "example": "No result found",
-                            "description": "Check the notification ID"
+                "properties": {
+                    "errors": {
+                    "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties" : {
+                                "error": {
+                                    "type": "string",
+                                    "example": "NoResultFound"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "No result found",
+                                    "description": "Check the notification ID"
+                                }
+                            }
                         }
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example" : 404
                     }
                 }
             },
             "GetMessageValidationErrorError": {
-                "type": "array",
+                "type": "object",
                 "description": "Validation error response",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "error": {
-                            "type": "string",
-                            "example": "NoResultFound"
-                        },
-                        "message": {
-                            "type": "string",
-                            "example": "id is not a valid UUID",
-                            "description": "Check the notification ID"
-                        }
-                    }
-                }
-            },
-            "GetPDFLetterValidationError": {
-                "type": "array",
-                "description": "Validation error response",
-                "items": {
-                    "oneOf": [
-                        {
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
                             "type": "object",
-                            "title": "Validation Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
-                                    "example": "ValidationError"
+                                    "example": "NoResultFound"
                                 },
                                 "message": {
                                     "type": "string",
@@ -342,68 +346,12 @@
                                     "description": "Check the notification ID"
                                 }
                             }
-                        },
-                        {
-                            "type": "object",
-                            "title": "PDF Not Ready Error",
-                            "properties": {
-                                "error": {
-                                    "type": "string",
-                                    "example": "PDFNotReadyError"
-                                },
-                                "message": {
-                                    "type": "string",
-                                    "example": "PDF not available yet, try again later",
-                                    "description": "Wait for the letter to finish processing. This usually takes a few seconds"
-                                }
-                            }
-                        },
-                        {
-                            "type": "object",
-                            "title": "Bad Request Error",
-                            "properties": {
-                                "error": {
-                                    "type": "string",
-                                    "example": "BadRequestError"
-                                },
-                                "message": {
-                                    "type": "string",
-                                    "example": "File did not pass the virus scan",
-                                    "description": "You cannot retrieve the contents of a letter that contains a virus"
-                                }
-                            }
-                        },
-                        {
-                            "type": "object",
-                            "title": "Bad Request Error",
-                            "properties": {
-                                "error": {
-                                    "type": "string",
-                                    "example": "BadRequestError"
-                                },
-                                "message": {
-                                    "type": "string",
-                                    "example": "PDF not available for letters in technical-failure",
-                                    "description": "You cannot retrieve the contents of a letter in technical-failure"
-                                }
-                            }
-                        },
-                        {
-                            "type": "object",
-                            "title": "Validation Error",
-                            "properties": {
-                                "error": {
-                                    "type": "string",
-                                    "example": "ValidationError"
-                                },
-                                "message": {
-                                    "type": "string",
-                                    "example": "Notification is not a letter",
-                                    "description": "Check that you are looking up the correct notification"
-                                }
-                            }
                         }
-                    ]
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example": 400
+                    }
                 }
             }
         }

@@ -30,7 +30,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "get_message_schema.json#/components/schemas/GetPDFLetterValidationError"
+                            "$ref": "get_message_schema.json#/components/schemas/GetMessageValidationErrorError"
                         }
                     }
                 },
