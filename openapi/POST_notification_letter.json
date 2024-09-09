@@ -106,24 +106,6 @@
                     "application/json": {
                         "schema": {
                             "$ref": "schema.json#/components/schemas/LimitError"
-                        },
-                        "examples": {
-                            "API Rate Limit": {
-                                "value": [
-                                    {
-                                        "error": "RateLimitError",
-                                        "message": "Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds"
-                                    }
-                                ]
-                            },
-                            "Service Limit": {
-                                "value": [
-                                    {
-                                        "error": "TooManyRequestsError",
-                                        "message": "Exceeded send limits (LIMIT NUMBER) for today"
-                                    }
-                                ]
-                            }
                         }
                     }
                 },

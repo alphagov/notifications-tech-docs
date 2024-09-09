@@ -543,7 +543,7 @@
                         },
                         "postage": {
                             "type": "string",
-                            "enum": ["first","second","europe","rest-of-world"],
+                            "enum": ["first","second","europe","rest-of-world",null],
                             "nullable":true,
                             "example": "second",
                             "description": "required string for letter - postage type, otherwise null"
@@ -775,41 +775,31 @@
                 }
             },
             "LimitError": {
-                "type": "array",
+                "type": "object",
                 "description": "Rate or service limit error response",
-                "items": {
-                    "oneOf": [
-                        {
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
                             "type": "object",
-                            "title": "Rate Limit Error",
                             "properties": {
                                 "error": {
                                     "type": "string",
-                                    "example": "RateLimitError"
-                                },
-                                "message": {
-                                    "type": "string",
-                                    "example": "Invalid token: API key not found",
-                                    "description": "Refer to [API rate limits](https://docs.notifications.service.gov.uk/rest-api.html#rate-limits) for more information"
-                                }
-                            }
-                        },
-                        {
-                            "type": "object",
-                            "title": "Too Many Requests Error",
-                            "properties": {
-                                "error": {
-                                    "type": "string",
-                                    "example": "TooManyRequestsError"
+                                    "example": "TooManyRequestsError",
+                                    "description": "Error type"
                                 },
                                 "message": {
                                     "type": "string",
                                     "example": "Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds",
-                                    "description": "Refer to [service limits](https://docs.notifications.service.gov.uk/rest-api.html#daily-limits) for the limit number"
+                                    "description": "Error string"
                                 }
                             }
                         }
-                    ]
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example": 429
+                    }
                 }
             },
             "ServerError": {
