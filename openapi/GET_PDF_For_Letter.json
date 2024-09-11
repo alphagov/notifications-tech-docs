@@ -30,7 +30,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "get_message_schema.json#/components/schemas/GetMessageValidationErrorError"
+                            "$ref": "schema.json#/components/schemas/GetMessageValidationError"
                         }
                     }
                 },
@@ -50,7 +50,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "get_message_schema.json#/components/schemas/GetMessageNoResultFoundError"
+                            "$ref": "schema.json#/components/schemas/GetMessageNoResultFoundError"
                         }
                     }
                 },
