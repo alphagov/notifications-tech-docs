@@ -21,7 +21,7 @@
     "tags": [
         {
             "name": "Send a message",
-            "description": "Send a message"
+            "description": "Send a message."
         },
         {
             "name": "Get message status",

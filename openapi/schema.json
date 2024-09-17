@@ -542,7 +542,7 @@
                     "created_at": {
                         "type": "string",
                         "description": "Required - date and time notification created",
-                        "example": "2024-05-17 15:58:38.342838"
+                        "example": "2024-05-17T15:58:38.342838Z"
                     },
                     "created_by_name": {
                         "type": "string",
@@ -553,18 +553,18 @@
                     "sent_at": {
                         "type": "string",
                         "description": "Optional - date and time notification sent to provider",
-                        "example": "2024-05-17 15:58:30.143000"
+                        "example": "2024-05-17T15:58:30.143000Z"
                     },
                     "completed_at": {
                         "type": "string",
                         "description": "Optional - date and time notification delivered or failed",
-                        "example": "2024-05-17 15:59:10.321000"
+                        "example": "2024-05-17T15:59:10.321000Z"
                     },
                     "scheduled_for": {
                         "type": "string",
                         "nullable": true,
                         "description": "Optional - date and time notification has been scheduled to be sent at",
-                        "example": "2024-05-17 9:00:00.000000"
+                        "example": "2024-05-17T09:00:00.000000Z"
                     },
                     "one_click_unsubscribe_url": {
                         "type": "string",
@@ -648,7 +648,7 @@
                     },
                     "created_at": {
                         "type": "string",
-                        "example": "STRING"
+                        "example": "2024-05-17T15:58:38.342838Z"
                     },
                     "service_id": {
                         "type": "string",
