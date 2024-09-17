@@ -1,6 +1,6 @@
 {
     "post": {
-        "description": "You can use this endpoint to send text message.  You can configure callbacks that provide delivery receipts by following the instructions in [our documentation](https://www.notifications.service.gov.uk/using-notify/api-documentation#callbacks).",
+        "description": "You can use this endpoint to send text message.  You can configure callbacks that provide delivery receipts by following the instructions in [our documentation](https://docs.notifications.service.gov.uk/rest-api.html#callbacks).",
         "operationId": "sendTextMessage",
         "requestBody": {
             "content": {
