@@ -38,37 +38,37 @@
     ],
     "paths": {
         "/v2/notifications/sms": {
-            "$ref": "POST_notification_sms.json#"
+            "$ref": "./POST_notification_sms.json"
         },
         "/v2/notifications/email": {
-            "$ref": "POST_notification_email.json#"
+            "$ref": "POST_notification_email.json"
         },
         "/v2/notifications/letter": {
-            "$ref": "POST_notification_letter.json#"
+            "$ref": "POST_notification_letter.json"
         },
         "/v2/notifications/{notification_id}": {
-            "$ref": "GET_status_message.json#"
+            "$ref": "GET_status_message.json"
         },
         "/v2/notifications": {
-            "$ref": "GET_status_messages.json#"
+            "$ref": "GET_status_messages.json"
         },
         "/v2/notifications/{notification_id}/pdf": {
-            "$ref": "GET_PDF_For_Letter.json#"
+            "$ref": "GET_PDF_For_Letter.json"
         },
         "/v2/received-text-messages": {
-            "$ref": "GET_received_text_messages.json#"
+            "$ref": "GET_received_text_messages.json"
         },
         "/v2/templates": {
-            "$ref": "GET_templates.json#"
+            "$ref": "GET_templates.json"
         },
         "/v2/template/{template_id}": {
-            "$ref": "GET_template_by_id.json#"
+            "$ref": "GET_template_by_id.json"
         },
         "/v2/template/{template_id}/version/{version}": {
-            "$ref": "GET_template_by_id_and_version.json#"
+            "$ref": "GET_template_by_id_and_version.json"
         },
         "/v2/template/{template_id}/preview": {
-            "$ref": "POST_template_preview.json#"
+            "$ref": "POST_template_preview.json"
         }
     },
     "components": {
