@@ -1,8 +1,10 @@
 # REST API documentation
 
-This documentation is for developers interested in using the GOV.UK Notify API to send emails, text messages or letters.
+This documentation is for developers interested in using the GOV.UK Notify API to send emails, text messages or letters.  
 
 You can use it to integrate directly with the API if you cannot use one of our 6 client libraries.
+
+Developers can also use [our OpenAPI file](https://github.com/alphagov/notifications-tech-docs/blob/main/openapi/publicapi_spec.json) with tools such as [Swagger](https://swagger.io/) and [Redoc](https://github.com/Redocly/redoc) to assist with using the REST API.  You cannot use Swagger Editor to make test API requests.
 
 ## Making a request
 

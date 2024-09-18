@@ -1,0 +1,113 @@
+{
+    "post": {
+        "description": "You can use this endpoint to send text message.  You can configure callbacks that provide delivery receipts by following the instructions in [our documentation](https://docs.notifications.service.gov.uk/rest-api.html#callbacks).",
+        "operationId": "sendTextMessage",
+        "requestBody": {
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "$ref": "schema.json#/components/schemas/SendTextMessageRequest"
+                    }
+                }
+            },
+            "description": "requestPayload",
+            "required": true
+        },
+        "responses": {
+            "201": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/SendTextMessageResponse"
+                        }
+                    }
+                },
+                "description": "Created"
+            },
+            "400": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/SendNotificaitonRequestError"
+                        }
+                    }
+                },
+                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+            },
+            "403": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/AuthError"
+                        }
+                    }
+                },
+                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+            },
+            "429": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/LimitError"
+                        }
+                    }
+                },
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed."
+            },
+            "500": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/ServerError"
+                        }
+                    }
+                },
+                "description": "Internal server error. Check the `message` in the response to find out why your request failed."
+            }
+        },
+        "callbacks": {
+            "onSmsSend": {
+                "{$callback_url}": {
+                    "post": {
+                        "requestBody": {
+                            "description": "Callbacks are when GOV.UK Notify sends POST requests to your service. You can get callbacks when sms you’ve sent is delivered or fails.\n\n### Set up callbacks\n\nYou must provide:\n\n- a URL where Notify will post the callback to\n- a bearer token which Notify will put in the authorisation header of the requests\n\nTo do this:\n\n1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n1. Go to the __API integration__ page.\n1. Select __Callbacks__.\n\n### Retry callbacks\n\nIf Notify sends a `POST` request to your service, but the request fails then we will retry.\n\nWe will retry every 5 minutes, up to a maximum of 5 times.\n\n### Delivery receipts\n\nWhen you send an text message, Notify will send a receipt to your callback URL with the status of the message. This is an automated method to get the status of messages.\n\nThis functionality works with test API keys, but does not work with smoke testing phone numbers.\n\nThe callback message is formatted in JSON. All of the values are strings, apart from the template version, which is a number. The key, description and format of the callback message arguments will be:\n|Key | Description | Format|\n|:---|:---|:---|\n|`id` | Notify’s id for the status receipts | UUID|\n|`reference` | The reference sent by the service | `12345678` or null|\n|`to` | The phone number of the recipient | `07700912345`|\n|`status` | The status of the notification | `delivered`, `permanent-failure`, `temporary-failure` or `technical-failure`|\n|`created_at` | The time the service sent the request | `2017-05-14T12:15:30.000000Z`|\n|`completed_at` | The last time the status was updated | `2017-05-14T12:15:30.000000Z` or null|\n|`sent_at` | The time the notification was sent | `2017-05-14T12:15:30.000000Z` or null|\n|`notification_type` | The notification type | `sms`|\n|`template_id` | The id of the template that was used | UUID|\n|`template_version` | The version number of the template that was used | `1`|",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "schema.json#/components/schemas/SmsCallbackRequest"
+                                    }
+                                }
+                            }
+                        },
+                        "responses": {
+                            "2XX": {
+                                "description": "Success"
+                            },
+                            "4XX": {
+                                "description": "Failed"
+                            },
+                            "5XX": {
+                                "description": "Failed"
+                            }
+                        },
+                        "security": [
+                            {
+                                "BearerAuth": []
+                            }
+                        ],
+                        "summary": "Text message callback"
+                    }
+                }
+            }
+        },
+        "security": [
+            {
+                "BearerAuth": []
+            }
+        ],
+        "summary": "Send a text message",
+        "tags": [
+            "Send a message"
+        ]
+    }
+}

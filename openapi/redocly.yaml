@@ -1,0 +1,12 @@
+extends:
+  - recommended
+
+theme:
+  openapi:
+    disableSearch: true
+    expandResponses: 200,202
+    jsonSampleExpandLevel: 1
+    hideTryItPanel: false
+
+
+      

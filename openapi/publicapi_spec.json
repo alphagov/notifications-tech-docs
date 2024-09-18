@@ -1,0 +1,84 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "description": "The GOV.UK Notify REST API. Read [our documentation](https://docs.notifications.service.gov.uk/rest-api.html) for more details.",
+        "title": "GOV.UK Notify API",
+        "version": "1.0.3",
+        "license": {
+            "name": "Open Government Licence v3.0",
+            "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+        },
+        "x-logo": {
+            "url": "https://assets.publishing.service.gov.uk/media/65d342e5e1bdec7737322247/s300_Untitled__1_.png",
+            "altText": "GOV.UK Notify"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://api.notifications.service.gov.uk"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Send a message",
+            "description": "Send a message."
+        },
+        {
+            "name": "Get message status",
+            "description": "Get message status"
+        },
+        {
+            "name": "Get a template",
+            "description": "Get a template"
+        },
+        {
+            "name": "Get received text messages",
+            "description": "Get received text messages"
+        }
+    ],
+    "paths": {
+        "/v2/notifications/sms": {
+            "$ref": "./POST_notification_sms.json"
+        },
+        "/v2/notifications/email": {
+            "$ref": "POST_notification_email.json"
+        },
+        "/v2/notifications/letter": {
+            "$ref": "POST_notification_letter.json"
+        },
+        "/v2/notifications/{notification_id}": {
+            "$ref": "GET_status_message.json"
+        },
+        "/v2/notifications": {
+            "$ref": "GET_status_messages.json"
+        },
+        "/v2/notifications/{notification_id}/pdf": {
+            "$ref": "GET_PDF_For_Letter.json"
+        },
+        "/v2/received-text-messages": {
+            "$ref": "GET_received_text_messages.json"
+        },
+        "/v2/templates": {
+            "$ref": "GET_templates.json"
+        },
+        "/v2/template/{template_id}": {
+            "$ref": "GET_template_by_id.json"
+        },
+        "/v2/template/{template_id}/version/{version}": {
+            "$ref": "GET_template_by_id_and_version.json"
+        },
+        "/v2/template/{template_id}/preview": {
+            "$ref": "POST_template_preview.json"
+        }
+    },
+    "components": {
+        "schemas": {},
+        "securitySchemes": {
+            "BearerAuth": {
+                "description": "The authorisation header is an [API key](#api-keys) that is encoded using [JSON Web Tokens](https://jwt.io/). You must include an authorisation header.\n\nJSON Web Tokens have a standard header and a payload. The header consists of:\n\n```json\n{\n   \"type\":\"JWT\",\n   \"alg\":\"HS256\"\n}\n```\n\nThe payload consists of:\n\n```json\n{\n   \"iss\": \"26785a09-ab16-4eb0-8407-a37497a57506\",\n   \"iat\": 1568818578\n}\n```\n\nJSON Web Tokens are encoded using a secret key with the following format: ```3d844edf-8d35-48ac-975b-e847b4f122b0```\n\nThat secret key forms a part of your [API key](#api-keys), which follows the format\n\n`{key_name}-{iss-uuid}-{secret-key-uuid}`.\n\nFor example, if your API key is\n\n`my_test_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0`: \n\n* your API key name is `my_test_key` \n * your iss (your service id) is `26785a09-ab16-4eb0-8407-a37497a57506` \n * your secret key is `3d844edf-8d35-48ac-975b-e847b4f122b0` \n\n`iat` (issued at) is the current time in UTC in epoch seconds. The token expires within 30 seconds of the current time. \n\nRefer to the [JSON Web Tokens website](https://jwt.io/) for more information on encoding your authorisation header.\n\nWhen you have an encoded and signed token, add that token to a header as follows:\n\n```json\n\"Authorization\": \"Bearer encoded_jwt_token\"\n```",
+                "scheme": "bearer",
+                "type": "http"
+            }
+        }
+    }
+}

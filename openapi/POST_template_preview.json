@@ -1,0 +1,88 @@
+{
+    "post": {
+        "description": "This generates a preview version of a template.",
+        "operationId": "previewTemplate",
+        "parameters": [  { 
+            "name": "template_id",
+            "in":"path",   
+            "description":"The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the Templates page to find it.",
+            "required":true,
+            "schema": {
+                "$ref": "schema.json#/components/schemas/TemplateByIdRequest"
+            },
+            "example": "b7a59abd-0ab2-4538-b619-8da9f9089e08"  
+        }],
+        "requestBody": {
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "$ref": "schema.json#/components/schemas/TemplatePreviewRequest"
+                    }
+                }
+            },
+            "description": "requestPayload",
+            "required":false
+        },
+        "responses": {
+            "200": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/TemplatePreviewResponse"
+                        }
+                    }
+                },
+                "description": "Created"
+            },
+            "400": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/TemplatePreviewRequestError"
+                        }
+                    }
+                },
+                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+            },
+            "403": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/AuthError"
+                        }
+                    }
+                },
+                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+            },
+            "429": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/LimitError"
+                        }
+                    }
+                },
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed."
+            },
+            "500": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/ServerError"
+                        }
+                    }
+                },
+                "description": "Internal server error. Check the `message` in the response to find out why your request failed."
+            }
+        },
+        "security": [
+            {
+                "BearerAuth": []
+            }
+        ],
+        "summary": "Generate a preview template",
+        "tags": [
+            "Get a template"
+        ]
+    }
+}
