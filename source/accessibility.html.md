@@ -1,6 +1,6 @@
 ---
 title: Accessibility statement for GOV.UK Notify’s documentation
-last_reviewed_on: 2021-10-07
+last_reviewed_on: 2024-10-14
 review_in: 6 months
 hide_in_navigation: true
 ---
@@ -11,21 +11,22 @@ This accessibility statement applies to the GOV.UK Notify documentation at [http
 
 This website is run by the GOV.UK Notify team at the Government Digital Service (GDS). It is designed to be used by as many people as possible. You should be able to:
 
-+ change colours, contrast levels and fonts
-+ zoom in up to 300% without problems
-+ navigate most of the website using just a keyboard
-+ navigate most of the website using speech recognition software
-+ listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)
+- change colours, contrast levels and fonts using browser or device settings
+- zoom in up to 400% without the text spilling off the screen
+- navigate most of the website using a keyboard or speech recognition software
+- listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)
 
-The text should be clear and simple to understand.
+We’ve also made the website text as simple as possible to understand.
 
 [AbilityNet](https://mcmw.abilitynet.org.uk/) has advice on making your device easier to use if you have a disability.
 
 ## How accessible this website is
 
-We know this website is not fully accessible because:
+We know this website is not fully accessible:
 
-+ some pages have adjacent links that go to the same URL
+- it has links whose only content is an image with no alt text
+- the table of contents is sometimes announced as a dialog to screen readers when it isn't
+- links can be hidden by the 'sticky' table of contents button while focused
 
 ## Feedback and contact information
 
@@ -56,28 +57,29 @@ The content listed below is non-accessible for the following reasons.
 
 #### Non-compliance with the accessibility regulations
 
-Some pages have adjacent links that go to the same URL. This is not a fail, but should be looked at under [WCAG 2.1 success criterion 2.4.4 Link Purpose (In Context)](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-refs.html).
+- the content of some links is an image with no alt text which provides no accessible name to assistive technologies. This fails
+  [WCAG 2.2 success criterion 4.1.2: Name, Role, Value](https://www.w3.org/WAI/WCAG21/Understanding/name-role-value)
+  and [WCAG 2.2 success
+  criterion 2.4.4: Link Purpose (In
+  Context)](https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context)
+- the table of contents will be announced as a dialog to screen readers but only behaves like one on smaller
+  screens or at high zoom. This fails [WCAG 2.2 success criterion 1.3.1: Info and Relationships](https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html)
+- focused links can be overlaped by the 'sticky' table of contents button which hides them from
+  sight when they're being used. This fails [WCAG 2.2 success criterion 2.4.11: Focus Not Obscured](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html)
 
 ## How we tested this website
 
-We last tested this website for accessibility issues in August 2020.
+We last tested this website for accessibility issues in August 2024. We followed the guidance for
+each of [the success criteria added in WCAG 2.2](https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/) and tested the website against them.
 
-We used manual and automated tests to look for issues such as:
+We first tested this website for accessibility issues in August 2020.
 
-- lack of keyboard accessibility
-- link text that’s not descriptive
-- non-unique or non-hierarchical headings
-- italics, bold or block capital formatting
-- inaccessible formatting in general
-- inaccessible language
-- inaccessible diagrams or images
-- lack of colour contrast for text, important graphics and controls
-- images not having meaningful alt text
-- problems when using assistive technologies such as screen readers and screen magnifiers
+On that occassion, we used manual and automated tests to look for issues, following [guidance on testing for accessibility from the GOV.UK Service Manual](https://www.gov.uk/service-manual/helping-people-to-use-your-service/testing-for-accessibility).
 
 ## What we’re doing to improve accessibility
 
-We plan to look at the redundant links by the end of December 2021.
+We test new features for accessibility issues and any changes we make that are large enough,
+following [guidance from the GOV.UK Service Manual on making your website accessible once live](https://www.gov.uk/service-manual/helping-people-to-use-your-service/making-your-service-accessible-an-introduction#what-to-do-about-accessibility-in-live).
 
 ## Preparation of this accessibility statement
 
