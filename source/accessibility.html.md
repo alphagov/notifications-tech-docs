@@ -1,6 +1,6 @@
 ---
 title: Accessibility statement for GOV.UK Notify’s documentation
-last_reviewed_on: 2024-10-14
+last_reviewed_on: 2024-10-16
 review_in: 6 months
 hide_in_navigation: true
 ---
@@ -24,9 +24,9 @@ We’ve also made the website text as simple as possible to understand.
 
 We know this website is not fully accessible:
 
-- it has links whose only content is an image with no alt text
-- the table of contents is sometimes announced as a dialog to screen readers when it isn't
-- links can be hidden by the 'sticky' table of contents button while focused
+- it links to images that have no alt text
+- screen readers sometimes incorrectly announce the table of contents as a dialog 
+- links can be hidden by the ‘sticky’ table of contents button while focused
 
 ## Feedback and contact information
 
@@ -49,7 +49,7 @@ GDS is committed to making its website accessible, in accordance with the Public
 
 ## Compliance status
 
-This website is partially compliant with the [Web Content Accessibility Guidelines version 2.1](https://www.w3.org/TR/WCAG21/) AA standard, due to the non-compliances listed below.
+This website is partially compliant with the [Web Content Accessibility Guidelines version 2.2](https://www.w3.org/TR/WCAG22/) AA standard, due to the non-compliances listed below.
 
 ### Non-accessible content
 
@@ -59,12 +59,10 @@ The content listed below is non-accessible for the following reasons.
 
 - the content of some links is an image with no alt text which provides no accessible name to assistive technologies. This fails
   [WCAG 2.2 success criterion 4.1.2: Name, Role, Value](https://www.w3.org/WAI/WCAG21/Understanding/name-role-value)
-  and [WCAG 2.2 success
-  criterion 2.4.4: Link Purpose (In
-  Context)](https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context)
+  and [WCAG 2.2 success criterion 2.4.4: Link Purpose (In Context)](https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context)
 - the table of contents will be announced as a dialog to screen readers but only behaves like one on smaller
   screens or at high zoom. This fails [WCAG 2.2 success criterion 1.3.1: Info and Relationships](https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html)
-- focused links can be overlaped by the 'sticky' table of contents button which hides them from
+- focused links can be overlaped by the ‘sticky’ table of contents button which hides them from
   sight when they're being used. This fails [WCAG 2.2 success criterion 2.4.11: Focus Not Obscured](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html)
 
 ## How we tested this website
@@ -72,9 +70,8 @@ The content listed below is non-accessible for the following reasons.
 We last tested this website for accessibility issues in August 2024. We followed the guidance for
 each of [the success criteria added in WCAG 2.2](https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/) and tested the website against them.
 
-We first tested this website for accessibility issues in August 2020.
 
-On that occassion, we used manual and automated tests to look for issues, following [guidance on testing for accessibility from the GOV.UK Service Manual](https://www.gov.uk/service-manual/helping-people-to-use-your-service/testing-for-accessibility).
+When we first tested this website for accessibility issues in August 2020, we used manual and automated tests to look for issues, following [guidance on testing for accessibility from the GOV.UK Service Manual](https://www.gov.uk/service-manual/helping-people-to-use-your-service/testing-for-accessibility).
 
 ## What we’re doing to improve accessibility
 
