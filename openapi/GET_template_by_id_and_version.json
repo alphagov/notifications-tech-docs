@@ -1,0 +1,127 @@
+{
+    "get": {
+        "description": "This returns the latest version of the template.",
+        "operationId": "GetTemplatesByIdAndVersion",
+        "parameters": [  { 
+            "name": "template_id",
+            "in":"path",   
+            "description":"The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the Templates page to find it.",
+            "required":true,
+            "schema": {
+                "$ref": "schema.json#/components/schemas/TemplateByIdRequest"
+            },
+            "example": "b7a59abd-0ab2-4538-b619-8da9f9089e08"  
+        },
+        {
+            "name": "version",
+            "in":"path",   
+            "description":"The version number of the template.",
+            "required":true,
+            "schema": {
+                "$ref": "schema.json#/components/schemas/TemplateByIdAndVersionRequest"
+            },
+            "example": 1
+        }],
+        "responses": {
+            "200": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/TemplateResponse"
+                        },
+                        "example": {
+                                "id":"b7a59abd-0ab2-4538-b619-8da9f9089e08",
+                                "name":"Test SMS Template",
+                                "type":"sms",
+                                "created_at":"2024-08-12T11:03:12.000000Z",
+                                "updated_at":"2024-08-12T11:03:34.994540Z",
+                                "version":2,
+                                "created_by":"someone@example.com",
+                                "body":"Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
+                                "subject":null,
+                                "postage":null,
+                                "letter_contact_block":null,
+                                "personalisation":{"date": {"required": true},"firstname": {"required": true}}
+                        }
+                    }
+                },
+                "description": "If the request is successful, the response body is json and the status code is 200"
+            },
+            "400": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/TemplatesRequestValidationError"
+                        },
+                        "example": {
+                                    "errors":
+                                    [{
+                                        "error":"ValidationError",
+                                        "message":"id is not a valid UUID"
+                                    }],
+                                    "status_code": 400
+                        }
+                    }
+                },
+                "description": "Make sure that the provided type is one of: email, sms, letter"
+            },
+            "403": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/AuthError"
+                        }
+                    }
+                },
+                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+            },
+            "404": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/TemplateNoResultError"
+                        },
+                        "example": {
+                                    "errors":
+                                    [{
+                                        "error":"NoResultFound",
+                                        "message":"No result found"
+                                    }],
+                                    "status_code": 404
+                        }
+                    }
+                },
+                "description": "Check your template ID and version"
+            },
+            "429": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/LimitError"
+                        }
+                    }
+                },
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed."
+            },
+            "500": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "schema.json#/components/schemas/ServerError"
+                        }
+                    }
+                },
+                "description": "Internal server error. Check the `message` in the response to find out why your request failed."
+            }
+        },
+        "security": [
+            {
+                "BearerAuth": []
+            }
+        ],
+        "summary": "Get template by ID and version",
+        "tags": [
+            "Get a template"
+        ]
+    }
+}

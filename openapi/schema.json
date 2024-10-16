@@ -1,0 +1,1311 @@
+{
+    "description": "All schema - usage example: {'$ref': 'schema.json#/components/schema/MessageRequest'} (swap quotes for double quotes)",
+    "components": {
+        "schemas": {
+            "SendTextMessageRequest": {
+                "type": "object",
+                "description": "The Send Text Message Request Payload",
+                "properties": {
+                    "phone_number": {
+                        "type": "string",
+                        "description": "The phone number of the recipient of the text message. This can be a UK or international number.",
+                        "example": "+447900900123",
+                        "maxLength": 15,
+                        "minLength": 7
+                    },
+                    "template_id": {
+                        "type": "string",
+                        "description": "To find the template ID:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Templates** page and select the relevant template.\n3.  Select **Copy template ID to clipboard**.",
+                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                    },
+                    "personalisation": {
+                        "type": "object",
+                        "description": "You can leave out this argument if a template does not have any placeholder fields for personalised information.<br/>If a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:",
+                        "properties": {
+                            "first_name": {
+                                "type": "string",
+                                "example": "Amala"
+                            },
+                            "application_date": {
+                                "type": "string",
+                                "example": "2018-01-01"
+                            }
+                        }
+                    },
+                    "reference": {
+                        "type": "string",
+                        "description": "You can leave out this argument if you do not have a reference. An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
+                        "example": "STRING"
+                    },
+                    "sms_sender_id": {
+                        "type": "string",
+                        "description": "\nA unique identifier of the sender of the text message notification.\nTo find the text message sender:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Settings** page.\n3.  In the **Text Messages** section, select **Manage** on the **Text Message sender** row.\n\nYou can then either:\n\n*   copy the sender ID that you want to use and paste it into the method\n*   select **Change** to change the default sender that the service will use, and select **Save**\n\nYou can leave out this argument if your service only has one text message sender, or if you want to use the default sender.",
+                        "example": "8e222534-7f05-4972-86e3-17c5d9f894e2"
+                    }
+                },
+                "required": [
+                    "phone_number",
+                    "template_id"
+                ]
+            },
+            "SendEmailRequest": {
+                "type": "object",
+                "description": "The Send Email Request Payload",
+                "properties": {
+                    "email_address": {
+                        "type": "string",
+                        "description": "The email address of the recipient.",
+                        "example": "sender@something.com",
+                        "maxLength": 250,
+                        "minLength": 5
+                    },
+                    "template_id": {
+                        "type": "string",
+                        "description": "To find the template ID:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Templates** page and select the relevant template.\n3.  Select **Copy template ID to clipboard**.",
+                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                    },
+                    "one_click_unsubscribe_url": {
+                        "type": "string",
+                        "description": "You can leave out this argument if the email being sent is not a subscription email.\n\nIf you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).\n\nThe one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.\n\nThe one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.\n\nYour unsubscribe URL and response must comply with the guidance specified in [Section 3.1 of IETF RFC 8058](https://www.rfcreader.com/#rfc8058_line139).\n\n**Unsubscribe link at the bottom of the email (recommended)**\n\nTo add an unsubscribe link at the bottom of your email, use square brackets around the link text and round brackets around the URL. Make sure there are no spaces between the brackets or the link will not work.\n\nUse this example if you have a webpage for users to manage their email subscriptions:\n\n```json\n[Unsubscribe](https://www.example.gov.uk/unsubscribe)\n```\nYour webpage should ask the recipients to confirm that they want to unsubscribe. \n\nIf you do not have your own webpage, you can add a ‘mailto’ link to let users send an email to your team instead. For example:\n\n```json\n[Unsubscribe](mailto:example@gov.uk?subject=unsubscribe)\n```\nThe email address should be a shared inbox managed by your team, not your own email address.",
+                        "example": "https://example.com/unsubscribe.html?opaque=123456789"
+                    },
+                    "personalisation": {
+                        "type": "object",
+                        "description": "You can leave out this argument if a template does not have any placeholder fields for personalised information.\n\nIf a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:",
+                        "properties": {
+                            "first_name": {
+                                "type": "string",
+                                "example": "Amala"
+                            },
+                            "application_date": {
+                                "type": "string",
+                                "example": "2018-01-01"
+                            },
+                            "required_documents": {
+                                "type": "array",
+                                "description": "Pass in a list and it will appear as bullet points in the message.",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "example": [
+                                    "passport",
+                                    "utility bill",
+                                    "other id"
+                                ]
+                            },
+                            "link_to_file": {
+                                "type": "object",
+                                "description": "You can leave out this argument if you do not have any file to attach.\n\nTo send a file by email, add a placeholder to the template then upload a file. The placeholder will contain a secure link to download the file.\n\nThe links are unique and unguessable. GOV.UK Notify cannot access or decrypt your file.\n\nYour file will be available to download for a default period of 26 weeks (6 months).\n\nTo help protect your files you can also:\n\n* ask recipients to confirm their email address before downloading\n* choose the length of time that a file is available to download**Add contact details to the file download page**\n\n1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n1. Go to the __Settings__ page.\n1. In the __Email__ section, select __Manage__ on the __Send files by email__ row.\n1. Enter the contact details you want to use, and select __Save__. \n\n**Add a placeholder to the template**\n\n1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n1. Go to the __Templates__ page and select the relevant email template.\n1. Select __Edit__.\n1. Add a placeholder to the email template using double brackets. For example: 'Download your file at: ((link_to_file))'\n\nYour email should also tell recipients how long the file will be available to download.\n\n**Upload your file**\n\nYou can upload the following file types:\n\n- PDF (.pdf)\n- CSV (.csv)\n- Text (.odt, .txt, .rtf, .json)\n- MS Word Document (.doc, .docx)\n- Ms Excel Spreadsheet (.xlsx)\n\nYour file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support/ask-question-give-feedback) if you need to send other file types.\n\nYou’ll need to convert the file into a string that is base64 encoded.\n\nPass the encoded string into an object with a `file` key, and put that in the personalisation argument.\n\n**Set the filename**\n\nYou should provide a filename when you upload your file.\n\nThe filename should tell the recipient what the file contains. A memorable filename can help the recipient to find the file again later.\n\nThe filename must end with a file extension. For example, `.csv` for a CSV file. If you include the wrong file extension, recipients may not be able to open your file.\n\nThe filename should be no more that 100 characters long\n\nIf you do not provide a filename for your file, Notify will:\n\n* generate a random filename\n* try to add the correct file extension\n\nIf Notify cannot add the correct file extension, recipients may not be able to open your file.\n\n**Ask recipients to confirm their email address before they can download the file**\n\nWhen a recipient clicks the link in the email you’ve sent them, they have to enter their email address. Only someone who knows the recipient’s email address can download the file.\n\nThis security feature is turned on by default.\n\n**Turn off email address check (not recommended)**\n\nIf you do not want to use this feature, you can turn it off on a file-by-file basis.\n\nYou should not turn this feature off if you send files that contain:\n\n* personally identifiable information\n* commercially sensitive information\n* information classified as ‘OFFICIAL’ or ‘OFFICIAL-SENSITIVE’ under the [Government Security Classifications](https://www.gov.uk/government/publications/government-security-classifications) policy\n\nTo let the recipient download the file without confirming their email address, set the `confirm_email_before_download` flag to `false`.\n\n**Choose the length of time that a file is available to download**\n\nSet the number of weeks you want the file to be available using the `retention_period` key.\n\nYou can choose any value between <code>1 week</code> and <code>26 weeks</code>. When deciding this, you should consider:\n\n* the need to protect the recipient’s personal information\n* whether the recipient will need to download the file again later\n\nIf you do not choose a value, the file will be available for the default period of 26 weeks (6 months).\n\nFiles sent before 12 April 2023 had a longer default period of 78 weeks (18 months).",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "byte",
+                                        "description": "File as base64 encoded string",
+                                        "example": "file as base64 encoded string"
+                                    },
+                                    "filename": {
+                                        "type": "string",
+                                        "description": "File name",
+                                        "maxLength": 100,
+                                        "example": "report.csv"
+                                    },
+                                    "confirm_email_before_download": {
+                                        "type": "boolean",
+                                        "description": "To let the recipient download the file without confirming their email address, set the `confirm_email_before_download` flag to `false`.",
+                                        "example": false
+                                    },
+                                    "retention_period": {
+                                        "type": "string",
+                                        "description": "The length of time that a file is available to download in weeks.  Choose between <code>1 week</code> and <code>26 weeks</code>",
+                                        "example": "4 weeks"
+                                    }
+                                },
+                                "required": [
+                                    "file"
+                                ]
+                            }
+                        }
+                    },
+                    "reference": {
+                        "type": "string",
+                        "description": "You can leave out this argument if you do not have a reference.\n\nAn identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
+                        "example": "STRING"
+                    },
+                    "email_reply_to_id": {
+                        "type": "string",
+                        "description": "You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.\n\nThis is an email address specified by you to receive replies from your users. You must add at least one reply-to email address before your service can go live.\n\nTo add a reply-to email address:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Settings** page.\n3.  In the **Email** section, select **Manage** on the **Reply-to email addresses** row.\n4.  Select **Add reply-to address**.\n5.  Enter the email address you want to use, and select **Add**.",
+                        "example": "STRING"
+                    }
+                },
+                "required": [
+                    "email_address",
+                    "template_id"
+                ]
+            },
+            "SendLetterRequest": {
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/SendNormalLetterRequest"
+                    },
+                    {
+                        "$ref": "#/components/schemas/SendPrecompiledLetterRequest"
+                    }
+                ]
+            },
+            "SendNormalLetterRequest": {
+                "type": "object",
+                "description": "The Letter Request Payload",
+                "properties": {
+                    "template_id": {
+                        "type": "string",
+                        "description": "To find the template ID:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Templates** page and select the relevant template.\n3.  Select **Copy template ID to clipboard**.",
+                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                    },
+                    "personalisation": {
+                        "type": "object",
+                        "description": "The personalisation argument always contains the following parameters for the letter recipient’s address:\n\n**The address must have at least 3 lines.**\n\nThe last line needs to be a real UK postcode or the name of a country outside the UK.\n\nNotify checks for international addresses and will automatically charge you the correct postage.\n\nThe `postcode` personalisation argument has been replaced. If your template still uses `postcode`, Notify will treat it as the last line of the address.\n\nAny other placeholder fields included in the letter template also count as required parameters. You need to provide their values in a dictionary with key value pairs. For example:",
+                        "properties": {
+                            "address_line_1": {
+                                "type": "string",
+                                "example": "The Occupier"
+                            },
+                            "address_line_2": {
+                                "type": "string",
+                                "example": "123 High Street"
+                            },
+                            "address_line_3": {
+                                "type": "string",
+                                "example": "Richmond upon Thames"
+                            },
+                            "address_line_4": {
+                                "type": "string",
+                                "example": "Middlesex"
+                            },
+                            "address_line_5": {
+                                "type": "string",
+                                "example": "SW14 6BF"
+                            },
+                            "address_line_6": {
+                                "type": "string"
+                            },
+                            "address_line_7": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "John Smith"
+                            },
+                            "application_id": {
+                                "type": "string",
+                                "example": "4134325"
+                            },
+                            "required_documents": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "example": [
+                                    "passport",
+                                    "utility bill",
+                                    "other id"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "address_line_1",
+                            "address_line_2",
+                            "address_line_3"
+                        ]
+                    },
+                    "reference": {
+                        "type": "string",
+                        "description": "You can leave out this argument if you do not have a reference. An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
+                        "example": "STRING"
+                    }
+                },
+                "required": [
+                    "template_id",
+                    "personalisation"
+                ]
+            },
+            "SendPrecompiledLetterRequest": {
+                "type": "object",
+                "description": "The Precompiled Send Letter Request Payload",
+                "properties": {
+                    "reference": {
+                        "type": "string",
+                        "description": "An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
+                        "example": "STRING"
+                    },
+                    "content": {
+                        "type": "string",
+                        "format": "byte",
+                        "description": "The precompiled letter must be a PDF file which meets [the GOV.UK Notify letter specification](https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification). You’ll need to convert the file into a string that is base64 encoded.",
+                        "example": "base64EncodedPDFFile"
+                    },
+                    "postage": {
+                        "type": "string",
+                        "description": "You can choose first or second class postage for your precompiled letter. Set the value to <code>first</code> for first class, or <code>second</code> for second class. If you do not pass in this argument, the postage will default to second class. During processing of the letter notify will detect international addresses automatically and may change the postage value to <code>europe</code> or <code>rest-of-world</code> automatically.",
+                        "example": "base64EncodedPDFFile"
+                    }
+                },
+                "required": [
+                    "reference",
+                    "content"
+                ]
+            },
+            "TemplatesRequest": {
+                "type": "string",
+                "enum": [
+                    "sms",
+                    "email",
+                    "letter"
+                ]
+            },
+            "TemplateByIdRequest": {
+                "type": "string",
+                "example": "b7a59abd-0ab2-4538-b619-8da9f9089e08"
+            },
+            "TemplateByIdAndVersionRequest": {
+                "type": "integer",
+                "example": 1
+            },
+            "TemplatePreviewRequest": {
+                "type": "object",
+                "description": "If a template has placeholder fields for personalised information such as name or reference number, you need to provide their values in a dictionary with key value pairs.",
+                "properties": {
+                    "personalisation": {
+                        "type": "object",
+                        "description": "You can leave out this argument if a template does not have any placeholder fields for personalised information.<br/>If a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:",
+                        "properties": {
+                            "firstname": {
+                                "type": "string",
+                                "example": "Amala"
+                            },
+                            "date": {
+                                "type": "string",
+                                "example": "19/08/2024"
+                            }
+                        }
+                    }
+                }
+            },
+            "EmailCallbackRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "75a36070-55dc-4dc1-ac33-89da9377d989"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": null
+                    },
+                    "to": {
+                        "type": "string",
+                        "example": "example@mail.com"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "delivered"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "2023-09-16T16:50:09.090424Z"
+                    },
+                    "completed_at": {
+                        "type": "string",
+                        "example": "2023-09-16T16:50:10.042907Z"
+                    },
+                    "sent_at": {
+                        "type": "string",
+                        "example": "2023-09-16T16:50:09.219763Z"
+                    },
+                    "notification_type": {
+                        "type": "string",
+                        "example": "email"
+                    },
+                    "template_id": {
+                        "type": "string",
+                        "example": "8496188f-3f35-401b-9b8c-f97a528c5b76"
+                    },
+                    "template_version": {
+                        "type": "number",
+                        "example": 2
+                    }
+                },
+                "required": []
+            },
+            "SmsCallbackRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "75a36070-55dc-4dc1-ac33-89da9377d989"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": null
+                    },
+                    "to": {
+                        "type": "string",
+                        "example": "07777777777"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "delivered"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "2023-09-16T16:50:09.090424Z"
+                    },
+                    "completed_at": {
+                        "type": "string",
+                        "example": "2023-09-16T16:50:10.042907Z"
+                    },
+                    "sent_at": {
+                        "type": "string",
+                        "example": "2023-09-16T16:50:09.219763Z"
+                    },
+                    "notification_type": {
+                        "type": "string",
+                        "example": "sms"
+                    },
+                    "template_id": {
+                        "type": "string",
+                        "example": "8496188f-3f35-401b-9b8c-f97a528c5b76"
+                    },
+                    "template_version": {
+                        "type": "number",
+                        "example": 1
+                    }
+                },
+                "required": []
+            },
+            "GetMultipleMessagesResponse": {
+                "type": "object",
+                "description": "The Send Text Message Response Payload",
+                "properties": {
+                    "notifications": {
+                        "type": "array",
+                        "description": "Multiple message notifications",
+                        "items": {
+                            "$ref": "#/components/schemas/GetOneMessageResponse"
+                        }
+                    },
+                    "links": {
+                        "type": "object",
+                        "required": [
+                            "current"
+                        ],
+                        "description": "Pagination links",
+                        "properties": {
+                            "current": {
+                                "type": "string",
+                                "example": "https://api.notifications.service.gov.uk/v2/notifications?template_type=sms&status=delivered"
+                            },
+                            "next": {
+                                "type": "string",
+                                "description": "Optional property, only included if the query parameter filers return some data",
+                                "example": "https://api.notifications.service.gov.uk/v2/notifications?older_than=last_id_in_list&template_type=sms&status=delivered"
+                            }
+                        }
+                    }
+                }
+            },
+            "GetOneMessageResponse": {
+                "type": "object",
+                "description": "The Send Email Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Required - notification ID",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Optional",
+                        "example": "STRING"
+                    },
+                    "email_address": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required for emails",
+                        "example": "sender@something.com"
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required for text messages",
+                        "example": "+447900900123"
+                    },
+                    "line_1": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 1"
+                    },
+                    "line_2": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 2"
+                    },
+                    "line_3": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 3"
+                    },
+                    "line_4": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 4"
+                    },
+                    "line_5": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 5"
+                    },
+                    "line_6": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required for letter",
+                        "example": "ADDRESS LINE 6"
+                    },
+                    "postcode": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required for letter",
+                        "example": "NW1 2TZ"
+                    },
+                    "postage": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required for letter",
+                        "enum": [
+                            "first",
+                            "second",
+                            "europe",
+                            "rest-of-world"
+                        ],
+                        "example": "first / second / europe / rest-of-world"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Required",
+                        "enum": [
+                            "sms",
+                            "letter",
+                            "email"
+                        ],
+                        "example": "sms / letter / email"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Required",
+                        "example": "sending / delivered / permanent-failure / temporary-failure / technical-failure"
+                    },
+                    "template": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "Required - template ID",
+                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            },
+                            "version": {
+                                "type": "number",
+                                "example": 1
+                            },
+                            "uri": {
+                                "type": "string",
+                                "description": "Required",
+                                "example": "/v2/template/{id}/{version}"
+                            }
+                        }
+                    },
+                    "body": {
+                        "type": "string",
+                        "description": "Required - body of notification",
+                        "example": "STRING"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required for email- subject of email",
+                        "example": "STRING"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "description": "Required - date and time notification created",
+                        "example": "2024-05-17T15:58:38.342838Z"
+                    },
+                    "created_by_name": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Optional - name of the person who sent the notification if sent manually",
+                        "example": "STRING"
+                    },
+                    "sent_at": {
+                        "type": "string",
+                        "description": "Optional - date and time notification sent to provider",
+                        "example": "2024-05-17T15:58:30.143000Z"
+                    },
+                    "completed_at": {
+                        "type": "string",
+                        "description": "Optional - date and time notification delivered or failed",
+                        "example": "2024-05-17T15:59:10.321000Z"
+                    },
+                    "scheduled_for": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Optional - date and time notification has been scheduled to be sent at",
+                        "example": "2024-05-17T09:00:00.000000Z"
+                    },
+                    "one_click_unsubscribe_url": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Optional - URL that you provided so your recipients can unsubscribe",
+                        "example": "STRING"
+                    },
+                    "is_cost_data_ready": {
+                        "type": "boolean",
+                        "description": "`true` if cost data is ready, and `false` if it isn't",
+                        "example": true
+                    },
+                    "cost_in_pounds": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Optional - cost of the notification in pounds. The cost does not take free allowance into account",
+                        "example": 0.0027
+                    },
+                    "cost_details": {
+                        "oneOf": [
+                            {
+                                "type": "object",
+                                "title": "sms",
+                                "properties": {
+                                    "billable_sms_fragments": {
+                                        "type": "number",
+                                        "description": "Optional - for text messages, number of billable sms fragments in your text message",
+                                        "example": 1
+                                    },
+                                    "international_rate_multiplier": {
+                                        "type": "number",
+                                        "description": "Optional - for text messages, for international sms rate is multiplied by this value",
+                                        "example": 1
+                                    },
+                                    "sms_rate": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "description": "Optional - for text messages, cost of 1 sms fragment",
+                                        "example": 0.0027
+                                    }
+                                }
+                            },
+                            {
+                                "type": "object",
+                                "title": "letter",
+                                "properties": {
+                                    "billable_sheets_of_paper": {
+                                        "type": "number",
+                                        "description": "Optional - for letters, number of sheets of paper in the letter you sent",
+                                        "example": 2
+                                    },
+                                    "postage": {
+                                        "type": "string",
+                                        "description": "Optional - for letters",
+                                        "enum": [
+                                            "first",
+                                            "second",
+                                            "europe",
+                                            "rest-of-world"
+                                        ],
+                                        "example": "first / second / europe / rest-of-world"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "object",
+                                "title": "email",
+                                "properties": {}
+                            }
+                        ]
+                    }
+                }
+            },
+            "GetReceivedTextMessageResponse": {
+                "type": "object",
+                "description": "The received text message payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "2024-05-17T15:58:38.342838Z"
+                    },
+                    "service_id": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "notify_number": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "user_number": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "STRING"
+                    }
+                }
+            },
+            "GetReceivedTextMessagesResponse": {
+                "type": "object",
+                "description": "Recieved text messages",
+                "properties": {
+                    "received_text_messages": {
+                        "type": "array",
+                        "description": "Multiple received text messages, empty if no text messages received",
+                        "items": {
+                            "$ref": "#/components/schemas/GetReceivedTextMessageResponse"
+                        }
+                    },
+                    "links": {
+                        "type": "object",
+                        "required": [
+                            "current"
+                        ],
+                        "description": "Pagination links",
+                        "properties": {
+                            "current": {
+                                "type": "string",
+                                "example": "https://api.notifications.service.gov.uk/v2/received-text-messages"
+                            },
+                            "next": {
+                                "type": "string",
+                                "example": "https://api.notifications.service.gov.uk/v2/received-text-messages?older_than=last_id_in_list"
+                            }
+                        }
+                    }
+                }
+            },
+            "SendTextMessageResponse": {
+                "type": "object",
+                "description": "The Send Text Message Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "scheduled_for": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": null
+                    },
+                    "content": {
+                        "type": "object",
+                        "properties": {
+                            "body": {
+                                "type": "string",
+                                "example": "MESSAGE TEXT"
+                            },
+                            "from_number": {
+                                "type": "string",
+                                "example": "SENDER"
+                            }
+                        }
+                    },
+                    "uri": {
+                        "type": "string",
+                        "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "template": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            },
+                            "version": {
+                                "type": "number",
+                                "example": 1
+                            },
+                            "uri": {
+                                "type": "string",
+                                "example": "https://api.notifications.service.gov.uk/v2/template/ceb50d92-100d-4b8b-b559-14fa3b091cd"
+                            }
+                        }
+                    }
+                }
+            },
+            "SendEmailResponse": {
+                "type": "object",
+                "description": "The Send Email Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "scheduled_for": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": null
+                    },
+                    "content": {
+                        "type": "object",
+                        "properties": {
+                            "subject": {
+                                "type": "string",
+                                "example": "SUBJECT TEXT"
+                            },
+                            "body": {
+                                "type": "string",
+                                "example": "MESSAGE TEXT"
+                            },
+                            "from_email": {
+                                "type": "string",
+                                "example": "SENDER EMAIL"
+                            },
+                            "one_click_unsubscribe_url": {
+                                "type": "string",
+                                "example": "https://example.com/unsubscribe.html?opaque=123456789",
+                                "nullable": true
+                            }
+                        }
+                    },
+                    "uri": {
+                        "type": "string",
+                        "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "template": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            },
+                            "version": {
+                                "type": "number",
+                                "example": 1
+                            },
+                            "uri": {
+                                "type": "string",
+                                "example": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            }
+                        }
+                    }
+                }
+            },
+            "SendLetterResponse": {
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/SendNormalLetterResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/SendPrecompiledLetterResponse"
+                    }
+                ]
+            },
+            "SendNormalLetterResponse": {
+                "type": "object",
+                "description": "The Send Normal Letter Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "content": {
+                        "type": "object",
+                        "properties": {
+                            "subject": {
+                                "type": "string",
+                                "example": "SUBJECT TEXT"
+                            },
+                            "body": {
+                                "type": "string",
+                                "example": "LETTER TEXT"
+                            }
+                        }
+                    },
+                    "uri": {
+                        "type": "string",
+                        "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "template": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            },
+                            "version": {
+                                "type": "number",
+                                "example": 1
+                            },
+                            "uri": {
+                                "type": "string",
+                                "example": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
+                            }
+                        }
+                    },
+                    "scheduled_for": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": null
+                    }
+                }
+            },
+            "SendPrecompiledLetterResponse": {
+                "type": "object",
+                "description": "The Send Precompiled Letter Response Payload",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": "STRING"
+                    },
+                    "postage": {
+                        "type": "string",
+                        "example": "postage-you-have-set-or-None"
+                    }
+                }
+            },
+            "TemplatesResponse": {
+                "type": "object",
+                "description": "If the request is successful, the response body is json and the status code is 200",
+                "properties": {
+                    "templates": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TemplateResponse"
+                        }
+                    }
+                }
+            },
+            "TemplateResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a",
+                        "description": "required string - template ID"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Test template",
+                        "description": "required string - template name"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "sms",
+                            "email",
+                            "letter"
+                        ],
+                        "example": "sms",
+                        "description": "required string"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "2024-08-12T10:40:20.000000Z",
+                        "description": "required string - date and time template created"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "example": "2024-08-12T10:45:47.890097Z",
+                        "description": "required string - date and time template last updated"
+                    },
+                    "version": {
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "example": "someone@example.com",
+                        "description": "required string"
+                    },
+                    "body": {
+                        "type": "string",
+                        "example": "Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
+                        "description": "required string - body of notification"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "Test",
+                        "description": "required string for email - subject of email, otherwise null"
+                    },
+                    "postage": {
+                        "type": "string",
+                        "enum": [
+                            "first",
+                            "second",
+                            "europe",
+                            "rest-of-world",
+                            null
+                        ],
+                        "nullable": true,
+                        "example": "second",
+                        "description": "required string for letter - postage type, otherwise null"
+                    },
+                    "personalisation": {
+                        "type": "object",
+                        "example": {
+                            "date": {
+                                "required": true
+                            },
+                            "firstname": {
+                                "required": true
+                            }
+                        },
+                        "description": "object containaing personalisation parameters - empty if no personalisation in the template"
+                    },
+                    "letter_contact_block": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "",
+                        "description": "optional string - null if not a letter template or contact block not set"
+                    }
+                }
+            },
+            "TemplatePreviewResponse": {
+                "type": "object",
+                "description": "If the request is successful, the response body is json and the status code is 200",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "b7a59abd-0ab2-4538-b619-8da9f9089e08"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "sms",
+                            "email",
+                            "letter"
+                        ],
+                        "example": "sms",
+                        "description": "required string"
+                    },
+                    "version": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "body": {
+                        "type": "string",
+                        "example": "Hi Amala, We have received your letter dated 19/08/2024.  No further action is required.",
+                        "description": "required string - body of notification"
+                    },
+                    "html": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": null,
+                        "description": "html representation of the notification to be sent - null for sms"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": null,
+                        "description": "required string for email - subject of email, otherwise null"
+                    },
+                    "postage": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": null,
+                        "description": "required string for letter - postage type, otherwise null"
+                    }
+                }
+            },
+            "SendNotificaitonRequestError": {
+                "type": "object",
+                "description": "Bad request error response",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "ValidationError",
+                                    "description": "Error type"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "X is a required property",
+                                    "description": "Error message"
+                                }
+                            }
+                        }
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example": 400
+                    }
+                }
+            },
+            "TemplatesRequestError": {
+                "type": "object",
+                "description": "If the request is not successful, the API returns json containing the relevant error code. ",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "ValidationError",
+                                    "description": "Error type"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "type pigeon is not one of [sms, email, letter, broadcast]",
+                                    "description": "Error message"
+                                }
+                            }
+                        }
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example": 400
+                    }
+                }
+            },
+            "TemplatesRequestValidationError": {
+                "type": "object",
+                "description": "If the request is not successful, the API returns json containing the relevant error code. ",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "ValidationError",
+                                    "description": "Error type"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "id is not a valid UUID",
+                                    "description": "Error message"
+                                }
+                            }
+                        }
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example": 400
+                    }
+                }
+            },
+            "TemplateNoResultError": {
+                "type": "object",
+                "description": "If the request is not successful, the API returns json containing the relevant error code.",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "NoResultFound"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "No result found",
+                                    "description": "Check your [template ID](https://docs.notifications.service.gov.uk/rest-api.html#get-a-template-by-id-arguments-template-id-required)"
+                                }
+                            }
+                        }
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example": 404
+                    }
+                }
+            },
+            "TemplatePreviewRequestError": {
+                "type": "object",
+                "description": "Bad request error response",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "BadRequestError",
+                                    "description": "Error type"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Missing personalisation: [PERSONALISATION FIELD]",
+                                    "description": "Error message"
+                                }
+                            }
+                        }
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example": 400
+                    }
+                }
+            },
+            "GetMessageNoResultFoundError": {
+                "type": "object",
+                "description": "No result found error response",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "NoResultFound"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "No result found",
+                                    "description": "Check the notification ID"
+                                }
+                            }
+                        }
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example": 404
+                    }
+                }
+            },
+            "GetMessageValidationError": {
+                "type": "object",
+                "description": "Validation error response",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "NoResultFound"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "id is not a valid UUID",
+                                    "description": "Check the notification ID"
+                                }
+                            }
+                        }
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example": 400
+                    }
+                }
+            },
+            "AuthError": {
+                "type": "object",
+                "description": "Auth error response",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "AuthError",
+                                    "description": "Error type"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Error: Your system clock must be accurate to within 30 seconds",
+                                    "description": "Error string"
+                                }
+                            }
+                        }
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example": 403
+                    }
+                }
+            },
+            "LimitError": {
+                "type": "object",
+                "description": "Rate or service limit error response",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "TooManyRequestsError",
+                                    "description": "Error type"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds",
+                                    "description": "Error string"
+                                }
+                            }
+                        }
+                    },
+                    "status_code": {
+                        "type": "integer",
+                        "example": 429
+                    }
+                }
+            },
+            "ServerError": {
+                "type": "array",
+                "description": "Rate or service limit error response",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "error": {
+                            "type": "string",
+                            "example": "Exception"
+                        },
+                        "message": {
+                            "type": "string",
+                            "example": "Internal server error",
+                            "description": "Notify was unable to process the request, resend your notification."
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
