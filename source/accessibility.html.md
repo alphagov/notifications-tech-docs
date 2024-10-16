@@ -71,7 +71,7 @@ We last tested this website for accessibility issues in August 2024. We followed
 each of [the success criteria added in WCAG 2.2](https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/) and tested the website against them.
 
 
-When we first tested this website for accessibility issues in August 2020, we used manual and automated tests to look for issues, following [guidance on testing for accessibility from the GOV.UK Service Manual](https://www.gov.uk/service-manual/helping-people-to-use-your-service/testing-for-accessibility).
+This website was first tested in August 2020. The test was carried out by the technical writing team at GDS. They used the [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org/) and a checklist created with the help of the GDS accessibility team. They tested a selection of the website’s pages.
 
 ## What we’re doing to improve accessibility
 
@@ -80,6 +80,5 @@ following [guidance from the GOV.UK Service Manual on making your website access
 
 ## Preparation of this accessibility statement
 
-This statement was prepared on 3 September 2020. It was last reviewed on 7 October 2021.
+This statement was prepared on 3 September 2020.
 
-This website was last tested in August 2020. The test was carried out by the technical writing team at GDS. We used the [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org/) and a checklist we created with the help of the GDS accessibility team. We tested a selection of the website’s pages.
