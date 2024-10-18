@@ -136,7 +136,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |error.code|error.message|class|How to fix|
 |:---|:---|:---|:---|
 |`400`|`BadRequestError: Can't send to this recipient using a team-only API key`|`BadRequestError`|Use the correct type of [API key](#api-keys)|
-|`400`|`BadRequestError: Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
+|`400`|`BadRequestError: Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
 |`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock|
 |`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 |`429`|`RateLimitError: Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds`|`RateLimitError`|Refer to [API rate limits](#rate-limits) for more information|
@@ -415,7 +415,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |error.code|error.message|class|How to fix|
 |:--- |:---|:---|:---|
 |`400`|`BadRequestError: Can't send to this recipient using a team-only API key`|`BadRequestError`|Use the correct type of [API key](#api-keys)|
-|`400`|`BadRequestError: Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
+|`400`|`BadRequestError: Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
 |`400`|`BadRequestError: Unsupported file type '(FILE TYPE)'. Supported types are: '(ALLOWED TYPES)'`|`BadRequestError`|Wrong file type. You can only upload .pdf, .csv, .txt, .doc, .docx, .xlsx, .rtf or .odt files|
 |`400`|```BadRequestError: `filename` cannot be longer than 100 characters"```|`BadRequestError`|Choose a shorter filename|
 |`400`|```BadRequestError: `filename` must end with a file extension. For example, filename.csv"```|`BadRequestError`|Include the file extension in your filename|
@@ -433,7 +433,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 
 ### Send a letter
 
-When you add a new service it will start in [trial mode](https://www.notifications.service.gov.uk/features/trial-mode). You can only send letters when your service is live.
+When you add a new service it will start in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode). You can only send letters when your service is live.
 
 To send Notify a request to go live:
 
@@ -535,7 +535,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |error.code|error.message|class|How to fix|
 |:--- |:---|:---|:---|
 |`403`|`BadRequestError: Cannot send letters with a team api key`|`BadRequestError`|Use the correct type of [API key](#api-keys).|
-|`400`|`BadRequestError: Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode).|
+|`400`|`BadRequestError: Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode).|
 |`400`|`ValidationError: personalisation address_line_1 is a required property`|`BadRequestError`|Ensure that your template has a field for the first line of the address, refer to [personalisation](#personalisation-required) for more information.|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Must be a real UK postcode"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode.|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Last line of address must be a real UK postcode or another country"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode or the name of a country outside the UK.|
@@ -593,7 +593,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |:---|:---|:---|:---|
 |`403`|`BadRequestError: Cannot send letters with a team api key`|`BadRequestError`|Use the correct type of [API key](#api-keys)|
 |`400`|`BadRequestError: Letter content is not a valid PDF`|`BadRequestError`|PDF file format is required|
-|`400`|`BadRequestError: Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/features/using-notify#trial-mode)|
+|`400`|`BadRequestError: Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
 |`400`|`ValidationError: reference is a required property`|`BadRequestError`|Add a `reference` argument to the method call|
 |`400`|`ValidationError: postage invalid. It must be either first or second.`|`BadRequestError`|Change the value of `postage` argument in the method call to either 'first' or 'second'|
 |`429`|`RateLimitError: Exceeded rate limit for key type live of 10 requests per 20 seconds`|`RateLimitError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
