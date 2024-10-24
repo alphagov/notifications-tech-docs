@@ -299,7 +299,7 @@ Your email should also tell recipients how long the file will be available to do
 
 #### Upload your file
 
-You can upload PDF, CSV, JSON, .odt, .txt, .rtf, .xlsx and MS Word Document files. Your file must be smaller than 2MB.. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support/ask-question-give-feedback) if you need to send other file types.
+You can upload PDF, CSV, JSON, .odt, .txt, .rtf, .xlsx and MS Word Document files. Your file must be smaller than 2MB.. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support) if you need to send other file types.
 
 Pass the file object as a value into the personalisation argument. For example:
 
@@ -902,8 +902,8 @@ If the request is not successful, the client returns an `Alphagov\Notifications\
 
 |exc->getCode()|exc->getErrors()|How to fix|
 |:---|:---|:---|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]"`<br>`}]`|Contact the GOV.UK Notify team.|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Apple is not one of [sms, email, letter]"`<br>`}]`|Contact the GOV>UK Notify team.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]"`<br>`}]`|[Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support).|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Apple is not one of [sms, email, letter]"`<br>`}]`|[Contact the GOV>UK Notify team](https://www.notifications.service.gov.uk/support).|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock.|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information.|
 

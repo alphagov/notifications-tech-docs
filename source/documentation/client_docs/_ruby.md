@@ -289,7 +289,7 @@ Your email should also tell recipients how long the file will be available to do
 
 #### Upload your file
 
-You can upload PDF, CSV, JSON, .odt, .txt, .rtf, .xlsx and MS Word Document files. Your file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support/ask-question-give-feedback) if you need to send other file types.
+You can upload PDF, CSV, JSON, .odt, .txt, .rtf, .xlsx and MS Word Document files. Your file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support) if you need to send other file types.
 
 1. Pass the file object as an argument to the `Notifications.prepare_upload` helper method.
 1. Pass the result into the personalisation argument.
@@ -788,8 +788,8 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 
 |error.code|error.message|class|How to fix|
 |:---|:---|:---|:---|
-|`400`|`ValidationError: bad status is not one of [created, sending, sent, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure, accepted, received]`|`BadRequestError`|Contact the GOV.UK Notify team|
-|`400`|`ValidationError: Template type is not one of [sms, email, letter]`|`BadRequestError`|Contact the GOV.UK Notify team|
+|`400`|`ValidationError: bad status is not one of [created, sending, sent, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure, accepted, received]`|`BadRequestError`|[Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support)|
+|`400`|`ValidationError: Template type is not one of [sms, email, letter]`|`BadRequestError`|[Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support)|
 |`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock|
 |`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 
@@ -1038,7 +1038,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 
 |error.code|error.message|class|How to fix|
 |:---|:---|:---|:---|
-|`400`|`ValidationError: Template type is not one of [sms, email, letter]`|`BadRequestError`|Contact the Notify team|
+|`400`|`ValidationError: Template type is not one of [sms, email, letter]`|`BadRequestError`|[Contact the Notify team](https://www.notifications.service.gov.uk/support)|
 
 ### Generate a preview template
 
