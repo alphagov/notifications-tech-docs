@@ -924,7 +924,7 @@ If the request is not successful, the client returns an `HTTPError` containing t
 |#`technical-failure`|GOV.UK Notify had an unexpected error while sending the letter to our printing provider.|
 |#`permanent-failure`|The provider cannot print the letter. Your letter will not be dispatched.|
 
-### Get a PDF for a letter
+### Get a PDF for a letter notification
 
 #### Method
 
@@ -1214,7 +1214,7 @@ If the request to the client is successful, the client will return a `<generator
 <generator object NotificationsAPIClient.get_received_texts_iterator at 0x1026c7410>
 ```
 
-### Get one page of received text messages
+### Get a page of received text messages
 
 This will return one page of up to 250 text messages.
 
