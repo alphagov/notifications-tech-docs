@@ -1018,7 +1018,7 @@ If the request is not successful, the API returns `json` containing the relevant
 |#`technical-failure`|GOV.UK Notify had an unexpected error while sending the letter to our printing provider.|
 |#`permanent-failure`|The provider cannot print the letter. Your letter will not be dispatched.|
 
-### Get a PDF for a letter
+### Get a PDF for a letter notification
 
 This returns the PDF contents of a letter.
 
