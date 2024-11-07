@@ -47,7 +47,7 @@ Run the following in the NuGet package manager console to install the client pac
 nuget install GovukNotify
 ```
 
-##### UI
+##### User Interface (UI)
 
 Use the Package Manager UI to [search for and install the client package](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui#finding-and-installing-a-package).
 
