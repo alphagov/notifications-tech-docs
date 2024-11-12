@@ -333,7 +333,7 @@ You can upload the following files types:
 - MS Word Document (.doc, .docx)
 - PDF (.pdf)
 - PNG (.png)
-- Text (.json, .odt, .rtf .txt,)
+- Text (.json, .odt, .rtf, .txt)
 
 Your file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support) if you need to send other file types.
 
