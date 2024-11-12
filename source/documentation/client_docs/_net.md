@@ -395,7 +395,7 @@ Your email should also tell recipients how long the file will be available to do
 You can upload the following file types:
 
 - CSV (.csv)
-- image(.jpeg, .jpg, .png) 
+- image (.jpeg, .jpg, .png) 
 - Microsoft Excel Spreadsheet (.xlsx)
 - Microsoft Word Document (.doc, .docx)
 - PDF (.pdf)
