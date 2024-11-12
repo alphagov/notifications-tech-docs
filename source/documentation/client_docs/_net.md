@@ -392,7 +392,17 @@ Your email should also tell recipients how long the file will be available to do
 
 #### Upload your file
 
-You can upload PDF, CSV, JSON, .odt, .txt, .rtf, .xlsx and MS Word Document files. Your file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support) if you need to send other file types.
+You can upload the following file types:
+
+- CSV (.csv)
+- JPEG (.jpeg, .jpg) 
+- MS Excel Spreadsheet (.xlsx)
+- MS Word Document (.doc, .docx)
+- PDF (.pdf)
+- PNG (.png)
+- Text (.json, .odt, .rtf .txt,)
+
+Your file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support) if you need to send other file types.
 
 1. Convert the PDF to a `byte[]`.
 1. Pass the `byte[]` to the personalisation argument.
