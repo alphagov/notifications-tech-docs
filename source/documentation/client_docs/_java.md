@@ -26,6 +26,8 @@ NotificationClient client = new NotificationClient(apiKey);
 
 To get an API key, [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page. You can find more information in the [API keys](#api-keys) section of this documentation.
 
+#### Connect through a proxy (optional)
+
 If you use a proxy you can pass it into the NotificationClient constructor.
 
 ```java
