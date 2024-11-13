@@ -195,7 +195,7 @@ reference='STRING', # optional string - identifies notification(s)
 
 You can leave out this argument if you do not have a reference.
 
-##### one_click_unsubscribe_url (required)
+##### one_click_unsubscribe_url (recommended)
 
 If you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).
 
