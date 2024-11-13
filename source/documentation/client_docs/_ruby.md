@@ -416,7 +416,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |:--- |:---|:---|:---|
 |`400`|`BadRequestError: Can't send to this recipient using a team-only API key`|`BadRequestError`|Use the correct type of [API key](#api-keys)|
 |`400`|`BadRequestError: Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
-|`400`|`BadRequestError: Unsupported file type '(FILE TYPE)'. Supported types are: '(ALLOWED TYPES)'`|`BadRequestError`|Wrong file type. You can only upload .pdf, .csv, .txt, .doc, .docx, .xlsx, .rtf or .odt files|
+|`400`|`BadRequestError: Unsupported file type '(FILE TYPE)'. Supported types are: '(ALLOWED TYPES)'`|`BadRequestError`|Wrong file type. You can only upload .csv, .doc, .docx, .jpeg, .jpg, .odt, .pdf, .png, .rtf, .txt or .xlsx files|
 |`400`|```BadRequestError: `filename` cannot be longer than 100 characters"```|`BadRequestError`|Choose a shorter filename|
 |`400`|```BadRequestError: `filename` must end with a file extension. For example, filename.csv"```|`BadRequestError`|Include the file extension in your filename|
 |`400`|`BadRequestError: Unsupported value for retention_period '(PERIOD)'. Supported periods are from 1 to 78 weeks.`|`BadRequestError`|Choose a period between 1 and 78 weeks|
