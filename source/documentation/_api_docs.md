@@ -246,7 +246,7 @@ An identifier you can create if necessary. This reference identifies a single no
 ```
 You can leave out this argument if you do not have a reference.
 
-##### one_click_unsubscribe_url (required)
+##### one_click_unsubscribe_url (recommended)
 
 If you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).
 
@@ -1018,7 +1018,7 @@ If the request is not successful, the API returns `json` containing the relevant
 |#`technical-failure`|GOV.UK Notify had an unexpected error while sending the letter to our printing provider.|
 |#`permanent-failure`|The provider cannot print the letter. Your letter will not be dispatched.|
 
-### Get a PDF for a letter
+### Get a PDF for a letter notification
 
 This returns the PDF contents of a letter.
 

@@ -195,7 +195,7 @@ reference='STRING', # optional string - identifies notification(s)
 
 You can leave out this argument if you do not have a reference.
 
-##### one_click_unsubscribe_url (required)
+##### one_click_unsubscribe_url (recommended)
 
 If you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).
 
@@ -924,7 +924,7 @@ If the request is not successful, the client returns an `HTTPError` containing t
 |#`technical-failure`|GOV.UK Notify had an unexpected error while sending the letter to our printing provider.|
 |#`permanent-failure`|The provider cannot print the letter. Your letter will not be dispatched.|
 
-### Get a PDF for a letter
+### Get a PDF for a letter notification
 
 #### Method
 
@@ -1214,7 +1214,7 @@ If the request to the client is successful, the client will return a `<generator
 <generator object NotificationsAPIClient.get_received_texts_iterator at 0x1026c7410>
 ```
 
-### Get one page of received text messages
+### Get a page of received text messages
 
 This will return one page of up to 250 text messages.
 

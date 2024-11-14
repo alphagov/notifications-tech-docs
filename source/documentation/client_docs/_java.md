@@ -26,6 +26,8 @@ NotificationClient client = new NotificationClient(apiKey);
 
 To get an API key, [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page. You can find more information in the [API keys](#api-keys) section of this documentation.
 
+#### Connect through a proxy (optional)
+
 If you use a proxy you can pass it into the NotificationClient constructor.
 
 ```java
@@ -212,7 +214,7 @@ A unique identifier you create. This reference identifies a single unique notifi
 String reference='STRING';
 ```
 
-##### oneClickUnsubscribeURL (required)
+##### oneClickUnsubscribeURL (recommended)
 
 If you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).
 

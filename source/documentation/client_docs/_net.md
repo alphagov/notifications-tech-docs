@@ -47,7 +47,7 @@ Run the following in the NuGet package manager console to install the client pac
 nuget install GovukNotify
 ```
 
-##### UI
+##### User Interface (UI)
 
 Use the Package Manager UI to [search for and install the client package](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui#finding-and-installing-a-package).
 
@@ -64,6 +64,8 @@ var client = new NotificationClient(apiKey);
 ```
 
 To get an API key, [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page. You can find more information in the [API keys](#api-keys) section of this documentation.
+
+#### Connect through a proxy (optional)
 
 If you use a proxy, you must set the proxy configuration in the `web.config` file. Refer to the [Microsoft documentation on proxy configuration](https://docs.microsoft.com/en-us/dotnet/framework/network-programming/proxy-configuration) for more information.
 
@@ -268,7 +270,7 @@ string reference: "STRING";
 ```
 You can leave out this argument if you do not have a reference.
 
-##### oneClickUnsubscribeURL (required)
+##### oneClickUnsubscribeURL (recommended)
 
 If you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).
 
