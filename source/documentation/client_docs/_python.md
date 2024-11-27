@@ -56,6 +56,8 @@ response = notifications_client.send_sms_notification(
 
 The phone number of the recipient of the text message. This can be a UK or international number.
 
+For example:
+
 ```python
 phone_number="+447900900123", # required string
 ```
@@ -82,8 +84,8 @@ If a template has placeholder fields for personalised information such as name o
 ```python
 personalisation={
     "first_name": "Amala",
-    "application_date": "2018-01-01",
-}
+    "appointment_date": "2018-01-01 at 01:00PM",
+},
 ```
 
 You can leave out this argument if a template does not have any placeholder fields for personalised information.
@@ -93,7 +95,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference="STRING", # optional string - identifies notification(s)
+reference="ref_123", # optional string - identifies notification(s)
 ```
 You can leave out this argument if you do not have a reference.
 
@@ -113,7 +115,7 @@ You can then either:
 - select __Change__ to change the default sender that the service will use, and select __Save__
 
 ```python
-sms_sender_id="8e222534-7f05-4972-86e3-17c5d9f894e2" # optional UUID string
+sms_sender_id="8e222534-7f05-4972-86e3-17c5d9f894e2", # optional UUID string
 ```
 
 You can leave out this argument if your service only has one text message sender, or if you want to use the default sender.
@@ -124,17 +126,17 @@ If the request to the client is successful, the client returns a `dict`:
 
 ```python
 {
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
-  "reference": "STRING",
+  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
+  "reference": "ref_123", # optional string - reference your provided
   "content": {
-    "body": "MESSAGE TEXT",
-    "from_number": "SENDER"
+    "body": "Hi Amala, your appointment is on 2018-01-01 at 01:00PM",  # required string - message content
+    "from_number": "GOVUK"  # required string - sender name / phone number
   },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",  # required string
   "template": {
-    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
-    "version": INTEGER,
-    "uri": "https://api.notifications.service.gov.uk/v2/template/ceb50d92-100d-4b8b-b559-14fa3b091cd"
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
+    "version": 3,  # required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"  # required string
   }
 }
 ```
