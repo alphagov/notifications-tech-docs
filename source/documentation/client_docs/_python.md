@@ -45,8 +45,8 @@ You can use GOV.UK Notify to send emails, text messages and letters.
 
 ```python
 response = notifications_client.send_sms_notification(
-    phone_number='+447900900123', # required string
-    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
+    phone_number='+447900900123',
+    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a',
 )
 ```
 
@@ -56,6 +56,11 @@ response = notifications_client.send_sms_notification(
 
 The phone number of the recipient of the text message. This can be a UK or international number.
 
+```python
+phone_number='+447900900123', # required string
+```
+
+
 ##### template_id (required)
 
 To find the template ID:
@@ -63,6 +68,12 @@ To find the template ID:
 1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
 1. Go to the __Templates__ page and select the relevant template.
 1. Select __Copy template ID to clipboard__.
+
+For example:
+
+```python
+template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
+```
 
 ##### personalisation (optional)
 
