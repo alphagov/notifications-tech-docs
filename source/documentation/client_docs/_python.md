@@ -45,8 +45,8 @@ You can use GOV.UK Notify to send emails, text messages and letters.
 
 ```python
 response = notifications_client.send_sms_notification(
-    phone_number='+447900900123',
-    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a',
+    phone_number="+447900900123",
+    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
 )
 ```
 
@@ -57,7 +57,7 @@ response = notifications_client.send_sms_notification(
 The phone number of the recipient of the text message. This can be a UK or international number.
 
 ```python
-phone_number='+447900900123', # required string
+phone_number="+447900900123", # required string
 ```
 
 
@@ -72,7 +72,7 @@ To find the template ID:
 For example:
 
 ```python
-template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
+template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
 ```
 
 ##### personalisation (optional)
@@ -81,8 +81,8 @@ If a template has placeholder fields for personalised information such as name o
 
 ```python
 personalisation={
-    'first_name': 'Amala',
-    'application_date': '2018-01-01',
+    "first_name": "Amala",
+    "application_date": "2018-01-01",
 }
 ```
 
@@ -93,7 +93,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference='STRING', # optional string - identifies notification(s)
+reference="STRING", # optional string - identifies notification(s)
 ```
 You can leave out this argument if you do not have a reference.
 
@@ -113,7 +113,7 @@ You can then either:
 - select __Change__ to change the default sender that the service will use, and select __Save__
 
 ```python
-sms_sender_id='8e222534-7f05-4972-86e3-17c5d9f894e2' # optional UUID string
+sms_sender_id="8e222534-7f05-4972-86e3-17c5d9f894e2" # optional UUID string
 ```
 
 You can leave out this argument if your service only has one text message sender, or if you want to use the default sender.
@@ -132,7 +132,7 @@ If the request to the client is successful, the client returns a `dict`:
   },
   "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",
   "template": {
-    "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a',
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
     "version": INTEGER,
     "uri": "https://api.notifications.service.gov.uk/v2/template/ceb50d92-100d-4b8b-b559-14fa3b091cd"
   }
@@ -163,8 +163,8 @@ If the request is not successful, the client returns an `HTTPError` containing t
 
 ```python
 response = notifications_client.send_email_notification(
-    email_address='sender@something.com', # required string
-    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
+    email_address="sender@something.com", # required string
+    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
 )
 ```
 
@@ -201,7 +201,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if necessary. This reference identifies a single unique email or a batch of emails. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference='STRING', # optional string - identifies notification(s)
+reference="STRING", # optional string - identifies notification(s)
 ```
 
 You can leave out this argument if you do not have a reference.
@@ -213,7 +213,7 @@ If you send subscription emails you must let recipients opt out of receiving the
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
 ```python
-one_click_unsubscribe_url = 'https://example.com/unsubscribe.html?opaque=123456789'
+one_click_unsubscribe_url = "https://example.com/unsubscribe.html?opaque=123456789"
 ```
 
 The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
@@ -255,7 +255,7 @@ To add a reply-to email address:
 For example:
 
 ```python
-email_reply_to_id='8e222534-7f05-4972-86e3-17c5d9f894e2' # optional UUID string
+email_reply_to_id="8e222534-7f05-4972-86e3-17c5d9f894e2" # optional UUID string
 ```
 
 You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.
@@ -307,12 +307,12 @@ Pass the file object as a value into the personalisation argument. For example:
 ```python
 from notifications_python_client import prepare_upload
 
-with open('file.pdf', 'rb') as f:
+with open("file.pdf", "rb") as f:
     ...
     personalisation={
-      'first_name': 'Amala',
-      'application_date': '2018-01-01',
-      'link_to_file': prepare_upload(f),
+      "first_name": "Amala",
+      "application_date": "2018-01-01",
+      "link_to_file": prepare_upload(f),
     }
 ```
 
@@ -336,12 +336,12 @@ If Notify cannot add the correct file extension, recipients may not be able to o
 ```python
 from notifications_python_client import prepare_upload
 
-with open('file.csv', 'rb') as f:
+with open("file.csv", "rb") as f:
     ...
     personalisation={
-      'first_name': 'Amala',
-      'application_date': '2018-01-01',
-      'link_to_file': prepare_upload(f, filename='2023-12-25-daily-report.csv'),
+      "first_name": "Amala",
+      "application_date": "2018-01-01",
+      "link_to_file": prepare_upload(f, filename="2023-12-25-daily-report.csv"),
     }
 ```
 
@@ -369,12 +369,12 @@ To let the recipient download the file without confirming their email address, s
 ```python
 from notifications_python_client import prepare_upload
 
-with open('file.pdf', 'rb') as f:
+with open("file.pdf", "rb") as f:
     ...
     personalisation={
-      'first_name': 'Amala',
-      'application_date': '2018-01-01',
-      'link_to_file': prepare_upload(f, confirm_email_before_download=False),
+      "first_name": "Amala",
+      "application_date": "2018-01-01",
+      "link_to_file": prepare_upload(f, confirm_email_before_download=False),
     }
 ```
 
@@ -396,12 +396,12 @@ Files sent before 12 April 2023 had a longer default period of 78 weeks (18 mont
 ```python
 from notifications_python_client import prepare_upload
 
-with open('file.pdf', 'rb') as f:
+with open("file.pdf", "rb") as f:
     ...
     personalisation={
-      'first_name': 'Amala',
-      'application_date': '2018-01-01',
-      'link_to_file': prepare_upload(f, retention_period='4 weeks'),
+      "first_name": "Amala",
+      "application_date": "2018-01-01",
+      "link_to_file": prepare_upload(f, retention_period="4 weeks"),
     }
 ```
 
@@ -464,11 +464,11 @@ To send Notify a request to go live:
 
 ```python
     response = notifications_client.send_letter_notification(
-        template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
+        template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
         personalisation={
-          'address_line_1': 'The Occupier' # required string,
-          'address_line_2': '123 High Street' # required string,
-          'address_line_3': 'SW14 6BH' # required string,
+          "address_line_1": "The Occupier" # required string,
+          "address_line_2": "123 High Street" # required string,
+          "address_line_3": "SW14 6BH" # required string,
         },
     )
 ```
@@ -507,13 +507,13 @@ Any other placeholder fields included in the letter template also count as requi
 
 ```python
 personalisation={
-  'address_line_1': 'The Occupier',
-  'address_line_2': '123 High Street',
-  'address_line_3': 'Richmond upon Thames',
-  'address_line_4': 'Middlesex',
-  'address_line_5': 'SW14 6BF',
-  'name': 'John Smith',
-  'application_id': '4134325',
+  "address_line_1": "The Occupier",
+  "address_line_2": "123 High Street",
+  "address_line_3": "Richmond upon Thames",
+  "address_line_4": "Middlesex",
+  "address_line_5": "SW14 6BF",
+  "name": "John Smith",
+  "application_id": "4134325",
   # pass in a list and it will appear as bullet points in the letter:
   "required_documents": ["passport", "utility bill", "other id"],
 }
@@ -524,7 +524,7 @@ personalisation={
 A unique identifier you can create if necessary. This reference identifies a single unique letter or a batch of letters. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference='STRING' # optional string - identifies notification(s)
+reference="STRING" # optional string - identifies notification(s)
 ```
 
 #### Response
@@ -534,7 +534,7 @@ If the request to the client is successful, the client returns a `dict`:
 ```python
 {
   "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
-  "reference": 'STRING',
+  "reference": "STRING",
   "content": {
     "subject": "SUBJECT TEXT",
     "body": "LETTER TEXT",
@@ -624,7 +624,7 @@ If the request is not successful, the client returns an HTTPError containing the
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Letter content is not a valid PDF"`<br>`}]`|PDF file format is required|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this precompiled letter in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "reference is a required property"`<br>`}]`|Add a `reference` argument to the method call|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "postage invalid. It must be either first or second."`<br>`}]`|Change the value of `postage` argument in the method call to either 'first' or 'second'|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "postage invalid. It must be either first or second."`<br>`}]`|Change the value of `postage` argument in the method call to either `"first"` or `"second"`|
 |`429`|`[{`<br>`"error": "RateLimitError",`<br>`"message": "Exceeded rate limit for key type live of 10 requests per 20 seconds"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 |`429`|`[{`<br>`"error": "TooManyRequestsError",`<br>`"message": "Exceeded send limits (50) for today"`<br>`}]`|Refer to [service limits](#daily-limits) for the limit number|
 
@@ -795,7 +795,7 @@ You can leave out this argument to ignore this filter.
 A unique identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference='STRING' # optional string - identifies notification(s)
+reference="STRING" # optional string - identifies notification(s)
 ```
 
 You can leave out this argument to ignore this filter.
@@ -805,7 +805,7 @@ You can leave out this argument to ignore this filter.
 Input a notification ID into this argument. If you use this argument, the method returns the next 250 received messages older than the given ID.
 
 ```python
-older_than='740e5834-3a29-46b4-9a6f-16142fde533a' # optional string - notification ID
+older_than="740e5834-3a29-46b4-9a6f-16142fde533a" # optional string - notification ID
 ```
 
 If you leave out this argument, the method returns the most recent 250 messages.
@@ -952,7 +952,7 @@ This returns the PDF contents of a letter.
 
 ```python
 pdf_file = notifications_client.get_pdf_for_letter(
-  'f33517ff-2a88-4f6e-b855-c550268ce08a' # required string - notification ID
+  "f33517ff-2a88-4f6e-b855-c550268ce08a" # required string - notification ID
 )
 ```
 
@@ -994,7 +994,7 @@ This returns the latest version of the template.
 
 ```python
 response = notifications_client.get_template(
-  'f33517ff-2a88-4f6e-b855-c550268ce08a' # required string - template ID
+  "f33517ff-2a88-4f6e-b855-c550268ce08a" # required string - template ID
 )
 ```
 
@@ -1010,7 +1010,7 @@ If the request to the client is successful, the client returns a `dict`.
 
 ```python
 {
-    "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
     "name": "STRING", # required string - template name
     "type": "sms / email / letter" , # required string
     "created_at": "STRING", # required string - date and time template created
@@ -1040,8 +1040,8 @@ If the request is not successful, the client returns an `HTTPError` containing t
 
 ```python
 response = notifications_client.get_template_version(
-    'f33517ff-2a88-4f6e-b855-c550268ce08a' # required string - template ID
-    'version': INTEGER,
+    "f33517ff-2a88-4f6e-b855-c550268ce08a" # required string - template ID
+    "version": INTEGER,
 )
 ```
 
@@ -1061,7 +1061,7 @@ If the request to the client is successful, the client returns a `dict`.
 
 ```python
 {
-    "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
     "name": "STRING", # required string - template name
     "type": "sms / email / letter" , # required string
     "created_at": "STRING", # required string - date and time template created
@@ -1115,7 +1115,7 @@ If the request to the client is successful, the client returns a `dict`.
 {
     "templates": [
         {
-            "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
+            "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
             "name": "STRING", # required string - template name
             "type": "sms / email / letter" , # required string
             "created_at": "STRING", # required string - date and time template created
@@ -1149,10 +1149,10 @@ This generates a preview version of a template.
 
 ```python
 response = notifications_client.post_template_preview(
-    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
+    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
     personalisation={
-        'KEY': 'VALUE',
-        'KEY': 'VALUE',
+        "KEY": "VALUE",
+        "KEY": "VALUE",
         ...
         }, # required dict - specifies template parameters
 )
@@ -1172,8 +1172,8 @@ If a template has placeholder fields for personalised information such as name o
 
 ```python
 personalisation={
-    'first_name': 'Amala',
-    'application_date': '2018-01-01',
+    "first_name": "Amala",
+    "application_date": "2018-01-01",
 }
 ```
 
@@ -1253,7 +1253,7 @@ You can specify which text messages to receive by inputting the ID of a received
 Input the ID of a received text message into this argument. If you use this argument, the method returns the next 250 received text messages older than the given ID.
 
 ```python
-older_than='740e5834-3a29-46b4-9a6f-16142fde533a' # optional string - notification ID
+older_than="740e5834-3a29-46b4-9a6f-16142fde533a" # optional string - notification ID
 ```
 
 If you leave out this argument, the method returns the most recent 250 text messages.
