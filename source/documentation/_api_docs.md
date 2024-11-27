@@ -261,7 +261,7 @@ Your unsubscribe URL and response must comply with the guidance specified in [Se
 
 You can leave out this argument if the email being sent is not a subscription email.
 
-You should also add an unsubscribe link to the bottom of your email. Find out how to add an unsubscribe link when you create a __New template__ or __Edit__ an email template. 
+You must also add an unsubscribe link to the bottom of your email. The unsubscribe link at the bottom of your email must be a `GET` request. Your link should go to a webpage where the recipient can confirm that they want to unsubscribe.  
 
 ##### email_reply_to_id (optional)
 
