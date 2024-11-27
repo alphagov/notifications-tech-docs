@@ -264,6 +264,10 @@ You can leave out this argument if the email being sent is not a subscription em
 
 You should also add an unsubscribe link to the bottom of your email. Find out how to add an unsubscribe link when you create a __New template__ or __Edit__ an email template. 
 
+You must also add an unsubscribe link to the bottom of your email. The unsubscribe link at the bottom of your email must be a `GET` request. Your link should go to a webpage where the recipient can confirm that they want to unsubscribe.  
+
+Find out how to add a link when you create a __New template__ or __Edit__ an email template. 
+
 ##### emailReplyToId (optional)
 
 This is an email address specified by you to receive replies from your users. You must add at least one reply-to email address before your service can go live.
