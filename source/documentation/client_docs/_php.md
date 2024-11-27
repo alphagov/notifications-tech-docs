@@ -18,7 +18,7 @@ The Notify PHP Client is based on a [PSR-7 HTTP model](https://www.php-fig.org/p
 
 1. Add the following code to your application to create a new instance of the client:
 
-    ```
+    ```php
     $notifyClient = new \Alphagov\Notifications\Client([
         'apiKey' => '{your api key}',
         'httpClient' => new \Http\Adapter\Guzzle7\Client
