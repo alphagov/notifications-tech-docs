@@ -165,8 +165,8 @@ If the request is not successful, the client returns an `HTTPError` containing t
 
 ```python
 response = notifications_client.send_email_notification(
-    email_address="sender@something.com", # required string
-    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
+    email_address="amala@example.com",
+    template_id="9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
 )
 ```
 
@@ -176,6 +176,13 @@ response = notifications_client.send_email_notification(
 
 The email address of the recipient.
 
+For example:
+
+```python
+email_address="amala@example.com", # required string
+```
+
+
 ##### template_id (required)
 
 To find the template ID:
@@ -184,6 +191,12 @@ To find the template ID:
 1. Go to the __Templates__ page and select the relevant template.
 1. Select __Copy template ID to clipboard__.
 
+For example:
+
+```python
+template_id="9d751e0e-f929-4891-82a1-a3e1c3c18ee3", # required UUID string
+```
+
 ##### personalisation (optional)
 
 If a template has placeholder fields for personalised information such as name or reference number, you need to provide their values in a dictionary with key value pairs. For example:
@@ -191,10 +204,10 @@ If a template has placeholder fields for personalised information such as name o
 ```python
 personalisation={
     "first_name": "Amala",
-    "application_date": "2018-01-01",
+    "appointment_date": "2018-01-01 at 01:00PM",
     # pass in a list and it will appear as bullet points in the message:
     "required_documents": ["passport", "utility bill", "other id"],
-}
+},
 ```
 You can leave out this argument if a template does not have any placeholder fields for personalised information.
 
@@ -203,7 +216,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if necessary. This reference identifies a single unique email or a batch of emails. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference="STRING", # optional string - identifies notification(s)
+reference="ref_123", # optional string - identifies notification(s)
 ```
 
 You can leave out this argument if you do not have a reference.
@@ -215,7 +228,7 @@ If you send subscription emails you must let recipients opt out of receiving the
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
 ```python
-one_click_unsubscribe_url = "https://example.com/unsubscribe.html?opaque=123456789"
+one_click_unsubscribe_url = "https://example.com/unsubscribe.html?opaque=123456789", # optional string, a URL
 ```
 
 The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
@@ -257,10 +270,33 @@ To add a reply-to email address:
 For example:
 
 ```python
-email_reply_to_id="8e222534-7f05-4972-86e3-17c5d9f894e2" # optional UUID string
+email_reply_to_id="ca4fdde7-2a67-4a6c-8393-62aa7245751f", # optional UUID string
 ```
 
 You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.
+
+#### Response
+
+If the request to the client is successful, the client returns a `dict`:
+
+```python
+{
+  "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string - notification ID
+  "reference": "ref_123",   # optional string - reference your provided
+  "content": {
+    "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content
+    "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",  # required string - "FROM" email address, not a real inbox
+    "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",  # optional string
+  },
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string
+  "template": {
+    "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",  # required string - template ID
+    "version": 1,  # required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"  # required string
+  }
+}
+```
 
 ### Send a file by email
 
