@@ -230,7 +230,7 @@ The one-click unsubscribe URL must respond to an empty `POST` request by unsubsc
 
 Your unsubscribe URL and response must comply with the guidance specified in [Section 3.1 of IETF RFC 8058](https://www.rfcreader.com/#rfc8058_line139).
 
-You must also add an unsubscribe link to the bottom of your email. The unsubscribe link at the bottom of your email must be a `GET` request. Your link should go to a webpage where the recipient can confirm that they want to unsubscribe.  
+You must also add an unsubscribe link to the bottom of your email. The unsubscribe link at the bottom of your email should take the email recipient to a webpage where they can confirm that they want to unsubscribe.  
 
 Find out how to add a link when you create a __New template__ or __Edit__ an email template. 
 
