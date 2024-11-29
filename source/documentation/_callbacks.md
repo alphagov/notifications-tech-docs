@@ -4,6 +4,7 @@ Callbacks are when GOV.UK Notify sends `POST` requests to your service. You can 
 
 - a text message or email you’ve sent is delivered or fails
 - your service receives a text message
+- a letter you sent is returned
 
 ### Set up callbacks
 
@@ -60,3 +61,25 @@ The callback message is formatted in JSON. All of the values are strings. The ke
 |#`destination_number` | The number the message was sent to (your number) | 07700987654|
 |#`message` | The received message | Hello Notify!|
 |#`date_received` | The UTC datetime that the message was received by Notify | 2017-05-14T12:15:30.000000Z|
+
+
+### Returned letters
+
+When a letter you sent is returned, Notify will send details of the returned letter to your callback url.
+
+Find more [information about returned letters](https://www.notifications.service.gov.uk/using-notify/delivery-times#returned-mail).  It can take a few weeks to receive information about a returned letter.
+
+The callback message is formatted in JSON. All of the values are strings. The key, description and format of the callback message arguments will be:
+
+| Key | Description | Format |
+|:---|:---|:---|
+| #`notification_id` | Notify’s id for the returned letter | UUID |
+| #`reference` | The reference sent by the service | `12345678` or null |
+| #`date_sent` | The time the letter was sent | `2017-05-14T12:15:30.000000Z` |
+| #`sent_by` | The email address of the service member who sent the letter | `hello@gov.uk`|
+| #`template_name` | The name of the template that was used | `Template name` |
+| #`template_id` | The id of the template that was used | UUID |
+| #`template_version` | The version number of the template that was used | `1` |
+| #`spreadsheet_file_name`| The name of the uploaded spreadsheet | `contact_list.csv` |
+| #`spreadsheet_row_number`| The row in the spreadsheet  | `1` |
+| #`upload_letter_file_name`| The name of the uploaded letter | `uploaded_letter.pdf` |
