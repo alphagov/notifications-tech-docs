@@ -349,7 +349,7 @@ with open("file.pdf", "rb") as f:
     ...
     personalisation={
       "first_name": "Amala",
-      "application_date": "2018-01-01",
+      "appointment_date": "2018-01-01 at 01:00PM",
       "link_to_file": prepare_upload(f),
     }
 ```
@@ -378,8 +378,8 @@ with open("file.csv", "rb") as f:
     ...
     personalisation={
       "first_name": "Amala",
-      "application_date": "2018-01-01",
-      "link_to_file": prepare_upload(f, filename="2023-12-25-daily-report.csv"),
+      "appointment_date": "2018-01-01 at 01:00PM",
+      "link_to_file": prepare_upload(f, filename="amala_pigeon_affairs_bureau_invite.csv"),
     }
 ```
 
@@ -411,7 +411,7 @@ with open("file.pdf", "rb") as f:
     ...
     personalisation={
       "first_name": "Amala",
-      "application_date": "2018-01-01",
+      "appointment_date": "2018-01-01 at 01:00PM",
       "link_to_file": prepare_upload(f, confirm_email_before_download=False),
     }
 ```
@@ -438,7 +438,7 @@ with open("file.pdf", "rb") as f:
     ...
     personalisation={
       "first_name": "Amala",
-      "application_date": "2018-01-01",
+      "appointment_date": "2018-01-01 at 01:00PM",
       "link_to_file": prepare_upload(f, retention_period="4 weeks"),
     }
 ```
@@ -449,18 +449,19 @@ If the request to the client is successful, the client returns a `dict`:
 
 ```python
 {
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
-  "reference": "STRING",
+  "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string - notification ID
+  "reference": "ref_123",   # optional string - reference your provided
   "content": {
-    "subject": "SUBJECT TEXT",
-    "body": "MESSAGE TEXT",
-    "from_email": "SENDER EMAIL"
+    "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\nhttps://documents.service.gov.uk/d/YlxDzgNUQYi1Qg6QxIpptA/th46VnrvRxyVO9div6f7hA?key=R0VDmwJ1YzNYFJysAIjQd9yHn5qKUFg-nXHVe3Ioa3A\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content - see that the link to document is embedded in the message content
+    "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",  # required string - "FROM" email address, not a real inbox
+    "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",  # optional string
   },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string
   "template": {
-    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
-    "version": INTEGER,
-    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
+    "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",  # required string - template ID
+    "version": 1,  # required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"  # required string
   }
 }
 ```
