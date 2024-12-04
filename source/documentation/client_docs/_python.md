@@ -95,7 +95,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference="ref_123", # optional string - identifies notification(s)
+reference="your reference", # optional string - identifies notification(s)
 ```
 You can leave out this argument if you do not have a reference.
 
@@ -127,7 +127,7 @@ If the request to the client is successful, the client returns a `dict`:
 ```python
 {
   "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
-  "reference": "ref_123", # optional string - reference your provided
+  "reference": "your reference", # optional string - reference your provided
   "content": {
     "body": "Hi Amala, your appointment is on 2018-01-01 at 01:00PM",  # required string - message content
     "from_number": "GOVUK"  # required string - sender name / phone number
@@ -216,7 +216,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if necessary. This reference identifies a single unique email or a batch of emails. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference="ref_123", # optional string - identifies notification(s)
+reference="your reference", # optional string - identifies notification(s)
 ```
 
 You can leave out this argument if you do not have a reference.
@@ -282,7 +282,7 @@ If the request to the client is successful, the client returns a `dict`:
 ```python
 {
   "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string - notification ID
-  "reference": "ref_123",   # optional string - reference your provided
+  "reference": "your reference",   # optional string - reference your provided
   "content": {
     "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
     "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content
@@ -450,7 +450,7 @@ If the request to the client is successful, the client returns a `dict`:
 ```python
 {
   "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string - notification ID
-  "reference": "ref_123",   # optional string - reference your provided
+  "reference": "your reference",  # optional string - reference your provided
   "content": {
     "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
     "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\nhttps://documents.service.gov.uk/d/YlxDzgNUQYi1Qg6QxIpptA/th46VnrvRxyVO9div6f7hA?key=R0VDmwJ1YzNYFJysAIjQd9yHn5qKUFg-nXHVe3Ioa3A\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content - see that the link to document is embedded in the message content
@@ -570,7 +570,7 @@ personalisation={
 A unique identifier you can create if necessary. This reference identifies a single unique letter or a batch of letters. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference="ref_123" # optional string - identifies notification(s)
+reference="your reference" # optional string - identifies notification(s)
 ```
 
 #### Response
@@ -579,17 +579,17 @@ If the request to the client is successful, the client returns a `dict`:
 
 ```python
 {
-  "id": "3d1ce039-5476-414c-99b2-fac1e6add62c",
-  "reference": "ref_123",
+  "id": "3d1ce039-5476-414c-99b2-fac1e6add62c",  # required string - notification ID
+  "reference": "your reference",  # optional string - reference your provided
   "content": {
-    "subject": "Your upcoming pigeon registration appointment",
-    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",
+    "subject": "Your upcoming pigeon registration appointment",  # required string - letter subject
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - letter content
   },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/3d1ce039-5476-414c-99b2-fac1e6add62c",
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/3d1ce039-5476-414c-99b2-fac1e6add62c",  # required string
   "template": {
-    "id": "64415853-cb86-4cc4-b597-2aaa94ef8c39",
-    "version": 3,
-    "uri": "https://api.notifications.service.gov.uk/v2/template/64415853-cb86-4cc4-b597-2aaa94ef8c39"
+    "id": "64415853-cb86-4cc4-b597-2aaa94ef8c39",  # required string - template ID
+    "version": 3,  # required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/64415853-cb86-4cc4-b597-2aaa94ef8c39"  # required string
   },
   "scheduled_for": None
 }
@@ -618,11 +618,11 @@ If the request is not successful, the client returns an `HTTPError` containing t
 #### Method
 
 ```python
-response = notifications_client.send_precompiled_letter_notification(
-    reference,      # Reference to identify the notification
-    pdf_file,       # PDF File object
-    postage         # set postage on your precompiled letter
-)
+with open("path/to/pdf_file.pdf", "rb") as pdf_file:
+  response = notifications_client.send_precompiled_letter_notification(
+      reference="your reference",
+      pdf_file=pdf_file,
+  )
 ```
 
 #### Arguments
@@ -631,12 +631,16 @@ response = notifications_client.send_precompiled_letter_notification(
 
 A unique identifier you create. This reference identifies a single unique precompiled letter or a batch of precompiled letters. It must not contain any personal information such as name or postal address.
 
+```python
+reference="your reference" # required string - identifies notification(s)
+```
+
 ##### pdf_file (required)
 
 The precompiled letter must be a PDF file which meets [the GOV.UK Notify letter specification](https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification).
 
 ```python
-with open("path/to/pdf_file", "rb") as pdf_file:
+with open("path/to/pdf_file.pdf", "rb") as pdf_file:
     notification = notifications_client.send_precompiled_letter_notification(
         reference="your reference", pdf_file=pdf_file
     )
@@ -646,7 +650,9 @@ with open("path/to/pdf_file", "rb") as pdf_file:
 
 You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
 
-
+```python
+postage="first" # optional string
+```
 
 #### Response
 
@@ -654,9 +660,9 @@ If the request to the client is successful, the client returns a `dict`:
 
 ```python
 {
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
-  "reference": "your-letter-reference",
-  "postage": "postage-you-have-set-or-None"
+  "id": "1d986ba7-fba6-49fb-84e5-75038a1dd968",  # required string - notification ID
+  "reference": "your reference",  # required string - reference your provided
+  "postage": "first"  # required string - postage you provided, or else default postage for the letter
 }
 ```
 
