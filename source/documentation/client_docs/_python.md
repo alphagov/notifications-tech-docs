@@ -503,11 +503,11 @@ To send Notify a request to go live:
 
 ```python
     response = notifications_client.send_letter_notification(
-        template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
+        template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
         personalisation={
-          "address_line_1": "The Occupier" # required string,
-          "address_line_2": "123 High Street" # required string,
-          "address_line_3": "SW14 6BH" # required string,
+          "address_line_1": "Amala Bird"
+          "address_line_2": "123 High Street"
+          "address_line_3": "SW14 6BH"
         },
     )
 ```
@@ -521,6 +521,13 @@ To find the template ID:
 1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
 1. Go to the __Templates__ page and select the relevant template.
 1. Select __Copy template ID to clipboard__.
+
+
+For example:
+
+```python
+template_id="64415853-cb86-4cc4-b597-2aaa94ef8c39", # required UUID string
+```
 
 ##### personalisation (required)
 
@@ -546,13 +553,13 @@ Any other placeholder fields included in the letter template also count as requi
 
 ```python
 personalisation={
-  "address_line_1": "The Occupier",
-  "address_line_2": "123 High Street",
-  "address_line_3": "Richmond upon Thames",
+  "address_line_1": "Amala Bird",  # required string
+  "address_line_2": "123 High Street",  # required string
+  "address_line_3": "Richmond upon Thames",  # required string
   "address_line_4": "Middlesex",
-  "address_line_5": "SW14 6BF",
-  "name": "John Smith",
-  "application_id": "4134325",
+  "address_line_5": "SW14 6BF",  # last line of address you include must be a postcode or a country name  outside the UK
+  "name": "Amala",
+  "appointment_date": "2018-01-01 at 01:00PM",
   # pass in a list and it will appear as bullet points in the letter:
   "required_documents": ["passport", "utility bill", "other id"],
 }
@@ -563,7 +570,7 @@ personalisation={
 A unique identifier you can create if necessary. This reference identifies a single unique letter or a batch of letters. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference="STRING" # optional string - identifies notification(s)
+reference="ref_123" # optional string - identifies notification(s)
 ```
 
 #### Response
@@ -572,18 +579,18 @@ If the request to the client is successful, the client returns a `dict`:
 
 ```python
 {
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
-  "reference": "STRING",
+  "id": "3d1ce039-5476-414c-99b2-fac1e6add62c",
+  "reference": "ref_123",
   "content": {
-    "subject": "SUBJECT TEXT",
-    "body": "LETTER TEXT",
+    "subject": "Your upcoming pigeon registration appointment",
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",
   },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/3d1ce039-5476-414c-99b2-fac1e6add62c",
   "template": {
-    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
-    "version": INTEGER,
-    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
-  }
+    "id": "64415853-cb86-4cc4-b597-2aaa94ef8c39",
+    "version": 3,
+    "uri": "https://api.notifications.service.gov.uk/v2/template/64415853-cb86-4cc4-b597-2aaa94ef8c39"
+  },
   "scheduled_for": None
 }
 ```
