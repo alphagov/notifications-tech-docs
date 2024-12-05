@@ -775,9 +775,11 @@ You can only get the status of messages sent within the retention period. The de
 
 #### Method
 
-##### All messages
+##### One page of up to 250 messages
 
-This will return all your messages with statuses. They will display in pages of up to 250 messages each.
+This API call returns one page of up to 250 messages and statuses. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `older_than` argument.
+
+You can only get messages that are within your data retention period. The default data retention period is 7 days. It can be changed in your Service Settings.
 
 ```python
 response = notifications_client.get_all_notifications(template_type, status, reference, older_than, include_jobs)
@@ -792,11 +794,9 @@ You can filter the returned messages by including the following optional argumen
 - [`include_jobs`](#include-jobs-optional)
 
 
-##### One page of up to 250 messages
+##### All messages - as an iterator
 
-This will return one page of up to 250 messages and statuses. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the [`older_than`](#older-than-optional) argument.
-
-To get the most recent messages, add the following code to your application:
+This will return a Python iterator object. This object will yield one notification at a time. Once it has got through the first 250 notifications, it will request the next page from the API, and start yielding from there, and so on, until it yields all your notifications.
 
 ```python
 response = get_all_notifications_iterator(status="sending")
