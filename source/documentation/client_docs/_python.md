@@ -796,26 +796,22 @@ You can filter the returned messages by including the following optional argumen
 
 ##### All messages - as an iterator
 
-This will return a Python iterator object. This object will yield one notification at a time. Once it has got through the first 250 notifications, it will request the next page from the API, and start yielding from there, and so on, until it yields all your notifications.
+This will return a Python iterator object. This object will yield one notification at a time. Once it has got through the first 250 notifications, it will request the next page from the API and start yielding from there, and so on, until it yields all your notifications.
 
 ```python
-response = get_all_notifications_iterator(status="sending")
+response = get_all_notifications_iterator()
+
+# to get a list of all notifications from your iterator:
+[notification for notification in response]
 ```
 
-You must set the [`status`](#status-optional) argument to `sending`.
+You can filter the returned messages by including the following optional arguments in the method:
 
-To get older messages:
-
-1. Get the ID of an older message.
-1. Add the following code to your application, with the older notification ID in the [`older_than`](#older-than-optional) argument.
-
-```python
-response = get_all_notifications_iterator(status="sending",older_than="NOTIFICATION ID")
-```
-
-You must set the [`status`](#status-optional) argument to `sending`.
-
-This method will return the next oldest messages from the specified notification ID.
+- [`template_type`](#template-type-optional)
+- [`status`](#status-optional)
+- [`reference`](#get-the-status-of-multiple-messages-arguments-reference-optional)
+- [`older_than`](#older-than-optional)
+- [`include_jobs`](#include-jobs-optional)
 
 #### Arguments
 
@@ -847,7 +843,7 @@ You can leave out this argument to ignore this filter.
 A unique identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference="STRING" # optional string - identifies notification(s)
+reference="your reference" # optional string - reference you provided when sending the message
 ```
 
 You can leave out this argument to ignore this filter.
