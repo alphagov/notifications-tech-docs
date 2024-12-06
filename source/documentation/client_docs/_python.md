@@ -127,7 +127,7 @@ If the request to the client is successful, the client returns a `dict`:
 ```python
 {
   "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
-  "reference": "your reference", # optional string - reference your provided
+  "reference": "your reference", # optional string - reference you provided when sending the message
   "content": {
     "body": "Hi Amala, your appointment is on 2018-01-01 at 01:00PM",  # required string - message content
     "from_number": "GOVUK"  # required string - sender name / phone number
@@ -282,7 +282,7 @@ If the request to the client is successful, the client returns a `dict`:
 ```python
 {
   "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string - notification ID
-  "reference": "your reference",   # optional string - reference your provided
+  "reference": "your reference",  # optional string - reference you provided when sending the message
   "content": {
     "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
     "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content
@@ -450,7 +450,7 @@ If the request to the client is successful, the client returns a `dict`:
 ```python
 {
   "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string - notification ID
-  "reference": "your reference",  # optional string - reference your provided
+  "reference": "your reference",  # optional string - reference you provided when sending the message
   "content": {
     "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
     "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\nhttps://documents.service.gov.uk/d/YlxDzgNUQYi1Qg6QxIpptA/th46VnrvRxyVO9div6f7hA?key=R0VDmwJ1YzNYFJysAIjQd9yHn5qKUFg-nXHVe3Ioa3A\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content - see that the link to document is embedded in the message content
@@ -580,7 +580,7 @@ If the request to the client is successful, the client returns a `dict`:
 ```python
 {
   "id": "3d1ce039-5476-414c-99b2-fac1e6add62c",  # required string - notification ID
-  "reference": "your reference",  # optional string - reference your provided
+  "reference": "your reference",  # optional string - reference you provided when sending the message
   "content": {
     "subject": "Your upcoming pigeon registration appointment",  # required string - letter subject
     "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - letter content
@@ -708,7 +708,7 @@ If the request to the client is successful, the client will return a `dict`:
 ```python
 {
     "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
-    "reference": "your reference",  # optional string - client reference
+    "reference": "your reference",  # optional string - reference you provided when sending the message
     "email_address": "amala@example.com",  # required string for emails
     "phone_number": "+447900900123",  # required string for text messages
     "line_1": "Amala Bird",  # required string for letter
