@@ -1000,7 +1000,7 @@ This returns the PDF contents of a letter.
 
 ```python
 pdf_file = notifications_client.get_pdf_for_letter(
-  "f33517ff-2a88-4f6e-b855-c550268ce08a" # required string - notification ID
+  "3d1ce039-5476-414c-99b2-fac1e6add62c" # required string - notification ID
 )
 ```
 
