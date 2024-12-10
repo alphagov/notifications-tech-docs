@@ -914,6 +914,9 @@ If the request to the client is successful, the client returns a `dict`.
                 "billable_sheets_of_paper": 2,  # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
                 "postage": "first / second / europe / rest-of-world"  # optional string
             }
+        },
+        {
+            ...another notification
         }
     ],
     "links": {
@@ -1042,7 +1045,7 @@ This returns the latest version of the template.
 
 ```python
 response = notifications_client.get_template(
-  "f33517ff-2a88-4f6e-b855-c550268ce08a" # required string - template ID
+  "f33517ff-2a88-4f6e-b855-c550268ce08a"
 )
 ```
 
@@ -1051,6 +1054,12 @@ response = notifications_client.get_template(
 ##### template_id (required)
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
+
+For example:
+
+```python
+template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
+```
 
 #### Response
 
@@ -1088,8 +1097,8 @@ If the request is not successful, the client returns an `HTTPError` containing t
 
 ```python
 response = notifications_client.get_template_version(
-    "f33517ff-2a88-4f6e-b855-c550268ce08a" # required string - template ID
-    "version": INTEGER,
+    "f33517ff-2a88-4f6e-b855-c550268ce08a"
+    "version": 1,
 )
 ```
 
@@ -1098,6 +1107,12 @@ response = notifications_client.get_template_version(
 ##### template_id (required)
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
+
+For example:
+
+```python
+template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
+```
 
 ##### version (required)
 
@@ -1110,15 +1125,15 @@ If the request to the client is successful, the client returns a `dict`.
 ```python
 {
     "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
-    "name": "STRING", # required string - template name
+    "name": "Pigeon registration - appointment email", # required string - template name
     "type": "sms / email / letter" , # required string
-    "created_at": "STRING", # required string - date and time template created
-    "updated_at": "STRING", # required string - date and time template last updated
-    "version": INTEGER,
-    "created_by": "someone@example.com", # required string
-    "body": "STRING", # required string - body of notification
-    "subject": "STRING" # required string for email - subject of email
-    "letter_contact_block": "STRING" # optional string - None if not a letter template or contact block not set
+    "created_at": "2024-05-10 10:30:31.142535", # required string - date and time template created
+    "updated_at": "2024-08-25 13:00:09.123234", # required string - date and time template last updated
+    "version": 1, # required integer - template version
+    "created_by": "charlie.smith@pigeons.gov.uk", # required string
+    "subject": "Your upcoming pigeon registration appointment",  # required string for email and letter - subject of email / heading of letter
+    "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - body of notification
+    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" # optional string - present for letter templates where contact block is set, otherwise None
 }
 ```
 
@@ -1164,15 +1179,15 @@ If the request to the client is successful, the client returns a `dict`.
     "templates": [
         {
             "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
-            "name": "STRING", # required string - template name
+            "name": "Pigeon registration - appointment email", # required string - template name
             "type": "sms / email / letter" , # required string
-            "created_at": "STRING", # required string - date and time template created
-            "updated_at": "STRING", # required string - date and time template last updated
-            "version": NUMBER, # required string - template version
-            "created_by": "someone@example.com", # required string
-            "body": "STRING", # required string - body of notification
-            "subject": "STRING" # required string for email - subject of email
-            "letter_contact_block": "STRING" # optional string - None if not a letter template or contact block not set
+            "created_at": "2024-05-10 10:30:31.142535", # required string - date and time template created
+            "updated_at": "2024-08-25 13:00:09.123234", # required string - date and time template last updated
+            "version": 2, # required integer - template version
+            "created_by": "charlie.smith@pigeons.gov.uk", # required string
+            "subject": "Your upcoming pigeon registration appointment",  # required string for email and letter - subject of email / heading of letter
+            "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - body of notification
+            "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" # optional string - present for letter templates where contact block is set, otherwise None
         },
         {
             ...another template
