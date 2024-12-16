@@ -1212,12 +1212,11 @@ This generates a preview version of a template.
 
 ```python
 response = notifications_client.post_template_preview(
-    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
+    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
     personalisation={
-        "KEY": "VALUE",
-        "KEY": "VALUE",
-        ...
-        }, # required dict - specifies template parameters
+    "first_name": "Amala",
+    "appointment_date": "2018-01-01 at 01:00PM",
+  },
 )
 ```
 
@@ -1229,6 +1228,12 @@ The parameters in the personalisation argument must match the placeholder fields
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
 
+For example:
+
+```python
+template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
+```
+
 ##### personalisation (required)
 
 If a template has placeholder fields for personalised information such as name or reference number, you need to provide their values in a dictionary with key value pairs. For example:
@@ -1236,8 +1241,9 @@ If a template has placeholder fields for personalised information such as name o
 ```python
 personalisation={
     "first_name": "Amala",
-    "application_date": "2018-01-01",
-}
+    "appointment_date": "2018-01-01 at 01:00PM",
+    "required_documents": ["passport", "utility bill", "other id"],
+},
 ```
 
 #### Response
@@ -1248,9 +1254,14 @@ If the request to the client is successful, you receive a `dict` response.
 {
     "id": "740e5834-3a29-46b4-9a6f-16142fde533a", # required string - notification ID
     "type": "sms / email / letter" , # required string
-    "version": INTEGER,
-    "body": "STRING", # required string - body of notification
-    "subject": "STRING" # required string for email - subject of email
+    "version": 3,
+    # required string - body of notification
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",
+    # required string for emails, empty for sms and letters - html version of the email body
+    "html": '<p style="Margin: 0 0 20px 0; font-size: 19px; line-height: 25px; color: #0B0C0C;">Dear Amala</p> ... [snippet truncated for readability]',
+    # required string for email and letter - subject of email / heading of letter
+    "subject": 'Your upcoming pigeon registration appointment',
+    'postage': None, # required string for letters, empty for sms and emails - letter postage
 }
 ```
 
