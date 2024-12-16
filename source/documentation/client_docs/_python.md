@@ -582,7 +582,7 @@ If the request to the client is successful, the client returns a `dict`:
   "id": "3d1ce039-5476-414c-99b2-fac1e6add62c",  # required string - notification ID
   "reference": "your reference",  # optional string - reference you provided when sending the message
   "content": {
-    "subject": "Your upcoming pigeon registration appointment",  # required string - letter subject
+    "subject": "Your upcoming pigeon registration appointment",  # required string - letter heading
     "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - letter content
   },
   "uri": "https://api.notifications.service.gov.uk/v2/notifications/3d1ce039-5476-414c-99b2-fac1e6add62c",  # required string
