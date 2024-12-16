@@ -802,7 +802,7 @@ This will return a Python iterator object. This object will yield one notificati
 response = get_all_notifications_iterator()
 
 # to get a list of all notifications from your iterator:
-[notification for notification in response]
+notifications = [notification for notification in response]
 ```
 
 You can filter the returned messages by including the following optional arguments in the method:
@@ -1292,12 +1292,15 @@ To receive text messages:
 
 ### Get all received text messages
 
-This method returns a `<generator object>` with all received text messages.
+This will return a Python iterator object. This object will yield one received text message at a time. Once it has got through the first 250 received text messages, it will request the next page from the API and start yielding from there, and so on, until it yields all your received text messages.
 
 #### Method
 
 ```python
-response = get_received_texts_iterator()
+response = notifications_client.get_received_texts_iterator()
+
+# to get a list of all received text messages from your iterator:
+received_messages = [sms for sms in response]
 ```
 
 #### Response
@@ -1315,7 +1318,7 @@ This will return one page of up to 250 text messages.
 #### Method
 
 ```python
-response = client.get_received_texts(older_than)
+response = notifications_client.get_received_texts(older_than="740e5834-3a29-46b4-9a6f-16142fde533a")
 ```
 
 You can specify which text messages to receive by inputting the ID of a received text message into the [`older_than`](#get-one-page-of-received-text-messages-arguments-older-than-optional) argument.
@@ -1341,14 +1344,16 @@ If the request to the client is successful, the client returns a `dict`.
   "received_text_messages":
   [
     {
-      "id": "STRING", # required string - ID of received text message
-      "user_number": "STRING", # required string
-      "notify_number": "STRING", # required string - receiving number
-      "created_at": "STRING", # required string - date and time template created
-      "service_id": "STRING", # required string - service ID
+      "id": "'b51f638b-4295-46e0-a06e-cd41eee7c33b", # required string - ID of received text message
+      "user_number": "447900900123", # required string - number of the end user who sent the message
+      "notify_number": "07900900456", # required string - your receiving number
+      "created_at": "2024-12-12 18:39:16.123346"", # required string - date and time template created
+      "service_id": "26785a09-ab16-4eb0-8407-a37497a57506", # required string - service ID
       "content": "STRING" # required string - text content
     },
-    …
+    {
+      ...another received text message
+    }
   ],
   "links": {
     "current": "/received-text-messages",
