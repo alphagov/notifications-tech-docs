@@ -1045,7 +1045,7 @@ This returns the latest version of the template.
 
 ```python
 response = notifications_client.get_template(
-  "f33517ff-2a88-4f6e-b855-c550268ce08a"
+  template_id="f33517ff-2a88-4f6e-b855-c550268ce08a"
 )
 ```
 
@@ -1097,8 +1097,8 @@ If the request is not successful, the client returns an `HTTPError` containing t
 
 ```python
 response = notifications_client.get_template_version(
-    "f33517ff-2a88-4f6e-b855-c550268ce08a"
-    "version": 1,
+    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
+    version=1,
 )
 ```
 
