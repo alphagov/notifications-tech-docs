@@ -211,23 +211,9 @@ Your unsubscribe URL and response must comply with the guidance specified in [Se
 
 You can leave out this argument if the email being sent is not a subscription email.
 
-##### Unsubscribe link at the bottom of the email (recommended)
+You must also add an unsubscribe link to the bottom of your email. The unsubscribe link at the bottom of your email should take the email recipient to a webpage where they can confirm that they want to unsubscribe.  
 
-To add an unsubscribe link at the bottom of your email, use square brackets around the link text and round brackets around the URL. Make sure there are no spaces between the brackets or the link will not work.
-
-Use this example if you have a webpage for users to manage their email subscriptions:
-
-```python
-[Unsubscribe](https://www.example.gov.uk/unsubscribe)
-```
-Your webpage should ask the recipients to confirm that they want to unsubscribe. 
-
-If you do not have your own webpage, you can add a ‘mailto’ link to let users send an email to your team instead. For example:
-
-```python
-[Unsubscribe](mailto:example@gov.uk?subject=unsubscribe)
-```
-The email address should be a shared inbox managed by your team, not your own email address.
+Find out how to add a link when you create a __New template__ or __Edit__ an email template. 
 
 ##### email_reply_to_id (optional)
 
