@@ -801,8 +801,9 @@ This will return a Python iterator object which yields one notification at a tim
 ```python
 response = get_all_notifications_iterator()
 
-# to get a list of all notifications from your iterator:
-notifications = [notification for notification in response]
+# to iterate and process the notifications using the iterator:
+for notification in response:
+    # process notification
 ```
 
 You can filter the returned messages by including the following optional arguments in the method:
@@ -1292,15 +1293,16 @@ To receive text messages:
 
 ### Get all received text messages
 
-This will return a Python iterator object. This object will yield one received text message at a time. Once it has got through the first 250 received text messages, it will request the next page from the API and start yielding from there, and so on, until it yields all your received text messages.
+This will return a Python iterator object which yields one received text message at a time until it has yielded all your received text messages.
 
 #### Method
 
 ```python
 response = notifications_client.get_received_texts_iterator()
 
-# to get a list of all received text messages from your iterator:
-received_messages = [sms for sms in response]
+# to iterate and process the received text messages using the iterator:
+for text_message in response:
+    # process received text message
 ```
 
 #### Response
