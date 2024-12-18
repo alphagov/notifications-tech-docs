@@ -710,7 +710,7 @@ If the request to the client is successful, the client will return a `dict`:
     "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
     "reference": "your reference",  # optional string - reference you provided when sending the message
     "email_address": "amala@example.com",  # required string for emails
-    "phone_number": "+447900900123",  # required string for text messages
+    "phone_number": "+447700900123",  # required string for text messages
     "line_1": "Amala Bird",  # required string for letter
     "line_2": "123 High Street",  # required string for letter
     "line_3": "Richmond upon Thames",  # required string for letter
