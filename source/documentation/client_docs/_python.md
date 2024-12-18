@@ -796,7 +796,7 @@ You can filter the returned messages by including the following optional argumen
 
 ##### All messages - as an iterator
 
-This will return a Python iterator object. This object will yield one notification at a time. Once it has got through the first 250 notifications, it will request the next page from the API and start yielding from there, and so on, until it yields all your notifications.
+This will return a Python iterator object which yields one notification at a time until it has yielded all your notifications.
 
 ```python
 response = get_all_notifications_iterator()
