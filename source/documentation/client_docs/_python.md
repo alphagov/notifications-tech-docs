@@ -228,7 +228,7 @@ If you send subscription emails you must let recipients opt out of receiving the
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
 ```python
-one_click_unsubscribe_url = "https://pigeons.gov.uk/unsubscribe.html?opaque=123456789", # optional string, a URL
+one_click_unsubscribe_url = "https://example.com/unsubscribe.html?opaque=123456789", # optional string, a URL
 ```
 
 The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
@@ -733,7 +733,7 @@ If the request to the client is successful, the client will return a `dict`:
     "sent_at": "2024-05-17 15:58:30.143000",  # optional string - date and time notification sent to provider
     "completed_at": "2024-05-17 15:59:10.321000",  # optional string - date and time notification delivered or failed
     "scheduled_for": "2024-05-17 9:00:00.000000", # optional string - date and time notification has been scheduled to be sent at
-    "one_click_unsubscribe": "https://pigeons.gov.uk/unsubscribe.html?opaque=123456789", # optional string, email only - URL that you provided so your recipients can unsubscribe
+    "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789", # optional string, email only - URL that you provided so your recipients can unsubscribe
     "is_cost_data_ready": True,  # required boolean, this field is true if cost data is ready, and false if it isn't
     "cost_in_pounds": 0.0027,  # optional number - cost of the notification in pounds. The cost does not take free allowance into account
     "cost_details": {
@@ -903,7 +903,7 @@ If the request to the client is successful, the client returns a `dict`.
             "sent_at": "2024-05-17 15:58:30.143000",  # optional string - date and time notification sent to provider
             "completed_at": "2024-05-17 15:59:10.321000",  # optional string - date and time notification delivered or failed
             "scheduled_for": "2024-05-17 9:00:00.000000", # optional string - date and time notification has been scheduled to be sent at
-            "one_click_unsubscribe": "https://pigeons.gov.uk/unsubscribe.html?opaque=123456789", # optional string, email only - URL that you provided so your recipients can unsubscribe
+            "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789", # optional string, email only - URL that you provided so your recipients can unsubscribe
             "is_cost_data_ready": True,  # required boolean, this field is true if cost data is ready, and false if it isn't
             "cost_in_pounds": 0.0027,  # optional number - cost of the notification in pounds. The cost does not take free allowance into account
             "cost_details": {
