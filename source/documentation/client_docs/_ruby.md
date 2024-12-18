@@ -668,7 +668,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 
 This API call returns one page of up to 250 messages and statuses. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `older_than` argument.
 
-You can only get messages that are 7 days old or newer.
+You can only get messages that are within your data retention period. The default data retention period is 7 days. It can be changed in your Service Settings.
 
 #### Method
 

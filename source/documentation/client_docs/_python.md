@@ -45,8 +45,8 @@ You can use GOV.UK Notify to send emails, text messages and letters.
 
 ```python
 response = notifications_client.send_sms_notification(
-    phone_number='+447900900123', # required string
-    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
+    phone_number="+447700900123",
+    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
 )
 ```
 
@@ -56,6 +56,13 @@ response = notifications_client.send_sms_notification(
 
 The phone number of the recipient of the text message. This can be a UK or international number.
 
+For example:
+
+```python
+phone_number="+447700900123", # required string
+```
+
+
 ##### template_id (required)
 
 To find the template ID:
@@ -64,15 +71,21 @@ To find the template ID:
 1. Go to the __Templates__ page and select the relevant template.
 1. Select __Copy template ID to clipboard__.
 
+For example:
+
+```python
+template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
+```
+
 ##### personalisation (optional)
 
 If a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:
 
 ```python
 personalisation={
-    'first_name': 'Amala',
-    'application_date': '2018-01-01',
-}
+    "first_name": "Amala",
+    "appointment_date": "2018-01-01 at 01:00PM",
+},
 ```
 
 You can leave out this argument if a template does not have any placeholder fields for personalised information.
@@ -82,7 +95,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference='STRING', # optional string - identifies notification(s)
+reference="your reference", # optional string - identifies notification(s)
 ```
 You can leave out this argument if you do not have a reference.
 
@@ -102,7 +115,7 @@ You can then either:
 - select __Change__ to change the default sender that the service will use, and select __Save__
 
 ```python
-sms_sender_id='8e222534-7f05-4972-86e3-17c5d9f894e2' # optional UUID string
+sms_sender_id="8e222534-7f05-4972-86e3-17c5d9f894e2", # optional UUID string
 ```
 
 You can leave out this argument if your service only has one text message sender, or if you want to use the default sender.
@@ -113,17 +126,17 @@ If the request to the client is successful, the client returns a `dict`:
 
 ```python
 {
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
-  "reference": "STRING",
+  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
+  "reference": "your reference", # optional string - reference you provided when sending the message
   "content": {
-    "body": "MESSAGE TEXT",
-    "from_number": "SENDER"
+    "body": "Hi Amala, your appointment is on 2018-01-01 at 01:00PM",  # required string - message content
+    "from_number": "GOVUK"  # required string - sender name / phone number
   },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",  # required string
   "template": {
-    "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a',
-    "version": INTEGER,
-    "uri": "https://api.notifications.service.gov.uk/v2/template/ceb50d92-100d-4b8b-b559-14fa3b091cd"
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
+    "version": 3,  # required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"  # required string
   }
 }
 ```
@@ -152,8 +165,8 @@ If the request is not successful, the client returns an `HTTPError` containing t
 
 ```python
 response = notifications_client.send_email_notification(
-    email_address='sender@something.com', # required string
-    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
+    email_address="amala@example.com",
+    template_id="9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
 )
 ```
 
@@ -163,6 +176,13 @@ response = notifications_client.send_email_notification(
 
 The email address of the recipient.
 
+For example:
+
+```python
+email_address="amala@example.com", # required string
+```
+
+
 ##### template_id (required)
 
 To find the template ID:
@@ -171,6 +191,12 @@ To find the template ID:
 1. Go to the __Templates__ page and select the relevant template.
 1. Select __Copy template ID to clipboard__.
 
+For example:
+
+```python
+template_id="9d751e0e-f929-4891-82a1-a3e1c3c18ee3", # required UUID string
+```
+
 ##### personalisation (optional)
 
 If a template has placeholder fields for personalised information such as name or reference number, you need to provide their values in a dictionary with key value pairs. For example:
@@ -178,10 +204,10 @@ If a template has placeholder fields for personalised information such as name o
 ```python
 personalisation={
     "first_name": "Amala",
-    "application_date": "2018-01-01",
+    "appointment_date": "2018-01-01 at 01:00PM",
     # pass in a list and it will appear as bullet points in the message:
     "required_documents": ["passport", "utility bill", "other id"],
-}
+},
 ```
 You can leave out this argument if a template does not have any placeholder fields for personalised information.
 
@@ -190,7 +216,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if necessary. This reference identifies a single unique email or a batch of emails. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference='STRING', # optional string - identifies notification(s)
+reference="your reference", # optional string - identifies notification(s)
 ```
 
 You can leave out this argument if you do not have a reference.
@@ -202,7 +228,7 @@ If you send subscription emails you must let recipients opt out of receiving the
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
 ```python
-one_click_unsubscribe_url = 'https://example.com/unsubscribe.html?opaque=123456789'
+one_click_unsubscribe_url = "https://example.com/unsubscribe.html?opaque=123456789", # optional string, a URL
 ```
 
 The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
@@ -230,10 +256,33 @@ To add a reply-to email address:
 For example:
 
 ```python
-email_reply_to_id='8e222534-7f05-4972-86e3-17c5d9f894e2' # optional UUID string
+email_reply_to_id="ca4fdde7-2a67-4a6c-8393-62aa7245751f", # optional UUID string
 ```
 
 You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.
+
+#### Response
+
+If the request to the client is successful, the client returns a `dict`:
+
+```python
+{
+  "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string - notification ID
+  "reference": "your reference",  # optional string - reference you provided when sending the message
+  "content": {
+    "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content
+    "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",  # required string - "FROM" email address, not a real inbox
+    "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",  # optional string
+  },
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string
+  "template": {
+    "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",  # required string - template ID
+    "version": 1,  # required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"  # required string
+  }
+}
+```
 
 ### Send a file by email
 
@@ -282,12 +331,12 @@ Pass the file object as a value into the personalisation argument. For example:
 ```python
 from notifications_python_client import prepare_upload
 
-with open('file.pdf', 'rb') as f:
+with open("file.pdf", "rb") as f:
     ...
     personalisation={
-      'first_name': 'Amala',
-      'application_date': '2018-01-01',
-      'link_to_file': prepare_upload(f),
+      "first_name": "Amala",
+      "appointment_date": "2018-01-01 at 01:00PM",
+      "link_to_file": prepare_upload(f),
     }
 ```
 
@@ -311,12 +360,12 @@ If Notify cannot add the correct file extension, recipients may not be able to o
 ```python
 from notifications_python_client import prepare_upload
 
-with open('file.csv', 'rb') as f:
+with open("file.csv", "rb") as f:
     ...
     personalisation={
-      'first_name': 'Amala',
-      'application_date': '2018-01-01',
-      'link_to_file': prepare_upload(f, filename='2023-12-25-daily-report.csv'),
+      "first_name": "Amala",
+      "appointment_date": "2018-01-01 at 01:00PM",
+      "link_to_file": prepare_upload(f, filename="amala_pigeon_affairs_bureau_invite.csv"),
     }
 ```
 
@@ -344,12 +393,12 @@ To let the recipient download the file without confirming their email address, s
 ```python
 from notifications_python_client import prepare_upload
 
-with open('file.pdf', 'rb') as f:
+with open("file.pdf", "rb") as f:
     ...
     personalisation={
-      'first_name': 'Amala',
-      'application_date': '2018-01-01',
-      'link_to_file': prepare_upload(f, confirm_email_before_download=False),
+      "first_name": "Amala",
+      "appointment_date": "2018-01-01 at 01:00PM",
+      "link_to_file": prepare_upload(f, confirm_email_before_download=False),
     }
 ```
 
@@ -371,12 +420,12 @@ Files sent before 12 April 2023 had a longer default period of 78 weeks (18 mont
 ```python
 from notifications_python_client import prepare_upload
 
-with open('file.pdf', 'rb') as f:
+with open("file.pdf", "rb") as f:
     ...
     personalisation={
-      'first_name': 'Amala',
-      'application_date': '2018-01-01',
-      'link_to_file': prepare_upload(f, retention_period='4 weeks'),
+      "first_name": "Amala",
+      "appointment_date": "2018-01-01 at 01:00PM",
+      "link_to_file": prepare_upload(f, retention_period="4 weeks"),
     }
 ```
 
@@ -386,18 +435,19 @@ If the request to the client is successful, the client returns a `dict`:
 
 ```python
 {
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
-  "reference": "STRING",
+  "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string - notification ID
+  "reference": "your reference",  # optional string - reference you provided when sending the message
   "content": {
-    "subject": "SUBJECT TEXT",
-    "body": "MESSAGE TEXT",
-    "from_email": "SENDER EMAIL"
+    "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\nhttps://documents.service.gov.uk/d/YlxDzgNUQYi1Qg6QxIpptA/th46VnrvRxyVO9div6f7hA?key=R0VDmwJ1YzNYFJysAIjQd9yHn5qKUFg-nXHVe3Ioa3A\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content - see that the link to document is embedded in the message content
+    "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",  # required string - "FROM" email address, not a real inbox
+    "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",  # optional string
   },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string
   "template": {
-    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
-    "version": INTEGER,
-    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
+    "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",  # required string - template ID
+    "version": 1,  # required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"  # required string
   }
 }
 ```
@@ -439,11 +489,11 @@ To send Notify a request to go live:
 
 ```python
     response = notifications_client.send_letter_notification(
-        template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
+        template_id="64415853-cb86-4cc4-b597-2aaa94ef8c39",
         personalisation={
-          'address_line_1': 'The Occupier' # required string,
-          'address_line_2': '123 High Street' # required string,
-          'address_line_3': 'SW14 6BH' # required string,
+          "address_line_1": "Amala Bird"
+          "address_line_2": "123 High Street"
+          "address_line_3": "SW14 6BH"
         },
     )
 ```
@@ -457,6 +507,13 @@ To find the template ID:
 1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
 1. Go to the __Templates__ page and select the relevant template.
 1. Select __Copy template ID to clipboard__.
+
+
+For example:
+
+```python
+template_id="64415853-cb86-4cc4-b597-2aaa94ef8c39", # required UUID string
+```
 
 ##### personalisation (required)
 
@@ -482,13 +539,13 @@ Any other placeholder fields included in the letter template also count as requi
 
 ```python
 personalisation={
-  'address_line_1': 'The Occupier',
-  'address_line_2': '123 High Street',
-  'address_line_3': 'Richmond upon Thames',
-  'address_line_4': 'Middlesex',
-  'address_line_5': 'SW14 6BF',
-  'name': 'John Smith',
-  'application_id': '4134325',
+  "address_line_1": "Amala Bird",  # required string
+  "address_line_2": "123 High Street",  # required string
+  "address_line_3": "Richmond upon Thames",  # required string
+  "address_line_4": "Middlesex",
+  "address_line_5": "SW14 6BF",  # last line of address you include must be a postcode or a country name  outside the UK
+  "name": "Amala",
+  "appointment_date": "2018-01-01 at 01:00PM",
   # pass in a list and it will appear as bullet points in the letter:
   "required_documents": ["passport", "utility bill", "other id"],
 }
@@ -499,7 +556,7 @@ personalisation={
 A unique identifier you can create if necessary. This reference identifies a single unique letter or a batch of letters. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference='STRING' # optional string - identifies notification(s)
+reference="your reference" # optional string - identifies notification(s)
 ```
 
 #### Response
@@ -508,18 +565,18 @@ If the request to the client is successful, the client returns a `dict`:
 
 ```python
 {
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
-  "reference": 'STRING',
+  "id": "3d1ce039-5476-414c-99b2-fac1e6add62c",  # required string - notification ID
+  "reference": "your reference",  # optional string - reference you provided when sending the message
   "content": {
-    "subject": "SUBJECT TEXT",
-    "body": "LETTER TEXT",
+    "subject": "Your upcoming pigeon registration appointment",  # required string - letter heading
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - letter content
   },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/3d1ce039-5476-414c-99b2-fac1e6add62c",  # required string
   "template": {
-    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
-    "version": INTEGER,
-    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
-  }
+    "id": "64415853-cb86-4cc4-b597-2aaa94ef8c39",  # required string - template ID
+    "version": 3,  # required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/64415853-cb86-4cc4-b597-2aaa94ef8c39"  # required string
+  },
   "scheduled_for": None
 }
 ```
@@ -547,11 +604,11 @@ If the request is not successful, the client returns an `HTTPError` containing t
 #### Method
 
 ```python
-response = notifications_client.send_precompiled_letter_notification(
-    reference,      # Reference to identify the notification
-    pdf_file,       # PDF File object
-    postage         # set postage on your precompiled letter
-)
+with open("path/to/pdf_file.pdf", "rb") as pdf_file:
+  response = notifications_client.send_precompiled_letter_notification(
+      reference="your reference",
+      pdf_file=pdf_file,
+  )
 ```
 
 #### Arguments
@@ -560,12 +617,16 @@ response = notifications_client.send_precompiled_letter_notification(
 
 A unique identifier you create. This reference identifies a single unique precompiled letter or a batch of precompiled letters. It must not contain any personal information such as name or postal address.
 
+```python
+reference="your reference" # required string - identifies notification(s)
+```
+
 ##### pdf_file (required)
 
 The precompiled letter must be a PDF file which meets [the GOV.UK Notify letter specification](https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification).
 
 ```python
-with open("path/to/pdf_file", "rb") as pdf_file:
+with open("path/to/pdf_file.pdf", "rb") as pdf_file:
     notification = notifications_client.send_precompiled_letter_notification(
         reference="your reference", pdf_file=pdf_file
     )
@@ -575,7 +636,9 @@ with open("path/to/pdf_file", "rb") as pdf_file:
 
 You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
 
-
+```python
+postage="first" # optional string
+```
 
 #### Response
 
@@ -583,9 +646,9 @@ If the request to the client is successful, the client returns a `dict`:
 
 ```python
 {
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
-  "reference": "your-letter-reference",
-  "postage": "postage-you-have-set-or-None"
+  "id": "1d986ba7-fba6-49fb-84e5-75038a1dd968",  # required string - notification ID
+  "reference": "your reference",  # required string - reference your provided
+  "postage": "first"  # required string - postage you provided, or else default postage for the letter
 }
 ```
 
@@ -599,7 +662,7 @@ If the request is not successful, the client returns an HTTPError containing the
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Letter content is not a valid PDF"`<br>`}]`|PDF file format is required|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this precompiled letter in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "reference is a required property"`<br>`}]`|Add a `reference` argument to the method call|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "postage invalid. It must be either first or second."`<br>`}]`|Change the value of `postage` argument in the method call to either 'first' or 'second'|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "postage invalid. It must be either first or second."`<br>`}]`|Change the value of `postage` argument in the method call to either `"first"` or `"second"`|
 |`429`|`[{`<br>`"error": "RateLimitError",`<br>`"message": "Exceeded rate limit for key type live of 10 requests per 20 seconds"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 |`429`|`[{`<br>`"error": "TooManyRequestsError",`<br>`"message": "Exceeded send limits (50) for today"`<br>`}]`|Refer to [service limits](#daily-limits) for the limit number|
 
@@ -631,16 +694,16 @@ If the request to the client is successful, the client will return a `dict`:
 ```python
 {
     "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
-    "reference": "STRING",  # optional string - client reference
-    "email_address": "sender@something.com",  # required string for emails
-    "phone_number": "+447900900123",  # required string for text messages
-    "line_1": "ADDRESS LINE 1",  # required string for letter
-    "line_2": "ADDRESS LINE 2",  # required string for letter
-    "line_3": "ADDRESS LINE 3",  # required string for letter
-    "line_4": "ADDRESS LINE 4",  # optional string for letter
-    "line_5": "ADDRESS LINE 5",  # optional string for letter
-    "line_6": "ADDRESS LINE 6",  # optional string for letter
-    "line_7": "ADDRESS LINE 7", # optional string for letter
+    "reference": "your reference",  # optional string - reference you provided when sending the message
+    "email_address": "amala@example.com",  # required string for emails
+    "phone_number": "+447700900123",  # required string for text messages
+    "line_1": "Amala Bird",  # required string for letter
+    "line_2": "123 High Street",  # required string for letter
+    "line_3": "Richmond upon Thames",  # required string for letter
+    "line_4": "Middlesex",  # optional string for letter
+    "line_5": "SW14 6BF",  # optional string for letter
+    "line_6": None,  # optional string for letter
+    "line_7": None, # optional string for letter
     "postage": "first / second / europe / rest-of-world", # required string for letter
     "type": "sms / letter / email",  # required string
     "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  # required string
@@ -649,14 +712,14 @@ If the request to the client is successful, the client will return a `dict`:
         "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",  # required string - template ID
         "uri": "/v2/template/{id}/{version}"  # required string
     },
-    "body": "STRING",  # required string - body of notification
-    "subject": "STRING",  # required string for email - subject of email
+    "body": "Hi Amala, your appointment is on 2018-01-01 at 01:00PM",  # required string - body of notification
+    "subject": "Your upcoming pigeon registration appointment",  # required string for email - subject of email
     "created_at": "2024-05-17 15:58:38.342838",  # required string - date and time notification created
-    "created_by_name": "STRING",  # optional string - name of the person who sent the notification if sent manually
+    "created_by_name": "Charlie Smith",  # optional string - name of the person who sent the notification if sent manually
     "sent_at": "2024-05-17 15:58:30.143000",  # optional string - date and time notification sent to provider
     "completed_at": "2024-05-17 15:59:10.321000",  # optional string - date and time notification delivered or failed
     "scheduled_for": "2024-05-17 9:00:00.000000", # optional string - date and time notification has been scheduled to be sent at
-    "one_click_unsubscribe": "STRING", # optional string, email only - URL that you provided so your recipients can unsubscribe
+    "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789", # optional string, email only - URL that you provided so your recipients can unsubscribe
     "is_cost_data_ready": True,  # required boolean, this field is true if cost data is ready, and false if it isn't
     "cost_in_pounds": 0.0027,  # optional number - cost of the notification in pounds. The cost does not take free allowance into account
     "cost_details": {
@@ -698,9 +761,11 @@ You can only get the status of messages sent within the retention period. The de
 
 #### Method
 
-##### All messages
+##### One page of up to 250 messages
 
-This will return all your messages with statuses. They will display in pages of up to 250 messages each.
+This API call returns one page of up to 250 messages and statuses. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `older_than` argument.
+
+You can only get messages that are within your data retention period. The default data retention period is 7 days. It can be changed in your Service Settings.
 
 ```python
 response = notifications_client.get_all_notifications(template_type, status, reference, older_than, include_jobs)
@@ -715,30 +780,25 @@ You can filter the returned messages by including the following optional argumen
 - [`include_jobs`](#include-jobs-optional)
 
 
-##### One page of up to 250 messages
+##### All messages - as an iterator
 
-This will return one page of up to 250 messages and statuses. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the [`older_than`](#older-than-optional) argument.
-
-To get the most recent messages, add the following code to your application:
+This will return a Python iterator object which yields one notification at a time until it has yielded all your notifications.
 
 ```python
-response = get_all_notifications_iterator(status="sending")
+response = get_all_notifications_iterator()
+
+# to iterate and process the notifications using the iterator:
+for notification in response:
+    # process notification
 ```
 
-You must set the [`status`](#status-optional) argument to `sending`.
+You can filter the returned messages by including the following optional arguments in the method:
 
-To get older messages:
-
-1. Get the ID of an older message.
-1. Add the following code to your application, with the older notification ID in the [`older_than`](#older-than-optional) argument.
-
-```python
-response = get_all_notifications_iterator(status="sending",older_than="NOTIFICATION ID")
-```
-
-You must set the [`status`](#status-optional) argument to `sending`.
-
-This method will return the next oldest messages from the specified notification ID.
+- [`template_type`](#template-type-optional)
+- [`status`](#status-optional)
+- [`reference`](#get-the-status-of-multiple-messages-arguments-reference-optional)
+- [`older_than`](#older-than-optional)
+- [`include_jobs`](#include-jobs-optional)
 
 #### Arguments
 
@@ -770,17 +830,17 @@ You can leave out this argument to ignore this filter.
 A unique identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
 ```python
-reference='STRING' # optional string - identifies notification(s)
+reference="your reference" # optional string - reference you provided when sending the message
 ```
 
 You can leave out this argument to ignore this filter.
 
 ##### older_than (optional)
 
-Input a notification ID into this argument. If you use this argument, the method returns the next 250 received messages older than the given ID.
+Input a notification ID into this argument. If you use this argument, the method returns the next 250 messages older than the given ID.
 
 ```python
-older_than='740e5834-3a29-46b4-9a6f-16142fde533a' # optional string - notification ID
+older_than="740e5834-3a29-46b4-9a6f-16142fde533a" # optional string - notification ID
 ```
 
 If you leave out this argument, the method returns the most recent 250 messages.
@@ -804,16 +864,16 @@ If the request to the client is successful, the client returns a `dict`.
     "notifications": [
         {
             "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
-            "reference": "STRING",  # optional string - client reference
-            "email_address": "sender@something.com",  # required string for emails
-            "phone_number": "+447900900123",  # required string for text messages
-            "line_1": "ADDRESS LINE 1",  # required string for letter
-            "line_2": "ADDRESS LINE 2",  # required string for letter
-            "line_3": "ADDRESS LINE 3",  # required string for letter
-            "line_4": "ADDRESS LINE 4",  # optional string for letter
-            "line_5": "ADDRESS LINE 5",  # optional string for letter
-            "line_6": "ADDRESS LINE 6",  # optional string for letter
-            "line_7": "ADDRESS LINE 7", # optional string for letter
+            "reference": "your reference",  # optional string - reference you provided when sending the message
+            "email_address": "amala@example.com",  # required string for emails
+            "phone_number": "+447700900123",  # required string for text messages
+            "line_1": "Amala Bird",  # required string for letter
+            "line_2": "123 High Street",  # required string for letter
+            "line_3": "Richmond upon Thames",  # required string for letter
+            "line_4": "Middlesex",  # optional string for letter
+            "line_5": "SW14 6BF",  # optional string for letter
+            "line_6": None,  # optional string for letter
+            "line_7": None, # optional string for letter
             "postage": "first / second / europe / rest-of-world", # required string for letter
             "type": "sms / letter / email",  # required string
             "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  # required string
@@ -822,14 +882,14 @@ If the request to the client is successful, the client returns a `dict`.
                 "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",  # required string - template ID
                 "uri": "/v2/template/{id}/{version}"  # required string
             },
-            "body": "STRING",  # required string - body of notification
-            "subject": "STRING",  # required string for email - subject of email
+            "body": "Hi Amala, your appointment is on 2018-01-01 at 01:00PM",  # required string - body of notification
+            "subject": "Your upcoming pigeon registration appointment",  # required string for email - subject of email
             "created_at": "2024-05-17 15:58:38.342838",  # required string - date and time notification created
-            "created_by_name": "STRING",  # optional string - name of the person who sent the notification if sent manually
+            "created_by_name": "Charlie Smith",  # optional string - name of the person who sent the notification if sent manually
             "sent_at": "2024-05-17 15:58:30.143000",  # optional string - date and time notification sent to provider
             "completed_at": "2024-05-17 15:59:10.321000",  # optional string - date and time notification delivered or failed
             "scheduled_for": "2024-05-17 9:00:00.000000", # optional string - date and time notification has been scheduled to be sent at
-            "one_click_unsubscribe": "STRING", # optional string, email only - URL that you provided so your recipients can unsubscribe
+            "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789", # optional string, email only - URL that you provided so your recipients can unsubscribe
             "is_cost_data_ready": True,  # required boolean, this field is true if cost data is ready, and false if it isn't
             "cost_in_pounds": 0.0027,  # optional number - cost of the notification in pounds. The cost does not take free allowance into account
             "cost_details": {
@@ -841,6 +901,9 @@ If the request to the client is successful, the client returns a `dict`.
                 "billable_sheets_of_paper": 2,  # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
                 "postage": "first / second / europe / rest-of-world"  # optional string
             }
+        },
+        {
+            ...another notification
         }
     ],
     "links": {
@@ -927,7 +990,7 @@ This returns the PDF contents of a letter.
 
 ```python
 pdf_file = notifications_client.get_pdf_for_letter(
-  'f33517ff-2a88-4f6e-b855-c550268ce08a' # required string - notification ID
+  "3d1ce039-5476-414c-99b2-fac1e6add62c" # required string - notification ID
 )
 ```
 
@@ -969,7 +1032,7 @@ This returns the latest version of the template.
 
 ```python
 response = notifications_client.get_template(
-  'f33517ff-2a88-4f6e-b855-c550268ce08a' # required string - template ID
+  template_id="f33517ff-2a88-4f6e-b855-c550268ce08a"
 )
 ```
 
@@ -979,22 +1042,28 @@ response = notifications_client.get_template(
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
 
+For example:
+
+```python
+template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
+```
+
 #### Response
 
 If the request to the client is successful, the client returns a `dict`.
 
 ```python
 {
-    "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
-    "name": "STRING", # required string - template name
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
+    "name": "Pigeon registration - appointment email", # required string - template name
     "type": "sms / email / letter" , # required string
-    "created_at": "STRING", # required string - date and time template created
-    "updated_at": "STRING", # required string - date and time template last updated
-    "version": INTEGER,
-    "created_by": "someone@example.com", # required string
-    "body": "STRING", # required string - body of notification
-    "subject": "STRING" # required string for email - subject of email
-    "letter_contact_block": "STRING" # optional string - None if not a letter template or contact block not set
+    "created_at": "2024-05-10 10:30:31.142535", # required string - date and time template created
+    "updated_at": "2024-08-25 13:00:09.123234", # required string - date and time template last updated
+    "version": 2, # required integer - template version
+    "created_by": "charlie.smith@pigeons.gov.uk", # required string
+    "subject": "Your upcoming pigeon registration appointment",  # required string for email and letter - subject of email / heading of letter
+    "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - body of notification
+    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" # optional string - present for letter templates where contact block is set, otherwise None
 }
 ```
 
@@ -1015,8 +1084,8 @@ If the request is not successful, the client returns an `HTTPError` containing t
 
 ```python
 response = notifications_client.get_template_version(
-    'f33517ff-2a88-4f6e-b855-c550268ce08a' # required string - template ID
-    'version': INTEGER,
+    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
+    version=1,
 )
 ```
 
@@ -1025,6 +1094,12 @@ response = notifications_client.get_template_version(
 ##### template_id (required)
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
+
+For example:
+
+```python
+template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
+```
 
 ##### version (required)
 
@@ -1036,16 +1111,16 @@ If the request to the client is successful, the client returns a `dict`.
 
 ```python
 {
-    "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
-    "name": "STRING", # required string - template name
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
+    "name": "Pigeon registration - appointment email", # required string - template name
     "type": "sms / email / letter" , # required string
-    "created_at": "STRING", # required string - date and time template created
-    "updated_at": "STRING", # required string - date and time template last updated
-    "version": INTEGER,
-    "created_by": "someone@example.com", # required string
-    "body": "STRING", # required string - body of notification
-    "subject": "STRING" # required string for email - subject of email
-    "letter_contact_block": "STRING" # optional string - None if not a letter template or contact block not set
+    "created_at": "2024-05-10 10:30:31.142535", # required string - date and time template created
+    "updated_at": "2024-08-25 13:00:09.123234", # required string - date and time template last updated
+    "version": 1, # required integer - template version
+    "created_by": "charlie.smith@pigeons.gov.uk", # required string
+    "subject": "Your upcoming pigeon registration appointment",  # required string for email and letter - subject of email / heading of letter
+    "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - body of notification
+    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" # optional string - present for letter templates where contact block is set, otherwise None
 }
 ```
 
@@ -1090,16 +1165,16 @@ If the request to the client is successful, the client returns a `dict`.
 {
     "templates": [
         {
-            "id": 'f33517ff-2a88-4f6e-b855-c550268ce08a', # required string - template ID
-            "name": "STRING", # required string - template name
+            "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
+            "name": "Pigeon registration - appointment email", # required string - template name
             "type": "sms / email / letter" , # required string
-            "created_at": "STRING", # required string - date and time template created
-            "updated_at": "STRING", # required string - date and time template last updated
-            "version": NUMBER, # required string - template version
-            "created_by": "someone@example.com", # required string
-            "body": "STRING", # required string - body of notification
-            "subject": "STRING" # required string for email - subject of email
-            "letter_contact_block": "STRING" # optional string - None if not a letter template or contact block not set
+            "created_at": "2024-05-10 10:30:31.142535", # required string - date and time template created
+            "updated_at": "2024-08-25 13:00:09.123234", # required string - date and time template last updated
+            "version": 2, # required integer - template version
+            "created_by": "charlie.smith@pigeons.gov.uk", # required string
+            "subject": "Your upcoming pigeon registration appointment",  # required string for email and letter - subject of email / heading of letter
+            "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - body of notification
+            "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" # optional string - present for letter templates where contact block is set, otherwise None
         },
         {
             ...another template
@@ -1124,12 +1199,11 @@ This generates a preview version of a template.
 
 ```python
 response = notifications_client.post_template_preview(
-    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a', # required UUID string
+    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
     personalisation={
-        'KEY': 'VALUE',
-        'KEY': 'VALUE',
-        ...
-        }, # required dict - specifies template parameters
+        "first_name": "Amala",
+        "appointment_date": "2018-01-01 at 01:00PM",
+    }
 )
 ```
 
@@ -1141,15 +1215,22 @@ The parameters in the personalisation argument must match the placeholder fields
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
 
+For example:
+
+```python
+template_id="f33517ff-2a88-4f6e-b855-c550268ce08a", # required UUID string
+```
+
 ##### personalisation (required)
 
 If a template has placeholder fields for personalised information such as name or reference number, you need to provide their values in a dictionary with key value pairs. For example:
 
 ```python
 personalisation={
-    'first_name': 'Amala',
-    'application_date': '2018-01-01',
-}
+    "first_name": "Amala",
+    "appointment_date": "2018-01-01 at 01:00PM",
+    "required_documents": ["passport", "utility bill", "other id"],
+},
 ```
 
 #### Response
@@ -1160,9 +1241,14 @@ If the request to the client is successful, you receive a `dict` response.
 {
     "id": "740e5834-3a29-46b4-9a6f-16142fde533a", # required string - notification ID
     "type": "sms / email / letter" , # required string
-    "version": INTEGER,
-    "body": "STRING", # required string - body of notification
-    "subject": "STRING" # required string for email - subject of email
+    "version": 3,
+    # required string - body of notification
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",
+    # required string for emails, empty for sms and letters - html version of the email body
+    "html": '<p style="Margin: 0 0 20px 0; font-size: 19px; line-height: 25px; color: #0B0C0C;">Dear Amala</p> ... [snippet truncated for readability]',
+    # required string for email and letter - subject of email / heading of letter
+    "subject": 'Your upcoming pigeon registration appointment',
+    'postage': None, # required string for letters, empty for sms and emails - letter postage
 }
 ```
 
@@ -1193,12 +1279,16 @@ To receive text messages:
 
 ### Get all received text messages
 
-This method returns a `<generator object>` with all received text messages.
+This will return a Python iterator object which yields one received text message at a time until it has yielded all your received text messages.
 
 #### Method
 
 ```python
-response = get_received_texts_iterator()
+response = notifications_client.get_received_texts_iterator()
+
+# to iterate and process the received text messages using the iterator:
+for text_message in response:
+    # process received text message
 ```
 
 #### Response
@@ -1216,7 +1306,7 @@ This will return one page of up to 250 text messages.
 #### Method
 
 ```python
-response = client.get_received_texts(older_than)
+response = notifications_client.get_received_texts(older_than="740e5834-3a29-46b4-9a6f-16142fde533a")
 ```
 
 You can specify which text messages to receive by inputting the ID of a received text message into the [`older_than`](#get-one-page-of-received-text-messages-arguments-older-than-optional) argument.
@@ -1228,7 +1318,7 @@ You can specify which text messages to receive by inputting the ID of a received
 Input the ID of a received text message into this argument. If you use this argument, the method returns the next 250 received text messages older than the given ID.
 
 ```python
-older_than='740e5834-3a29-46b4-9a6f-16142fde533a' # optional string - notification ID
+older_than="740e5834-3a29-46b4-9a6f-16142fde533a" # optional string - notification ID
 ```
 
 If you leave out this argument, the method returns the most recent 250 text messages.
@@ -1242,14 +1332,16 @@ If the request to the client is successful, the client returns a `dict`.
   "received_text_messages":
   [
     {
-      "id": "STRING", # required string - ID of received text message
-      "user_number": "STRING", # required string
-      "notify_number": "STRING", # required string - receiving number
-      "created_at": "STRING", # required string - date and time template created
-      "service_id": "STRING", # required string - service ID
+      "id": "'b51f638b-4295-46e0-a06e-cd41eee7c33b", # required string - ID of received text message
+      "user_number": "447700900123", # required string - number of the end user who sent the message
+      "notify_number": "07700900456", # required string - your receiving number
+      "created_at": "2024-12-12 18:39:16.123346", # required string - date and time template created
+      "service_id": "26785a09-ab16-4eb0-8407-a37497a57506", # required string - service ID
       "content": "STRING" # required string - text content
     },
-    …
+    {
+      ...another received text message
+    }
   ],
   "links": {
     "current": "/received-text-messages",
