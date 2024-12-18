@@ -1214,9 +1214,9 @@ This generates a preview version of a template.
 response = notifications_client.post_template_preview(
     template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
     personalisation={
-    "first_name": "Amala",
-    "appointment_date": "2018-01-01 at 01:00PM",
-  },
+        "first_name": "Amala",
+        "appointment_date": "2018-01-01 at 01:00PM",
+    }
 )
 ```
 
