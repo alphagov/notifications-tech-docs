@@ -45,7 +45,7 @@ You can use GOV.UK Notify to send emails, text messages and letters.
 
 ```python
 response = notifications_client.send_sms_notification(
-    phone_number="+447900900123",
+    phone_number="+447700900123",
     template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
 )
 ```
@@ -59,7 +59,7 @@ The phone number of the recipient of the text message. This can be a UK or inter
 For example:
 
 ```python
-phone_number="+447900900123", # required string
+phone_number="+447700900123", # required string
 ```
 
 
@@ -880,7 +880,7 @@ If the request to the client is successful, the client returns a `dict`.
             "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
             "reference": "your reference",  # optional string - reference you provided when sending the message
             "email_address": "amala@example.com",  # required string for emails
-            "phone_number": "+447900900123",  # required string for text messages
+            "phone_number": "+447700900123",  # required string for text messages
             "line_1": "Amala Bird",  # required string for letter
             "line_2": "123 High Street",  # required string for letter
             "line_3": "Richmond upon Thames",  # required string for letter
@@ -1347,8 +1347,8 @@ If the request to the client is successful, the client returns a `dict`.
   [
     {
       "id": "'b51f638b-4295-46e0-a06e-cd41eee7c33b", # required string - ID of received text message
-      "user_number": "447900900123", # required string - number of the end user who sent the message
-      "notify_number": "07900900456", # required string - your receiving number
+      "user_number": "447700900123", # required string - number of the end user who sent the message
+      "notify_number": "07700900456", # required string - your receiving number
       "created_at": "2024-12-12 18:39:16.123346", # required string - date and time template created
       "service_id": "26785a09-ab16-4eb0-8407-a37497a57506", # required string - service ID
       "content": "STRING" # required string - text content
