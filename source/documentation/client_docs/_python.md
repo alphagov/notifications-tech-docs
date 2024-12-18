@@ -1347,7 +1347,7 @@ If the request to the client is successful, the client returns a `dict`.
       "id": "'b51f638b-4295-46e0-a06e-cd41eee7c33b", # required string - ID of received text message
       "user_number": "447900900123", # required string - number of the end user who sent the message
       "notify_number": "07900900456", # required string - your receiving number
-      "created_at": "2024-12-12 18:39:16.123346"", # required string - date and time template created
+      "created_at": "2024-12-12 18:39:16.123346", # required string - date and time template created
       "service_id": "26785a09-ab16-4eb0-8407-a37497a57506", # required string - service ID
       "content": "STRING" # required string - text content
     },
