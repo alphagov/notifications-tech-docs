@@ -87,6 +87,7 @@ The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/Java
 The phone number of the recipient of the text message. This can be a UK or international number.
 
 For example:
+
 ```javascript
 let phoneNumber = "+447900900123";
 ```
@@ -1358,7 +1359,7 @@ To get older messages, pass the ID of an older notification into the `olderThan`
 Input the ID of a received text message into this argument. If you use this argument, the client returns the next 250 received text messages older than the given ID. For example:
 
 ```javascript
-let olderThan= "740e5834-3a29-46b4-9a6f-16142fde533a";
+let olderThan = "740e5834-3a29-46b4-9a6f-16142fde533a";
 ```
 
 If you pass in an empty argument or `null`, the client returns the most recent 250 text messages.
