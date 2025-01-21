@@ -17,24 +17,29 @@ npm install --save notifications-node-client
 Add this code to your application:
 
 ```javascript
-var NotifyClient = require('notifications-node-client').NotifyClient
+let NotifyClient = require("notifications-node-client").NotifyClient;
 
-var notifyClient = new NotifyClient(apiKey)
+let notifyClient = new NotifyClient(apiKey);
 ```
 
+#### Arguments
+
+##### api_key (required)
+
 To get an API key, [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page. You can find more information in the [API keys](#api-keys) section of this documentation.
+
 
 #### Connect through a proxy (optional)
 
 Add this code to your application:
 
 ```javascript
-proxyConfig = {
+const proxyConfig = {
   host: proxyHost,
   port: proxyPort
-}
+};
 
-notifyClient.setProxy(proxyConfig)
+notifyClient.setProxy(proxyConfig);
 ```
 
 where the `proxyConfig` should be an object supported by [axios](https://github.com/axios/axios).
@@ -46,7 +51,7 @@ You can provide your own Axios client to the Notify client. This is useful if yo
 Add this code to your application:
 
 ```javascript
-notifyClient.setClient(customAxiosClient)
+notifyClient.setClient(customAxiosClient);
 ```
 
 where `customAxiosClient` is an instance of Axios.
@@ -67,7 +72,7 @@ notifyClient
     smsSenderId: smsSenderId
   })
   .then(response => console.log(response))
-  .catch(err => console.error(err))
+  .catch(err => console.error(err));
 ```
 
 The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). The promise will either:
@@ -76,6 +81,15 @@ The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/Java
 - fail with an `err` if unsuccessful
 
 #### Arguments
+
+##### phoneNumber (required)
+
+The phone number of the recipient of the text message. This can be a UK or international number.
+
+For example:
+```javascript
+let phoneNumber = "+447900900123";
+```
 
 ##### templateId (required)
 
@@ -87,44 +101,32 @@ To find the template ID:
 
 For example:
 
-```
-'f33517ff-2a88-4f6e-b855-c550268ce08a'
-```
-
-##### phoneNumber (required)
-
-The phone number of the recipient of the text message. This number can be a UK or international number. For example:
-
-```
-'+447900900123'
+```javascript
+let templateId = "f33517ff-2a88-4f6e-b855-c550268ce08a"; // required UUID string
 ```
 
-##### personalisation (required)
+##### personalisation (optional)
 
 If a template has placeholder fields for personalised information such as name or reference number, you must provide their values in an `object`. For example:
 
 ```javascript
-{
-  'first_name': 'Amala',
-  'reference_number': '300241'
-}
+let personalisation = {
+    first_name: "Amala",
+    appointment_date: "1 January 2018 at 1:00pm"
+};
 ```
 
-##### reference (required)
+##### reference (optional)
 
-A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. If you do not have a reference, you must pass in an empty string or `null`. For example:
+A unique identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
-```
-'your_reference_here'
+```javascript
+let reference = "your reference"; // optional string - identifies notification(s)
 ```
 
 ##### smsSenderId (optional)
 
-A unique identifier of the sender of the text message notification. For example:
-
-```
-'8e222534-7f05-4972-86e3-17c5d9f894e2'
-```
+A unique identifier of the sender of the text message.
 
 To find the text message sender:
 
@@ -132,12 +134,17 @@ To find the text message sender:
 1. Go to the __Settings__ page.
 1. In the __Text Messages__ section, select __Manage__ on the __Text Message sender__ row.
 
-In this screen, you can either:
+You can then either:
 
-  - copy the sender ID that you want to use and paste it into the method
-  - select __Change__ to change the default sender that the service will use, and select __Save__
+- copy the sender ID that you want to use and paste it into the method
+- select __Change__ to change the default sender that the service will use, and select __Save__
+
+```javascript
+let smsSenderId = "8e222534-7f05-4972-86e3-17c5d9f894e2";
+```
 
 You can leave out this argument if your service only has one text message sender, or if you want to use the default sender.
+
 
 #### Response
 
@@ -145,24 +152,24 @@ If the request is successful, the promise resolves with a `response` `object`. F
 
 ```javascript
 {
-  'id': 'bfb50d92-100d-4b8b-b559-14fa3b091cda',
-  'reference': null,
-  'content': {
-    'body': 'Some words',
-    'from_number': '40604'
-  },
-  'uri': 'https://api.notifications.service.gov.uk/v2/notifications/ceb50d92-100d-4b8b-b559-14fa3b091cd',
-  'template': {
-    'id': 'ceb50d92-100d-4b8b-b559-14fa3b091cda',
-    'version': 1,
-    'uri': 'https://api.notifications.service.gov.uk/v2/templates/bfb50d92-100d-4b8b-b559-14fa3b091cda'
-  }
-}
+    "id": "740e5834-3a29-46b4-9a6f-16142fde533a", // required string - notification ID
+    "reference": "your reference", // optional string - reference you provided when sending the message
+    "content": {
+        "body": "Hi Amala, your appointment is on 1 January 2018 at 1:00pm", // required string - message content
+        "from_number": "GOVUK" // required string - sender name / phone number
+    },
+    "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a", // required string
+    "template": {
+        "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+        "version": 3, // required integer
+        "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a" // required string
+    }
+};
 ```
 
-If you are using the [test API key](#test), all your messages come back with a `delivered` status.
+If you are using the [test API key](#test), all your messages will come back with a `delivered` status.
 
-All messages sent using the [team and guest list](#team-and-guest-list) or [live](#live) keys appear on your dashboard.
+All messages sent using the [team and guest list](#team-and-guest-list) or [live](#live) keys will appear on your dashboard.
 
 #### Error codes
 
@@ -183,15 +190,21 @@ If the request is not successful, the promise fails with an `err`.
 #### Method
 
 ```javascript
+let options = {
+    personalisation: {
+        first_name: "Amala",
+        appointment_date: "1 January 2018 at 1:00pm",
+        required_documents: ["passport", "utility bill", "other id"]
+    },
+    reference: "your reference",
+    oneClickUnsubscribeURL: "https://example.com/unsubscribe.html?opaque=123456789",
+    emailReplyToId: "ca4fdde7-2a67-4a6c-8393-62aa7245751f" 
+};
+
 notifyClient
-  .sendEmail(templateId, emailAddress, {
-    personalisation: personalisation,
-    reference: reference,
-    oneClickUnsubscribeURL: oneClickUnsubscribeURL,
-    emailReplyToId: emailReplyToId
-  })
+  .sendEmail(templateId, emailAddress, options) // Pass options as the third argument (optional)
   .then(response => console.log(response))
-  .catch(err => console.error(err))
+  .catch(err => console.error(err));
 ```
 
 The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). The promise will either:
@@ -200,6 +213,14 @@ The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/Java
 - fail with an `err` if unsuccessful
 
 #### Arguments
+
+##### emailAddress (required)
+
+The email address of the recipient. For example:
+
+```javascript
+let emailAddress = "amala@example.com";
+```
 
 ##### templateId (required)
 
@@ -211,39 +232,34 @@ To find the template ID:
 
 For example:
 
-```
-"f33517ff-2a88-4f6e-b855-c550268ce08a"
-```
-
-##### emailAddress (required)
-
-The email address of the recipient. For example:
-
-```
-"sender@something.com"
+```javascript
+let templateId = "9d751e0e-f929-4891-82a1-a3e1c3c18ee3";
 ```
 
-##### personalisation (required)
+##### personalisation (optional)
 
 If a template has placeholder fields for personalised information such as name or application date, you must provide their values in an `object`. For example:
 
 ```javascript
-{
-  personalisation: {
-    'first_name': 'Amala',
-    'application_number': '300241',
-    // pass in an array and it will appear as bullet points in the message:
-    'required_documents': ['passport', 'utility bill', 'other id']
-  }
-}
+let options = {
+    personalisation: {
+        first_name: "Amala",
+        appointment_date: "1 January 2018 at 1:00pm",
+        required_documents: ["passport", "utility bill", "other id"] 
+    },
+};
 ```
 
-##### reference (required)
+Note: if you pass a list like `required_documents` in the example above, it will appear as bullet points in your message.
 
-A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. If you do not have a reference, you must pass in an empty string or `null`. For example:
+##### reference (optional)
 
-```
-"your_reference_here"
+A unique identifier you can create if necessary. This reference identifies a single unique email or a batch of emails. It must not contain any personal information such as name or postal address. For example:
+
+```javascript
+let options = {
+    reference: "your-reference"
+};
 ```
 
 ##### oneClickUnsubscribeURL (recommended)
@@ -253,7 +269,9 @@ If you send subscription emails you must let recipients opt out of receiving the
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
 ```javascript
-oneClickUnsubscribeURL = 'https://example.com/unsubscribe.html?opaque=123456789'
+let options = {
+    oneClickUnsubscribeURL: "https://example.com/unsubscribe.html?opaque=123456789"
+};
 ```
 
 The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
@@ -280,8 +298,11 @@ To add a reply-to email address:
 1. Select __Add reply-to address__.
 1. Enter the email address you want to use, and select __Add__.
 
-```
-emailReplyToId='8e222534-7f05-4972-86e3-17c5d9f894e2'
+
+```javascript
+let options = {
+    emailReplyToId:"ca4fdde7-2a67-4a6c-8393-62aa7245751f"
+};
 ```
 
 You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.
@@ -292,21 +313,21 @@ If the request is successful, the promise resolves with a `response` `object`. F
 
 ```javascript
 {
-  'id': 'bfb50d92-100d-4b8b-b559-14fa3b091cda',
-  'reference': null,
-  'oneClickUnsubscribeURL': null,
-  'content': {
-    'subject': 'Licence renewal',
-    'body': 'Dear Bill, your licence is due for renewal on 3 January 2016.',
-    'from_email': 'the_service@gov.uk'
-  },
-  'uri': 'https://api.notifications.service.gov.uk/v2/notifications/ceb50d92-100d-4b8b-b559-14fa3b091cd',
-  'template': {
-    'id': 'ceb50d92-100d-4b8b-b559-14fa3b091cda',
-    'version': 1,
-    'uri': 'https://api.notificaitons.service.gov.uk/service/your_service_id/templates/bfb50d92-100d-4b8b-b559-14fa3b091cda'
-  }
-}
+    "id": "201b576e-c09b-467b-9dfa-9c3b689ee730", // required string - notification ID
+    "reference": "your reference", // optional string - reference you provided when sending the message
+    "content": {
+        "subject": "Your upcoming pigeon registration appointment",  // required string - message subject
+        "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 1:00pm.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - message content
+        "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk", // required string - "FROM" email address, not a real inbox
+        "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789" // optional string
+    },
+    "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730", // required string
+    "template": {
+        "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3", // required string - template ID
+        "version": 1, // required integer
+        "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3" // required string
+    }
+};
 ```
 
 #### Error codes
@@ -357,7 +378,7 @@ Your email should also tell recipients how long the file will be available to do
 You can upload the following file types:
 
 - CSV (.csv)
-- image (.jpeg, .jpg, .png) 
+- image (.jpeg, .jpg, .png)
 - Microsoft Excel Spreadsheet (.xlsx)
 - Microsoft Word Document (.doc, .docx)
 - PDF (.pdf)
@@ -368,14 +389,14 @@ Your file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www
 Pass the file object as a value into the `personalisation` argument. For example:
 
 ```javascript
-var fs = require('fs')
+let fs = require("fs")
 
-fs.readFile('path/to/document.pdf', function (err, pdfFile) {
+fs.readFile("path/to/document.pdf", function (err, pdfFile) {
   console.log(err)
   notifyClient.sendEmail(templateId, emailAddress, {
     personalisation: {
-      first_name: 'Amala',
-      application_date: '2018-01-01',
+      first_name: "Amala",
+      appointment_date: "1 January 2018 at 1:00pm",
       link_to_file: notifyClient.prepareUpload(pdfFile)
     }
   }).then(response => console.log(response)).catch(err => console.error(err))
@@ -405,14 +426,14 @@ If you do not provide a filename for your file, Notify will:
 If Notify cannot add the correct file extension, recipients may not be able to open your file.
 
 ```javascript
-var fs = require('fs')
-fs.readFile('path/to/document.csv', function (err, csvFile) {
+let fs = require("fs")
+fs.readFile("path/to/document.csv", function (err, csvFile) {
   console.log(err)
   notifyClient.sendEmail(templateId, emailAddress, {
     personalisation: {
-      first_name: 'Amala',
-      application_date: '2018-01-01',
-      link_to_file: notifyClient.prepareUpload(csvFile, { filename: '2023-12-25-daily-report.csv' })
+      first_name: "Amala",
+      appointment_date: "1 January 2018 at 1:00pm",
+      link_to_file: notifyClient.prepareUpload(csvFile, { filename: "amala_pigeon_affairs_bureau_invite.csv" })
     }
   }).then(response => console.log(response)).catch(err => console.error(err))
 })
@@ -439,14 +460,14 @@ You should not turn this feature off if you send files that contain:
 To let the recipient download the file without confirming their email address, set the `confirmEmailBeforeDownload` option to `false`.
 
 ```javascript
-var fs = require('fs')
+let fs = require("fs")
 
-fs.readFile('path/to/document.pdf', function (err, pdfFile) {
+fs.readFile("path/to/document.pdf", function (err, pdfFile) {
   console.log(err)
   notifyClient.sendEmail(templateId, emailAddress, {
     personalisation: {
-      first_name: 'Amala',
-      application_date: '2018-01-01',
+      first_name: "Amala",
+      appointment_date: "1 January 2018 at 1:00pm",
       link_to_file: notifyClient.prepareUpload(pdfFile, { confirmEmailBeforeDownload: false })
     }
   }).then(response => console.log(response)).catch(err => console.error(err))
@@ -469,15 +490,15 @@ If you do not choose a value, the file will be available for the default period 
 Files sent before 12 April 2023 had a longer default period of 78 weeks (18 months).
 
 ```javascript
-var fs = require('fs')
+let fs = require("fs")
 
-fs.readFile('path/to/document.pdf', function (err, pdfFile) {
+fs.readFile("path/to/document.pdf", function (err, pdfFile) {
   console.log(err)
   notifyClient.sendEmail(templateId, emailAddress, {
     personalisation: {
-      first_name: 'Amala',
-      application_date: '2018-01-01',
-      link_to_file: notifyClient.prepareUpload(pdfFile, { retentionPeriod: '52 weeks' })
+      first_name: "Amala",
+      appointment_date: "1 January 2018 at 1:00pm",
+      link_to_file: notifyClient.prepareUpload(pdfFile, { retentionPeriod: "52 weeks" })
     }
   }).then(response => console.log(response)).catch(err => console.error(err))
 })
@@ -489,18 +510,19 @@ If the request is successful, the promise resolves with a `response` `object`. F
 
 ```javascript
 {
-  'id': '740e5834-3a29-46b4-9a6f-16142fde533a',
-  'reference': 'your_reference_here',
-  'content': {
-    'subject': 'SUBJECT TEXT',
-    'body': 'MESSAGE TEXT',
-    'from_email': 'SENDER EMAIL'
+  "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  // required string - notification ID
+  "reference": "your reference",  // optional string - reference you provided when sending the message
+  "content": {
+    "subject": "Your upcoming pigeon registration appointment",  // required string - message subject
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 1:00pm.\r\n\r\n Here is a link to your invitation document:\r\nhttps://documents.service.gov.uk/d/YlxDzgNUQYi1Qg6QxIpptA/th46VnrvRxyVO9div6f7hA?key=R0VDmwJ1YzNYFJysAIjQd9yHn5qKUFg-nXHVe3Ioa3A\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - message content - see that the link to document is embedded in the message content
+    "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",  // required string - "FROM" email address, not a real inbox
+    "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789",  // optional string
   },
-  'uri': 'https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a',
-  'template': {
-    'id': 'f33517ff-2a88-4f6e-b855-c550268ce08a',
-    'version': INTEGER,
-    'uri': 'https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a'
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730",  // required string
+  "template": {
+    "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",  // required string - template ID
+    "version": 1,  // required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"  // required string
   }
 }
 ```
@@ -567,8 +589,8 @@ To find the template ID:
 
 For example:
 
-```
-"f33517ff-2a88-4f6e-b855-c550268ce08a"
+```javascript
+let templateId = "64415853-cb86-4cc4-b597-2aaa94ef8c39";
 ```
 
 ##### personalisation (required)
@@ -596,12 +618,15 @@ Any other placeholder fields included in the letter template also count as requi
 ```javascript
 {
   personalisation: {
-    'address_line_1': 'The Occupier',
-    'address_line_2': '123 High Street',
-    'address_line_3': 'SW14 6BH',
-    'application_date': '2018-01-01',
+    "address_line_1": "Amala Bird", // required string
+    "address_line_2": "123 High Street", // required string
+    "address_line_3": "Richmond upon Thames", // required string
+    "address_line_4": "Middlesex",
+    "address_line_5": "SW14 6BF",  // last line of address you include must be a postcode or a country name  outside the UK
+    "name": "Amala",
+    "appointment_date": "1 January 2018 at 1:00pm",
     // pass in an array and it will appear as bullet points in the letter:
-    'required_documents': ['passport', 'utility bill', 'other id']
+    "required_documents": ["passport", "utility bill", "other id"]
   }
 }
 ```
@@ -610,8 +635,8 @@ Any other placeholder fields included in the letter template also count as requi
 
 A unique identifier you can create if required. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
-```
-"your_reference_here"
+```javascript
+let reference = "your_reference_here";
 ```
 
 #### Response
@@ -620,19 +645,18 @@ If the request is successful, the promise resolves with a `response` `object`. F
 
 ```javascript
 {
-  'id': '740e5834-3a29-46b4-9a6f-16142fde533a',
-  'reference': null,
-  'content': {
-    'subject': 'Licence renewal',
-    'body': 'Dear Bill, your licence is due for renewal on 3 January 2016.'
-  },
-  'uri': 'https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a',
-  'template': {
-    'id': 'f33517ff-2a88-4f6e-b855-c550268ce08a',
-    'version': 1,
-    'uri': 'https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a'
-  },
-  'scheduled_for': null
+    "id": "3d1ce039-5476-414c-99b2-fac1e6add62c",  // required string - notification ID
+    "reference": "your reference",  // optional string - reference you provided when sending the message
+    "content": {
+        "subject": "Your upcoming pigeon registration appointment",  // required string - letter heading
+        "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 1:00pm.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - letter content
+    },
+    "uri": "https://api.notifications.service.gov.uk/v2/notifications/3d1ce039-5476-414c-99b2-fac1e6add62c",  // required string
+    "template": {
+        "id": "64415853-cb86-4cc4-b597-2aaa94ef8c39",  // required string - template ID
+        "version": 3,  // required integer
+        "uri": "https://api.notifications.service.gov.uk/v2/template/64415853-cb86-4cc4-b597-2aaa94ef8c39"  // required string
+    }
 }
 ```
 
@@ -659,7 +683,7 @@ If the request is not successful, the promise fails with an `err`.
 #### Method
 
 ```javascript
-var response = notifyClient.sendPrecompiledLetter(
+let response = notifyClient.sendPrecompiledLetter(
   reference,
   pdfFile,
   postage
@@ -672,23 +696,23 @@ var response = notifyClient.sendPrecompiledLetter(
 
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
-```
-"your_reference_here"
+```javascript
+let reference = "your reference";
 ```
 
-##### pdfFile
+##### pdfFile (required)
 
 The precompiled letter must be a PDF file which meets [the GOV.UK Notify letter specification](https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification). For example:
 
 ```javascript
-var fs = require('fs')
+let fs = require("fs")
 
-fs.readFile('path/to/document.pdf', function (err, pdfFile) {
+fs.readFile("path/to/document.pdf", function (err, pdfFile) {
   if (err) {
     console.error(err)
   }
-  var notification = notifyClient.sendPrecompiledLetter(
-    'your reference', pdfFile
+  let notification = notifyClient.sendPrecompiledLetter(
+    "your reference", pdfFile
   )
 })
 ```
@@ -697,6 +721,9 @@ fs.readFile('path/to/document.pdf', function (err, pdfFile) {
 
 You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
 
+```javascript
+let postage = "first";
+```
 
 #### Response
 
@@ -704,9 +731,9 @@ If the request is successful, the promise resolves with a `response` `object`. F
 
 ```javascript
 {
-  'id': '740e5834-3a29-46b4-9a6f-16142fde533a',
-  'reference': 'your-letter-reference',
-  'postage': 'second'
+    "id": "1d986ba7-fba6-49fb-84e5-75038a1dd968",  // required string - notification ID
+    "reference": "your reference",  // required string - reference your provided
+    "postage": "first"  // required string - postage you provided, or else default postage for the letter
 }
 ```
 
@@ -764,44 +791,43 @@ If the request is successful, the promise resolves with a `response` `object`. F
 
 ```javascript
 {
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a", // required string - notification ID
-  "reference": "STRING", // optional string - client reference
-  "email_address": "sender@something.com", // required string for emails
-  "phone_number": "+447900900123", // required string for text messages
-  "line_1": "ADDRESS LINE 1", // required string for letter
-  "line_2": "ADDRESS LINE 2", // required string for letter
-  "line_3": "ADDRESS LINE 3", // required string for letter
-  "line_4": "ADDRESS LINE 4", // optional string for letter
-  "line_5": "ADDRESS LINE 5", // optional string for letter
-  "line_6": "ADDRESS LINE 6", // optional string for letter
-  "postcode": "valid UK postcode", // optional string
-  "postage": "first / second / europe / rest-of-world", // required string for letter
-  "type": "sms / letter / email", // required string
-  "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure", // required string
-  "template": {
-    "version": 1, // required integer
-    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
-    "uri": "/v2/template/{id}/{version}" // required string
-  },
-  "body": "STRING", // required string - body of notification
-  "subject": "STRING", // required string for email - subject of email
-  "created_at": "2024-05-17 15:58:38.342838", // required string - date and time notification created
-  "created_by_name": "STRING", // optional string - name of the person who sent the notification if sent manually
-  "sent_at": "2024-05-17 15:58:30.143000", // optional string - date and time notification sent to provider
-  "completed_at": "2024-05-17 15:59:10.321000", // optional string - date and time notification delivered or failed
-  "scheduled_for": "2024-05-17 9:00:00.000000", // optional string - date and time notification has been scheduled to be sent at
-  "one_click_unsubscribe": "STRING", // optional string, email only - URL that you provided so your recipients can unsubscribe
-  "is_cost_data_ready": true, // required boolean, this field is true if cost data is ready, and false if it isn't
-  "cost_in_pounds": 0.0027, // optional number - cost of the notification in pounds. The cost does not take free allowance into account
-  "cost_details": {
+    "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  // required string - notification ID
+    "reference": "your reference",  // optional string - reference you provided when sending the message
+    "email_address": "amala@example.com",  // required string for emails
+    "phone_number": "+447700900123",  // required string for text messages
+    "line_1": "Amala Bird",  // required string for letter
+    "line_2": "123 High Street",  // required string for letter
+    "line_3": "Richmond upon Thames",  // required string for letter
+    "line_4": "Middlesex",  // optional string for letter
+    "line_5": "SW14 6BF",  // optional string for letter
+    "line_6": null,  // optional string for letter
+    "line_7": null, // optional string for letter
+    "postage": "first / second / europe / rest-of-world", // required string for letter
+    "type": "sms / letter / email",  // required string
+    "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  // required string
+    "template": {
+        "version": 1, // required integer
+        "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",  // required string - template ID
+        "uri": "/v2/template/{id}/{version}"  // required string
+    },
+    "body": "Hi Amala, your appointment is on 1 January 2018 at 1:00pm",  // required string - body of notification
+    "subject": "Your upcoming pigeon registration appointment",  // required string for email - subject of email
+    "created_at": "2024-05-17 15:58:38.342838",  // required string - date and time notification created
+    "created_by_name": "Charlie Smith",  // optional string - name of the person who sent the notification if sent manually
+    "sent_at": "2024-05-17 15:58:30.143000",  // optional string - date and time notification sent to provider
+    "completed_at": "2024-05-17 15:59:10.321000",  // optional string - date and time notification delivered or failed
+    "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789", // optional string, email only - URL that you provided so your recipients can unsubscribe
+    "is_cost_data_ready": True,  // required boolean, this field is true if cost data is ready, and false if it isn't
+    "cost_in_pounds": 0.0027,  // optional number - cost of the notification in pounds. The cost does not take free allowance into account
+    "cost_details": {
     // for text messages:
-    "billable_sms_fragments": 1, // optional integer - number of billable sms fragments in your text message
-    "international_rate_multiplier": 1, // optional integer - for international sms rate is multiplied by this value
-    "sms_rate": 0.0027, // optional number - cost of 1 sms fragment
+        "billable_sms_fragments": 1,  // optional integer - number of billable sms fragments in your text message
+        "international_rate_multiplier": 1,  // optional integer - for international sms rate is multiplied by this value
+        "sms_rate": 0.0027,  // optional number - cost of 1 sms fragment
     // for letters:
-    "billable_sheets_of_paper": 2, // optional integer - number of sheets of paper in the letter you sent, that you will be charged for
-    "postage": "first / second / europe / rest-of-world" // optional string
-  }
+        "billable_sheets_of_paper": 2,  // optional integer - number of sheets of paper in the letter you sent, that you will be charged for
+        "postage": "first / second / europe / rest-of-world"  // optional string
+    }
 }
 ```
 
@@ -868,16 +894,16 @@ You can filter by:
 
 A unique identifier you create if necessary. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
-```
-"your_reference_here"
+```javascript
+let reference  = "your_reference_here";
 ```
 
 ##### olderThan (optional)
 
 Input the ID of a notification into this argument. If you use this argument, the client returns the next 250 received notifications older than the given ID. For example:
 
-```
-"8e222534-7f05-4972-86e3-17c5d9f894e2"
+```javascript
+let olderThan = "8e222534-7f05-4972-86e3-17c5d9f894e2";
 ```
 
 If you pass in an empty argument or `null`, the client returns the most recent 250 notifications.
@@ -915,7 +941,6 @@ If the request is successful, the promise resolves with a `response` `object`. F
       "created_by_name": "STRING",  // optional string - name of the person who sent the notification if sent manually
       "sent_at": "2024-05-17 15:58:30.143000",  // optional string - date and time notification sent to provider
       "completed_at": "2024-05-17 15:59:10.321000",  // optional string - date and time notification delivered or failed
-      "scheduled_for": "2024-05-17 9:00:00.000000", // optional string - date and time notification has been scheduled to be sent at
       "one_click_unsubscribe": "STRING", // optional string, email only - URL that you provided so your recipients can unsubscribe
       "is_cost_data_ready": true,  // required boolean, this field is true if cost data is ready, and false if it isn't
       "cost_in_pounds": 0.0027,  // optional number - cost of the notification in pounds. The cost does not take free allowance into account
@@ -1068,8 +1093,8 @@ The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/Java
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
 
-```
-"f33517ff-2a88-4f6e-b855-c550268ce08a"
+```javascript
+let templateId = "f33517ff-2a88-4f6e-b855-c550268ce08a";
 ```
 
 #### Response
@@ -1078,16 +1103,16 @@ If the request is successful, the promise resolves with a `response` `object`. F
 
 ```javascript
 {
-  'id': 'template_id',
-  'name': 'template name',
-  'type': 'sms|email|letter',
-  'created_at': 'created at',
-  'updated_at': 'updated at',
-  'version': 'version',
-  'created_by': 'someone@example.com',
-  'body': 'body',
-  'subject': 'null|email_subject',
-  'letter_contact_block': 'null|letter_contact_block'
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+    "name": "Pigeon registration - appointment email", // required string - template name
+    "type": "sms / email / letter" , // required string
+    "created_at": "2024-05-10 10:30:31.142535", // required string - date and time template created
+    "updated_at": "2024-08-25 13:00:09.123234", // required string - date and time template last updated
+    "version": 2, // required integer - template version
+    "created_by": "charlie.smith@pigeons.gov.uk", // required string
+    "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
+    "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
 }
 ```
 
@@ -1124,8 +1149,8 @@ The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/Java
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
 
-```
-"f33517ff-2a88-4f6e-b855-c550268ce08a"
+```javascript
+let templateId = "f33517ff-2a88-4f6e-b855-c550268ce08a";
 ```
 
 ##### version (required)
@@ -1138,16 +1163,16 @@ If the request is successful, the promise resolves with a `response` `object`. F
 
 ```javascript
 {
-  'id': 'template_id',
-  'name': 'template name',
-  'type': 'sms|email|letter',
-  'created_at': 'created at',
-  'updated_at': 'updated at',
-  'version': 'version',
-  'created_by': 'someone@example.com',
-  'body': 'body',
-  'subject': 'null|email_subject',
-  'letter_contact_block': 'null|letter_contact_block'
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+    "name": "Pigeon registration - appointment email", // required string - template name
+    "type": "sms / email / letter" , // required string
+    "created_at": "2024-05-10 10:30:31.142535", // required string - date and time template created
+    "updated_at": "2024-08-25 13:00:09.123234", // required string - date and time template last updated
+    "version": 1, // required integer - template version
+    "created_by": "charlie.smith@pigeons.gov.uk", // required string
+    "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
+    "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
 }
 ```
 
@@ -1185,7 +1210,7 @@ The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/Java
 
 ##### templateType (optional)
 
-If you do not use `templateType`, the client returns all templates. Otherwise you can filter by:
+If you leave out this argument, the method returns all templates. Otherwise you can filter by:
 
 - `email`
 - `sms`
@@ -1197,23 +1222,23 @@ If the request is successful, the promise resolves with a `response` `object`. F
 
 ```javascript
 {
-  'templates': [
-    {
-      'id': 'template_id',
-      'name': 'template name',
-      'type': 'sms|email|letter',
-      'created_at': 'created at',
-      'updated_at': 'updated at',
-      'version': 'version',
-      'created_by': 'someone@example.com',
-      'body': 'body',
-      'subject': 'null|email_subject',
-      'letter_contact_block': 'null|letter_contact_block'
-    },
-    {
-      // … another template
-    }
-  ]
+    "templates": [
+        {
+            "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+            "name": "Pigeon registration - appointment email", // required string - template name
+            "type": "sms / email / letter" , // required string
+            "created_at": "2024-05-10 10:30:31.142535", // required string - date and time template created
+            "updated_at": "2024-08-25 13:00:09.123234", // required string - date and time template last updated
+            "version": 2, // required integer - template version
+            "created_by": "charlie.smith@pigeons.gov.uk", // required string
+            "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
+            "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+            "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
+        },
+        {
+        //...another template
+        }
+    ]
 }
 ```
 
@@ -1226,7 +1251,6 @@ If no templates exist for a template type or there no templates for a service, t
 This generates a preview version of a template.
 
 ```javascript
-personalisation = { 'foo': 'bar' }
 notifyClient
   .previewTemplateById(templateId, personalisation)
   .then((response) => console.log(response))
@@ -1246,8 +1270,8 @@ The parameters in the personalisation argument must match the placeholder fields
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
 
-```
-"f33517ff-2a88-4f6e-b855-c550268ce08a"
+```javascript
+let templateId = "f33517ff-2a88-4f6e-b855-c550268ce08a";
 ```
 
 ##### personalisation (optional)
@@ -1257,8 +1281,8 @@ If a template has placeholder fields for personalised information such as name o
 ```javascript
 {
   personalisation: {
-    'first_name': 'Amala',
-    'reference_number': '300241'
+    "first_name": "Amala",
+    "reference_number": "300241"
   }
 }
 ```
@@ -1271,12 +1295,12 @@ If the request is successful, the promise resolves with a `response` `object`. F
 
 ```javascript
 {
-  'id': 'notify_id',
-  'type': 'sms|email|letter',
-  'version': 'version',
-  'body': 'Hello bar', // with substitution values
-  'subject': 'null|email_subject',
-  'html': '<p>Example</p>' // Returns the rendered body (email templates only)
+  "id": "notify_id",
+  "type": "sms|email|letter",
+  "version": "version",
+  "body": "Hello bar", // with substitution values
+  "subject": "null|email_subject",
+  "html": "<p>Example</p>" // Returns the rendered body (email templates only)
 }
 ```
 
@@ -1333,8 +1357,8 @@ To get older messages, pass the ID of an older notification into the `olderThan`
 
 Input the ID of a received text message into this argument. If you use this argument, the client returns the next 250 received text messages older than the given ID. For example:
 
-```
-8e222534-7f05-4972-86e3-17c5d9f894e2"
+```javascript
+let olderThan= "740e5834-3a29-46b4-9a6f-16142fde533a";
 ```
 
 If you pass in an empty argument or `null`, the client returns the most recent 250 text messages.
@@ -1345,22 +1369,24 @@ If the request to the client is successful, the promise resolves with an `object
 
 ```javascript
 {
-  'received_text_messages':
-        [
-          {
-            'id': 'notify_id', // required
-            'user_number': 'user number', // required user number
-            'notify_number': 'notify number', // receiving number
-            'created_at': 'created at', // required
-            'service_id': 'service id', // required service id
-            'content': 'text content' // required text content
-          }
-          // …
-        ],
-  'links': {
-    'current': '/received-test-messages',
-    'next': '/received-text-messages?older_than=last_id_in_list'
-  }
+    "received_text_messages":
+    [
+        {
+            "id": "b51f638b-4295-46e0-a06e-cd41eee7c33b", // required string - ID of received text message
+            "user_number": "447700900123", // required string - number of the end user who sent the message
+            "notify_number": "07700900456", // required string - your receiving number
+            "created_at": "2024-12-12 18:39:16.123346", // required string - date and time template created
+            "service_id": "26785a09-ab16-4eb0-8407-a37497a57506", // required string - service ID
+            "content": "STRING" // required string - text content
+        },
+        {
+            //...another received text message
+        }
+    ],
+    "links": {
+        "current": "/received-text-messages",
+        "next": "/received-text-messages?other_than=last_id_in_list"
+    }
 }
 ```
 
