@@ -23,7 +23,7 @@ bootstrap-with-docker: ## Prepare the Docker builder image
 
 .PHONY: run-with-docker
 run-with-docker: ## Runs the app with Docker
-	export DOCKER_ARGS="-p 4567:4567 -p 35729:35729" && \
+	export DOCKER_ARGS="-p 127.0.0.1:4567:4567 -p 127.0.0.1:35729:35729" && \
 		./scripts/run_with_docker.sh make run
 
 .PHONY: development
