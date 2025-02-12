@@ -92,7 +92,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 
 ##### reference (optional)
 
-A unique identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
+An identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
 ```python
 reference="your reference", # optional string - identifies notification(s)
@@ -213,7 +213,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 
 ##### reference (optional)
 
-A unique identifier you can create if necessary. This reference identifies a single unique email or a batch of emails. It must not contain any personal information such as name or postal address. For example:
+An identifier you can create if necessary. This reference identifies a single unique email or a batch of emails. It must not contain any personal information such as name or postal address. For example:
 
 ```python
 reference="your reference", # optional string - identifies notification(s)
@@ -553,7 +553,7 @@ personalisation={
 
 ##### reference (optional)
 
-A unique identifier you can create if necessary. This reference identifies a single unique letter or a batch of letters. It must not contain any personal information such as name or postal address. For example:
+An identifier you can create if necessary. This reference identifies a single unique letter or a batch of letters. It must not contain any personal information such as name or postal address. For example:
 
 ```python
 reference="your reference" # optional string - identifies notification(s)
@@ -615,7 +615,7 @@ with open("path/to/pdf_file.pdf", "rb") as pdf_file:
 
 ##### reference (required)
 
-A unique identifier you create. This reference identifies a single unique precompiled letter or a batch of precompiled letters. It must not contain any personal information such as name or postal address.
+An identifier you create. This reference identifies a single unique precompiled letter or a batch of precompiled letters. It must not contain any personal information such as name or postal address.
 
 ```python
 reference="your reference" # required string - identifies notification(s)
@@ -827,7 +827,7 @@ You can leave out this argument to ignore this filter.
 
 ##### reference (optional)
 
-A unique identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
+An identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
 ```python
 reference="your reference" # optional string - reference you provided when sending the message
