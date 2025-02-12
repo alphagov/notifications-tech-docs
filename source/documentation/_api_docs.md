@@ -762,7 +762,7 @@ You can only get the status of messages sent within the retention period. The de
 GET /v2/notifications/{notification_id}
 ```
 
-#### Query parameters
+#### Arguments
 
 ##### notification_id (required)
 
@@ -879,6 +879,10 @@ You can filter by:
 * `sms`
 * `letter`
 
+```
+?template_type=email
+```
+
 ##### status (optional)
 
 You can filter by each:
@@ -890,12 +894,18 @@ You can filter by each:
 
 You can leave out this argument to ignore this filter.
 
+You can filter on multiple statuses by repeating the query string.
+
+```
+?status=created&status=sending&status=delivered
+```
+
 ##### reference (optional)
 
 An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```json
-"reference": "your reference" # optional string - reference you provided when sending the message
+?reference=your%20reference # optional string - reference you provided when sending the message
 ```
 
 ##### older_than (optional)
@@ -903,7 +913,7 @@ An identifier you can create if necessary. This reference identifies a single no
 Input a notification ID into this argument. If you use this argument, the method returns the next 250 messages older than the given ID.
 
 ```
-"older_than": "740e5834-3a29-46b4-9a6f-16142fde533a" # optional string - notification ID
+?older_than=740e5834-3a29-46b4-9a6f-16142fde533a # optional string - notification ID
 ```
 
 If you leave out this argument, the method returns the most recent 250 notifications.
@@ -916,6 +926,9 @@ Includes notifications sent as part of a batch upload.
 
 If you leave out this argument, the method only returns notifications sent using the API.
 
+```
+?include_jobs=true
+```
 
 #### Response
 
@@ -1052,7 +1065,7 @@ This returns the PDF contents of a letter.
 GET /v2/notifications/{notification_id}/pdf
 ```
 
-#### Query parameters
+#### Arguments
 
 ##### notification_id (required)
 
@@ -1389,7 +1402,7 @@ GET /v2/received-text-messages
 The ID of a received text message. If this is passed, the response will only list text messages received before that message.
 
 ```
-"older_than": "740e5834-3a29-46b4-9a6f-16142fde533a" # optional string - notification ID
+?older_than=740e5834-3a29-46b4-9a6f-16142fde533a # optional string - notification ID
 ```
 
 ### Response
