@@ -1389,15 +1389,20 @@ To receive text messages:
 1. Go to the **Text message settings** section of the **Settings** page.
 1. Select **Change** on the **Receive text messages** row.
 
-### Method
+### Get a page of received text messages
+
+#### Method
 
 ```
 GET /v2/received-text-messages
 ```
 
-### Query parameters
+You can specify which text messages to receive by inputting the ID of a received text message into the [`older_than`](#get-a-page-of-received-text-messages-query-parameters-older-than-optional) argument.
 
-#### older_than (optional)
+
+#### Query parameters
+
+##### older_than (optional)
 
 The ID of a received text message. If this is passed, the response will only list text messages received before that message.
 
@@ -1405,7 +1410,7 @@ The ID of a received text message. If this is passed, the response will only lis
 ?older_than=740e5834-3a29-46b4-9a6f-16142fde533a # optional string - notification ID
 ```
 
-### Response
+#### Response
 
 If the request is successful, the response body is `json` and the status code is `200`.
 
@@ -1432,7 +1437,7 @@ If the request is successful, the response body is `json` and the status code is
 }
 ```
 
-### Error codes
+#### Error codes
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
