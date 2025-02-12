@@ -984,8 +984,8 @@ If the request is successful, the response body is `json` and the status code is
         }
     ],
     "links": {
-        "current": "/notifications?template_type=sms&status=delivered",
-        "next": "/notifications?other_than=last_id_in_list&template_type=sms&status=delivered"
+        "current": "https://api.notifications.service.gov.uk/v2/notifications?template_type=sms&status=delivered",
+        "next": "https://api.notifications.service.gov.uk/v2/notifications?other_than=last_id_in_list&template_type=sms&status=delivered"
     }
 }
 ```
@@ -1431,8 +1431,8 @@ If the request is successful, the response body is `json` and the status code is
     }
   ],
   "links": {
-    "current": "/received-text-messages",
-    "next": "/received-text-messages?other_than=last_id_in_list"
+    "current": "https://api.notifications.service.gov.uk/v2/received-text-messages",
+    "next": "https://api.notifications.service.gov.uk/v2/received-text-messages?other_than=last_id_in_list"
   }
 }
 ```
