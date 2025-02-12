@@ -1,6 +1,6 @@
 # REST API documentation
 
-This documentation is for developers interested in using the GOV.UK Notify API to send emails, text messages or letters.  
+This documentation is for developers interested in using the GOV.UK Notify API to send emails, text messages or letters.
 
 You can use it to integrate directly with the API if you cannot use one of our 6 client libraries.
 
@@ -261,9 +261,9 @@ Your unsubscribe URL and response must comply with the guidance specified in [Se
 
 You can leave out this argument if the email being sent is not a subscription email.
 
-You must also add an unsubscribe link to the bottom of your email. The unsubscribe link at the bottom of your email should take the email recipient to a webpage where they can confirm that they want to unsubscribe.  
+You must also add an unsubscribe link to the bottom of your email. The unsubscribe link at the bottom of your email should take the email recipient to a webpage where they can confirm that they want to unsubscribe.
 
-Find out how to add a link when you create a __New template__ or __Edit__ an email template. 
+Find out how to add a link when you create a __New template__ or __Edit__ an email template.
 
 ##### email_reply_to_id (optional)
 
