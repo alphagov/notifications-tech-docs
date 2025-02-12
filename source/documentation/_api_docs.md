@@ -122,7 +122,7 @@ If a template has placeholder fields for personalised information such as name o
 ```json
 "personalisation": {
   "first_name": "Amala",
-  "appointment_date": "2018-01-01 at 01:00PM",
+  "appointment_date": "1 January 2018 at 01:00PM",
 }
 ```
 
@@ -169,7 +169,7 @@ If the request is successful, the response body is `json` with a status code of 
   "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
   "reference": "your reference", # optional string - reference you provided when sending the message
   "content": {
-    "body": "Hi Amala, your appointment is on 2018-01-01 at 01:00PM",  # required string - message content
+    "body": "Hi Amala, your appointment is on 1 January 2018 at 01:00PM",  # required string - message content
     "from_number": "GOVUK"  # required string - sender name / phone number
   },
   "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",  # required string
@@ -255,7 +255,7 @@ If a template has placeholder fields for personalised information such as name o
 ```json
 "personalisation": {
   "first_name": "Amala",
-  "appointment_date": "2018-01-01 at 01:00PM",
+  "appointment_date": "1 January 2018 at 01:00PM",
   # pass in a list and it will appear as bullet points in the message:
   "required_documents": ["passport", "utility bill", "other id"],
 }
@@ -320,7 +320,7 @@ If the request is successful, the response body is `json` with a status code of 
   "reference": "your reference",  # optional string - reference you provided when sending the message
   "content": {
     "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
-    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content
     "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",  # required string - "FROM" email address, not a real inbox
     "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",  # optional string
   },
@@ -407,7 +407,7 @@ Pass the encoded string into an object with a `file` key, and put that in the pe
 ```json
 "personalisation":{
   "first_name": "Amala",
-  "appointment_date": "2018-01-01 at 01:00PM",
+  "appointment_date": "1 January 2018 at 01:00PM",
   "link_to_file": {"file": "file as base64 encoded string"}
 }
 ```
@@ -430,7 +430,7 @@ If Notify cannot add the correct file extension, recipients may not be able to o
 ```json
 "personalisation":{
   "first_name": "Amala",
-  "appointment_date": "2018-01-01 at 01:00PM",
+  "appointment_date": "1 January 2018 at 01:00PM",
   "link_to_file": {"file": "CSV file as base64 encoded string", "filename": "amala_pigeon_affairs_bureau_invite.csv"}
 }
 ```
@@ -457,7 +457,7 @@ To let the recipient download the file without confirming their email address, s
 ```json
 "personalisation":{
   "first_name": "Amala",
-  "appointment_date": "2018-01-01 at 01:00PM",
+  "appointment_date": "1 January 2018 at 01:00PM",
   "link_to_file": {"file": "file as base64 encoded string", "confirm_email_before_download": false}
 }
 ```
@@ -478,7 +478,7 @@ Files sent before 12 April 2023 had a longer default period of 78 weeks (18 mont
 ```json
 "personalisation":{
   "first_name": "Amala",
-  "appointment_date": "2018-01-01 at 01:00PM",
+  "appointment_date": "1 January 2018 at 01:00PM",
   "link_to_file": {"file": "file as base64 encoded string", "retention_period": "4 weeks"}
 }
 ```
@@ -493,7 +493,7 @@ If the request is successful, the response body is `json` with a status code of 
   "reference": "your reference",  # optional string - reference you provided when sending the message
   "content": {
     "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
-    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\nhttps://documents.service.gov.uk/d/YlxDzgNUQYi1Qg6QxIpptA/th46VnrvRxyVO9div6f7hA?key=R0VDmwJ1YzNYFJysAIjQd9yHn5qKUFg-nXHVe3Ioa3A\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content - see that the link to document is embedded in the message content
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\nhttps://documents.service.gov.uk/d/YlxDzgNUQYi1Qg6QxIpptA/th46VnrvRxyVO9div6f7hA?key=R0VDmwJ1YzNYFJysAIjQd9yHn5qKUFg-nXHVe3Ioa3A\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content - see that the link to document is embedded in the message content
     "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",  # required string - "FROM" email address, not a real inbox
     "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",  # optional string
   },
@@ -611,7 +611,7 @@ Any other placeholder fields included in the letter template also count as requi
   "address_line_4": "Middlesex",
   "address_line_5": "SW14 6BF",  # last line of address you include must be a postcode or a country name  outside the UK
   "name": "Amala",
-  "appointment_date": "2018-01-01 at 01:00PM",
+  "appointment_date": "1 January 2018 at 01:00PM",
   # pass in a list and it will appear as bullet points in the letter:
   "required_documents": ["passport", "utility bill", "other id"]
 }
@@ -635,7 +635,7 @@ If the request is successful, the response body is `json` and the status code is
   "reference": "your reference",  # optional string - reference you provided when sending the message
   "content": {
     "subject": "Your upcoming pigeon registration appointment",  # required string - letter heading
-    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - letter content
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - letter content
   },
   "uri": "https://api.notifications.service.gov.uk/v2/notifications/3d1ce039-5476-414c-99b2-fac1e6add62c",  # required string
   "template": {
@@ -806,7 +806,7 @@ If the request is successful, the response body is `json` and the status code is
         "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",  # required string - template ID
         "uri": "/v2/template/{id}/{version}"  # required string
     },
-    "body": "Hi Amala, your appointment is on 2018-01-01 at 01:00PM",  # required string - body of notification
+    "body": "Hi Amala, your appointment is on 1 January 2018 at 01:00PM",  # required string - body of notification
     "subject": "Your upcoming pigeon registration appointment",  # required string for email - subject of email
     "created_at": "2024-05-17 15:58:38.342838",  # required string - date and time notification created
     "created_by_name": "Charlie Smith",  # optional string - name of the person who sent the notification if sent manually
@@ -959,7 +959,7 @@ If the request is successful, the response body is `json` and the status code is
                 "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",  # required string - template ID
                 "uri": "/v2/template/{id}/{version}"  # required string
             },
-            "body": "Hi Amala, your appointment is on 2018-01-01 at 01:00PM",  # required string - body of notification
+            "body": "Hi Amala, your appointment is on 1 January 2018 at 01:00PM",  # required string - body of notification
             "subject": "Your upcoming pigeon registration appointment",  # required string for email - subject of email
             "created_at": "2024-05-17 15:58:38.342838",  # required string - date and time notification created
             "created_by_name": "Charlie Smith",  # optional string - name of the person who sent the notification if sent manually
@@ -1339,7 +1339,7 @@ If a template has placeholder fields for personalised information such as name o
 {
   "personalisation": {
     "first_name": "Amala",
-    "appointment_date": "2018-01-01 at 01:00PM",
+    "appointment_date": "1 January 2018 at 01:00PM",
     "required_documents": ["passport", "utility bill", "other id"],
   }
 }
@@ -1355,7 +1355,7 @@ If the request is successful, the response body is `json` and the status code is
     "type": "sms / email / letter" , # required string
     "version": 3,
     # required string - body of notification
-    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 2018-01-01 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",
     # required string for emails, empty for sms and letters - html version of the email body
     "html": '<p style="Margin: 0 0 20px 0; font-size: 19px; line-height: 25px; color: #0B0C0C;">Dear Amala</p> ... [snippet truncated for readability]',
     # required string for email and letter - subject of email / heading of letter
