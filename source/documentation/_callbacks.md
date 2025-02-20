@@ -80,6 +80,6 @@ The callback message is formatted in JSON. The key, description and format of th
 | #`template_name` | The name of the template that was used | `Template name` |
 | #`template_id` | The id of the template that was used | UUID |
 | #`template_version` | The version number of the template that was used | `1` |
-| #`spreadsheet_file_name`| The name of the uploaded spreadsheet | `contact_list.csv` |
+| #`spreadsheet_file_name`| The name of the uploaded spreadsheet | `contact_list.csv`  or null |
 | #`spreadsheet_row_number`| The row in the spreadsheet  | `2` or null |
 | #`upload_letter_file_name`| The name of the uploaded letter | `uploaded_letter.pdf` |
