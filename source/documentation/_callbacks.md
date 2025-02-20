@@ -81,5 +81,5 @@ The callback message is formatted in JSON. All of the values are strings. The ke
 | #`template_id` | The id of the template that was used | UUID |
 | #`template_version` | The version number of the template that was used | `1` |
 | #`spreadsheet_file_name`| The name of the uploaded spreadsheet | `contact_list.csv` |
-| #`spreadsheet_row_number`| The row in the spreadsheet  | `1` |
+| #`spreadsheet_row_number`| The row in the spreadsheet  | `2` or null |
 | #`upload_letter_file_name`| The name of the uploaded letter | `uploaded_letter.pdf` |
