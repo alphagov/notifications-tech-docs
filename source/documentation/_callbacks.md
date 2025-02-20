@@ -76,7 +76,7 @@ The callback message is formatted in JSON. The key, description and format of th
 | #`notification_id` | Notify’s ID for the returned letter | UUID |
 | #`reference` | The reference sent by the service | `12345678` or null |
 | #`date_sent` | The time the letter was sent | `2017-05-14T12:15:30.000000Z` |
-| #`sent_by` | The email address of the service member who sent the letter | `hello@gov.uk`|
+| #`sent_by` | The email address of the service member who sent the letter | `hello@gov.uk` or null |
 | #`template_name` | The name of the template that was used | `Template name` |
 | #`template_id` | The id of the template that was used | UUID |
 | #`template_version` | The version number of the template that was used | `1` |
