@@ -73,7 +73,7 @@ The callback message is formatted in JSON. All of the values are strings. The ke
 
 | Key | Description | Format |
 |:---|:---|:---|
-| #`notification_id` | Notify’s id for the returned letter | UUID |
+| #`notification_id` | Notify’s ID for the returned letter | UUID |
 | #`reference` | The reference sent by the service | `12345678` or null |
 | #`date_sent` | The time the letter was sent | `2017-05-14T12:15:30.000000Z` |
 | #`sent_by` | The email address of the service member who sent the letter | `hello@gov.uk`|
