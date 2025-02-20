@@ -65,7 +65,7 @@ The callback message is formatted in JSON. All of the values are strings. The ke
 
 ### Returned letters
 
-When a letter you sent is returned, Notify will send details of the returned letter to your callback url.
+When a letter you sent is returned, Notify will send details of the returned letter to your callback URL.
 
 Find more [information about returned letters](https://www.notifications.service.gov.uk/using-notify/delivery-times#returned-mail).  It can take a few weeks to receive information about a returned letter.
 
