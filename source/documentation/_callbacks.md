@@ -69,7 +69,7 @@ When a letter you sent is returned, Notify will send details of the returned let
 
 Find more [information about returned letters](https://www.notifications.service.gov.uk/using-notify/delivery-times#returned-mail).  It can take a few weeks to receive information about a returned letter.
 
-The callback message is formatted in JSON. All of the values are strings. The key, description and format of the callback message arguments will be:
+The callback message is formatted in JSON. The key, description and format of the callback message arguments will be:
 
 | Key | Description | Format |
 |:---|:---|:---|
