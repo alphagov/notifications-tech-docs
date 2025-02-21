@@ -21,7 +21,7 @@ The authorisation header is an [API key](#api-keys) that is encoded using [JSON 
 
 JSON Web Tokens have a standard header and a payload. The header consists of:
 
-```json
+```javascript
 {
   "typ": "JWT",
   "alg": "HS256"
@@ -30,7 +30,7 @@ JSON Web Tokens have a standard header and a payload. The header consists of:
 
 The payload consists of:
 
-```json
+```javascript
 {
   "iss": "26785a09-ab16-4eb0-8407-a37497a57506",
   "iat": 1568818578
@@ -58,7 +58,7 @@ Refer to the [JSON Web Tokens website](https://jwt.io/) for more information on 
 
 When you have an encoded and signed token, add that token to a header as follows:
 
-```json
+```javascript
 "Authorization": "Bearer encoded_jwt_token"
 ```
 
@@ -66,7 +66,7 @@ When you have an encoded and signed token, add that token to a header as follows
 
 The content header is `application/json`:
 
-```json
+```javascript
 "Content-type": "application/json"
 ```
 
@@ -82,7 +82,7 @@ POST /v2/notifications/sms
 
 #### Request body
 
-```json
+```javascript
 {
   "phone_number": "+447900900123",
   "template_id": "f33517ff-2a88-4f6e-b855-c550268ce08a"
@@ -97,7 +97,7 @@ The phone number of the recipient of the text message. This can be a UK or inter
 
 For example:
 
-```json
+```javascript
 "phone_number": "+447900900123"
 ```
 
@@ -111,7 +111,7 @@ To find the template ID:
 
 For example:
 
-```json
+```javascript
 "template_id": "f33517ff-2a88-4f6e-b855-c550268ce08a"
 ```
 
@@ -119,7 +119,7 @@ For example:
 
 If a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:
 
-```json
+```javascript
 "personalisation": {
   "first_name": "Amala",
   "appointment_date": "1 January 2018 at 01:00PM",
@@ -132,8 +132,8 @@ You can leave out this argument if a template does not have any placeholder fiel
 
 An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
-```json
-# optional string - identifies notification(s)
+```javascript
+// optional string - identifies notification(s)
 "reference": "your reference"
 ```
 
@@ -154,7 +154,7 @@ You can then either:
 - copy the sender ID that you want to use and paste it into the method
 - select __Change__ to change the default sender that the service will use, and select __Save__
 
-```json
+```javascript
 "sms_sender_id": "8e222534-7f05-4972-86e3-17c5d9f894e2"
 ```
 
@@ -164,19 +164,19 @@ You can leave out this argument if your service only has one text message sender
 
 If the request is successful, the response body is `json` with a status code of `201`:
 
-```json
+```javascript
 {
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
-  "reference": "your reference", # optional string - reference you provided when sending the message
+  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  // required string - notification ID
+  "reference": "your reference", // optional string - reference you provided when sending the message
   "content": {
-    "body": "Hi Amala, your appointment is on 1 January 2018 at 01:00PM",  # required string - message content
-    "from_number": "GOVUK"  # required string - sender name / phone number
+    "body": "Hi Amala, your appointment is on 1 January 2018 at 01:00PM",  // required string - message content
+    "from_number": "GOVUK"  // required string - sender name / phone number
   },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",  # required string
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",  // required string
   "template": {
-    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
-    "version": 3,  # required integer
-    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"  # required string
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+    "version": 3,  // required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"  // required string
   }
 }
 ```
@@ -189,7 +189,7 @@ All messages sent using the [team and guest list](#team-and-guest-list) or [live
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
-```json
+```javascript
 {
   "status_code": 400,
   "errors": [
@@ -215,7 +215,7 @@ POST /v2/notifications/email
 ```
 
 #### Request body
-```json
+```javascript
 {
   "email_address": "amala@example.com",
   "template_id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3"
@@ -230,8 +230,8 @@ The email address of the recipient.
 
 For example:
 
-```json
-"email_address": "amala@example.com" # required string
+```javascript
+"email_address": "amala@example.com" // required string
 ```
 
 ##### template_id (required)
@@ -244,19 +244,19 @@ To find the template ID:
 
 For example:
 
-```json
-"template_id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3", # required UUID string
+```javascript
+"template_id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3", // required UUID string
 ```
 
 ##### personalisation (optional)
 
 If a template has placeholder fields for personalised information such as name or reference number, you need to provide their values in a dictionary with key value pairs. For example:
 
-```json
+```javascript
 "personalisation": {
   "first_name": "Amala",
   "appointment_date": "1 January 2018 at 01:00PM",
-  # pass in a list and it will appear as bullet points in the message:
+  // pass in a list and it will appear as bullet points in the message:
   "required_documents": ["passport", "utility bill", "other id"],
 }
 ```
@@ -266,7 +266,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 
 An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
-```json
+```javascript
 "reference": "your reference"
 ```
 You can leave out this argument if you do not have a reference.
@@ -277,8 +277,8 @@ If you send subscription emails you must let recipients opt out of receiving the
 
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
-```json
-"one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789" # optional string, a URL
+```javascript
+"one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789" // optional string, a URL
 ```
 The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
 
@@ -304,8 +304,8 @@ To add a reply-to email address:
 
 For example:
 
-```json
-"email_reply_to_id": "8e222534-7f05-4972-86e3-17c5d9f894e2" # optional UUID string
+```javascript
+"email_reply_to_id": "8e222534-7f05-4972-86e3-17c5d9f894e2" // optional UUID string
 ```
 
 You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.
@@ -314,21 +314,21 @@ You can leave out this argument if your service only has one reply-to email addr
 
 If the request is successful, the response body is `json` with a status code of `201`:
 
-```json
+```javascript
 {
-  "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string - notification ID
-  "reference": "your reference",  # optional string - reference you provided when sending the message
+  "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  // required string - notification ID
+  "reference": "your reference",  // optional string - reference you provided when sending the message
   "content": {
-    "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
-    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content
-    "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",  # required string - "FROM" email address, not a real inbox
-    "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",  # optional string
+    "subject": "Your upcoming pigeon registration appointment",  // required string - message subject
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - message content
+    "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",  // required string - "FROM" email address, not a real inbox
+    "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",  // optional string
   },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730",  // required string
   "template": {
-    "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",  # required string - template ID
-    "version": 1,  # required integer
-    "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"  # required string
+    "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",  // required string - template ID
+    "version": 1,  // required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"  // required string
   }
 }
 ```
@@ -337,7 +337,7 @@ If the request is successful, the response body is `json` with a status code of 
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
-```json
+```javascript
 {
   "status_code": 400,
   "errors": [
@@ -404,7 +404,7 @@ You’ll need to convert the file into a string that is base64 encoded.
 
 Pass the encoded string into an object with a `file` key, and put that in the personalisation argument. For example:
 
-```json
+```javascript
 "personalisation":{
   "first_name": "Amala",
   "appointment_date": "1 January 2018 at 01:00PM",
@@ -427,7 +427,7 @@ If you do not provide a filename for your file, Notify will:
 
 If Notify cannot add the correct file extension, recipients may not be able to open your file.
 
-```json
+```javascript
 "personalisation":{
   "first_name": "Amala",
   "appointment_date": "1 January 2018 at 01:00PM",
@@ -454,7 +454,7 @@ You should not turn this feature off if you send files that contain:
 To let the recipient download the file without confirming their email address, set the `confirm_email_before_download` flag to `false`.
 
 
-```json
+```javascript
 "personalisation":{
   "first_name": "Amala",
   "appointment_date": "1 January 2018 at 01:00PM",
@@ -475,7 +475,7 @@ If you do not choose a value, the file will be available for the default period 
 
 Files sent before 12 April 2023 had a longer default period of 78 weeks (18 months).
 
-```json
+```javascript
 "personalisation":{
   "first_name": "Amala",
   "appointment_date": "1 January 2018 at 01:00PM",
@@ -487,21 +487,21 @@ Files sent before 12 April 2023 had a longer default period of 78 weeks (18 mont
 
 If the request is successful, the response body is `json` with a status code of `201`:
 
-```json
+```javascript
 {
-  "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string - notification ID
-  "reference": "your reference",  # optional string - reference you provided when sending the message
+  "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",  // required string - notification ID
+  "reference": "your reference",  // optional string - reference you provided when sending the message
   "content": {
-    "subject": "Your upcoming pigeon registration appointment",  # required string - message subject
-    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\nhttps://documents.service.gov.uk/d/YlxDzgNUQYi1Qg6QxIpptA/th46VnrvRxyVO9div6f7hA?key=R0VDmwJ1YzNYFJysAIjQd9yHn5qKUFg-nXHVe3Ioa3A\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - message content - see that the link to document is embedded in the message content
-    "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",  # required string - "FROM" email address, not a real inbox
-    "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",  # optional string
+    "subject": "Your upcoming pigeon registration appointment",  // required string - message subject
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\nhttps://documents.service.gov.uk/d/YlxDzgNUQYi1Qg6QxIpptA/th46VnrvRxyVO9div6f7hA?key=R0VDmwJ1YzNYFJysAIjQd9yHn5qKUFg-nXHVe3Ioa3A\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - message content - see that the link to document is embedded in the message content
+    "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",  // required string - "FROM" email address, not a real inbox
+    "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",  // optional string
   },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730",  # required string
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730",  // required string
   "template": {
-    "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",  # required string - template ID
-    "version": 1,  # required integer
-    "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"  # required string
+    "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",  // required string - template ID
+    "version": 1,  // required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"  // required string
   }
 }
 ```
@@ -510,7 +510,7 @@ If the request is successful, the response body is `json` with a status code of 
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
-```json
+```javascript
 {
   "status_code": 400,
   "errors": [
@@ -553,7 +553,7 @@ POST /v2/notifications/letter
 
 #### Request body
 
-```json
+```javascript
 {
   "template_id": "64415853-cb86-4cc4-b597-2aaa94ef8c39",
   "personalisation": {
@@ -577,8 +577,8 @@ To find the template ID:
 
 For example:
 
-```json
-"template_id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3", # required UUID string
+```javascript
+"template_id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3", // required UUID string
 ```
 
 ##### personalisation (required)
@@ -603,16 +603,16 @@ The `postcode` personalisation argument has been replaced. If your template stil
 
 Any other placeholder fields included in the letter template also count as required parameters. You need to provide their values in a dictionary with key value pairs. For example:
 
-```json
+```javascript
 "personalisation": {
-  "address_line_1": "Amala Bird",  # required string
-  "address_line_2": "123 High Street",  # required string
-  "address_line_3": "Richmond upon Thames",  # required string
+  "address_line_1": "Amala Bird",  // required string
+  "address_line_2": "123 High Street",  // required string
+  "address_line_3": "Richmond upon Thames",  // required string
   "address_line_4": "Middlesex",
-  "address_line_5": "SW14 6BF",  # last line of address you include must be a postcode or a country name  outside the UK
+  "address_line_5": "SW14 6BF",  // last line of address you include must be a postcode or a country name  outside the UK
   "name": "Amala",
   "appointment_date": "1 January 2018 at 01:00PM",
-  # pass in a list and it will appear as bullet points in the letter:
+  // pass in a list and it will appear as bullet points in the letter:
   "required_documents": ["passport", "utility bill", "other id"]
 }
 ```
@@ -621,27 +621,27 @@ Any other placeholder fields included in the letter template also count as requi
 
 An identifier you can create if necessary. This reference identifies a single unique letter or a batch of letters. It must not contain any personal information such as name or postal address. For example:
 
-```json
-"reference": "your reference" # optional string - identifies notification(s)
+```javascript
+"reference": "your reference" // optional string - identifies notification(s)
 ```
 
 #### Response
 
 If the request is successful, the response body is `json` and the status code is `201`:
 
-```json
+```javascript
 {
-  "id": "3d1ce039-5476-414c-99b2-fac1e6add62c",  # required string - notification ID
-  "reference": "your reference",  # optional string - reference you provided when sending the message
+  "id": "3d1ce039-5476-414c-99b2-fac1e6add62c",  // required string - notification ID
+  "reference": "your reference",  // optional string - reference you provided when sending the message
   "content": {
-    "subject": "Your upcoming pigeon registration appointment",  # required string - letter heading
-    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - letter content
+    "subject": "Your upcoming pigeon registration appointment",  // required string - letter heading
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 01:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - letter content
   },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/3d1ce039-5476-414c-99b2-fac1e6add62c",  # required string
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/3d1ce039-5476-414c-99b2-fac1e6add62c",  // required string
   "template": {
-    "id": "64415853-cb86-4cc4-b597-2aaa94ef8c39",  # required string - template ID
-    "version": 3,  # required integer
-    "uri": "https://api.notifications.service.gov.uk/v2/template/64415853-cb86-4cc4-b597-2aaa94ef8c39"  # required string
+    "id": "64415853-cb86-4cc4-b597-2aaa94ef8c39",  // required string - template ID
+    "version": 3,  // required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/64415853-cb86-4cc4-b597-2aaa94ef8c39"  // required string
   },
   "scheduled_for": None
 }
@@ -651,7 +651,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
-```json
+```javascript
 {
   "status_code": 400,
   "errors": [
@@ -680,7 +680,7 @@ POST /v2/notifications/letter
 ```
 #### Request body
 
-```json
+```javascript
 {
   "reference": "your reference",
   "content": "file as base64 encoded string"
@@ -693,15 +693,15 @@ POST /v2/notifications/letter
 
 An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.
 
-```json
-"reference": "your reference" # required string - identifies notification(s)
+```javascript
+"reference": "your reference" // required string - identifies notification(s)
 ```
 
 ##### content (required)
 
 The precompiled letter must be a PDF file which meets [the GOV.UK Notify letter specification](https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification). You’ll need to convert the file into a string that is base64 encoded.
 
-```json
+```javascript
 "content": "file as base64 encoded string"
 ```
 
@@ -709,7 +709,7 @@ The precompiled letter must be a PDF file which meets [the GOV.UK Notify letter 
 
 You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
 
-```json
+```javascript
 "postage": "second"
 ```
 
@@ -718,11 +718,11 @@ You can choose first or second class postage for your precompiled letter. Set th
 
 If the request is successful, the response body is `json` and the status code is `201`:
 
-```json
+```javascript
 {
-  "id": "1d986ba7-fba6-49fb-84e5-75038a1dd968",  # required string - notification ID
-  "reference": "your reference",  # required string - reference your provided
-  "postage": "first"  # required string - postage you provided, or else default postage for the letter
+  "id": "1d986ba7-fba6-49fb-84e5-75038a1dd968",  // required string - notification ID
+  "reference": "your reference",  // required string - reference your provided
+  "postage": "first"  // required string - postage you provided, or else default postage for the letter
 }
 ```
 
@@ -730,7 +730,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
-```json
+```javascript
 {
   "status_code": 400,
   "errors": [
@@ -785,45 +785,45 @@ You can filter the returned messages by including the following optional paramet
 
 If the request is successful, the response body is `json` and the status code is `200`:
 
-```json
+```javascript
 {
-    "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
-    "reference": "your reference",  # optional string - reference you provided when sending the message
-    "email_address": "amala@example.com",  # required string for emails
-    "phone_number": "+447700900123",  # required string for text messages
-    "line_1": "Amala Bird",  # required string for letter
-    "line_2": "123 High Street",  # required string for letter
-    "line_3": "Richmond upon Thames",  # required string for letter
-    "line_4": "Middlesex",  # optional string for letter
-    "line_5": "SW14 6BF",  # optional string for letter
-    "line_6": None,  # optional string for letter
-    "line_7": None, # optional string for letter
-    "postage": "first / second / europe / rest-of-world", # required string for letter
-    "type": "sms / letter / email",  # required string
-    "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  # required string
+    "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  // required string - notification ID
+    "reference": "your reference",  // optional string - reference you provided when sending the message
+    "email_address": "amala@example.com",  // required string for emails
+    "phone_number": "+447700900123",  // required string for text messages
+    "line_1": "Amala Bird",  // required string for letter
+    "line_2": "123 High Street",  // required string for letter
+    "line_3": "Richmond upon Thames",  // required string for letter
+    "line_4": "Middlesex",  // optional string for letter
+    "line_5": "SW14 6BF",  // optional string for letter
+    "line_6": None,  // optional string for letter
+    "line_7": None, // optional string for letter
+    "postage": "first / second / europe / rest-of-world", // required string for letter
+    "type": "sms / letter / email",  // required string
+    "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  // required string
     "template": {
-        "version": 1, # required integer
-        "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",  # required string - template ID
-        "uri": "/v2/template/{id}/{version}"  # required string
+        "version": 1, // required integer
+        "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",  // required string - template ID
+        "uri": "/v2/template/{id}/{version}"  // required string
     },
-    "body": "Hi Amala, your appointment is on 1 January 2018 at 01:00PM",  # required string - body of notification
-    "subject": "Your upcoming pigeon registration appointment",  # required string for email - subject of email
-    "created_at": "2024-05-17 15:58:38.342838",  # required string - date and time notification created
-    "created_by_name": "Charlie Smith",  # optional string - name of the person who sent the notification if sent manually
-    "sent_at": "2024-05-17 15:58:30.143000",  # optional string - date and time notification sent to provider
-    "completed_at": "2024-05-17 15:59:10.321000",  # optional string - date and time notification delivered or failed
-    "scheduled_for": "2024-05-17 9:00:00.000000", # optional string - date and time notification has been scheduled to be sent at
-    "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789", # optional string, email only - URL that you provided so your recipients can unsubscribe
-    "is_cost_data_ready": True,  # required boolean, this field is true if cost data is ready, and false if it isn't
-    "cost_in_pounds": 0.0027,  # optional number - cost of the notification in pounds. The cost does not take free allowance into account
+    "body": "Hi Amala, your appointment is on 1 January 2018 at 01:00PM",  // required string - body of notification
+    "subject": "Your upcoming pigeon registration appointment",  // required string for email - subject of email
+    "created_at": "2024-05-17 15:58:38.342838",  // required string - date and time notification created
+    "created_by_name": "Charlie Smith",  // optional string - name of the person who sent the notification if sent manually
+    "sent_at": "2024-05-17 15:58:30.143000",  // optional string - date and time notification sent to provider
+    "completed_at": "2024-05-17 15:59:10.321000",  // optional string - date and time notification delivered or failed
+    "scheduled_for": "2024-05-17 9:00:00.000000", // optional string - date and time notification has been scheduled to be sent at
+    "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789", // optional string, email only - URL that you provided so your recipients can unsubscribe
+    "is_cost_data_ready": True,  // required boolean, this field is true if cost data is ready, and false if it isn't
+    "cost_in_pounds": 0.0027,  // optional number - cost of the notification in pounds. The cost does not take free allowance into account
     "cost_details": {
-        # for text messages:
-        "billable_sms_fragments": 1,  # optional integer - number of billable sms fragments in your text message
-        "international_rate_multiplier": 1,  # optional integer - for international sms rate is multiplied by this value
-        "sms_rate": 0.0027,  # optional number - cost of 1 sms fragment
-        # for letters:
-        "billable_sheets_of_paper": 2,  # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
-        "postage": "first / second / europe / rest-of-world"  # optional string
+        // for text messages:
+        "billable_sms_fragments": 1,  // optional integer - number of billable sms fragments in your text message
+        "international_rate_multiplier": 1,  // optional integer - for international sms rate is multiplied by this value
+        "sms_rate": 0.0027,  // optional number - cost of 1 sms fragment
+        // for letters:
+        "billable_sheets_of_paper": 2,  // optional integer - number of sheets of paper in the letter you sent, that you will be charged for
+        "postage": "first / second / europe / rest-of-world"  // optional string
     }
 }
 ```
@@ -832,7 +832,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
-```json
+```javascript
 {
   "status_code": 400,
   "errors": [
@@ -904,8 +904,8 @@ You can filter on multiple statuses by repeating the query string.
 
 An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
-```json
-?reference=your%20reference # optional string - reference you provided when sending the message
+```javascript
+?reference=your%20reference // optional string - reference you provided when sending the message
 ```
 
 ##### older_than (optional)
@@ -913,7 +913,7 @@ An identifier you can create if necessary. This reference identifies a single no
 Input a notification ID into this argument. If you use this argument, the method returns the next 250 messages older than the given ID.
 
 ```
-?older_than=740e5834-3a29-46b4-9a6f-16142fde533a # optional string - notification ID
+?older_than=740e5834-3a29-46b4-9a6f-16142fde533a // optional string - notification ID
 ```
 
 If you leave out this argument, the method returns the most recent 250 notifications.
@@ -936,47 +936,47 @@ If the request is successful, the response body is `json` and the status code is
 
 ##### All messages
 
-```json
+```javascript
 {
     "notifications": [
         {
-            "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  # required string - notification ID
-            "reference": "your reference",  # optional string - reference you provided when sending the message
-            "email_address": "amala@example.com",  # required string for emails
-            "phone_number": "+447700900123",  # required string for text messages
-            "line_1": "Amala Bird",  # required string for letter
-            "line_2": "123 High Street",  # required string for letter
-            "line_3": "Richmond upon Thames",  # required string for letter
-            "line_4": "Middlesex",  # optional string for letter
-            "line_5": "SW14 6BF",  # optional string for letter
-            "line_6": None,  # optional string for letter
-            "line_7": None, # optional string for letter
-            "postage": "first / second / europe / rest-of-world", # required string for letter
-            "type": "sms / letter / email",  # required string
-            "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  # required string
+            "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  // required string - notification ID
+            "reference": "your reference",  // optional string - reference you provided when sending the message
+            "email_address": "amala@example.com",  // required string for emails
+            "phone_number": "+447700900123",  // required string for text messages
+            "line_1": "Amala Bird",  // required string for letter
+            "line_2": "123 High Street",  // required string for letter
+            "line_3": "Richmond upon Thames",  // required string for letter
+            "line_4": "Middlesex",  // optional string for letter
+            "line_5": "SW14 6BF",  // optional string for letter
+            "line_6": None,  // optional string for letter
+            "line_7": None, // optional string for letter
+            "postage": "first / second / europe / rest-of-world", // required string for letter
+            "type": "sms / letter / email",  // required string
+            "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  // required string
             "template": {
-                "version": 1, # required integer
-                "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",  # required string - template ID
-                "uri": "/v2/template/{id}/{version}"  # required string
+                "version": 1, // required integer
+                "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",  // required string - template ID
+                "uri": "/v2/template/{id}/{version}"  // required string
             },
-            "body": "Hi Amala, your appointment is on 1 January 2018 at 01:00PM",  # required string - body of notification
-            "subject": "Your upcoming pigeon registration appointment",  # required string for email - subject of email
-            "created_at": "2024-05-17 15:58:38.342838",  # required string - date and time notification created
-            "created_by_name": "Charlie Smith",  # optional string - name of the person who sent the notification if sent manually
-            "sent_at": "2024-05-17 15:58:30.143000",  # optional string - date and time notification sent to provider
-            "completed_at": "2024-05-17 15:59:10.321000",  # optional string - date and time notification delivered or failed
-            "scheduled_for": "2024-05-17 9:00:00.000000", # optional string - date and time notification has been scheduled to be sent at
-            "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789", # optional string, email only - URL that you provided so your recipients can unsubscribe
-            "is_cost_data_ready": True,  # required boolean, this field is true if cost data is ready, and false if it isn't
-            "cost_in_pounds": 0.0027,  # optional number - cost of the notification in pounds. The cost does not take free allowance into account
+            "body": "Hi Amala, your appointment is on 1 January 2018 at 01:00PM",  // required string - body of notification
+            "subject": "Your upcoming pigeon registration appointment",  // required string for email - subject of email
+            "created_at": "2024-05-17 15:58:38.342838",  // required string - date and time notification created
+            "created_by_name": "Charlie Smith",  // optional string - name of the person who sent the notification if sent manually
+            "sent_at": "2024-05-17 15:58:30.143000",  // optional string - date and time notification sent to provider
+            "completed_at": "2024-05-17 15:59:10.321000",  // optional string - date and time notification delivered or failed
+            "scheduled_for": "2024-05-17 9:00:00.000000", // optional string - date and time notification has been scheduled to be sent at
+            "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789", // optional string, email only - URL that you provided so your recipients can unsubscribe
+            "is_cost_data_ready": True,  // required boolean, this field is true if cost data is ready, and false if it isn't
+            "cost_in_pounds": 0.0027,  // optional number - cost of the notification in pounds. The cost does not take free allowance into account
             "cost_details": {
-                # for text messages:
-                "billable_sms_fragments": 1,  # optional integer - number of billable sms fragments in your text message
-                "international_rate_multiplier": 1,  # optional integer - for international sms rate is multiplied by this value
-                "sms_rate": 0.0027,  # optional number - cost of 1 sms fragment
-                # for letters:
-                "billable_sheets_of_paper": 2,  # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
-                "postage": "first / second / europe / rest-of-world"  # optional string
+                // for text messages:
+                "billable_sms_fragments": 1,  // optional integer - number of billable sms fragments in your text message
+                "international_rate_multiplier": 1,  // optional integer - for international sms rate is multiplied by this value
+                "sms_rate": 0.0027,  // optional number - cost of 1 sms fragment
+                // for letters:
+                "billable_sheets_of_paper": 2,  // optional integer - number of sheets of paper in the letter you sent, that you will be charged for
+                "postage": "first / second / europe / rest-of-world"  // optional string
             }
         },
         {
@@ -994,7 +994,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
-```json
+```javascript
 {
   "status_code": 400,
   "errors": [
@@ -1085,7 +1085,7 @@ If the request to the client is successful, the client will return bytes represe
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
-```json
+```javascript
 {
   "status_code": 400,
   "errors": [
@@ -1133,18 +1133,18 @@ If the request is successful, the response body is `json` and the status code is
 
 ##### All messages
 
-```json
+```javascript
 {
-    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
-    "name": "Pigeon registration - appointment email", # required string - template name
-    "type": "sms / email / letter" , # required string
-    "created_at": "2024-05-10 10:30:31.142535", # required string - date and time template created
-    "updated_at": "2024-08-25 13:00:09.123234", # required string - date and time template last updated
-    "version": 2, # required integer - template version
-    "created_by": "charlie.smith@pigeons.gov.uk", # required string
-    "subject": "Your upcoming pigeon registration appointment",  # required string for email and letter - subject of email / heading of letter
-    "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - body of notification
-    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" # optional string - present for letter templates where contact block is set, otherwise None
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+    "name": "Pigeon registration - appointment email", // required string - template name
+    "type": "sms / email / letter" , // required string
+    "created_at": "2024-05-10 10:30:31.142535", // required string - date and time template created
+    "updated_at": "2024-08-25 13:00:09.123234", // required string - date and time template last updated
+    "version": 2, // required integer - template version
+    "created_by": "charlie.smith@pigeons.gov.uk", // required string
+    "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
+    "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise None
 }
 ```
 
@@ -1152,7 +1152,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
-```json
+```javascript
 {
   "status_code": 404,
   "errors": [
@@ -1198,18 +1198,18 @@ The version number of the template.
 
 If the request is successful, the response body is `json` and the status code is `200`.
 
-```json
+```javascript
 {
-    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
-    "name": "Pigeon registration - appointment email", # required string - template name
-    "type": "sms / email / letter" , # required string
-    "created_at": "2024-05-10 10:30:31.142535", # required string - date and time template created
-    "updated_at": "2024-08-25 13:00:09.123234", # required string - date and time template last updated
-    "version": 1, # required integer - template version
-    "created_by": "charlie.smith@pigeons.gov.uk", # required string
-    "subject": "Your upcoming pigeon registration appointment",  # required string for email and letter - subject of email / heading of letter
-    "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - body of notification
-    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" # optional string - present for letter templates where contact block is set, otherwise None
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+    "name": "Pigeon registration - appointment email", // required string - template name
+    "type": "sms / email / letter" , // required string
+    "created_at": "2024-05-10 10:30:31.142535", // required string - date and time template created
+    "updated_at": "2024-08-25 13:00:09.123234", // required string - date and time template last updated
+    "version": 1, // required integer - template version
+    "created_by": "charlie.smith@pigeons.gov.uk", // required string
+    "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
+    "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise None
 }
 ```
 
@@ -1217,7 +1217,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
-```json
+```javascript
 {
   "status_code": 404,
   "errors": [
@@ -1257,20 +1257,20 @@ If you leave out this argument, the method returns all templates. Otherwise you 
 
 If the request is successful, the response body is `json` and the status code is `200`.
 
-```json
+```javascript
 {
     "templates": [
         {
-            "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", # required string - template ID
-            "name": "Pigeon registration - appointment email", # required string - template name
-            "type": "sms / email / letter" , # required string
-            "created_at": "2024-05-10 10:30:31.142535", # required string - date and time template created
-            "updated_at": "2024-08-25 13:00:09.123234", # required string - date and time template last updated
-            "version": 2, # required integer - template version
-            "created_by": "charlie.smith@pigeons.gov.uk", # required string
-            "subject": "Your upcoming pigeon registration appointment",  # required string for email and letter - subject of email / heading of letter
-            "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  # required string - body of notification
-            "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" # optional string - present for letter templates where contact block is set, otherwise None
+            "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+            "name": "Pigeon registration - appointment email", // required string - template name
+            "type": "sms / email / letter" , // required string
+            "created_at": "2024-05-10 10:30:31.142535", // required string - date and time template created
+            "updated_at": "2024-08-25 13:00:09.123234", // required string - date and time template last updated
+            "version": 2, // required integer - template version
+            "created_by": "charlie.smith@pigeons.gov.uk", // required string
+            "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
+            "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+            "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise None
         },
         {
             ...another template
@@ -1281,7 +1281,7 @@ If the request is successful, the response body is `json` and the status code is
 
 If no templates exist for a template type or there no templates for a service, the API returns a `json` object with a `templates` key for an empty array:
 
-```json
+```javascript
 {
     "templates": []
 }
@@ -1291,7 +1291,7 @@ If no templates exist for a template type or there no templates for a service, t
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
-```json
+```javascript
 {
   "status_code": 400,
   "errors": [
@@ -1335,7 +1335,7 @@ f33517ff-2a88-4f6e-b855-c550268ce08a
 
 If a template has placeholder fields for personalised information such as name or reference number, you need to provide their values in a dictionary with key value pairs. For example:
 
-```json
+```javascript
 {
   "personalisation": {
     "first_name": "Amala",
@@ -1349,18 +1349,18 @@ If a template has placeholder fields for personalised information such as name o
 
 If the request is successful, the response body is `json` and the status code is `200`.
 
-```json
+```javascript
 {
-    "id": "740e5834-3a29-46b4-9a6f-16142fde533a", # required string - notification ID
-    "type": "sms / email / letter" , # required string
+    "id": "740e5834-3a29-46b4-9a6f-16142fde533a", // required string - notification ID
+    "type": "sms / email / letter" , // required string
     "version": 3,
-    # required string - body of notification
+    // required string - body of notification
     "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 01:00PM.\r\n\r\n Here is a link to your invitation document:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",
-    # required string for emails, empty for sms and letters - html version of the email body
+    // required string for emails, empty for sms and letters - html version of the email body
     "html": '<p style="Margin: 0 0 20px 0; font-size: 19px; line-height: 25px; color: #0B0C0C;">Dear Amala</p> ... [snippet truncated for readability]',
-    # required string for email and letter - subject of email / heading of letter
+    // required string for email and letter - subject of email / heading of letter
     "subject": 'Your upcoming pigeon registration appointment',
-    'postage': None, # required string for letters, empty for sms and emails - letter postage
+    'postage': None, // required string for letters, empty for sms and emails - letter postage
 }
 ```
 
@@ -1407,24 +1407,24 @@ You can specify which text messages to receive by inputting the ID of a received
 The ID of a received text message. If this is passed, the response will only list text messages received before that message.
 
 ```
-?older_than=740e5834-3a29-46b4-9a6f-16142fde533a # optional string - notification ID
+?older_than=740e5834-3a29-46b4-9a6f-16142fde533a // optional string - notification ID
 ```
 
 #### Response
 
 If the request is successful, the response body is `json` and the status code is `200`.
 
-```json
+```javascript
 {
   "received_text_messages":
   [
     {
-      "id": "'b51f638b-4295-46e0-a06e-cd41eee7c33b", # required string - ID of received text message
-      "user_number": "447700900123", # required string - number of the end user who sent the message
-      "notify_number": "07700900456", # required string - your receiving number
-      "created_at": "2024-12-12 18:39:16.123346", # required string - date and time template created
-      "service_id": "26785a09-ab16-4eb0-8407-a37497a57506", # required string - service ID
-      "content": "STRING" # required string - text content
+      "id": "'b51f638b-4295-46e0-a06e-cd41eee7c33b", // required string - ID of received text message
+      "user_number": "447700900123", // required string - number of the end user who sent the message
+      "notify_number": "07700900456", // required string - your receiving number
+      "created_at": "2024-12-12 18:39:16.123346", // required string - date and time template created
+      "service_id": "26785a09-ab16-4eb0-8407-a37497a57506", // required string - service ID
+      "content": "STRING" // required string - text content
     },
     {
       ...another received text message
