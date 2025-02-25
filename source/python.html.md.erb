@@ -283,6 +283,14 @@ If the request to the client is successful, the client returns a `dict`:
 }
 ```
 
+#### Error codes
+
+If the request is not successful, the client returns an `HTTPError` containing the relevant error code.
+
+|error.status_code|error.message|How to fix|
+|:---|:---|:---|
+<%= partial 'documentation/error_tables/send_an_email' %>
+
 #### Reducing the risk of malicious content injection in placeholders
 
 Notify lets you [personalise messages](https://www.notifications.service.gov.uk/using-notify/personalisation) using placeholders.
