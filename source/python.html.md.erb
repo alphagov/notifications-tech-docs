@@ -283,6 +283,14 @@ If the request to the client is successful, the client returns a `dict`:
 }
 ```
 
+#### Error codes
+
+If the request is not successful, the client returns an `HTTPError` containing the relevant error code.
+
+|error.status_code|error.message|How to fix|
+|:---|:---|:---|
+<%= partial 'documentation/error_tables/send_an_email' %>
+
 ### Send a file by email
 
 To send a file by email, add a placeholder to the template then upload a file. The placeholder will contain a secure link to download the file.
