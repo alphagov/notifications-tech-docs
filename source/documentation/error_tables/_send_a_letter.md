@@ -1,0 +1,17 @@
+`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "personalisation address_line_1 is a required property"`<br>`}]`|Ensure that your template has a field for the first line of the address, check [personalisation](#personalisation-required) for more information.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Must be a real UK postcode"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Must be a real address"`<br>`}]`|Provide a real recipient address. We do not accept letters for "no fixed abode" addresses, as those can't be delivered.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Last line of address must be a real UK postcode or another country"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode or the name of a country outside the UK.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "The last line of a BFPO address must not be a country."`<br>`}]`|Ensure that the value for the last line of the address for a BFPO destination is a postcode, not a country.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Address must be at least 3 lines"`<br>`}]`|Provide at least 3 lines of address.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Address must be no more than 7 lines"`<br>`}]`|Provide no more than 7 lines of address.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Address lines must not start with any of the following characters: @ ( ) = [ ] ” \\ / , < >"`<br>`}]`|Change the start of an address line, so it doesn't start with one of these characters. This is a requirement from our printing provider.|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "postage invalid. It must be either first or second."`<br>`}]`|Specify valid postage option.|
+|`403`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Cannot send letters with a team api key"`<br>`}]`|Use the correct type of [API key](#api-keys)|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this letter in  [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode).|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Service is not allowed to send letters"`<br>`}]`|Turn on sending letters in your Service Settings on GOV.UK Notify webpage|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "letter_contact_id <letter_contact_id> does not exist in database for service id <service id>"`<br>`}]`|Go to your Service Settings and copy a valid `letter_contact_id`. Double check that the API key you are using and the `letter_contact_id` belong to the same service.|
+|`500`|`[{`<br>`"error": "Exception",`<br>`"message": "Internal server error"`<br>`}]`|Notify was unable to process the request, resend your letter.|
+
+* various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type.
+* errors that are not related to sending an email, but instead are related to things like authentication and rate limits. You can find a list of these errors [in the Errors Messages section](#error-messages)
