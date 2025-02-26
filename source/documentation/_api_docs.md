@@ -859,7 +859,7 @@ You can only get messages that are within your data retention period. The defaul
 GET /v2/notifications
 ```
 
-You can filter the returned messages by including the following optional arguments in the method:
+You can filter the returned messages by including the following optional arguments in the URL:
 
 - [`template_type`](#template-type-optional)
 - [`status`](#status-optional)
