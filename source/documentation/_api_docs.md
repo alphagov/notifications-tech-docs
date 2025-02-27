@@ -76,6 +76,8 @@ You can use GOV.UK Notify to send emails, text messages and letters.
 
 ### Send a text message
 
+#### Method
+
 ```
 POST /v2/notifications/sms
 ```
@@ -185,7 +187,7 @@ If you are using the [test API key](#test), all your messages will come back wit
 
 All messages sent using the [team and guest list](#team-and-guest-list) or [live](#live) keys will appear on your dashboard.
 
-#### Errors
+#### Error codes
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
@@ -209,6 +211,8 @@ If the request is not successful, the API returns `json` containing the relevant
 |`500`|`[{`<br>`"error": "Exception",`<br>`"message": "Internal server error"`<br>`}]`|Notify was unable to process the request, resend your notification.|
 
 ### Send an email
+
+#### Method
 
 ```
 POST /v2/notifications/email
@@ -333,7 +337,7 @@ If the request is successful, the response body is `json` with a status code of 
 }
 ```
 
-#### Errors
+#### Error codes
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
@@ -506,7 +510,7 @@ If the request is successful, the response body is `json` with a status code of 
 }
 ```
 
-#### Errors
+#### Error codes
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
@@ -546,6 +550,8 @@ To send Notify a request to go live:
 1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
 1. Go to the __Settings__ page.
 1. In the __Your service is in trial mode__ section, select __request to go live__.
+
+#### Method
 
 ```
 POST /v2/notifications/letter
@@ -647,7 +653,7 @@ If the request is successful, the response body is `json` and the status code is
 }
 ```
 
-#### Errors
+#### Error codes
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
@@ -726,7 +732,7 @@ If the request is successful, the response body is `json` and the status code is
 }
 ```
 
-#### Errors
+#### Error codes
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
@@ -752,17 +758,19 @@ If the request is not successful, the API returns `json` containing the relevant
 
 ## Get message status
 
+### Get the status of one message
+
 Message status depends on the type of message you have sent.
 
 You can only get the status of messages sent within the retention period. The default retention period is 7 days.
 
-### Get the status of one message
+#### Method
 
 ```
 GET /v2/notifications/{notification_id}
 ```
 
-#### Arguments
+#### URL parameters
 
 ##### notification_id (required)
 
@@ -828,7 +836,7 @@ If the request is successful, the response body is `json` and the status code is
 }
 ```
 
-#### Errors
+#### Error codes
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
@@ -867,7 +875,7 @@ You can filter the returned messages by including the following optional argumen
 - [`older_than`](#older-than-optional)
 - [`include_jobs`](#include-jobs-optional)
 
-#### Arguments
+#### Query parameters
 
 You can omit any of these arguments to ignore these filters.
 
@@ -990,7 +998,7 @@ If the request is successful, the response body is `json` and the status code is
 }
 ```
 
-#### Errors
+#### Error codes
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
@@ -1059,13 +1067,15 @@ If the request is not successful, the API returns `json` containing the relevant
 
 ### Get a PDF for a letter notification
 
+#### Method
+
 This returns the PDF contents of a letter.
 
 ```
 GET /v2/notifications/{notification_id}/pdf
 ```
 
-#### Arguments
+#### URL parameters
 
 ##### notification_id (required)
 
@@ -1081,7 +1091,7 @@ You can also find it by [signing in to GOV.UK Notify](https://www.notifications.
 
 If the request to the client is successful, the client will return bytes representing the raw PDF data.
 
-#### Errors
+#### Error codes
 
 If the request is not successful, the API returns `json` containing the relevant error code. For example:
 
@@ -1117,7 +1127,7 @@ This returns the latest version of the template.
 GET /v2/template/{template_id}
 ```
 
-#### Arguments
+#### URL parameters
 
 ##### template_id (required)
 
@@ -1130,8 +1140,6 @@ f33517ff-2a88-4f6e-b855-c550268ce08a
 #### Response
 
 If the request is successful, the response body is `json` and the status code is `200`.
-
-##### All messages
 
 ```javascript
 {
@@ -1176,7 +1184,7 @@ If the request is not successful, the API returns `json` containing the relevant
 GET /v2/template/{template_id}/version/{version}
 ```
 
-#### Arguments
+#### URL parameters
 
 ##### template_id (required)
 
@@ -1245,7 +1253,7 @@ GET /v2/templates
 
 #### Query parameters
 
-##### type (optional)
+##### template_type (optional)
 
 If you leave out this argument, the method returns all templates. Otherwise you can filter by:
 
@@ -1316,6 +1324,7 @@ This generates a preview version of a template.
 ```
 POST /v2/template/{template_id}/preview
 ```
+#### URL parameters
 
 The parameters in the personalisation argument must match the placeholder fields in the actual template. The API notification client will ignore any extra fields in the method.
 
@@ -1331,7 +1340,7 @@ f33517ff-2a88-4f6e-b855-c550268ce08a
 
 #### Request body
 
-##### personalisation (optional)
+##### personalisation (required)
 
 If a template has placeholder fields for personalised information such as name or reference number, you need to provide their values in a dictionary with key value pairs. For example:
 
