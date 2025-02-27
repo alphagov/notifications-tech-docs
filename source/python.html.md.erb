@@ -287,7 +287,18 @@ If the request to the client is successful, the client returns a `dict`:
 
 If the request is not successful, the client returns an `HTTPError` containing the relevant error code.
 
-|error.status_code|error.message|How to fix|
+To get error details, use `error.message` attribute. You will get the following:
+
+```python
+[{
+  "error": "ValidationError",
+  "message": "email_address is not a valid email address"  
+}]
+```
+
+Below please find errors you might encounter when sending an email:
+
+|error.status_code|message|How to fix|
 |:---|:---|:---|
 <%= partial 'documentation/error_tables/send_an_email' %>
 
