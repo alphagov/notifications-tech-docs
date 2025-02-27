@@ -1326,10 +1326,6 @@ POST /v2/template/{template_id}/preview
 ```
 #### URL parameters
 
-The parameters in the personalisation argument must match the placeholder fields in the actual template. The API notification client will ignore any extra fields in the method.
-
-#### Arguments
-
 ##### template_id (required)
 
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
@@ -1339,6 +1335,18 @@ f33517ff-2a88-4f6e-b855-c550268ce08a
 ```
 
 #### Request body
+
+```
+{
+  "personalisation": {
+    "first_name": "Amala",
+    "appointment_date": "1 January 2018 at 1:00pm",
+  }
+}
+```
+
+#### Arguments
+
 
 ##### personalisation (required)
 
@@ -1353,6 +1361,8 @@ If a template has placeholder fields for personalised information such as name o
   }
 }
 ```
+
+The parameters in the personalisation argument must match the placeholder fields in the actual template. The API notification client will ignore any extra fields in the method.
 
 #### Response
 
