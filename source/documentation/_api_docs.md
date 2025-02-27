@@ -643,7 +643,7 @@ If the request is successful, the response body is `json` and the status code is
     "version": 3,  // required integer
     "uri": "https://api.notifications.service.gov.uk/v2/template/64415853-cb86-4cc4-b597-2aaa94ef8c39"  // required string
   },
-  "scheduled_for": None
+  "scheduled_for": null
 }
 ```
 
@@ -796,8 +796,8 @@ If the request is successful, the response body is `json` and the status code is
     "line_3": "Richmond upon Thames",  // required string for letter
     "line_4": "Middlesex",  // optional string for letter
     "line_5": "SW14 6BF",  // optional string for letter
-    "line_6": None,  // optional string for letter
-    "line_7": None, // optional string for letter
+    "line_6": null,  // optional string for letter
+    "line_7": null, // optional string for letter
     "postage": "first / second / europe / rest-of-world", // required string for letter
     "type": "sms / letter / email",  // required string
     "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  // required string
@@ -814,7 +814,7 @@ If the request is successful, the response body is `json` and the status code is
     "completed_at": "2024-05-17 15:59:10.321000",  // optional string - date and time notification delivered or failed
     "scheduled_for": "2024-05-17 9:00:00.000000", // optional string - date and time notification has been scheduled to be sent at
     "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789", // optional string, email only - URL that you provided so your recipients can unsubscribe
-    "is_cost_data_ready": True,  // required boolean, this field is true if cost data is ready, and false if it isn't
+    "is_cost_data_ready": true,  // required boolean, this field is true if cost data is ready, and false if it isn't
     "cost_in_pounds": 0.0027,  // optional number - cost of the notification in pounds. The cost does not take free allowance into account
     "cost_details": {
         // for text messages:
@@ -949,8 +949,8 @@ If the request is successful, the response body is `json` and the status code is
             "line_3": "Richmond upon Thames",  // required string for letter
             "line_4": "Middlesex",  // optional string for letter
             "line_5": "SW14 6BF",  // optional string for letter
-            "line_6": None,  // optional string for letter
-            "line_7": None, // optional string for letter
+            "line_6": null,  // optional string for letter
+            "line_7": null, // optional string for letter
             "postage": "first / second / europe / rest-of-world", // required string for letter
             "type": "sms / letter / email",  // required string
             "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  // required string
@@ -967,7 +967,7 @@ If the request is successful, the response body is `json` and the status code is
             "completed_at": "2024-05-17 15:59:10.321000",  // optional string - date and time notification delivered or failed
             "scheduled_for": "2024-05-17 9:00:00.000000", // optional string - date and time notification has been scheduled to be sent at
             "one_click_unsubscribe": "https://example.com/unsubscribe.html?opaque=123456789", // optional string, email only - URL that you provided so your recipients can unsubscribe
-            "is_cost_data_ready": True,  // required boolean, this field is true if cost data is ready, and false if it isn't
+            "is_cost_data_ready": true,  // required boolean, this field is true if cost data is ready, and false if it isn't
             "cost_in_pounds": 0.0027,  // optional number - cost of the notification in pounds. The cost does not take free allowance into account
             "cost_details": {
                 // for text messages:
@@ -1144,7 +1144,7 @@ If the request is successful, the response body is `json` and the status code is
     "created_by": "charlie.smith@pigeons.gov.uk", // required string
     "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
     "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
-    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise None
+    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
 }
 ```
 
@@ -1209,7 +1209,7 @@ If the request is successful, the response body is `json` and the status code is
     "created_by": "charlie.smith@pigeons.gov.uk", // required string
     "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
     "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
-    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise None
+    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
 }
 ```
 
@@ -1270,7 +1270,7 @@ If the request is successful, the response body is `json` and the status code is
             "created_by": "charlie.smith@pigeons.gov.uk", // required string
             "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
             "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
-            "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise None
+            "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
         },
         {
             ...another template
@@ -1360,7 +1360,7 @@ If the request is successful, the response body is `json` and the status code is
     "html": '<p style="Margin: 0 0 20px 0; font-size: 19px; line-height: 25px; color: #0B0C0C;">Dear Amala</p> ... [snippet truncated for readability]',
     // required string for email and letter - subject of email / heading of letter
     "subject": 'Your upcoming pigeon registration appointment',
-    'postage': None, // required string for letters, empty for sms and emails - letter postage
+    'postage': null, // required string for letters, empty for sms and emails - letter postage
 }
 ```
 
