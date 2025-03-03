@@ -237,9 +237,9 @@ Your unsubscribe URL and response must comply with the guidance specified in [Se
 
 You can leave out this argument if the email being sent is not a subscription email.
 
-You must also add an unsubscribe link to the bottom of your email. The unsubscribe link at the bottom of your email should take the email recipient to a webpage where they can confirm that they want to unsubscribe.  
+You must also add an unsubscribe link to the bottom of your email. The unsubscribe link at the bottom of your email should take the email recipient to a webpage where they can confirm that they want to unsubscribe.
 
-Find out how to add a link when you create a __New template__ or __Edit__ an email template. 
+Find out how to add a link when you create a __New template__ or __Edit__ an email template.
 
 ##### email_reply_to_id (optional)
 
@@ -323,7 +323,7 @@ You can upload the following file types:
 - Microsoft Word Document (.doc, .docx)
 - PDF (.pdf)
 - text (.json, .odt, .rtf, .txt)
-  
+
 Your file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support) if you need to send other file types.
 
 Pass the file object as a value into the personalisation argument. For example:
@@ -1075,7 +1075,7 @@ If the request is not successful, the client returns an `HTTPError` containing t
 |:---|:---|:---|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-arguments-template-id-required)|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-arguments-template-id-required)|
 
 
 ### Get a template by ID and version
@@ -1132,7 +1132,7 @@ If the request is not successful, the client returns an `HTTPError` containing t
 |:---|:---|:---|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-and-version-arguments-template-id-required) and [version](#version-required)|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-and-version-arguments-template-id-required) and [version](#version-required)|
 
 
 ### Get all templates
@@ -1309,7 +1309,7 @@ This will return one page of up to 250 text messages.
 response = notifications_client.get_received_texts(older_than="740e5834-3a29-46b4-9a6f-16142fde533a")
 ```
 
-You can specify which text messages to receive by inputting the ID of a received text message into the [`older_than`](#get-one-page-of-received-text-messages-arguments-older-than-optional) argument.
+You can specify which text messages to receive by inputting the ID of a received text message into the [`older_than`](#get-a-page-of-received-text-messages-arguments-older-than-optional) argument.
 
 #### Arguments
 
