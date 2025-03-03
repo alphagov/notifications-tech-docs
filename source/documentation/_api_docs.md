@@ -132,7 +132,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 
 ##### reference (optional)
 
-An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
+An identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
 ```javascript
 // optional string - identifies notification(s)
@@ -268,7 +268,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 
 ##### reference (optional)
 
-An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
+An identifier you can create if necessary. This reference identifies a single unique email or a batch of emails. It must not contain any personal information such as name or postal address. For example:
 
 ```javascript
 "reference": "your reference"
@@ -697,7 +697,7 @@ POST /v2/notifications/letter
 
 ##### reference (required)
 
-An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.
+An identifier you create. This reference identifies a single unique precompiled letter or a batch of precompiled letters. It must not contain any personal information such as name or postal address.
 
 ```javascript
 "reference": "your reference" // required string - identifies notification(s)
@@ -760,8 +760,6 @@ If the request is not successful, the API returns `json` containing the relevant
 
 ### Get the status of one message
 
-Message status depends on the type of message you have sent.
-
 You can only get the status of messages sent within the retention period. The default retention period is 7 days.
 
 #### Method
@@ -774,16 +772,10 @@ GET /v2/notifications/{notification_id}
 
 ##### notification_id (required)
 
-The ID of the notification. You can find the notification ID in the response to the [original notification method call](#get-the-status-of-one-message-response).
+The ID of the notification. To find the notification ID, you can either:
 
-You can also find it by [signing in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and going to the __API integration__ page.
-
-You can filter the returned messages by including the following optional parameters in the URL:
-
-- [`template_type`](#template-type-optional)
-- [`status`](#status-optional)
-- [`reference`](#get-the-status-of-multiple-messages-arguments-reference-optional)
-- [`older_than`](#older-than-optional)
+* check the response to the [original notification method call](#get-the-status-of-one-message-response).
+* [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page
 
 ```
 3d1ce039-5476-414c-99b2-fac1e6add62c
@@ -910,11 +902,13 @@ You can filter on multiple statuses by repeating the query string.
 
 ##### reference (optional)
 
-An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
+An identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
 
 ```javascript
 ?reference=your%20reference // optional string - reference you provided when sending the message
 ```
+
+You can leave out this argument to ignore this filter.
 
 ##### older_than (optional)
 
@@ -924,9 +918,9 @@ Input a notification ID into this argument. If you use this argument, the method
 ?older_than=740e5834-3a29-46b4-9a6f-16142fde533a // optional string - notification ID
 ```
 
-If you leave out this argument, the method returns the most recent 250 notifications.
+If you leave out this argument, the method returns the most recent 250 messages.
 
-The client only returns notifications that are 7 days old or newer. If the notification specified in this argument is older than 7 days, the client returns an empty response.
+The client only returns messages sent within the retention period. The default retention period is 7 days. If the message specified in this argument was sent before the retention period, the client returns an empty response.
 
 ##### include_jobs (optional)
 
@@ -1079,9 +1073,10 @@ GET /v2/notifications/{notification_id}/pdf
 
 ##### notification_id (required)
 
-The ID of the notification. You can find the notification ID in the response to the [original notification method call](#get-the-status-of-one-message-response).
+The ID of the notification. To find the notification ID, you can either:
 
-You can also find it by [signing in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and going to the __API integration__ page.
+* check the response to the [original notification POST call](#response)
+* [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page
 
 ```
 3d1ce039-5476-414c-99b2-fac1e6add62c
@@ -1423,7 +1418,7 @@ You can specify which text messages to receive by inputting the ID of a received
 
 ##### older_than (optional)
 
-The ID of a received text message. If this is passed, the response will only list text messages received before that message.
+Input the ID of a received text message into this argument. If you use this argument, the method returns the next 250 received text messages older than the given ID.
 
 ```
 ?older_than=740e5834-3a29-46b4-9a6f-16142fde533a // optional string - notification ID
