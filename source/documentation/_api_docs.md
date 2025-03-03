@@ -279,7 +279,7 @@ You can leave out this argument if you do not have a reference.
 
 If you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).
 
-The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
+The one-click unsubscribe URL will be added to the headers of your email. Email s will use it to add an unsubscribe button.
 
 ```javascript
 "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789" // optional string, a URL
@@ -920,7 +920,7 @@ Input a notification ID into this argument. If you use this argument, the method
 
 If you leave out this argument, the method returns the most recent 250 messages.
 
-The client only returns messages sent within the retention period. The default retention period is 7 days. If the message specified in this argument was sent before the retention period, the client returns an empty response.
+The API only returns messages sent within the retention period. The default retention period is 7 days. If the message specified in this argument was sent before the retention period, the API returns an empty response.
 
 ##### include_jobs (optional)
 
@@ -1084,7 +1084,7 @@ The ID of the notification. To find the notification ID, you can either:
 
 #### Response
 
-If the request to the client is successful, the client will return bytes representing the raw PDF data.
+If the request to the API is successful, the API will return bytes representing the raw PDF data.
 
 #### Error codes
 
@@ -1357,7 +1357,7 @@ If a template has placeholder fields for personalised information such as name o
 }
 ```
 
-The parameters in the personalisation argument must match the placeholder fields in the actual template. The API notification client will ignore any extra fields in the method.
+The keys in the personalisation argument must match the placeholder fields in the actual template. The API will ignore any extra keys in the personalisation argument.
 
 #### Response
 
