@@ -582,6 +582,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 ### Send a precompiled letter
 
 #### Method
+
 ```ruby
 precompiled_letter = client.send_precompiled_letter(reference, pdf_file)
 ```
@@ -589,6 +590,7 @@ precompiled_letter = client.send_precompiled_letter(reference, pdf_file)
 #### Arguments
 
 ##### reference (required)
+
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address.
 
 ##### pdf_file (required)
@@ -605,6 +607,11 @@ end
 
 You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
 
+```ruby
+precompiled_letter = client.send_precompiled_letter(
+  reference, pdf_file, "first"
+)
+```
 
 #### Response
 
