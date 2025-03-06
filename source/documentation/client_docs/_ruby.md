@@ -47,8 +47,8 @@ You can use GOV.UK Notify to send emails, text messages and letters.
 
 ```ruby
 smsresponse = client.send_sms(
-  phone_number: "+447900900123",
-  template_id: "f33517ff-2a88-4f6e-b855-c550268ce08a",
+  phone_number: '+447900900123',
+  template_id: 'f33517ff-2a88-4f6e-b855-c550268ce08a',
 )
 ```
 
@@ -59,7 +59,7 @@ smsresponse = client.send_sms(
 The phone number of the text message recipient. This can be a UK or international number. For example:
 
 ```ruby
-phone_number:"+447900900123"
+phone_number: '+447900900123'
 ```
 
 ##### template_id (required)
@@ -73,7 +73,7 @@ To find the template ID:
 For example:
 
 ```ruby
-template_id:"f33517ff-2a88-4f6e-b855-c550268ce08a"
+template_id: 'f33517ff-2a88-4f6e-b855-c550268ce08a'
 ```
 
 ##### personalisation (optional)
@@ -82,8 +82,8 @@ If a template has placeholder fields for personalised information such as name o
 
 ```ruby
 personalisation: {
-  name: "John Smith",
-  ID: "300241",
+  name: 'John Smith',
+  ID: '300241',
 }
 ```
 
@@ -94,7 +94,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if necessary. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```ruby
-reference: "your_reference_string"
+reference: 'your_reference_string'
 ```
 
 You can leave out this argument if you do not have a reference.
@@ -118,7 +118,7 @@ You can then either:
 For example:
 
 ```ruby
-sms_sender_id: "8e222534-7f05-4972-86e3-17c5d9f894e2"
+sms_sender_id: '8e222534-7f05-4972-86e3-17c5d9f894e2'
 ```
 
 You can leave out this argument if your service only has one text message sender, or if you want to use the default sender.
@@ -161,8 +161,8 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 
 ```ruby
 emailresponse = client.send_email(
-  email_address: "sender@something.com",
-  template_id: "f33517ff-2a88-4f6e-b855-c550268ce08a",
+  email_address: 'sender@something.com',
+  template_id: 'f33517ff-2a88-4f6e-b855-c550268ce08a',
 )
 ```
 
@@ -173,7 +173,7 @@ emailresponse = client.send_email(
 The email address of the recipient. For example:
 
 ```ruby
-email_address: "sender@something.com"
+email_address: 'sender@something.com'
 ```
 
 ##### template_id (required)
@@ -187,7 +187,7 @@ To find the template ID:
 For example:
 
 ```ruby
-template_id: "f33517ff-2a88-4f6e-b855-c550268ce08a"
+template_id: 'f33517ff-2a88-4f6e-b855-c550268ce08a'
 ```
 
 ##### personalisation (optional)
@@ -196,10 +196,10 @@ If a template has placeholder fields for personalised information such as name o
 
 ```ruby
 personalisation: {
-  name: "John Smith",
-  year: "2016",
+  name: 'John Smith',
+  year: '2016',
   # pass in an array and it will appear as bullet points in the message:
-  required_documents: ["passport", "utility bill", "other id"],
+  required_documents: ['passport', 'utility bill', 'other id'],
 }
 ```
 
@@ -210,7 +210,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if necessary. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```ruby
-reference: "your_reference_string"
+reference: 'your_reference_string'
 ```
 
 You can leave out this argument if you do not have a reference.
@@ -222,7 +222,7 @@ If you send subscription emails you must let recipients opt out of receiving the
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
 ```ruby
-one_click_unsubscribe_url: "https://example.com/unsubscribe.html?opaque=123456789"
+one_click_unsubscribe_url: 'https://example.com/unsubscribe.html?opaque=123456789'
 ```
 
 The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
@@ -331,11 +331,11 @@ Your file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www
 For example:
 
 ```ruby
-File.open("file.pdf", "rb") do |f|
+File.open('file.pdf', 'rb') do |f|
     ...
     personalisation: {
-      first_name: "Amala",
-      application_date: "2018-01-01",
+      first_name: 'Amala',
+      application_date: '2018-01-01',
       link_to_file: Notifications.prepare_upload(f),
     }
 end
@@ -359,12 +359,12 @@ If you do not provide a filename for your file, Notify will:
 If Notify cannot add the correct file extension, recipients may not be able to open your file.
 
 ```ruby
-File.open("file.csv", "rb") do |f|
+File.open('file.csv', 'rb') do |f|
     ...
     personalisation: {
-      first_name: "Amala",
-      application_date: "2018-01-01",
-      link_to_file: Notifications.prepare_upload(f, filename="2023-12-25-daily-report.csv"),
+      first_name: 'Amala',
+      application_date: '2018-01-01',
+      link_to_file: Notifications.prepare_upload(f, filename: '2023-12-25-daily-report.csv'),
     }
 end
 ```
@@ -392,11 +392,11 @@ To let the recipient download the file without confirming their email address, s
 
 
 ```ruby
-File.open("file.pdf", "rb") do |f|
+File.open('file.pdf', 'rb') do |f|
     ...
     personalisation: {
-      first_name: "Amala",
-      application_date: "2018-01-01",
+      first_name: 'Amala',
+      application_date: '2018-01-01',
       link_to_file: Notifications.prepare_upload(f, confirm_email_before_download: false),
     }
 end
@@ -418,11 +418,11 @@ If you do not choose a value, the file will be available for the default period 
 Files sent before 12 April 2023 had a longer default period of 78 weeks (18 months).
 
 ```ruby
-File.open("file.pdf", "rb") do |f|
+File.open('file.pdf', 'rb') do |f|
     ...
     personalisation: {
-      first_name: "Amala",
-      application_date: "2018-01-01",
+      first_name: 'Amala',
+      application_date: '2018-01-01',
       link_to_file: Notifications.prepare_upload(f, retention_period: '52 weeks'),
     }
 end
@@ -479,7 +479,7 @@ To send Notify a request to go live:
 
 ```ruby
 letterresponse = client.send_letter(
-  template_id: "f33517ff-2a88-4f6e-b855-c550268ce08a",
+  template_id: 'f33517ff-2a88-4f6e-b855-c550268ce08a',
   personalisation: {
     address_line_1: 'The Occupier',
     address_line_2: '123 High Street',
@@ -501,7 +501,7 @@ To find the template ID:
 For example:
 
 ```ruby
-template_id: "f33517ff-2a88-4f6e-b855-c550268ce08a"
+template_id: 'f33517ff-2a88-4f6e-b855-c550268ce08a'
 ```
 
 ##### personalisation (required)
@@ -535,7 +535,7 @@ personalisation: {
   name: 'John Smith', # field from template
   application_date: '2018-01-01' # field from template,
   # pass in an array and it will appear as bullet points in the letter:
-  required_documents: ["passport", "utility bill", "other id"],
+  required_documents: ['passport', 'utility bill', 'other id'],
 },
 ```
 
@@ -598,8 +598,8 @@ A unique identifier you create. This reference identifies a single unique notifi
 The precompiled letter must be a PDF file which meets [the GOV.UK Notify letter specification](https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification).
 
 ```ruby
-File.open("path/to/pdf_file", "rb") do |pdf_file|
-    client.send_precompiled_letter("your reference", pdf_file)
+File.open('path/to/pdf_file', 'rb') do |pdf_file|
+    client.send_precompiled_letter('your reference', pdf_file)
 end
 ```
 
@@ -609,7 +609,7 @@ You can choose first or second class postage for your precompiled letter. Set th
 
 ```ruby
 precompiled_letter = client.send_precompiled_letter(
-  reference, pdf_file, "first"
+  reference, pdf_file, 'first'
 )
 ```
 
@@ -1117,8 +1117,8 @@ If a template has placeholder fields for personalised information such as name o
 
 ```ruby
 personalisation: {
-  name: "John Smith",
-  ID: "300241",
+  name: 'John Smith',
+  ID: '300241',
 }
 ```
 
