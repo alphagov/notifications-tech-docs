@@ -738,12 +738,24 @@ You can leave out these arguments to ignore these filters.
 
 ##### status (optional)
 
-You can filter by each:
+The possible statuses that a notification can be in depends on the type of notification:
 
 * [email status](#email-status-descriptions)
 * [text message status](#text-message-status-descriptions)
 * [letter status](#letter-status-descriptions)
 * [precompiled letter status](#precompiled-letter-status-descriptions)
+
+You can specify a single status:
+
+```ruby
+status: 'failed'
+```
+
+Or multiple, by specifying an array:
+
+```ruby
+status: ['permanent-failure', 'temporary-failure']
+```
 
 You can leave out this argument to ignore this filter.
 
