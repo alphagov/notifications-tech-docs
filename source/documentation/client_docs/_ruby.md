@@ -255,6 +255,34 @@ email_reply_to_id: '8e222534-7f05-4972-86e3-17c5d9f894e2'
 
 You can leave out this argument if your service only has one email reply-to address, or you want to use the default email address.
 
+#### Response
+
+If the request to the client is successful, the client returns a `Notifications::Client:ResponseNotification` object. In the example shown in the [Method section](#send-an-email-method), the object is named `emailresponse`.
+
+You can then call different methods on this object to return the requested information.
+
+|Method|Information|Type|
+|:---|:---|:---|
+|#`emailresponse.id`|Notification UUID|String|
+|#`emailresponse.reference`|`reference` argument|String|
+|#`emailresponse.content`|- `body`: Message body<br>- `subject`: Message subject<br>- `from_email`: From email address of your service found on the **Settings** page|Hash|
+|#`emailresponse.template`|Contains the `id`, `version` and `uri` of the template|Hash|
+|#`emailresponse.uri`|Notification URL|String|
+
+#### Error codes
+
+If the request is not successful, the client raises a `Notifications::Client::RequestError` exception (or a subclass), which contains a code:
+
+|error.code|error.message|class|How to fix|
+|:--- |:---|:---|:---|
+|`400`|`BadRequestError: Can't send to this recipient using a team-only API key`|`BadRequestError`|Use the correct type of [API key](#api-keys)|
+|`400`|`BadRequestError: Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
+|`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock|
+|`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
+|`429`|`RateLimitError: Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds`|`RateLimitError`|Refer to [API rate limits](#rate-limits) for more information|
+|`429`|`TooManyRequestsError: Exceeded send limits (LIMIT NUMBER) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit number|
+|`500`|`Exception: Internal server error`|`ServerError`|Notify was unable to process the request, resend your notification|
+
 ### Send a file by email
 
 To send a file by email, add a placeholder to the template then upload a file. The placeholder will contain a secure link to download the file.
