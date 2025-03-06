@@ -720,13 +720,12 @@ You can only get messages that are within your data retention period. The defaul
 #### Method
 
 ```ruby
-args = {
+response = client.get_notifications(
   template_type: 'sms',
   status: 'failed',
-  reference: 'your_reference_string'
-  older_than: 'e194efd1-c34d-49c9-9915-e4267e01e92e'
-}
-response = client.get_notifications(args)
+  reference: 'your_reference_string',
+  older_than: 'e194efd1-c34d-49c9-9915-e4267e01e92e',
+)
 ```
 
 You can leave out the `older_than` argument to get the 250 most recent messages.
@@ -1034,10 +1033,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 This returns the latest version of all templates inside a collection object.
 
 ```ruby
-args = {
-  type: 'sms'
-}
-response = client.get_all_templates(args)
+response = client.get_all_templates(type: 'sms')
 ```
 
 #### Arguments
@@ -1162,10 +1158,9 @@ To receive text messages:
 #### Method
 
 ```ruby
-args = {
-  older_than: 'e194efd1-c34d-49c9-9915-e4267e01e92e'
-}
-response = client.get_received_texts(args)
+response = client.get_received_texts(
+  older_than: 'e194efd1-c34d-49c9-9915-e4267e01e92e',
+)
 ```
 
 To get older messages, pass the ID of an older notification into the `older_than` argument. This returns the next oldest messages from the specified notification ID.
