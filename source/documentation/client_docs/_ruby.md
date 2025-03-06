@@ -11,7 +11,7 @@ This documentation is for developers interested in using the GOV.UK Notify Ruby 
 Add `notifications-ruby-client` to your application's `Gemfile`, for example:
 
 ```ruby
-gem 'notifications-ruby-client'
+gem "notifications-ruby-client"
 ```
 
 Then run `bundle install` from your project's directory.
@@ -31,7 +31,7 @@ gem install notifications-ruby-client
 Add this code to your application:
 
 ```ruby
-require 'notifications/client'
+require "notifications/client"
 client = Notifications::Client.new(api_key)
 ```
 
@@ -59,7 +59,7 @@ smsresponse = client.send_sms(
 The phone number of the text message recipient. This can be a UK or international number. For example:
 
 ```ruby
-phone_number:"+447900900123"
+phone_number: "+447900900123"
 ```
 
 ##### template_id (required)
@@ -73,7 +73,7 @@ To find the template ID:
 For example:
 
 ```ruby
-template_id:"f33517ff-2a88-4f6e-b855-c550268ce08a"
+template_id: "f33517ff-2a88-4f6e-b855-c550268ce08a"
 ```
 
 ##### personalisation (optional)
@@ -250,7 +250,7 @@ To add a reply-to email address:
 For example:
 
 ```ruby
-email_reply_to_id: '8e222534-7f05-4972-86e3-17c5d9f894e2'
+email_reply_to_id: "8e222534-7f05-4972-86e3-17c5d9f894e2"
 ```
 
 You can leave out this argument if your service only has one email reply-to address, or you want to use the default email address.
@@ -364,7 +364,7 @@ File.open("file.csv", "rb") do |f|
     personalisation: {
       first_name: "Amala",
       application_date: "2018-01-01",
-      link_to_file: Notifications.prepare_upload(f, filename="2023-12-25-daily-report.csv"),
+      link_to_file: Notifications.prepare_upload(f, filename: "2023-12-25-daily-report.csv"),
     }
 end
 ```
@@ -423,7 +423,7 @@ File.open("file.pdf", "rb") do |f|
     personalisation: {
       first_name: "Amala",
       application_date: "2018-01-01",
-      link_to_file: Notifications.prepare_upload(f, retention_period: '52 weeks'),
+      link_to_file: Notifications.prepare_upload(f, retention_period: "52 weeks"),
     }
 end
 ```
@@ -481,9 +481,9 @@ To send Notify a request to go live:
 letterresponse = client.send_letter(
   template_id: "f33517ff-2a88-4f6e-b855-c550268ce08a",
   personalisation: {
-    address_line_1: 'The Occupier',
-    address_line_2: '123 High Street',
-    address_line_3: 'SW14 6BH',
+    address_line_1: "The Occupier",
+    address_line_2: "123 High Street",
+    address_line_3: "SW14 6BH",
   },
 )
 ```
@@ -529,11 +529,11 @@ Any other placeholder fields included in the letter template also count as requi
 
 ```ruby
 personalisation: {
-  address_line_1: 'The Occupier',  # mandatory address field
-  address_line_2: '123 High Street', # mandatory address field
-  address_line_3: 'SW14 6BH',  # mandatory address field
-  name: 'John Smith', # field from template
-  application_date: '2018-01-01' # field from template,
+  address_line_1: "The Occupier",  # mandatory address field
+  address_line_2: "123 High Street", # mandatory address field
+  address_line_3: "SW14 6BH",  # mandatory address field
+  name: "John Smith", # field from template
+  application_date: "2018-01-01" # field from template,
   # pass in an array and it will appear as bullet points in the letter:
   required_documents: ["passport", "utility bill", "other id"],
 },
@@ -544,7 +544,7 @@ personalisation: {
 A unique identifier you can create if necessary. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```ruby
-reference: 'your_reference_string'
+reference: "your_reference_string"
 ```
 
 #### Response
@@ -721,10 +721,10 @@ You can only get messages that are within your data retention period. The defaul
 
 ```ruby
 response = client.get_notifications(
-  template_type: 'sms',
-  status: 'failed',
-  reference: 'your_reference_string',
-  older_than: 'e194efd1-c34d-49c9-9915-e4267e01e92e',
+  template_type: "sms",
+  status: "failed",
+  reference: "your_reference_string",
+  older_than: "e194efd1-c34d-49c9-9915-e4267e01e92e",
 )
 ```
 
@@ -748,13 +748,13 @@ The possible statuses that a notification can be in depends on the type of notif
 You can specify a single status:
 
 ```ruby
-status: 'failed'
+status: "failed"
 ```
 
 Or multiple, by specifying an array:
 
 ```ruby
-status: ['permanent-failure', 'temporary-failure']
+status: ["permanent-failure", "temporary-failure"]
 ```
 
 You can leave out this argument to ignore this filter.
@@ -772,7 +772,7 @@ You can filter by:
 A unique identifier you can create if necessary. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```ruby
-reference: 'your_reference_string'
+reference: "your_reference_string"
 ```
 
 ##### older_than (optional)
@@ -780,7 +780,7 @@ reference: 'your_reference_string'
 Input the ID of a notification into this argument. If you use this argument, the client returns the next 250 received notifications older than the given ID. For example:
 
 ```ruby
-older_than: 'e194efd1-c34d-49c9-9915-e4267e01e92e'
+older_than: "e194efd1-c34d-49c9-9915-e4267e01e92e"
 ```
 
 If you leave out this argument, the client returns the most recent 250 notifications.
@@ -901,7 +901,7 @@ This returns the pdf contents of a letter notification.
 
 ```ruby
 pdf_file = client.get_pdf_for_letter(
-  'f33517ff-2a88-4f6e-b855-c550268ce08a' # notification id (required)
+  "f33517ff-2a88-4f6e-b855-c550268ce08a" # notification id (required)
 )
 ```
 
@@ -953,7 +953,7 @@ response = client.get_template_by_id(id)
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
 
 ```
-'f33517ff-2a88-4f6e-b855-c550268ce08a'
+"f33517ff-2a88-4f6e-b855-c550268ce08a"
 ```
 
 #### Response
@@ -1001,7 +1001,7 @@ response = client.get_template_version(id, version)
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
 
 ```ruby
-'f33517ff-2a88-4f6e-b855-c550268ce08a'
+"f33517ff-2a88-4f6e-b855-c550268ce08a"
 ```
 
 ##### version (required)
@@ -1045,7 +1045,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 This returns the latest version of all templates inside a collection object.
 
 ```ruby
-response = client.get_all_templates(type: 'sms')
+response = client.get_all_templates(type: "sms")
 ```
 
 #### Arguments
@@ -1108,7 +1108,7 @@ The parameters in the personalisation argument must match the placeholder fields
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
 
 ```ruby
-'f33517ff-2a88-4f6e-b855-c550268ce08a'
+"f33517ff-2a88-4f6e-b855-c550268ce08a"
 ```
 
 ##### personalisation (optional)
@@ -1171,7 +1171,7 @@ To receive text messages:
 
 ```ruby
 response = client.get_received_texts(
-  older_than: 'e194efd1-c34d-49c9-9915-e4267e01e92e',
+  older_than: "e194efd1-c34d-49c9-9915-e4267e01e92e",
 )
 ```
 
@@ -1186,7 +1186,7 @@ If you leave out the `older_than` argument, the client returns the most recent 2
 Input the ID of a received text message into this argument. If you use this argument, the client returns the next 250 received text messages older than the given ID. For example:
 
 ```ruby
-older_than: '8e222534-7f05-4972-86e3-17c5d9f894e2'
+older_than: "8e222534-7f05-4972-86e3-17c5d9f894e2"
 ```
 
 If you leave out the `older_than` argument, the client returns the most recent 250 notifications.
