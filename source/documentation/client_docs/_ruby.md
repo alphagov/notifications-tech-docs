@@ -6,13 +6,25 @@ This documentation is for developers interested in using the GOV.UK Notify Ruby 
 
 ### Install the client
 
-Run the following in the command line:
+#### Using Bundler (recommended)
 
+Add `notifications-ruby-client` to your application's `Gemfile`, for example:
+
+```ruby
+gem 'notifications-ruby-client'
 ```
-gem install 'notifications-ruby-client'
-```
+
+Then run `bundle install` from your project's directory.
 
 Refer to the [client changelog](https://github.com/alphagov/notifications-ruby-client/blob/main/CHANGELOG.md) for the version number and the latest updates.
+
+#### Installing globally
+
+Run the following from the command line:
+
+```sh
+gem install notifications-ruby-client
+```
 
 ### Create a new instance of the client
 
