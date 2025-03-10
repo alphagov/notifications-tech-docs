@@ -1,6 +1,6 @@
 # REST API documentation
 
-This documentation is for developers interested in using the GOV.UK Notify API to send emails, text messages or letters.
+This documentation is for developers interested in using the GOV.UK Notify API to send emails, text messages or letters.  
 
 You can use it to integrate directly with the API if you cannot use one of our 6 client libraries.
 
