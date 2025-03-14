@@ -1376,7 +1376,45 @@ If the request is not successful, the client returns an `HTTPError` containing t
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 
-<%= partial 'documentation/error_messages' %>
+
+## Error handling
+
+If the request is not successful, the client raises an `HTTPError`.
+
+This error consists of:
+- a status_code, for example ‘400’
+- an error type, for example ’BadRequestError’
+- a message, for example ‘Mobile numbers can only include: 0 1 2 3 4 5 6 7 8 9 ( ) + -‘
+
+To access these details about the error, read its `status_code` and `message` fields, for example:
+
+```python
+from notifications_python_client.errors import HTTPError
+
+try:
+  response = notifications_client.send_sms_notification(
+    phone_number="+447700900123",
+    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
+  )
+except HTTPError as e:
+  if e.status_code in range(500, 599):  # using status code for error handling
+    self.retry()
+  else:
+    print(e.message)  # accessing error details to debug
+
+```
+
+Error's `message` field is a `dict`, for example:
+
+```python
+[{
+  "error": "AuthError",
+  "message": "Invalid token: API key not found",
+}]
+```
+
+<%= partial 'documentation/error_tables/generic_errors' %>
+
 <%= partial 'documentation/testing' %>
 <%= partial 'documentation/api_keys' %>
 <%= partial 'documentation/limits' %>
