@@ -1,3 +1,7 @@
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#Errors).
+
+|Error message|How to fix|
+|:---|:---|
 **ValidationError (status code 400)**|
 `phone_number Too many digits`|Provide a valid recipient phone number.|
 `phone_number Not enough digits`|Provide a valid recipient phone number.|
