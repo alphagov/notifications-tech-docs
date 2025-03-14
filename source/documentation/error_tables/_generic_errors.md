@@ -2,7 +2,7 @@ Do not use the content of the messages in your code. These can sometimes change,
 
 Use the status code or the error type instead, as these will not change.
 
-### General errors you might see
+### General errors
 
 You may encounter following errors when making requests to a number of Notify's API endpoints.
 
