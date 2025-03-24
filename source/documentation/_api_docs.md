@@ -266,6 +266,8 @@ If a template has placeholder fields for personalised information such as name o
 ```
 You can leave out this argument if a template does not have any placeholder fields for personalised information.
 
+Find out how to reduce the risk of malicious content injection in placeholders [here](#reducing-the-risk-of-malicious-content-injection-in-placeholders) 
+
 ##### reference (optional)
 
 An identifier you can create if necessary. This reference identifies a single unique email or a batch of emails. It must not contain any personal information such as name or postal address. For example:
@@ -336,6 +338,58 @@ If the request is successful, the response body is `json` with a status code of 
   }
 }
 ```
+
+
+#### Reducing the risk of malicious content injection in placeholders
+
+Notify lets you [personalise messages](https://www.notifications.service.gov.uk/using-notify/personalisation) using placeholders.
+
+You can [format](https://www.notifications.service.gov.uk/using-notify/formatting) content or add links and urls into placeholders using Markdown. 
+
+If you pass in information from untrusted sources (such as online forms) into your Notify template using personalisation, this may be used to add malicious content and links to notifications you send via Notify. 
+
+The malicious content could be:
+
+  * Markdown syntax intended to be rendered into HTML 
+  * a plain text URL which would be rendered into a clickable phishing link
+
+An example of how malicious content can be injected into Notify personalisation:
+
+**Template in Notify**:
+
+```
+Hello ((name))
+```
+
+**Personalisation**: 
+
+```
+{name: "Anne Example, now [click this evil link](https://malicious.link)"}
+```
+
+**Email will appear as**: 
+
+<pre>
+ <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
+</pre>
+
+
+We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content. You can:
+
+1. Use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape). 
+   The characters of most concern are those that could be used to add a URL link such as: “\[”, “\]”, “\(”, "\)".
+
+2. Use the Markdown triple backtick [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) syntax
+   to escape all characters within a placeholder. 
+   Keep in mind that to use this option, the placeholder needs to be on a separate line from the backticks in the template. 
+   It is also a less effective option - an attacker could potentially overcome it by preceding malicious content with triple backticks of their own.
+   For it to be effective, the input must be pre-processed to escape triple backticks.
+
+~~~
+```
+((name))
+```
+~~~
 
 #### Error codes
 
