@@ -266,7 +266,7 @@ If a template has placeholder fields for personalised information such as name o
 ```
 You can leave out this argument if a template does not have any placeholder fields for personalised information.
 
-Find out how to reduce the risk of malicious content injection in placeholders [here](#reducing-the-risk-of-malicious-content-injection-in-placeholders) 
+Find out how to [reduce the risk of malicious content injection in placeholders](#reducing-the-risk-of-malicious-content-injection-in-placeholders).
 
 ##### reference (optional)
 
