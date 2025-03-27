@@ -377,7 +377,7 @@ Hello ((name))
 We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content. You can:
 
 1. Use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape). 
-   The characters of most concern are those that could be used to add a URL link such as: “\[”, “\]”, “\(”, "\)".
+   The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
 
 2. Use the Markdown triple backtick [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) syntax
    to escape all characters within a placeholder. 
