@@ -760,14 +760,11 @@ For more information, see the:
 
 #### Error codes
 
-If the request is not successful, the client will return an `HTTPError` containing the relevant error code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#Errors).
 
-|error.status_code|error.message|How to fix|
-|:---|:---|:---|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|Check the notification ID|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|Check when your message was sent. If it was sent before the retention period, it has been deleted. You can no longer get the status of this message. The default retention period is 7 days.|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/get_the_status_of_one_message' %>
 
 
 ### Get the status of multiple messages
