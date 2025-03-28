@@ -10,7 +10,7 @@
 **Client error (no status code)**|
 `ValueError('File is larger than 2MB')`|The file is too big. Files must be smaller than 2MB.|
 
-In addition to the above, you can also encounter:
+In addition to the above, you may also encounter:
 
 * other errors related to [sending an email](#send-an-email).
 * various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type.

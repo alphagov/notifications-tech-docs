@@ -21,7 +21,7 @@ Error message | How to fix
 **Exception (status code 500)**|
 `Internal server error`|Notify was unable to process the request, resend your notification.|
 
-In addition to the above, you can also encounter:
+In addition to the above, you may also encounter:
 
 * various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type.
 
