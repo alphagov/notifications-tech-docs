@@ -6,7 +6,7 @@
 `Emails cannot be longer than 2000000 bytes. Your message is <rendered template size in bytes> bytes.`|Shorten your email message.|
 `Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|Your service cannot send this email in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode). To fix, you need to request for your service to go live.|
 
-In addition to the above, you can also encounter:
+In addition to the above, you may also encounter:
 
 * various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type.
 * errors about a file you try to send via email. You can find a list of these errors at the end of [Send a file by email section](#send-a-file-by-email)
