@@ -1,4 +1,4 @@
-**ValidationError (status code 400)**|
+**NoResultFound (status code 404)**|
 `No Result Found`|Check your [template ID](#get-a-template-by-id-arguments-template-id-required).|
 
 In addition to the above, you may also encounter:

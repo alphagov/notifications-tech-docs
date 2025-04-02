@@ -1,5 +1,5 @@
 **ValidationError (status code 400)**|
-`email_address is not a valid email address`|Provide a valid recipient email address.|
+`email_address Not a valid email address`|Provide a valid recipient email address.|
 `one_click_unsubscribe_url is not a valid https url`|Provide a valid https url for your unsubscribe link.|
 **BadRequestError (status code 400)**|
 `email_reply_to_id <reply to id> does not exist in database for service id <service id>`|Go to your Service Settings and copy a valid `email_reply_to_id`. Double check that the API key you are using and the `email_reply_to_id` belong to the same service.|
