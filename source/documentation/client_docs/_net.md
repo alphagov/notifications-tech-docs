@@ -279,7 +279,7 @@ If you send subscription emails you must let recipients opt out of receiving the
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
 ```csharp
-string oneClickUnsubscribeURL : 'https://example.com/unsubscribe.html?opaque=123456789';
+string oneClickUnsubscribeURL : "https://example.com/unsubscribe.html?opaque=123456789";
 ```
 
 The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
