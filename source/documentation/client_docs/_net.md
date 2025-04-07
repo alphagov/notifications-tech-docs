@@ -504,7 +504,7 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents, false, false)}
+    { "link_to_file", NotificationClient.PrepareUpload(documentContents, false)}
 };
 ```
 
@@ -530,7 +530,7 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents, false, true, "52 weeks")}
+    { "link_to_file", NotificationClient.PrepareUpload(documentContents, true, "52 weeks")}
 };
 ```
 
