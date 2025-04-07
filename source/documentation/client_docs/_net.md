@@ -6,7 +6,7 @@ This documentation is for developers interested in using the GOV.UK Notify .NET 
 
 ### Prerequisites
 
-This documentation assumes you are using [Microsoft Visual Studio](https://visualstudio.microsoft.com/) with the [NuGet Package Manager](https://www.nuget.org/).
+This documentation assumes you are using either [Microsoft Visual Studio](https://visualstudio.microsoft.com/) (Windows) or [Visual Studio Code with the C# extension](https://code.visualstudio.com/docs/languages/dotnet) (Windows, macOS, or Linux) and  with the [NuGet Package Manager](https://www.nuget.org/).
 
 Refer to the [client changelog](https://github.com/alphagov/notifications-net-client/blob/main/CHANGELOG.md) for the version number and the latest updates.
 
@@ -33,7 +33,7 @@ Go to your project directory and run the following in the command line to instal
 dotnet add package GovukNotify
 ```
 
-#### Use Microsoft Visual Studio
+#### Use Microsoft Visual Studio or Visual Studio Code with C# Extension
 
 Use the [NuGet Package Manager](https://docs.microsoft.com/en-us/nuget/what-is-nuget) to install the `GovukNotify` client package in Visual Studio.
 
@@ -1021,7 +1021,7 @@ This returns the latest version of the template.
 
 ```csharp
 TemplateResponse response = client.GetTemplateById(
-    "templateId"
+    "f33517ff-2a88-4f6e-b855-c550268ce08a"
 );
 ```
 
