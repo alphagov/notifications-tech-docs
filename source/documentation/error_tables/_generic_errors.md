@@ -9,7 +9,7 @@ You may encounter following errors when making requests to a number of Notify's 
 Error message | How to fix
 ---|---
 **BadRequestError (status code 400)**|
-`Can’t send to this recipient using a team-only API key.`|Use a live API key, or add recipient to `Guest list` (located in API Integration section)|
+`Cannot send to this recipient using a team-only API key.`|Use a live API key, or add recipient to `Guest list` (located in API Integration section)|
 `Cannot send to this recipient when service is in trial mode – see https://www.notifications.service.gov.uk/trial-mode`|You need to request for your service to go live before you can send messages to people outside your team.|
 **BadRequestError (status code 403)**|
 `Error: Your system clock must be accurate to within 30 seconds`|Check your system clock|
