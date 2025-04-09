@@ -1,7 +1,7 @@
 **ValidationError&nbsp;(status&nbsp;code&nbsp;400)**|
 `id is not a valid UUID`|Check the notification ID.|
 **NoResultFound&nbsp;(status&nbsp;code&nbsp;404)**|
-`No result found`|Check when your message was sent. If it was sent before the retention period, it has been deleted. You can no longer get the status of this message. The default retention period is 7 days.|
+`No result found`| If it's outside the retention period, you may no longer get the status of the message. The default retention period is 7 days.|
 
 In addition to the above, you may also encounter:
 
