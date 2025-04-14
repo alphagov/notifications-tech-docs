@@ -33,7 +33,7 @@ Go to your project directory and run the following in the command line to instal
 dotnet add package GovukNotify
 ```
 
-#### Use Microsoft Visual Studio
+#### Use Microsoft Visual Studio or Visual Studio Code with C# Extension
 
 Use the [NuGet Package Manager](https://docs.microsoft.com/en-us/nuget/what-is-nuget) to install the `GovukNotify` client package in Visual Studio.
 
@@ -1027,7 +1027,7 @@ This returns the latest version of the template.
 
 ```csharp
 TemplateResponse response = client.GetTemplateById(
-    "templateId"
+    "f33517ff-2a88-4f6e-b855-c550268ce08a"
 );
 ```
 
