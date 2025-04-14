@@ -822,6 +822,12 @@ public class CostDetails
     public string postage;
 }
 ```
+For more information, see the:
+
+* [email status descriptions](#email-status-descriptions)
+* [text message status descriptions](#text-message-status-descriptions)
+* [letter status descriptions](#letter-status-descriptions)
+* [precompiled letter status descriptions](#precompiled-letter-status-descriptions)
 
 #### Error codes
 
