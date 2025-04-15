@@ -14,7 +14,7 @@ Because the container caches things like packages, you will need to run this aga
 
 ## To run the application
 
-```
+```shell
 make run-with-docker
 ```
 
