@@ -56,7 +56,7 @@ GEM
     google-protobuf (4.30.2-x86_64-linux)
       bigdecimal
       rake (>= 13)
-    govuk_tech_docs (4.3.0)
+    govuk_tech_docs (4.3.1)
       autoprefixer-rails (~> 10.2)
       base64
       bigdecimal
@@ -170,7 +170,7 @@ GEM
     padrino-support (0.15.3)
     parallel (1.27.0)
     parslet (2.0.0)
-    public_suffix (6.0.1)
+    public_suffix (6.0.2)
     racc (1.8.1)
     rack (2.2.13)
     rack-livereload (0.3.17)
@@ -217,7 +217,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  govuk_tech_docs (~> 4.3.0)
+  govuk_tech_docs (~> 4.3.1)
   mini_racer (~> 0.8.0)
 
 BUNDLED WITH
