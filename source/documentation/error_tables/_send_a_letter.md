@@ -7,7 +7,7 @@
 `Address must be at least 3 lines`|Provide at least 3 lines of address.|
 `Address must be no more than 7 lines`|Provide no more than 7 lines of address.|
 `Address lines must not start with any of the following characters: @ ( ) = [ ] ” \\ / , < >`|Change the start of an address line, so it doesn't start with one of these characters. This is a requirement from our printing provider.|
-`postage invalid. It must be either first or second.`|Specify valid postage option.|
+`postage invalid. It must be either first, second or economy.`|Specify valid postage option.|
 **BadRequestError (status code 400)**|
 `Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|Your service cannot send this letter in  [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode).|
 `Service is not allowed to send letters`|Turn on sending letters in your service Settings on GOV.UK Notify webpage|
