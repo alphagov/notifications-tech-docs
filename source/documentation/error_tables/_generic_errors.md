@@ -17,7 +17,7 @@ Error message | How to fix
 **RateLimitError (status code 429)**|
 `Exceeded rate limit for key type <team/test/live> of 3000/<custom limit> requests per 60 seconds`|Refer to [API rate limits](#rate-limits) for more information|
 **TooManyRequestsError (status code 429)**|
-`Exceeded send limits <your daily limit> for today`|Refer to [service limits](#daily-limits) for the limit number|
+`Exceeded send limits (<sms/email/letter/international_sms>: <LIMIT SIZE>) for today`|Refer to [service limits](#daily-limits) for the limit size|
 **Exception (status code 500)**|
 `Internal server error`|Notify was unable to process the request, resend your notification.|
 

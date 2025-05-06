@@ -140,7 +140,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock|
 |`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 |`429`|`RateLimitError: Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds`|`RateLimitError`|Refer to [API rate limits](#rate-limits) for more information|
-|`429`|`TooManyRequestsError: Exceeded send limits (LIMIT NUMBER) for today`|`ClientError`|Refer to [service limits](#daily-limits) for the limit number|
+|`429`|`TooManyRequestsError: Exceeded send limits (<sms/email/letter/international_sms>: <LIMIT SIZE>) for today`|`ClientError`|Refer to [service limits](#daily-limits) for the limit size|
 |`500`|`Exception: Internal server error`|`ServerError`|Notify was unable to process the request, resend your notification|
 
 ### Send an email
@@ -461,7 +461,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock|
 |`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 |`429`|`RateLimitError: Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds`|`RateLimitError`|Refer to [API rate limits](#rate-limits) for more information|
-|`429`|`TooManyRequestsError: Exceeded send limits (LIMIT NUMBER) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit number|
+|`429`|`TooManyRequestsError: Exceeded send limits (<sms/email/letter/international_sms>: <LIMIT SIZE>) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit size|
 |`500`|`Exception: Internal server error`|`ServerError`|Notify was unable to process the request, resend your notification|
 |-|`ArgumentError: File is larger than 2MB")`|-|The file is too big. Files must be smaller than 2MB|
 
@@ -576,7 +576,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock.|
 |`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information.|
 |`429`|`RateLimitError: Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds`|`RateLimitError`|Refer to [API rate limits](#rate-limits) for more information.|
-|`429`|`TooManyRequestsError: Exceeded send limits (LIMIT NUMBER) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit number.|
+|`429`|`TooManyRequestsError: Exceeded send limits (<sms/email/letter/international_sms>: <LIMIT SIZE>) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit size.|
 |`500`|`Exception: Internal server error`|`ServerError`|Notify was unable to process the request, resend your notification.|
 
 ### Send a precompiled letter
@@ -631,7 +631,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |`400`|`ValidationError: reference is a required property`|`BadRequestError`|Add a `reference` argument to the method call|
 |`400`|`ValidationError: postage invalid. It must be either first or second.`|`BadRequestError`|Change the value of `postage` argument in the method call to either 'first' or 'second'|
 |`429`|`RateLimitError: Exceeded rate limit for key type live of 10 requests per 20 seconds`|`RateLimitError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`429`|`TooManyRequestsError: Exceeded send limits (50) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit number|
+|`429`|`TooManyRequestsError: Exceeded send limits (letter: 50) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit size|
 
 ## Get message status
 
