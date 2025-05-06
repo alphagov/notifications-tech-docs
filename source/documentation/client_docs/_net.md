@@ -6,7 +6,7 @@ This documentation is for developers interested in using the GOV.UK Notify .NET 
 
 ### Prerequisites
 
-This documentation assumes you are using [Microsoft Visual Studio](https://visualstudio.microsoft.com/) with the [NuGet Package Manager](https://www.nuget.org/).
+This documentation assumes you are using either [Microsoft Visual Studio](https://visualstudio.microsoft.com/) (Windows) or [Visual Studio Code with the C# extension](https://code.visualstudio.com/docs/languages/dotnet) (Windows, macOS, or Linux) and  with the [NuGet Package Manager](https://www.nuget.org/).
 
 Refer to the [client changelog](https://github.com/alphagov/notifications-net-client/blob/main/CHANGELOG.md) for the version number and the latest updates.
 
@@ -33,7 +33,7 @@ Go to your project directory and run the following in the command line to instal
 dotnet add package GovukNotify
 ```
 
-#### Use Microsoft Visual Studio
+#### Use Microsoft Visual Studio or Visual Studio Code with C# Extension
 
 Use the [NuGet Package Manager](https://docs.microsoft.com/en-us/nuget/what-is-nuget) to install the `GovukNotify` client package in Visual Studio.
 
@@ -279,7 +279,7 @@ If you send subscription emails you must let recipients opt out of receiving the
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
 ```csharp
-string oneClickUnsubscribeURL : 'https://example.com/unsubscribe.html?opaque=123456789';
+string oneClickUnsubscribeURL : "https://example.com/unsubscribe.html?opaque=123456789";
 ```
 
 The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
@@ -504,7 +504,7 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents, false, false)}
+    { "link_to_file", NotificationClient.PrepareUpload(documentContents, false)}
 };
 ```
 
@@ -530,7 +530,7 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents, false, true, "52 weeks")}
+    { "link_to_file", NotificationClient.PrepareUpload(documentContents, true, "52 weeks")}
 };
 ```
 
@@ -822,6 +822,12 @@ public class CostDetails
     public string postage;
 }
 ```
+For more information, see the:
+
+* [email status descriptions](#email-status-descriptions)
+* [text message status descriptions](#text-message-status-descriptions)
+* [letter status descriptions](#letter-status-descriptions)
+* [precompiled letter status descriptions](#precompiled-letter-status-descriptions)
 
 #### Error codes
 
@@ -1021,7 +1027,7 @@ This returns the latest version of the template.
 
 ```csharp
 TemplateResponse response = client.GetTemplateById(
-    "templateId"
+    "f33517ff-2a88-4f6e-b855-c550268ce08a"
 );
 ```
 
