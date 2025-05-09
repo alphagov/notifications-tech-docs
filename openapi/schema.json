@@ -245,7 +245,7 @@
                     },
                     "postage": {
                         "type": "string",
-                        "description": "You can choose first or second class postage for your precompiled letter. Set the value to <code>first</code> for first class, or <code>second</code> for second class. If you do not pass in this argument, the postage will default to second class. During processing of the letter notify will detect international addresses automatically and may change the postage value to <code>europe</code> or <code>rest-of-world</code> automatically.",
+                        "description": "You can choose first class, second class or economy mail postage for your precompiled letter. Set the value to <code>first</code> for first class, <code>second</code> for second class or <code>economy</code> for economy mail. If you do not pass in this argument, the postage will default to second class. During processing of the letter notify will detect international addresses automatically and may change the postage value to <code>europe</code> or <code>rest-of-world</code> automatically.",
                         "example": "base64EncodedPDFFile"
                     }
                 },
@@ -489,10 +489,11 @@
                         "enum": [
                             "first",
                             "second",
+                            "economy",
                             "europe",
                             "rest-of-world"
                         ],
-                        "example": "first / second / europe / rest-of-world"
+                        "example": "first / second / economy / europe / rest-of-world"
                     },
                     "type": {
                         "type": "string",
@@ -622,10 +623,11 @@
                                         "enum": [
                                             "first",
                                             "second",
+                                            "economy",
                                             "europe",
                                             "rest-of-world"
                                         ],
-                                        "example": "first / second / europe / rest-of-world"
+                                        "example": "first / second / economy / europe / rest-of-world"
                                     }
                                 }
                             },
@@ -964,6 +966,7 @@
                         "enum": [
                             "first",
                             "second",
+                            "economy",
                             "europe",
                             "rest-of-world",
                             null

@@ -754,7 +754,7 @@ The precompiled letter must be a PDF file which meets [the GOV.UK Notify letter 
 
 ##### postage (optional)
 
-You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
+You can choose first class, second class or economy mail postage for your precompiled letter. Set the value to `first` for first class, `second` for second class or `economy` for economy mail. If you do not pass in this argument, the postage will default to second class.
 
 ```javascript
 "postage": "second"
@@ -792,7 +792,7 @@ If the request is not successful, the API returns `json` containing the relevant
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Letter content is not a valid PDF"`<br>`}]`|PDF file format is required|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can't send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "reference is a required property"`<br>`}]`|Add a `reference` argument to the method call|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "postage invalid. It must be either first or second."`<br>`}]`|Change the value of `postage` argument in the method call to either `'first'` or `'second'`|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "postage invalid. It must be either first, second or economy."`<br>`}]`|Change the value of `postage` argument in the method call to either `'first'`, `'second'` or `'economy'`|
 |`429`|`[{`<br>`"error": "RateLimitError",`<br>`"message": "Exceeded rate limit for key type live of 10 requests per 20 seconds"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 |`429`|`[{`<br>`"error": "TooManyRequestsError",`<br>`"message": "Exceeded send limits (50) for today"`<br>`}]`|Refer to [service limits](#daily-limits) for the limit size|
 
@@ -839,7 +839,7 @@ If the request is successful, the response body is `json` and the status code is
     "line_5": "SW14 6BF",  // optional string for letter
     "line_6": null,  // optional string for letter
     "line_7": null, // optional string for letter
-    "postage": "first / second / europe / rest-of-world", // required string for letter
+    "postage": "first / second / economy / europe / rest-of-world", // required string for letter
     "type": "sms / letter / email",  // required string
     "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  // required string
     "template": {
@@ -864,7 +864,7 @@ If the request is successful, the response body is `json` and the status code is
         "sms_rate": 0.0027,  // optional number - cost of 1 sms fragment
         // for letters:
         "billable_sheets_of_paper": 2,  // optional integer - number of sheets of paper in the letter you sent, that you will be charged for
-        "postage": "first / second / europe / rest-of-world"  // optional string
+        "postage": "first / second / economy / europe / rest-of-world"  // optional string
     }
 }
 ```
@@ -994,7 +994,7 @@ If the request is successful, the response body is `json` and the status code is
             "line_5": "SW14 6BF",  // optional string for letter
             "line_6": null,  // optional string for letter
             "line_7": null, // optional string for letter
-            "postage": "first / second / europe / rest-of-world", // required string for letter
+            "postage": "first / second / economy / europe / rest-of-world", // required string for letter
             "type": "sms / letter / email",  // required string
             "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  // required string
             "template": {
@@ -1019,7 +1019,7 @@ If the request is successful, the response body is `json` and the status code is
                 "sms_rate": 0.0027,  // optional number - cost of 1 sms fragment
                 // for letters:
                 "billable_sheets_of_paper": 2,  // optional integer - number of sheets of paper in the letter you sent, that you will be charged for
-                "postage": "first / second / europe / rest-of-world"  // optional string
+                "postage": "first / second / economy / europe / rest-of-world"  // optional string
             }
         },
         {
