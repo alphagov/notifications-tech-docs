@@ -16,7 +16,7 @@ There’s a limit to the number of messages you can send each day:
 |Trial|Team|50 emails or text messages|
 |Live or trial|Test|Unlimited|
 
-[GP surgeries](https://www.notifications.service.gov.uk/features/who-can-use-notify) cannot send any text messages in trial mode. 
+[GP surgeries](https://www.notifications.service.gov.uk/features/who-can-use-notify#gp) cannot send any text messages in trial mode. 
 
 These limits reset at midnight UTC.
 
