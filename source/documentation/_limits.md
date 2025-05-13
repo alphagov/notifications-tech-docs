@@ -16,6 +16,8 @@ There’s a limit to the number of messages you can send each day:
 |Trial|Team|50 emails or text messages|
 |Live or trial|Test|Unlimited|
 
+<a class="govuk-link govuk-link--no-visited-state" href="{{ url_for('main.guidance_who_can_use_notify') }}">GP surgeries</a> cannot send any text messages in trial mode. 
+
 These limits reset at midnight UTC.
 
 ### Phone network limits
