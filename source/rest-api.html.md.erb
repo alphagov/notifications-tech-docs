@@ -1072,6 +1072,52 @@ Error message|How to fix|
 |#`technical-failure`|GOV.UK Notify had an unexpected error while sending the letter to our printing provider.|
 |#`permanent-failure`|The provider cannot print the letter. Your letter will not be dispatched.|
 
+
+### Get a PDF for a letter notification
+
+#### Method
+
+This returns the PDF contents of a letter.
+
+```
+GET /v2/notifications/{notification_id}/pdf
+```
+
+#### URL parameters
+
+##### notification_id (required)
+
+The ID of the notification. To find the notification ID, you can either:
+
+* check the response to the [original notification POST call](#response)
+* [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page
+
+```
+3d1ce039-5476-414c-99b2-fac1e6add62c
+```
+
+#### Response
+
+If the request to the API is successful, the API will return bytes representing the raw PDF data.
+
+#### Error codes
+
+If the request is not successful, the API returns `json` containing the relevant error code. For example:
+
+```javascript
+{
+  "status_code": 400,
+  "errors": [
+    {"error": "ValidationError", "message": "Notification is not a letter"}
+  ]
+}
+```
+
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/get_a_pdf_for_a_letter_notification' %>
+
+
 <%= partial 'documentation/api_docs' %>
 <%= partial 'documentation/error_messages' %>
 <%= partial 'documentation/testing' %>
