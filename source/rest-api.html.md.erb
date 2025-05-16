@@ -701,6 +701,77 @@ If the request is not successful, the client returns an error. To learn more abo
 |:---|:---|
 <%= partial 'documentation/error_tables/send_a_letter' %>
 
+
+### Send a precompiled letter
+
+```
+POST /v2/notifications/letter
+```
+#### Request body
+
+```javascript
+{
+  "reference": "your reference",
+  "content": "file as base64 encoded string"
+}
+```
+
+#### Arguments
+
+##### reference (required)
+
+An identifier you create. This reference identifies a single unique precompiled letter or a batch of precompiled letters. It must not contain any personal information such as name or postal address.
+
+```javascript
+"reference": "your reference" // required string - identifies notification(s)
+```
+
+##### content (required)
+
+The precompiled letter must be a PDF file which meets [the GOV.UK Notify letter specification](https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification). You’ll need to convert the file into a string that is base64 encoded.
+
+```javascript
+"content": "file as base64 encoded string"
+```
+
+##### postage (optional)
+
+You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
+
+```javascript
+"postage": "second"
+```
+
+
+#### Response
+
+If the request is successful, the response body is `json` and the status code is `201`:
+
+```javascript
+{
+  "id": "1d986ba7-fba6-49fb-84e5-75038a1dd968",  // required string - notification ID
+  "reference": "your reference",  // required string - reference your provided
+  "postage": "first"  // required string - postage you provided, or else default postage for the letter
+}
+```
+
+#### Error codes
+
+If the request is not successful, the API returns `json` containing the relevant error code. For example:
+
+```javascript
+{
+  "status_code": 400,
+  "errors": [
+    {"error": "BadRequestError", "message": "Can't send to this recipient using a team-only API key"}
+  ]
+}
+```
+
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/send_a_precompiled_letter' %>
+
 <%= partial 'documentation/api_docs' %>
 <%= partial 'documentation/error_messages' %>
 <%= partial 'documentation/testing' %>
