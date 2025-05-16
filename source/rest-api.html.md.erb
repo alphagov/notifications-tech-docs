@@ -74,6 +74,140 @@ The content header is `application/json`:
 "Content-type": "application/json"
 ```
 
+## Send a message
+
+You can use GOV.UK Notify to send emails, text messages and letters.
+
+### Send a text message
+
+#### Method
+
+```
+POST /v2/notifications/sms
+```
+
+#### Request body
+
+```javascript
+{
+  "phone_number": "+447900900123",
+  "template_id": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+}
+ ```
+
+#### Arguments
+
+##### phone_number (required)
+
+The phone number of the recipient of the text message. This can be a UK or international number.
+
+For example:
+
+```javascript
+"phone_number": "+447900900123"
+```
+
+##### template_id (required)
+
+To find the template ID:
+
+1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
+1. Go to the __Templates__ page and select the relevant template.
+1. Select __Copy template ID to clipboard__.
+
+For example:
+
+```javascript
+"template_id": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+```
+
+##### personalisation (optional)
+
+If a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:
+
+```javascript
+"personalisation": {
+  "first_name": "Amala",
+  "appointment_date": "1 January 2018 at 1:00PM",
+}
+```
+
+You can leave out this argument if a template does not have any placeholder fields for personalised information.
+
+##### reference (optional)
+
+An identifier you can create if necessary. This reference identifies a single unique message or a batch of messages. It must not contain any personal information such as name or postal address. For example:
+
+```javascript
+// optional string - identifies notification(s)
+"reference": "your reference"
+```
+
+You can leave out this argument if you do not have a reference.
+
+##### sms_sender_id (optional)
+
+A unique identifier of the sender of the text message notification.
+
+To find the text message sender:
+
+1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
+1. Go to the __Settings__ page.
+1. In the __Text Messages__ section, select __Manage__ on the __Text Message sender__ row.
+
+You can then either:
+
+- copy the sender ID that you want to use and paste it into the method
+- select __Change__ to change the default sender that the service will use, and select __Save__
+
+```javascript
+"sms_sender_id": "8e222534-7f05-4972-86e3-17c5d9f894e2"
+```
+
+You can leave out this argument if your service only has one text message sender, or if you want to use the default sender.
+
+#### Response
+
+If the request is successful, the response body is `json` with a status code of `201`:
+
+```javascript
+{
+  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",  // required string - notification ID
+  "reference": "your reference", // optional string - reference you provided when sending the message
+  "content": {
+    "body": "Hi Amala, your appointment is on 1 January 2018 at 1:00PM",  // required string - message content
+    "from_number": "GOVUK"  // required string - sender name / phone number
+  },
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",  // required string
+  "template": {
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+    "version": 3,  // required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"  // required string
+  }
+}
+```
+
+If you are using the [test API key](#test), all your messages will come back with a `delivered` status.
+
+All messages sent using the [team and guest list](#team-and-guest-list) or [live](#live) keys will appear on your dashboard.
+
+#### Error codes
+
+If the request is not successful, the API returns `json` containing the relevant error code. For example:
+
+```javascript
+{
+  "status_code": 400,
+  "errors": [
+    {"error": "BadRequestError", "message": "Can't send to this recipient using a team-only API key"}
+  ]
+}
+```
+
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/send_a_text_message' %>
+
 <%= partial 'documentation/api_docs' %>
 <%= partial 'documentation/error_messages' %>
 <%= partial 'documentation/testing' %>
