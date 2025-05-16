@@ -568,6 +568,138 @@ If the request is not successful, the client returns an error. To learn more abo
 <%= partial 'documentation/error_tables/send_a_file_by_email' %>
 
 
+### Send a letter
+
+When you add a new service it will start in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode). You can only send letters when your service is live.
+
+To send Notify a request to go live:
+
+1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
+1. Go to the __Settings__ page.
+1. In the __Your service is in trial mode__ section, select __request to go live__.
+
+#### Method
+
+```
+POST /v2/notifications/letter
+```
+
+#### Request body
+
+```javascript
+{
+  "template_id": "64415853-cb86-4cc4-b597-2aaa94ef8c39",
+  "personalisation": {
+    "address_line_1": "Amala Bird",
+    "address_line_2": "123 High Street",
+    "address_line_3": "SW14 6BH"
+  }
+}
+```
+
+#### Arguments
+
+##### template_id (required)
+
+To find the template ID:
+
+1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).
+1. Go to the __Templates__ page and select the relevant template.
+1. Select __Copy template ID to clipboard__.
+
+
+For example:
+
+```javascript
+"template_id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3", // required UUID string
+```
+
+##### personalisation (required)
+
+The personalisation argument always contains the following parameters for the letter recipient’s address:
+
+- `address_line_1`
+- `address_line_2`
+- `address_line_3`
+- `address_line_4`
+- `address_line_5`
+- `address_line_6`
+- `address_line_7`
+
+The address must have at least 3 lines.
+
+The last line needs to be a real UK postcode or the name of a country outside the UK.
+
+Notify checks for international addresses and will automatically charge you the correct postage.
+
+The `postcode` personalisation argument has been replaced. If your template still uses `postcode`, Notify will treat it as the last line of the address.
+
+Any other placeholder fields included in the letter template also count as required parameters. You need to provide their values in a dictionary with key value pairs. For example:
+
+```javascript
+"personalisation": {
+  "address_line_1": "Amala Bird",  // required string
+  "address_line_2": "123 High Street",  // required string
+  "address_line_3": "Richmond upon Thames",  // required string
+  "address_line_4": "Middlesex",
+  "address_line_5": "SW14 6BF",  // last line of address you include must be a postcode or a country name  outside the UK
+  "name": "Amala",
+  "appointment_date": "1 January 2018 at 1:00PM",
+  // pass in a list and it will appear as bullet points in the letter:
+  "required_documents": ["passport", "utility bill", "other id"]
+}
+```
+
+##### reference (optional)
+
+An identifier you can create if necessary. This reference identifies a single unique letter or a batch of letters. It must not contain any personal information such as name or postal address. For example:
+
+```javascript
+"reference": "your reference" // optional string - identifies notification(s)
+```
+
+#### Response
+
+If the request is successful, the response body is `json` and the status code is `201`:
+
+```javascript
+{
+  "id": "3d1ce039-5476-414c-99b2-fac1e6add62c",  // required string - notification ID
+  "reference": "your reference",  // optional string - reference you provided when sending the message
+  "content": {
+    "subject": "Your upcoming pigeon registration appointment",  // required string - letter heading
+    "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 1:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - letter content
+  },
+  "uri": "https://api.notifications.service.gov.uk/v2/notifications/3d1ce039-5476-414c-99b2-fac1e6add62c",  // required string
+  "template": {
+    "id": "64415853-cb86-4cc4-b597-2aaa94ef8c39",  // required string - template ID
+    "version": 3,  // required integer
+    "uri": "https://api.notifications.service.gov.uk/v2/template/64415853-cb86-4cc4-b597-2aaa94ef8c39"  // required string
+  },
+  "scheduled_for": null
+}
+```
+
+#### Error codes
+
+If the request is not successful, the API returns `json` containing the relevant error code. For example:
+
+```javascript
+{
+  "status_code": 400,
+  "errors": [
+    {"error": "BadRequestError", "message": "Can't send to this recipient using a team-only API key"}
+  ]
+}
+```
+
+#### Error codes
+
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
+
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/send_a_letter' %>
 
 <%= partial 'documentation/api_docs' %>
 <%= partial 'documentation/error_messages' %>
