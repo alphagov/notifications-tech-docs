@@ -1,5 +1,5 @@
 **ValidationError (status code 400)**|
-phone_number Too many digits|Provide a valid recipient phone number.|
+`phone_number Too many digits`|Provide a valid recipient phone number.|
 `phone_number Not enough digits`|Provide a valid recipient phone number.|
 `phone_number Not a UK mobile number`|Provide a valid British recipient phone number.|
 `phone_number Must not contain letters or symbols`|Provide a valid recipient phone number.|

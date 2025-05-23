@@ -1383,9 +1383,22 @@ If the request is not successful, the promise fails with an `err`.
 <%= partial 'documentation/error_tables/get_a_page_of_received_text_messages' %>
 
 
+## Errors
 
-<%= partial 'documentation/client_docs/node' %>
-<%= partial 'documentation/error_messages' %>
+### Error handling
+
+If the request is not successful, the client raises an `HTTPError`.
+
+This error consists of:
+
+- a status code, for example `400`
+- an error type, for example `BadRequestError`
+- a message, for example `Mobile numbers can only include: 0 1 2 3 4 5 6 7 8 9 ( ) + -`
+
+To access these details about the error, read its `status_code` and `message` fields, for example:
+
+<%= partial 'documentation/error_tables/generic_errors' %>
+
 <%= partial 'documentation/testing' %>
 <%= partial 'documentation/api_keys' %>
 <%= partial 'documentation/limits' %>
