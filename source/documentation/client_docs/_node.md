@@ -702,7 +702,7 @@ fs.readFile("path/to/document.pdf", function (err, pdfFile) {
 
 ##### postage (optional)
 
-You can choose first class, second class or economy mail postage for your precompiled letter. Set the value to `first` for first class, `second` for second class or `economy` for economy mail. If you do not pass in this argument, the postage will default to second class.
+You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
 
 ```javascript
 let postage = "first";
@@ -729,7 +729,7 @@ If the request is not successful, the promise fails with an `err`.
 |`403`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Cannot send letters with a team api key"`<br>`}]`|Use the correct type of [API key](#api-keys)|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "personalisation address_line_1 is a required property"`<br>`}]`|Send a valid PDF file|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "postage invalid. It must be either first, second or economy."`<br>`}]`|Change the value of `postage` argument in the method call to either 'first', 'second' or 'economy'|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "postage invalid. It must be either first or second."`<br>`}]`|Change the value of `postage` argument in the method call to either 'first' or 'second'|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 |`429`|`[{`<br>`"error": "RateLimitError",`<br>`"message": "Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds"`<br>`}]`|Refer to [API rate limits](#rate-limits) for more information|
@@ -809,7 +809,7 @@ If the request is successful, the promise resolves with a `response` `object`. F
         "sms_rate": 0.0027,  // optional number - cost of 1 sms fragment
     // for letters:
         "billable_sheets_of_paper": 2,  // optional integer - number of sheets of paper in the letter you sent, that you will be charged for
-        "postage": "first / second / economy / europe / rest-of-world"  // optional string
+        "postage": "first / second / europe / rest-of-world"  // optional string
     }
 }
 ```
