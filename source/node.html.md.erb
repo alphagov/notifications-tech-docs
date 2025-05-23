@@ -1061,6 +1061,245 @@ If the request is not successful, the client will return an error. To learn more
 <%= partial 'documentation/error_tables/get_a_pdf_for_a_letter_notification' %>
 
 
+## Get a template
+
+### Get a template by ID
+
+#### Method
+
+This returns the latest version of the template.
+
+```javascript
+notifyClient
+  .getTemplateById(templateId)
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err))
+```
+
+The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). The promise will either:
+
+- resolve with a `response` if successful
+- fail with an `err` if unsuccessful
+
+#### Arguments
+
+##### templateId (required)
+
+The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
+
+```javascript
+let templateId = "f33517ff-2a88-4f6e-b855-c550268ce08a";
+```
+
+#### Response
+
+If the request is successful, the promise resolves with a `response` `object`. For example, the `response.data` property will look like this:
+
+```javascript
+{
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+    "name": "Pigeon registration - appointment email", // required string - template name
+    "type": "sms / email / letter" , // required string
+    "created_at": "2024-05-10 10:30:31.142535", // required string - date and time template created
+    "updated_at": "2024-08-25 13:00:09.123234", // required string - date and time template last updated
+    "version": 2, // required integer - template version
+    "created_by": "charlie.smith@pigeons.gov.uk", // required string
+    "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
+    "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
+}
+```
+
+#### Error codes
+
+If the request is not successful, the promise fails with an `err`. To learn more about error structure, go to [Errors section](#errors).
+
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/get_a_template_by_id' %>
+
+
+### Get a template by ID and version
+
+#### Method
+
+```javascript
+notifyClient
+  .getTemplateByIdAndVersion(templateId, version)
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err))
+```
+
+The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). The promise will either:
+
+- resolve with a `response` if successful
+- fail with an `err` if unsuccessful
+
+#### Arguments
+
+##### templateId (required)
+
+The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
+
+```javascript
+let templateId = "f33517ff-2a88-4f6e-b855-c550268ce08a";
+```
+
+##### version (required)
+
+The version number of the template.
+
+#### Response
+
+If the request is successful, the promise resolves with a `response` `object`. For example, the `response.data` property will look like this:
+
+```javascript
+{
+    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+    "name": "Pigeon registration - appointment email", // required string - template name
+    "type": "sms / email / letter" , // required string
+    "created_at": "2024-05-10 10:30:31.142535", // required string - date and time template created
+    "updated_at": "2024-08-25 13:00:09.123234", // required string - date and time template last updated
+    "version": 1, // required integer - template version
+    "created_by": "charlie.smith@pigeons.gov.uk", // required string
+    "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
+    "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+    "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
+}
+```
+
+#### Error codes
+
+If the request is not successful, the promise fails with an `err`. To learn more about error structure, go to [Errors section](#errors).
+
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/get_a_template_by_id_and_version' %>
+
+
+### Get all templates
+
+#### Method
+
+This returns the latest version of all templates.
+
+```javascript
+notifyClient
+  .getAllTemplates(templateType)
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err))
+```
+
+The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). The promise will either:
+
+- resolve with a `response` if successful
+- fail with an `err` if unsuccessful
+
+#### Arguments
+
+##### templateType (optional)
+
+If you leave out this argument, the method returns all templates. Otherwise you can filter by:
+
+- `email`
+- `sms`
+- `letter`
+
+#### Response
+
+If the request is successful, the promise resolves with a `response` `object`. For example, the `response.data` property will look like this:
+
+```javascript
+{
+    "templates": [
+        {
+            "id": "f33517ff-2a88-4f6e-b855-c550268ce08a", // required string - template ID
+            "name": "Pigeon registration - appointment email", // required string - template name
+            "type": "sms / email / letter" , // required string
+            "created_at": "2024-05-10 10:30:31.142535", // required string - date and time template created
+            "updated_at": "2024-08-25 13:00:09.123234", // required string - date and time template last updated
+            "version": 2, // required integer - template version
+            "created_by": "charlie.smith@pigeons.gov.uk", // required string
+            "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
+            "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+            "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
+        },
+        {
+        //...another template
+        }
+    ]
+}
+```
+
+If no templates exist for a template type or there no templates for a service, the object is empty.
+
+### Generate a preview template
+
+#### Method
+
+This generates a preview version of a template.
+
+```javascript
+notifyClient
+  .previewTemplateById(templateId, personalisation)
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err))
+```
+
+The method returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). The promise will either:
+
+- resolve with a `response` if successful
+- fail with an `err` if unsuccessful
+
+The parameters in the personalisation argument must match the placeholder fields in the actual template. The API notification client ignores any extra fields in the method.
+
+#### Arguments
+
+##### templateId (required)
+
+The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
+
+```javascript
+let templateId = "f33517ff-2a88-4f6e-b855-c550268ce08a";
+```
+
+##### personalisation (optional)
+
+If a template has placeholder fields for personalised information such as name or application date, you must provide their values in an `object`. For example:
+
+```javascript
+{
+  personalisation: {
+    "first_name": "Amala",
+    "reference_number": "300241"
+  }
+}
+```
+
+You can leave out this argument if a template does not have any placeholder fields for personalised information.
+
+#### Response
+
+If the request is successful, the promise resolves with a `response` `object`. For example, the `response.data` property will look like this:
+
+```javascript
+{
+  "id": "notify_id",
+  "type": "sms|email|letter",
+  "version": "version",
+  "body": "Hello bar", // with substitution values
+  "subject": "null|email_subject",
+  "html": "<p>Example</p>" // Returns the rendered body (email templates only)
+}
+```
+
+#### Error codes
+
+If the request is not successful, the promise fails with an `err`. To learn more about error structure, go to [Errors section](#errors).
+
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/generate_a_preview_template' %>
 
 <%= partial 'documentation/client_docs/node' %>
 <%= partial 'documentation/error_messages' %>
