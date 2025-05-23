@@ -2,6 +2,63 @@
 title: Node JS client documentation
 parent: https://www.notifications.service.gov.uk/documentation
 ---
+# Node.js client documentation
+
+This documentation is for developers interested in using the GOV.UK Notify Node.js client to send emails, text messages or letters.
+
+## Set up the client
+
+### Install the client
+
+Run the following in the command line:
+
+```shell
+npm install --save notifications-node-client
+```
+
+### Create a new instance of the client
+
+Add this code to your application:
+
+```javascript
+let NotifyClient = require("notifications-node-client").NotifyClient;
+
+let notifyClient = new NotifyClient(apiKey);
+```
+
+#### Arguments
+
+##### api_key (required)
+
+To get an API key, [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page. You can find more information in the [API keys](#api-keys) section of this documentation.
+
+
+#### Connect through a proxy (optional)
+
+Add this code to your application:
+
+```javascript
+const proxyConfig = {
+  host: proxyHost,
+  port: proxyPort
+};
+
+notifyClient.setProxy(proxyConfig);
+```
+
+where the `proxyConfig` should be an object supported by [axios](https://github.com/axios/axios).
+
+#### Provide your own underlying Axios client (optional)
+
+You can provide your own Axios client to the Notify client. This is useful if you want to use a custom Axios client with specific settings, like custom interceptors.
+
+Add this code to your application:
+
+```javascript
+notifyClient.setClient(customAxiosClient);
+```
+
+where `customAxiosClient` is an instance of Axios.
 
 <%= partial 'documentation/client_docs/node' %>
 <%= partial 'documentation/error_messages' %>
