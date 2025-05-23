@@ -1050,11 +1050,11 @@ The ID of the notification. To find the notification ID, you can either:
 
 #### Response
 
-If the request to the client is successful, the client will return an instance of the [Buffer](https://nodejs.org/api/buffer.html#buffer_buffer) class containing the raw PDF data.
+If the request is successful, the promise resolves with a `response` `object` which will be an instance of the [Buffer](https://nodejs.org/api/buffer.html#buffer_buffer) class containing the raw PDF data.
 
 #### Error codes
 
-If the request is not successful, the client will return an error. To learn more about error structure, go to [Errors section](#errors).
+If the request is not successful, the promise fails with an `err`. To learn more about error structure, go to [Errors section](#errors).
 
 |Error message|How to fix|
 |:---|:---|
@@ -1380,14 +1380,59 @@ If the notification specified in the `olderThan` argument is older than 7 days, 
 
 #### Error codes
 
-If the request is not successful, the promise fails with an `err`.
+If the request is not successful, the promise fails with an `err`. To learn more about error structure, go to [Errors section](#errors).
 
 <%= partial 'documentation/error_tables/get_a_page_of_received_text_messages' %>
 
 
+## Errors
 
-<%= partial 'documentation/client_docs/node' %>
-<%= partial 'documentation/error_messages' %>
+### Error handling
+
+If the request is not successful, the promise fails with an `err`.
+
+- a status code, for example `400`
+- an error type, for example `BadRequestError`
+- a message, for example `Mobile numbers can only include: 0 1 2 3 4 5 6 7 8 9 ( ) + -`
+
+These details about the error can be accessed by reading `err.response.data` which is `json`, for example:
+
+```javascript
+{
+  errors: [
+    {
+      error: 'BadRequestError',
+      message: 'Mobile numbers can only include: 0 1 2 3 4 5 6 7 8 9 ( ) + -'
+    }
+  ],
+  status_code: 400
+}
+
+```
+A simple illustration of error handling:
+
+```javascript
+notifyClient.sendSms("f33517ff-2a88-4f6e-b855-c550268ce08a", "+447700900123", {
+    personalisation: {
+                        first_name: "Amala",
+                        appointment_date: "1 January 2018 at 1:00pm"
+                       },
+    reference: "your reference",
+    smsSenderId: "445f705f-e394-445d-a5a0-1c80ab958e22"
+  })
+  .then(response => console.log(response))
+  .catch(err => {
+      if (err.response.data.status_code >= 500 && err.response.data.status_code <= 599){
+          // retry logic;
+      }
+      else {
+        console.log(err.response.data.errors[0]);
+      }
+})
+```
+
+<%= partial 'documentation/error_tables/generic_errors' %>
+
 <%= partial 'documentation/testing' %>
 <%= partial 'documentation/api_keys' %>
 <%= partial 'documentation/limits' %>
