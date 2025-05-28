@@ -678,7 +678,7 @@ try {
 
 ##### postage (optional)
 
-You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
+You can choose first class, second class or economy mail postage for your precompiled letter. Set the value to `first` for first class, `second` for second class or `economy` for economy mail. If you do not pass in this argument, the postage will default to second class.
 
 ```php
 $postage = 'first';
@@ -707,7 +707,7 @@ If the request is not successful, the client returns an `Alphagov\Notifications\
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Letter content is not a valid PDF"`<br>`}]`|PDF file format is required.|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode).|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "reference is a required property"`<br>`}]`|Add a `reference` argument to the method call.|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "postage invalid. It must be either first or second."`<br>`}]`|Change the value of `postage` argument in the method call to either 'first' or 'second'|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "postage invalid. It must be either first, second or economy."`<br>`}]`|Change the value of `postage` argument in the method call to either 'first', 'second' or 'economy'|
 |`429`|`[{`<br>`"error": "RateLimitError",`<br>`"message": "Exceeded rate limit for key type live of 10 requests per 20 seconds"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information.|
 |`429`|`[{`<br>`"error": "TooManyRequestsError",`<br>`"message": "Exceeded send limits (<sms/email/letter/international_sms>: <LIMIT SIZE>) for today"`<br>`}]`|Refer to [service limits](#daily-limits) for the limit size.|
 
@@ -762,7 +762,7 @@ If the request to the client is successful, the client returns an `array`:
     "line_5" => "Some county",
     "line_6" => "Something else",
     "line_7" => "Postcode or country",
-    "postage" => "null|first|second",
+    "postage" => "null|first|second|economy",
     "type" => "sms|letter|email",
     "status" => "sending / delivered / permanent-failure / temporary-failure / technical-failure",
     "template" => [
@@ -787,7 +787,7 @@ If the request to the client is successful, the client returns an `array`:
         "sms_rate" => 0.0027,
         // for letters:
         "billable_sheets_of_paper" => 2,
-        "postage" => "first / second / europe / rest-of-world"
+        "postage" => "first / second / economy / europe / rest-of-world"
     ]
 ];
 ```
@@ -895,7 +895,7 @@ If the request to the client is successful, the client returns an `array`.
             "line_5" => "Some county",
             "line_6" => "Something else",
             "postcode" => "postcode",
-            "postage" => "null|first|second",
+            "postage" => "null|first|second|economy",
             "type" => "sms | letter | email",
             "status" => sending | delivered | permanent-failure | temporary-failure | technical-failure",
             "template" => [
@@ -920,7 +920,7 @@ If the request to the client is successful, the client returns an `array`.
                 "sms_rate" => 0.0027,
                 // for letters:
                 "billable_sheets_of_paper" => 2,
-                "postage" => "first / second / europe / rest-of-world"
+                "postage" => "first / second / economy / europe / rest-of-world"
             ]
         ]
     ],

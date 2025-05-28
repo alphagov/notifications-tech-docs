@@ -603,7 +603,7 @@ end
 
 ##### postage (optional)
 
-You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
+You can choose first class, second class or economy mail postage for your precompiled letter. Set the value to `first` for first class, `second` for second class or `economy` for economy mail. If you do not pass in this argument, the postage will default to second class.
 
 
 #### Response
@@ -629,7 +629,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |`400`|`BadRequestError: Letter content is not a valid PDF`|`BadRequestError`|PDF file format is required|
 |`400`|`BadRequestError: Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
 |`400`|`ValidationError: reference is a required property`|`BadRequestError`|Add a `reference` argument to the method call|
-|`400`|`ValidationError: postage invalid. It must be either first or second.`|`BadRequestError`|Change the value of `postage` argument in the method call to either 'first' or 'second'|
+|`400`|`ValidationError: postage invalid. It must be either first, second or economy.`|`BadRequestError`|Change the value of `postage` argument in the method call to either 'first', 'second' or 'economy'|
 |`429`|`RateLimitError: Exceeded rate limit for key type live of 10 requests per 20 seconds`|`RateLimitError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 |`429`|`TooManyRequestsError: Exceeded send limits (letter: 50) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit size|
 

@@ -656,7 +656,7 @@ with open("path/to/pdf_file.pdf", "rb") as pdf_file:
 
 ##### postage (optional)
 
-You can choose first or second class postage for your precompiled letter. Set the value to `first` for first class, or `second` for second class. If you do not pass in this argument, the postage will default to second class.
+You can choose first class, second class or economy mail postage for your precompiled letter. Set the value to `first` for first class, `second` for second class or `economy` for economy mail. If you do not pass in this argument, the postage will default to second class.
 
 ```python
 postage="first" # optional string
@@ -721,7 +721,7 @@ If the request to the client is successful, the client will return a `dict`:
     "line_5": "SW14 6BF",  # optional string for letter
     "line_6": None,  # optional string for letter
     "line_7": None, # optional string for letter
-    "postage": "first / second / europe / rest-of-world", # required string for letter
+    "postage": "first / second / economy / europe / rest-of-world", # required string for letter
     "type": "sms / letter / email",  # required string
     "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  # required string
     "template": {
@@ -746,7 +746,7 @@ If the request to the client is successful, the client will return a `dict`:
         "sms_rate": 0.0027,  # optional number - cost of 1 sms fragment
         # for letters:
         "billable_sheets_of_paper": 2,  # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
-        "postage": "first / second / europe / rest-of-world"  # optional string
+        "postage": "first / second / economy / europe / rest-of-world"  # optional string
     }
 }
 ```
@@ -888,7 +888,7 @@ If the request to the client is successful, the client returns a `dict`.
             "line_5": "SW14 6BF",  # optional string for letter
             "line_6": None,  # optional string for letter
             "line_7": None, # optional string for letter
-            "postage": "first / second / europe / rest-of-world", # required string for letter
+            "postage": "first / second / economy / europe / rest-of-world", # required string for letter
             "type": "sms / letter / email",  # required string
             "status": "sending / delivered / permanent-failure / temporary-failure / technical-failure",  # required string
             "template": {
@@ -913,7 +913,7 @@ If the request to the client is successful, the client returns a `dict`.
                 "sms_rate": 0.0027,  # optional number - cost of 1 sms fragment
                 # for letters:
                 "billable_sheets_of_paper": 2,  # optional integer - number of sheets of paper in the letter you sent, that you will be charged for
-                "postage": "first / second / europe / rest-of-world"  # optional string
+                "postage": "first / second / economy / europe / rest-of-world"  # optional string
             }
         },
         {
