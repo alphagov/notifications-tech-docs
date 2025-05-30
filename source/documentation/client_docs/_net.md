@@ -444,7 +444,9 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents)}
+    { "link_to_file", NotificationClient.PrepareUpload(
+        documentContents: documentContents)
+    }
 };
 ```
 
@@ -472,7 +474,10 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents, filename = "2023-12-25-daily-report.csv")}
+    { "link_to_file", NotificationClient.PrepareUpload(
+        documentContents: documentContents, 
+        filename: "2023-12-25-daily-report.csv")
+    }
 };
 ```
 
@@ -504,7 +509,10 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents, false)}
+    { "link_to_file", NotificationClient.PrepareUpload(
+        documentContents: documentContents, 
+        confirmEmailBeforeDownload: false)
+    }
 };
 ```
 
@@ -530,7 +538,11 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents, true, "52 weeks")}
+    { "link_to_file", NotificationClient.PrepareUpload(
+        documentContents: documentContents, 
+        confirmEmailBeforeDownload: true, 
+        retentionPeriod: "52 weeks")
+    }
 };
 ```
 
@@ -1027,7 +1039,7 @@ This returns the latest version of the template.
 
 ```csharp
 TemplateResponse response = client.GetTemplateById(
-    "f33517ff-2a88-4f6e-b855-c550268ce08a"
+    templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a"
 );
 ```
 
@@ -1077,8 +1089,8 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 
 ```csharp
 TemplateResponse response = client.GetTemplateByIdAndVersion(
-    "templateId",
-    1   // integer required for version number
+    templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a",
+    version: 1   // integer required for version number
 );
 ```
 
@@ -1133,7 +1145,7 @@ This returns the latest version of all templates.
 
 ```csharp
 TemplateList response = client.GetAllTemplates(
-    "sms" | "email" | "letter" // optional
+    templateType: "sms" | "email" | "letter" // optional
 );
 ```
 
