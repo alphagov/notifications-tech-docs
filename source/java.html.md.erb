@@ -735,14 +735,11 @@ Optional<String> postageType;
 
 #### Error codes
 
-If the request is not successful, the client returns a `NotificationClientException` containing the relevant error code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|httpResult|Message|How to fix|
-|:---|:---|:---|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|Check the notification ID|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|Check the notification ID|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/get_the_status_of_one_message' %>
 
 
 ### Get the status of multiple messages
@@ -819,14 +816,11 @@ Optional<String> nextPageLink;
 
 #### Error codes
 
-If the request is not successful, the client returns a `NotificationClientException` containing the relevant error code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|httpResult|Message|How to fix|
-|:---|:---|:---|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, sent, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure, accepted, received]"`<br>`}]`|[Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support)|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Applet is not one of [sms, email, letter]"`<br>`}]`|[Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support)|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/get_the_status_of_multiple_messages' %>
 
 ### Email status descriptions
 
@@ -900,18 +894,11 @@ If the request to the client is successful, the client will return a `byte[]` ob
 
 #### Error codes
 
-If the request is not successful, the client returns a `NotificationClientException` containing the relevant error code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|error.status_code|error.message|How to fix|
-|:---|:---|:---|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|Check the notification ID|
-|`400`|`[{`<br>`"error": "PDFNotReadyError",`<br>`"message": "PDF not available yet, try again later"`<br>`}]`|Wait for the notification to finish processing. This usually takes a few seconds|
-|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "File did not pass the virus scan"`<br>`}]`|You cannot retrieve the contents of a letter notification that contains a virus|
-|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "PDF not available for letters in technical-failure"`<br>`}]`|You cannot retrieve the contents of a letter notification in technical-failure|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Notification is not a letter"`<br>`}]`|Check that you are looking up the correct notification|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|Check the notification ID|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/get_a_pdf_for_a_letter_notification' %>
 
 
 ## Get a template
@@ -956,13 +943,11 @@ Optional<String> letterContactBlock;
 
 #### Error codes
 
-If the request is not successful, the client returns a `NotificationClientException` containing the relevant error code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|httpResult|Message|How to fix|
-|:---|:---|:---|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-arguments-templateid-required)|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/get_a_template_by_id' %>
 
 
 ### Get a template by ID and version
@@ -1007,14 +992,11 @@ Optional<String> letterContactBlock;
 
 #### Error codes
 
-If the request is not successful, the client returns a `NotificationClientException` containing the relevant error code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|httpResult|message|How to fix|
-|:---|:---|:---|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|Check the notification ID|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|Check your [template ID](#get-a-template-by-id-and-version-arguments-templateid-required) and [version](#version-required)|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/get_a_template_by_id_and_version' %>
 
 
 ### Get all templates
@@ -1098,14 +1080,11 @@ Optional<String> html;
 
 #### Error codes
 
-If the request is not successful, the client returns a `NotificationClientException` containing the relevant error code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|httpResult|message|How to fix|
-|:---|:---|:---|
-|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Missing personalisation: [PERSONALISATION FIELD]"`<br>`}]`|Check that the personalisation arguments in the method match the placeholder fields in the template|
-|`400`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|Check the [template ID](#generate-a-preview-template-arguments-templateid-required)|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/generate_a_preview_template' %>
 
 
 ## Get received text messages
@@ -1170,12 +1149,9 @@ If the notification specified in the `olderThanId` argument is older than 7 days
 
 #### Error codes
 
-If the request is not successful, the client returns a `NotificationClientException` containing the relevant error code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|httpResult|Message|How to fix|
-|:---|:---|:---|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
-|`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
+<%= partial 'documentation/error_tables/get_a_page_of_received_text_messages' %>
 
 ## Errors
 
