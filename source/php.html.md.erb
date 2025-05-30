@@ -1320,6 +1320,49 @@ If the request is not successful, the client returns an `Alphagov\Notifications\
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information.|
 
 
+## Errors
+
+### Error handling
+
+If the request is not successful, the client raises an `Alphagov\Notifications\Exception\ApiException` object.
+
+This error consists of:
+
+- a status code, for example `400`
+- an error type, for example `BadRequestError`
+- a message, for example `Mobile numbers can only include: 0 1 2 3 4 5 6 7 8 9 ( ) + -`
+
+To access these details about the error, read its `$e->getCode()` and `$e->getErrors()` fields, for example:
+
+```php
+try {
+    $response = $notifyClient->sendSms('+447700900123', 'bb323ab6-a6ca-4d38-9450-09cd5b782cc5');
+} catch (Exception $e){
+    if ($e->getCode() >= 500) { // using status code for error handling
+        // Retry logic goes here
+    } else {
+        print_r($e->getErrors(), $return = false); // accessing error details to debug
+    };
+};
+```
+
+Error's `$e->getErrors()` field is a `Array` of arrays, for example:
+
+```php
+Array
+(
+    [0] => Array
+        (
+            [error] => BadRequestError
+            [message] => Template not found
+        )
+
+)
+```
+
+<%= partial 'documentation/error_tables/generic_errors' %>
+
+
 <%= partial 'documentation/testing' %>
 <%= partial 'documentation/api_keys' %>
 <%= partial 'documentation/limits' %>
