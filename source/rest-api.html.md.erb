@@ -2,9 +2,79 @@
 title: REST API documentation
 parent: https://www.notifications.service.gov.uk/documentation
 ---
+# REST API documentation
 
-<%= partial 'documentation/api_docs' %>
-<%= partial 'documentation/error_messages' %>
+This documentation is for developers interested in using the GOV.UK Notify API to send emails, text messages or letters.
+
+You can use it to integrate directly with the API if you cannot use one of our 6 client libraries.
+
+Developers can also use [our OpenAPI file](https://github.com/alphagov/notifications-tech-docs/blob/main/openapi/publicapi_spec.json) with tools such as [Swagger](https://swagger.io/) and [Redoc](https://github.com/Redocly/redoc) to assist with using the REST API.  You cannot use Swagger Editor to make test API requests.
+
+## Making a request
+
+### Base URL
+```
+https://api.notifications.service.gov.uk
+```
+
+### Headers
+
+#### Authorisation header
+
+The authorisation header is an [API key](#api-keys) that is encoded using [JSON Web Tokens](https://jwt.io/). You must include an authorisation header.
+
+JSON Web Tokens have a standard header and a payload. The header consists of:
+
+```javascript
+{
+  "typ": "JWT",
+  "alg": "HS256"
+}
+```
+
+The payload consists of:
+
+```javascript
+{
+  "iss": "26785a09-ab16-4eb0-8407-a37497a57506",
+  "iat": 1568818578
+}
+```
+
+JSON Web Tokens are encoded using a secret key with the following format:
+
+```
+3d844edf-8d35-48ac-975b-e847b4f122b0
+```
+
+That secret key forms a part of your [API key](#api-keys), which follows the format `{key_name}-{iss-uuid}-{secret-key-uuid}`.
+
+For example, if your API key is
+`my_test_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0`:
+
+* your API key name is `my_test_key`
+* your iss (your service id) is `26785a09-ab16-4eb0-8407-a37497a57506`
+* your secret key is `3d844edf-8d35-48ac-975b-e847b4f122b0`
+
+`iat` (issued at) is the current time in UTC in epoch seconds. The token expires within 30 seconds of the current time.
+
+Refer to the [JSON Web Tokens website](https://jwt.io/) for more information on encoding your authorisation header.
+
+When you have an encoded and signed token, add that token to a header as follows:
+
+```javascript
+"Authorization": "Bearer encoded_jwt_token"
+```
+
+#### Content header
+
+The content header is `application/json`:
+
+```javascript
+"Content-type": "application/json"
+```
+
+
 <%= partial 'documentation/testing' %>
 <%= partial 'documentation/api_keys' %>
 <%= partial 'documentation/limits' %>
