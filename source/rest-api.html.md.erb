@@ -1338,6 +1338,31 @@ If the request is not successful, the API returns `json` containing the relevant
 <%= partial 'documentation/error_tables/get_a_page_of_received_text_messages' %>
 
 
+## Errors
+
+### Error handling
+
+If the request is not successful, the API returns `json` containing:
+
+- a status code, for example `403`
+- an error type, for example `AuthError`
+- a message, for example `Invalid token: service not found`
+
+For example:
+
+```json
+{
+    "errors": [
+        {
+            "error": "AuthError",
+            "message": "Invalid token: service not found"
+        }
+    ],
+    "status_code": 403
+}
+```
+
+<%= partial 'documentation/error_tables/generic_errors' %>
 <%= partial 'documentation/testing' %>
 <%= partial 'documentation/api_keys' %>
 <%= partial 'documentation/limits' %>
