@@ -6,20 +6,32 @@ This documentation is for developers interested in using the GOV.UK Notify Ruby 
 
 ### Install the client
 
-Run the following in the command line:
+#### Using Bundler (recommended)
 
+Add `notifications-ruby-client` to your application's `Gemfile`, for example:
+
+```ruby
+gem "notifications-ruby-client"
 ```
-gem install 'notifications-ruby-client'
-```
+
+Then run `bundle install` from your project's directory.
 
 Refer to the [client changelog](https://github.com/alphagov/notifications-ruby-client/blob/main/CHANGELOG.md) for the version number and the latest updates.
+
+#### Installing globally
+
+Run the following from the command line:
+
+```sh
+gem install notifications-ruby-client
+```
 
 ### Create a new instance of the client
 
 Add this code to your application:
 
 ```ruby
-require 'notifications/client'
+require "notifications/client"
 client = Notifications::Client.new(api_key)
 ```
 
@@ -47,7 +59,7 @@ smsresponse = client.send_sms(
 The phone number of the text message recipient. This can be a UK or international number. For example:
 
 ```ruby
-phone_number:"+447900900123"
+phone_number: "+447900900123"
 ```
 
 ##### template_id (required)
@@ -61,7 +73,7 @@ To find the template ID:
 For example:
 
 ```ruby
-template_id:"f33517ff-2a88-4f6e-b855-c550268ce08a"
+template_id: "f33517ff-2a88-4f6e-b855-c550268ce08a"
 ```
 
 ##### personalisation (optional)
@@ -240,7 +252,7 @@ To add a reply-to email address:
 For example:
 
 ```ruby
-email_reply_to_id: '8e222534-7f05-4972-86e3-17c5d9f894e2'
+email_reply_to_id: "8e222534-7f05-4972-86e3-17c5d9f894e2"
 ```
 
 #### Reducing the risk of malicious content injection in placeholders
@@ -282,6 +294,34 @@ The characters of most concern are those that could be used to add a URL link su
 
 
 You can leave out this argument if your service only has one email reply-to address, or you want to use the default email address.
+
+#### Response
+
+If the request to the client is successful, the client returns a `Notifications::Client:ResponseNotification` object. In the example shown in the [Method section](#send-an-email-method), the object is named `emailresponse`.
+
+You can then call different methods on this object to return the requested information.
+
+|Method|Information|Type|
+|:---|:---|:---|
+|#`emailresponse.id`|Notification UUID|String|
+|#`emailresponse.reference`|`reference` argument|String|
+|#`emailresponse.content`|- `body`: Message body<br>- `subject`: Message subject<br>- `from_email`: From email address of your service found on the **Settings** page|Hash|
+|#`emailresponse.template`|Contains the `id`, `version` and `uri` of the template|Hash|
+|#`emailresponse.uri`|Notification URL|String|
+
+#### Error codes
+
+If the request is not successful, the client raises a `Notifications::Client::RequestError` exception (or a subclass), which contains a code:
+
+|error.code|error.message|class|How to fix|
+|:--- |:---|:---|:---|
+|`400`|`BadRequestError: Can't send to this recipient using a team-only API key`|`BadRequestError`|Use the correct type of [API key](#api-keys)|
+|`400`|`BadRequestError: Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
+|`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock|
+|`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
+|`429`|`RateLimitError: Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds`|`RateLimitError`|Refer to [API rate limits](#rate-limits) for more information|
+|`429`|`TooManyRequestsError: Exceeded send limits (LIMIT NUMBER) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit number|
+|`500`|`Exception: Internal server error`|`ServerError`|Notify was unable to process the request, resend your notification|
 
 ### Send a file by email
 
@@ -364,7 +404,7 @@ File.open("file.csv", "rb") do |f|
     personalisation: {
       first_name: "Amala",
       application_date: "2018-01-01",
-      link_to_file: Notifications.prepare_upload(f, filename="2023-12-25-daily-report.csv"),
+      link_to_file: Notifications.prepare_upload(f, filename: "2023-12-25-daily-report.csv"),
     }
 end
 ```
@@ -423,7 +463,7 @@ File.open("file.pdf", "rb") do |f|
     personalisation: {
       first_name: "Amala",
       application_date: "2018-01-01",
-      link_to_file: Notifications.prepare_upload(f, retention_period: '52 weeks'),
+      link_to_file: Notifications.prepare_upload(f, retention_period: "52 weeks"),
     }
 end
 ```
@@ -481,9 +521,9 @@ To send Notify a request to go live:
 letterresponse = client.send_letter(
   template_id: "f33517ff-2a88-4f6e-b855-c550268ce08a",
   personalisation: {
-    address_line_1: 'The Occupier',
-    address_line_2: '123 High Street',
-    address_line_3: 'SW14 6BH',
+    address_line_1: "The Occupier",
+    address_line_2: "123 High Street",
+    address_line_3: "SW14 6BH",
   },
 )
 ```
@@ -529,11 +569,11 @@ Any other placeholder fields included in the letter template also count as requi
 
 ```ruby
 personalisation: {
-  address_line_1: 'The Occupier',  # mandatory address field
-  address_line_2: '123 High Street', # mandatory address field
-  address_line_3: 'SW14 6BH',  # mandatory address field
-  name: 'John Smith', # field from template
-  application_date: '2018-01-01' # field from template,
+  address_line_1: "The Occupier",  # mandatory address field
+  address_line_2: "123 High Street", # mandatory address field
+  address_line_3: "SW14 6BH",  # mandatory address field
+  name: "John Smith", # field from template
+  application_date: "2018-01-01" # field from template,
   # pass in an array and it will appear as bullet points in the letter:
   required_documents: ["passport", "utility bill", "other id"],
 },
@@ -544,7 +584,7 @@ personalisation: {
 A unique identifier you can create if necessary. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```ruby
-reference: 'your_reference_string'
+reference: "your_reference_string"
 ```
 
 #### Response
@@ -582,6 +622,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 ### Send a precompiled letter
 
 #### Method
+
 ```ruby
 precompiled_letter = client.send_precompiled_letter(reference, pdf_file)
 ```
@@ -589,6 +630,7 @@ precompiled_letter = client.send_precompiled_letter(reference, pdf_file)
 #### Arguments
 
 ##### reference (required)
+
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address.
 
 ##### pdf_file (required)
@@ -605,6 +647,11 @@ end
 
 You can choose first class, second class or economy mail postage for your precompiled letter. Set the value to `first` for first class, `second` for second class or `economy` for economy mail. If you do not pass in this argument, the postage will default to second class.
 
+```ruby
+precompiled_letter = client.send_precompiled_letter(
+  reference, pdf_file, "first"
+)
+```
 
 #### Response
 
@@ -713,13 +760,12 @@ You can only get messages that are within your data retention period. The defaul
 #### Method
 
 ```ruby
-args = {
-  template_type: 'sms',
-  status: 'failed',
-  reference: 'your_reference_string'
-  older_than: 'e194efd1-c34d-49c9-9915-e4267e01e92e'
-}
-response = client.get_notifications(args)
+response = client.get_notifications(
+  template_type: "sms",
+  status: "failed",
+  reference: "your_reference_string",
+  older_than: "e194efd1-c34d-49c9-9915-e4267e01e92e",
+)
 ```
 
 You can leave out the `older_than` argument to get the 250 most recent messages.
@@ -732,12 +778,24 @@ You can leave out these arguments to ignore these filters.
 
 ##### status (optional)
 
-You can filter by each:
+The possible statuses that a notification can be in depends on the type of notification:
 
 * [email status](#email-status-descriptions)
 * [text message status](#text-message-status-descriptions)
 * [letter status](#letter-status-descriptions)
 * [precompiled letter status](#precompiled-letter-status-descriptions)
+
+You can specify a single status:
+
+```ruby
+status: "failed"
+```
+
+Or multiple, by specifying an array:
+
+```ruby
+status: ["permanent-failure", "temporary-failure"]
+```
 
 You can leave out this argument to ignore this filter.
 
@@ -754,7 +812,7 @@ You can filter by:
 A unique identifier you can create if necessary. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```ruby
-reference: 'your_reference_string'
+reference: "your_reference_string"
 ```
 
 ##### older_than (optional)
@@ -762,7 +820,7 @@ reference: 'your_reference_string'
 Input the ID of a notification into this argument. If you use this argument, the client returns the next 250 received notifications older than the given ID. For example:
 
 ```ruby
-older_than: 'e194efd1-c34d-49c9-9915-e4267e01e92e'
+older_than: "e194efd1-c34d-49c9-9915-e4267e01e92e"
 ```
 
 If you leave out this argument, the client returns the most recent 250 notifications.
@@ -883,7 +941,7 @@ This returns the pdf contents of a letter notification.
 
 ```ruby
 pdf_file = client.get_pdf_for_letter(
-  'f33517ff-2a88-4f6e-b855-c550268ce08a' # notification id (required)
+  "f33517ff-2a88-4f6e-b855-c550268ce08a" # notification id (required)
 )
 ```
 
@@ -935,7 +993,7 @@ response = client.get_template_by_id(id)
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
 
 ```
-'f33517ff-2a88-4f6e-b855-c550268ce08a'
+"f33517ff-2a88-4f6e-b855-c550268ce08a"
 ```
 
 #### Response
@@ -983,7 +1041,7 @@ response = client.get_template_version(id, version)
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
 
 ```ruby
-'f33517ff-2a88-4f6e-b855-c550268ce08a'
+"f33517ff-2a88-4f6e-b855-c550268ce08a"
 ```
 
 ##### version (required)
@@ -1027,10 +1085,7 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 This returns the latest version of all templates inside a collection object.
 
 ```ruby
-args = {
-  type: 'sms'
-}
-response = client.get_all_templates(args)
+response = client.get_all_templates(type: "sms")
 ```
 
 #### Arguments
@@ -1093,7 +1148,7 @@ The parameters in the personalisation argument must match the placeholder fields
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it. For example:
 
 ```ruby
-'f33517ff-2a88-4f6e-b855-c550268ce08a'
+"f33517ff-2a88-4f6e-b855-c550268ce08a"
 ```
 
 ##### personalisation (optional)
@@ -1155,10 +1210,9 @@ To receive text messages:
 #### Method
 
 ```ruby
-args = {
-  older_than: 'e194efd1-c34d-49c9-9915-e4267e01e92e'
-}
-response = client.get_received_texts(args)
+response = client.get_received_texts(
+  older_than: "e194efd1-c34d-49c9-9915-e4267e01e92e",
+)
 ```
 
 To get older messages, pass the ID of an older notification into the `older_than` argument. This returns the next oldest messages from the specified notification ID.
@@ -1172,7 +1226,7 @@ If you leave out the `older_than` argument, the client returns the most recent 2
 Input the ID of a received text message into this argument. If you use this argument, the client returns the next 250 received text messages older than the given ID. For example:
 
 ```ruby
-older_than: '8e222534-7f05-4972-86e3-17c5d9f894e2'
+older_than: "8e222534-7f05-4972-86e3-17c5d9f894e2"
 ```
 
 If you leave out the `older_than` argument, the client returns the most recent 250 notifications.
