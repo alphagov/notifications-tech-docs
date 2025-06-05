@@ -1271,8 +1271,48 @@ If the request is not successful, the client raises a `Notifications::Client::Re
 |`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock|
 |`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 
+## Errors
 
-<%= partial 'documentation/error_messages' %>
+### Error handling
+
+If the request is not successful, the client raises a `Notifications::Client::RequestError` exception (or a subclass).
+
+This error consists of:
+
+- a status code, for example `400`
+- an error class, for example `BadRequestError`
+- a message, for example `Mobile numbers can only include: 0 1 2 3 4 5 6 7 8 9 ( ) + -`
+
+To access these details about the error, read its `error.code`, `error.class`, and `error.message` fields, for example:
+
+```ruby
+require_relative "lib/notifications/client/request_error"
+
+begin
+  response = client.send_sms(
+    phone_number: "+447700900123",
+    template_id: "f33517ff-2a88-4f6e-b855-c550268ce08a",
+  )
+rescue Notifications::Client::RequestError => e
+  if (500..599).include? e.code  # using status code for error handling
+    # retry logic goes here
+  else
+    puts e.message  # accessing error details to debug
+  end
+else
+    # unexpected error, raise!
+end
+
+```
+
+Error's `message` field is a string, for example:
+
+```ruby
+"BadRequestError: Template not found"
+```
+
+<%= partial 'documentation/error_tables/generic_errors' %>
+
 <%= partial 'documentation/testing' %>
 <%= partial 'documentation/api_keys' %>
 <%= partial 'documentation/limits' %>
