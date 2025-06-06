@@ -148,17 +148,11 @@ All messages sent using the [team and guest list](#team-and-guest-list) or [live
 
 #### Error codes
 
-If the request is not successful, the client raises a `Notifications::Client::RequestError` exception (or a subclass), which contains a code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|error.code|error.message|class|How to fix|
-|:---|:---|:---|:---|
-|`400`|`BadRequestError: Can't send to this recipient using a team-only API key`|`BadRequestError`|Use the correct type of [API key](#api-keys)|
-|`400`|`BadRequestError: Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
-|`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock|
-|`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`429`|`RateLimitError: Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds`|`RateLimitError`|Refer to [API rate limits](#rate-limits) for more information|
-|`429`|`TooManyRequestsError: Exceeded send limits (<sms/email/letter/international_sms>: <LIMIT SIZE>) for today`|`ClientError`|Refer to [service limits](#daily-limits) for the limit size|
-|`500`|`Exception: Internal server error`|`ServerError`|Notify was unable to process the request, resend your notification|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/send_a_text_message' %>
 
 ### Send an email
 
@@ -316,17 +310,11 @@ You can then call different methods on this object to return the requested infor
 
 #### Error codes
 
-If the request is not successful, the client raises a `Notifications::Client::RequestError` exception (or a subclass), which contains a code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|error.code|error.message|class|How to fix|
-|:--- |:---|:---|:---|
-|`400`|`BadRequestError: Can't send to this recipient using a team-only API key`|`BadRequestError`|Use the correct type of [API key](#api-keys)|
-|`400`|`BadRequestError: Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
-|`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock|
-|`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`429`|`RateLimitError: Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds`|`RateLimitError`|Refer to [API rate limits](#rate-limits) for more information|
-|`429`|`TooManyRequestsError: Exceeded send limits (LIMIT NUMBER) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit number|
-|`500`|`Exception: Internal server error`|`ServerError`|Notify was unable to process the request, resend your notification|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/send_an_email' %>
 
 ### Send a file by email
 
@@ -489,26 +477,11 @@ You can then call different methods on this object to return the requested infor
 
 #### Error codes
 
-If the request is not successful, the client raises a `Notifications::Client::RequestError` exception (or a subclass), which contains a code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|error.code|error.message|class|How to fix|
-|:--- |:---|:---|:---|
-|`400`|`BadRequestError: Can't send to this recipient using a team-only API key`|`BadRequestError`|Use the correct type of [API key](#api-keys)|
-|`400`|`BadRequestError: Can't send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
-|`400`|`BadRequestError: Unsupported file type '(FILE TYPE)'. Supported types are: '(ALLOWED TYPES)'`|`BadRequestError`|Wrong file type. You can only upload .csv, .doc, .docx, .jpeg, .jpg, .odt, .pdf, .png, .rtf, .txt or .xlsx files|
-|`400`|```BadRequestError: `filename` cannot be longer than 100 characters"```|`BadRequestError`|Choose a shorter filename|
-|`400`|```BadRequestError: `filename` must end with a file extension. For example, filename.csv"```|`BadRequestError`|Include the file extension in your filename|
-|`400`|`BadRequestError: Unsupported value for retention_period '(PERIOD)'. Supported periods are from 1 to 78 weeks.`|`BadRequestError`|Choose a period between 1 and 78 weeks|
-|`400`|`BadRequestError: Unsupported value for confirm_email_before_download: '(VALUE)'. Use a boolean true or false value.`|`BadRequestError`|Use either true or false|
-|`400`|`BadRequestError: File did not pass the virus scan`|`BadRequestError`|The file contains a virus|
-|`400`|`BadRequestError: Send files by email has not been set up - add contact details for your service at https://www.notifications.service.gov.uk/services/(SERVICE ID)/service-settings/send-files-by-email`|`BadRequestError`|See how to [add contact details to the file download page](#add-contact-details-to-the-file-download-page)|
-|`400`|`BadRequestError: Can only send a file by email` | `BadRequestError`|Make sure you are using an email template|
-|`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock|
-|`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`429`|`RateLimitError: Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds`|`RateLimitError`|Refer to [API rate limits](#rate-limits) for more information|
-|`429`|`TooManyRequestsError: Exceeded send limits (<sms/email/letter/international_sms>: <LIMIT SIZE>) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit size|
-|`500`|`Exception: Internal server error`|`ServerError`|Notify was unable to process the request, resend your notification|
-|-|`ArgumentError: File is larger than 2MB")`|-|The file is too big. Files must be smaller than 2MB|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/send_a_file_by_email' %>
 
 ### Send a letter
 
@@ -609,20 +582,11 @@ You can then call different methods on this object to return the requested infor
 
 #### Error codes
 
-If the request is not successful, the client raises a `Notifications::Client::RequestError` exception (or a subclass), which contains a code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|error.code|error.message|class|How to fix|
-|:--- |:---|:---|:---|
-|`403`|`BadRequestError: Cannot send letters with a team api key`|`BadRequestError`|Use the correct type of [API key](#api-keys).|
-|`400`|`BadRequestError: Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode).|
-|`400`|`ValidationError: personalisation address_line_1 is a required property`|`BadRequestError`|Ensure that your template has a field for the first line of the address, refer to [personalisation](#personalisation-required) for more information.|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Must be a real UK postcode"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode.|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Last line of address must be a real UK postcode or another country"`<br>`}]`|Ensure that the value for the last line of the address is a real UK postcode or the name of a country outside the UK.|
-|`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock.|
-|`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information.|
-|`429`|`RateLimitError: Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds`|`RateLimitError`|Refer to [API rate limits](#rate-limits) for more information.|
-|`429`|`TooManyRequestsError: Exceeded send limits (<sms/email/letter/international_sms>: <LIMIT SIZE>) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit size.|
-|`500`|`Exception: Internal server error`|`ServerError`|Notify was unable to process the request, resend your notification.|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/send_a_letter' %>
 
 ### Send a precompiled letter
 
@@ -673,17 +637,11 @@ You can then call different methods on this object to return the requested infor
 
 #### Error codes
 
-If the request is not successful, the client raises a `Notifications::Client::RequestError` exception (or a subclass), which contains a code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|error.status_code|error.message|class|How to fix|
-|:---|:---|:---|:---|
-|`403`|`BadRequestError: Cannot send letters with a team api key`|`BadRequestError`|Use the correct type of [API key](#api-keys)|
-|`400`|`BadRequestError: Letter content is not a valid PDF`|`BadRequestError`|PDF file format is required|
-|`400`|`BadRequestError: Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode`|`BadRequestError`|Your service cannot send this notification in [trial mode](https://www.notifications.service.gov.uk/using-notify/trial-mode)|
-|`400`|`ValidationError: reference is a required property`|`BadRequestError`|Add a `reference` argument to the method call|
-|`400`|`ValidationError: postage invalid. It must be either first, second or economy.`|`BadRequestError`|Change the value of `postage` argument in the method call to either 'first', 'second' or 'economy'|
-|`429`|`RateLimitError: Exceeded rate limit for key type live of 10 requests per 20 seconds`|`RateLimitError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
-|`429`|`TooManyRequestsError: Exceeded send limits (letter: 50) for today`|`RateLimitError`|Refer to [service limits](#daily-limits) for the limit size|
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/send_a_precompiled_letter' %>
 
 ## Get message status
 
