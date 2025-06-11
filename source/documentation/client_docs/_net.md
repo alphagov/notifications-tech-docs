@@ -16,15 +16,6 @@ The GOV.UK Notify client can be installed from [Nuget.org](https://www.nuget.org
 
 You can install the GOV.UK Notify client package using either the command line or Microsoft Visual Studio.
 
-<div class="govuk-warning-text">
-  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-  <strong class="govuk-warning-text__text">
-    <span class="govuk-warning-text__assistive">Warning</span>
-      If you need a version of our API client older than 4.0.0, you should download it from
-      <a href="https://github.com/alphagov/notifications-net-client/releases">Github</a> [external link]
-  </strong>
-</div>
-
 #### Use the dotnet command line interface
 
 Go to your project directory and run the following in the command line to install the client package:
