@@ -9,17 +9,16 @@ You may encounter following errors when making requests to a number of Notify's 
 Error message | How to fix
 ---|---
 **BadRequestError (status code 400)**|
-`Cannot send to this recipient using a team-only API key.`|Use a live API key, or add recipient to `Guest list` (located in API Integration section)|
-`Cannot send to this recipient when service is in trial mode – see https://www.notifications.service.gov.uk/trial-mode`|You need to request for your service to go live before you can send messages to people outside your team.|
-**BadRequestError (status code 403)**|
-`Error: Your system clock must be accurate to within 30 seconds`|Check your system clock|
-`Invalid token: API key not found`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
+`BadRequestError: Cannot send to this recipient using a team-only API key.`|Use a live API key, or add recipient to `Guest list` (located in API Integration section)|
+`BadRequestError: Cannot send to this recipient when service is in trial mode – see https://www.notifications.service.gov.uk/trial-mode`|You need to request for your service to go live before you can send messages to people outside your team.|
+**AuthError (status code 403)**|
+`BadRequestError: Error: Your system clock must be accurate to within 30 seconds`|Check your system clock|
+`BadRequestError: Invalid token: API key not found`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 **RateLimitError (status code 429)**|
-`Exceeded rate limit for key type <team/test/live> of 3000/<custom limit> requests per 60 seconds`|Refer to [API rate limits](#rate-limits) for more information|
-**TooManyRequestsError (status code 429)**|
-`Exceeded send limits (<sms/email/letter/international_sms>: <LIMIT SIZE>) for today`|Refer to [service limits](#daily-limits) for the limit size|
-**Exception (status code 500)**|
-`Internal server error`|Notify was unable to process the request, resend your notification.|
+`RateLimitError: Exceeded rate limit for key type <team/test/live> of 3000/<custom limit> requests per 60 seconds`|Refer to [API rate limits](#rate-limits) for more information|
+`TooManyRequestsError: Exceeded send limits (<sms/email/letter/international_sms>: <LIMIT SIZE>) for today`|Refer to [service limits](#daily-limits) for the limit size|
+**ServerError (status code 500)**|
+`Exception: Internal server error`|Notify was unable to process the request, resend your notification.|
 
 In addition to the above, you may also encounter:
 

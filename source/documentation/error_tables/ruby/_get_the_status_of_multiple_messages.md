@@ -1,6 +1,6 @@
-**ValidationError (status code 400)**|
-`status ‘elephant’ is not one of [cancelled, created, sending, sent, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure, pending-virus-check, validation-failed, virus-scan-failed, returned-letter, accepted, received]`|Change the [status argument](#status-optional).|
-`‘Apple’ is not one of [sms, email, letter]`|Change the [template_type argument](#template-type-optional).|
+**BadRequestError (status code 400)**|
+`ValidationError: status ‘elephant’ is not one of [cancelled, created, sending, sent, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure, pending-virus-check, validation-failed, virus-scan-failed, returned-letter, accepted, received]`|Change the [status argument](#status-optional).|
+`ValidationError: ‘Apple’ is not one of [sms, email, letter]`|Change the [template_type argument](#template-type-optional).|
 
 In addition to the above, you may also encounter:
 

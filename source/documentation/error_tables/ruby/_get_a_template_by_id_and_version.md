@@ -1,5 +1,5 @@
-**NoResultFound (status code 404)**|
-`No Result Found`|Check your [template ID](#get-a-template-by-id-arguments-template-id-required).|
+**NotFoundError (status code 404)**|
+`NoResultFound: No Result Found`|Check your [template ID](#get-a-template-by-id-arguments-template-id-required).|
 
 In addition to the above, you may also encounter:
 

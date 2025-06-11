@@ -1,7 +1,7 @@
-**ValidationError&nbsp;(status&nbsp;code&nbsp;400)**|
-`id is not a valid UUID`|Check the notification ID.|
-**NoResultFound&nbsp;(status&nbsp;code&nbsp;404)**|
-`No result found`| If it's outside the retention period, you may no longer get the status of the message. The default retention period is 7 days.|
+**BadRequestError&nbsp;(status&nbsp;code&nbsp;400)**|
+`ValidationError: id is not a valid UUID`|Check the notification ID.|
+**NotFoundError&nbsp;(status&nbsp;code&nbsp;404)**|
+`NoResultFound: No result found`| If it's outside the retention period, you may no longer get the status of the message. The default retention period is 7 days.|
 
 In addition to the above, you may also encounter:
 

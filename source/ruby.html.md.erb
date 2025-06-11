@@ -840,7 +840,7 @@ If the request is not successful, the client returns an error. To learn more abo
 
 |Error message|How to fix|
 |:---|:---|
-<%= partial 'documentation/error_tables/get_the_status_of_multiple_messages' %>
+<%= partial 'documentation/error_tables/ruby/get_the_status_of_multiple_messages' %>
 
 ### Email status descriptions
 
@@ -921,7 +921,7 @@ If the request is not successful, the client returns an error. To learn more abo
 
 |Error message|How to fix|
 |:---|:---|
-<%= partial 'documentation/error_tables/get_a_pdf_for_a_letter_notification' %>
+<%= partial 'documentation/error_tables/ruby/get_a_pdf_for_a_letter_notification' %>
 
 
 ## Get a template
@@ -971,7 +971,7 @@ If the request is not successful, the client returns an error. To learn more abo
 
 |Error message|How to fix|
 |:---|:---|
-<%= partial 'documentation/error_tables/get_a_template_by_id' %>
+<%= partial 'documentation/error_tables/ruby/get_a_template_by_id' %>
 
 ### Get a template by ID and version
 
@@ -1020,7 +1020,7 @@ If the request is not successful, the client returns an error. To learn more abo
 
 |Error message|How to fix|
 |:---|:---|
-<%= partial 'documentation/error_tables/get_a_template_by_id_and_version' %>
+<%= partial 'documentation/error_tables/ruby/get_a_template_by_id_and_version' %>
 
 ### Get all templates
 
@@ -1129,7 +1129,7 @@ If the request is not successful, the client returns an error. To learn more abo
 
 |Error message|How to fix|
 |:---|:---|
-<%= partial 'documentation/error_tables/generate_a_preview_template' %>
+<%= partial 'documentation/error_tables/ruby/generate_a_preview_template' %>
 
 ## Get received text messages
 
@@ -1200,12 +1200,10 @@ If the notification specified in the `older_than` argument is older than 7 days,
 
 #### Error codes
 
-If the request is not successful, the client raises a `Notifications::Client::RequestError` exception (or a subclass), which contains a code:
+If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
 
-|error.code|error.message|class|How to fix|
-|:---|:---|:---|:---|
-|`403`|`AuthError: Error: Your system clock must be accurate to within 30 seconds`|`AuthError`|Check your system clock|
-|`403`|`AuthError: Invalid token: API key not found`|`AuthError`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
+<%= partial 'documentation/error_tables/ruby/get_a_page_of_received_text_messages' %>
+
 
 ## Errors
 
@@ -1247,7 +1245,7 @@ Error's `message` field is a string, for example:
 "BadRequestError: Template not found"
 ```
 
-<%= partial 'documentation/error_tables/generic_errors' %>
+<%= partial 'documentation/error_tables/ruby/generic_errors' %>
 
 <%= partial 'documentation/testing' %>
 <%= partial 'documentation/api_keys' %>
