@@ -126,7 +126,7 @@ If a template has placeholder fields for personalised information such as name o
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     {"first_name", "Amala"},
-    {"application_date", "2018-01-01"}
+    {"application_date", "1 January 2018 at 01:00PM"}
 };
 ```
 
@@ -253,7 +253,7 @@ If a template has placeholder fields for personalised information such as name o
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     {"first_name", "Amala"},
-    {"application_date", "2018-01-01"},
+    {"application_date", "1 January 2018 at 01:00PM"},
     // pass in a list and it will appear as bullet points in the message:
     {"required_documents", new List<string> {"passport", "utility bill", "other id"}}
 };
@@ -443,7 +443,8 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
-    { "name", "Foo" },
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"},
     { "link_to_file", NotificationClient.PrepareUpload(
         documentContents: documentContents)
     }
@@ -473,7 +474,8 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
-    { "name", "Foo" },
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"},
     { "link_to_file", NotificationClient.PrepareUpload(
         documentContents: documentContents, 
         filename: "2023-12-25-daily-report.csv")
@@ -508,7 +510,8 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
-    { "name", "Foo" },
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"},
     { "link_to_file", NotificationClient.PrepareUpload(
         documentContents: documentContents, 
         confirmEmailBeforeDownload: false)
@@ -537,7 +540,8 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
-    { "name", "Foo" },
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"},
     { "link_to_file", NotificationClient.PrepareUpload(
         documentContents: documentContents, 
         confirmEmailBeforeDownload: true, 
@@ -1213,6 +1217,12 @@ List<TemplateResponse> templates; // empty list of templates
 This generates a preview version of a template.
 
 ```csharp
+Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
+{
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"}
+};
+
 TemplatePreviewResponse response = client.GenerateTemplatePreview(
     templateId,
     personalisation
@@ -1238,7 +1248,8 @@ If a template has placeholder fields for personalised information such as name o
 ```csharp
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
-    { "name", "someone" }
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"}
 };
 ```
 
