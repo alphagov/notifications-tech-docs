@@ -607,6 +607,7 @@ To send Notify a request to go live:
 #### Method
 
 ```csharp
+string templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a"
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     { "address_line_1", "The Occupier" }, // required
@@ -728,9 +729,9 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 
 ```csharp
 LetterNotificationsResponse response = client.SendPrecompiledLetter(
-    clientReference,
-    pdfContents,
-    postage
+    clientReference: "my reference",
+    pdfContents: File.ReadAllBytes("<PDF file path>"),
+    postage: "first"
     );
 ```
 
@@ -801,7 +802,7 @@ You can only get the status of messages sent within the retention period. The de
 #### Method
 
 ```csharp
-Notification notification = client.GetNotificationById(notificationId);
+Notification notification = client.GetNotificationById(notificationId: "740e5834-3a29-46b4-9a6f-16142fde533a");
 ```
 
 #### Arguments
@@ -814,7 +815,7 @@ The ID of the notification. To find the notification ID, you can either:
 * [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page
 
 ```csharp
-string notificationId = "3fc00062-9970-47ac-9efe-c86757fe19";
+string notificationId = "740e5834-3a29-46b4-9a6f-16142fde533a";
 ```
 
 #### Response
@@ -899,7 +900,19 @@ You can only get messages that are within your data retention period. The defaul
 #### Method
 
 ```csharp
-NotificationList notifications = client.GetNotifications(templateType, status, reference, olderThanId, includeSpreadsheetUploads);
+NotificationList notifications = client.GetNotifications(
+    templateType, 
+    status, 
+    reference, 
+    olderThanId, 
+    includeSpreadsheetUploads);
+```
+
+For example:
+```csharp
+NotificationList notifications = client.GetNotifications(
+    templateType: "sms"
+);
 ```
 
 #### Arguments
@@ -1034,7 +1047,7 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 This returns the pdf contents of a letter notification.
 
 ```csharp
-byte[] pdfFile = client.GetPdfForLetter(notificationId);
+byte[] pdfFile = client.GetPdfForLetter(notificationId: "740e5834-3a29-46b4-9a6f-16142fde533a");
 ```
 
 #### Arguments
@@ -1182,7 +1195,7 @@ This returns the latest version of all templates.
 
 ```csharp
 TemplateList response = client.GetAllTemplates(
-    templateType: "sms" | "email" | "letter" // optional
+    templateType: "sms" // optional
 );
 ```
 
@@ -1224,8 +1237,8 @@ Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 };
 
 TemplatePreviewResponse response = client.GenerateTemplatePreview(
-    templateId,
-    personalisation
+    templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a",
+    personalisation: personalisation
 );
 ```
 
@@ -1299,7 +1312,7 @@ To receive text messages:
 #### Method
 
 ```csharp
-ReceivedTextListResponse response = client.GetReceivedTexts(olderThanId);
+ReceivedTextListResponse response = client.GetReceivedTexts(olderThanId: "e194efd1-c34d-49c9-9915-e4267e01e92e");
 ```
 
 #### Arguments
