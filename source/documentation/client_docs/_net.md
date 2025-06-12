@@ -546,6 +546,27 @@ Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 };
 ```
 
+#### Response
+```csharp
+public String id;
+public String reference;
+public String oneClickUnsubscribeURL;
+public String uri;
+public Template template;
+public EmailResponseContent content;
+
+public class Template{
+    public String id;
+    public String uri;
+    public Int32 version;
+}
+public class EmailResponseContent{
+  public String fromEmail;
+  public String body;
+  public String subject;
+}
+```
+
 #### Error codes
 
 If the request is not successful, the client returns a `Notify.Exceptions.NotifyClientException` containing the relevant error code.
@@ -714,6 +735,10 @@ LetterNotificationsResponse response = client.SendPrecompiledLetter(
 
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address.
 
+```csharp
+string reference = "STRING";
+```
+
 ##### pdfContents (required for the SendPrecompiledLetter method)
 
 The precompiled letter must be a PDF file which meets [the GOV.UK Notify letter specification](https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification). The method sends the contents of the file to GOV.UK Notify.
@@ -726,6 +751,9 @@ byte[] pdfContents = File.ReadAllBytes("<PDF file path>");
 
 You can choose first class, second class or economy mail postage for your precompiled letter. Set the value to `first` for first class, `second` for second class or `economy` for economy mail. If you do not pass in this argument, the postage will default to second class.
 
+```csharp
+string postage = "first";
+```
 
 #### Response
 
@@ -779,6 +807,10 @@ The ID of the notification. To find the notification ID, you can either:
 
 * check the response to the [original notification method call](#response)
 * [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page
+
+```csharp
+string notificationId = "3fc00062-9970-47ac-9efe-c86757fe19";
+```
 
 #### Response
 
