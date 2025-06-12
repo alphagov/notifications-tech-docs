@@ -137,7 +137,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if you need to. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```csharp
-string reference: "STRING";
+string reference: "my reference";
 ```
 You can leave out this argument if you do not have a reference.
 
@@ -268,7 +268,7 @@ Find out how to [reduce the risk of malicious content injection in placeholders]
 A unique identifier you can create if you need to. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```csharp
-string reference: "STRING";
+string reference: "my reference";
 ```
 You can leave out this argument if you do not have a reference.
 
@@ -610,6 +610,7 @@ Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
     { "address_line_3", "SW14 6BF" }, // required
       ... // any other optional address lines, or personalisation fields found in your template
 };
+string reference = "my reference"
 
 LetterNotificationResponse response = client.SendLetter(templateId, personalisation, reference);
 ```
@@ -672,7 +673,7 @@ Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 A unique identifier you can create if you need to. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```csharp
-string reference: "STRING";
+string reference: "my reference";
 ```
 You can leave out this argument if you do not have a reference.
 
@@ -736,7 +737,7 @@ LetterNotificationsResponse response = client.SendPrecompiledLetter(
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address.
 
 ```csharp
-string reference = "STRING";
+string reference = "my reference";
 ```
 
 ##### pdfContents (required for the SendPrecompiledLetter method)
@@ -925,7 +926,7 @@ You can leave out this argument to ignore this filter.
 A unique identifier you can create if you need to. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```csharp
-string reference = "STRING";
+string reference = "my reference";
 ```
 
 ##### olderThanId (optional)
