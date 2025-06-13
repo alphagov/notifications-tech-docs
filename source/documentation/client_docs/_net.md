@@ -6,7 +6,7 @@ This documentation is for developers interested in using the GOV.UK Notify .NET 
 
 ### Prerequisites
 
-This documentation assumes you are using [Microsoft Visual Studio](https://visualstudio.microsoft.com/) with the [NuGet Package Manager](https://www.nuget.org/).
+This documentation assumes you are using either [Microsoft Visual Studio](https://visualstudio.microsoft.com/) (Windows) or [Visual Studio Code with the C# extension](https://code.visualstudio.com/docs/languages/dotnet) (Windows, macOS, or Linux) and  with the [NuGet Package Manager](https://www.nuget.org/).
 
 Refer to the [client changelog](https://github.com/alphagov/notifications-net-client/blob/main/CHANGELOG.md) for the version number and the latest updates.
 
@@ -24,7 +24,7 @@ Go to your project directory and run the following in the command line to instal
 dotnet add package GovukNotify
 ```
 
-#### Use Microsoft Visual Studio
+#### Use Microsoft Visual Studio or Visual Studio Code with C# Extension
 
 Use the [NuGet Package Manager](https://docs.microsoft.com/en-us/nuget/what-is-nuget) to install the `GovukNotify` client package in Visual Studio.
 
@@ -117,7 +117,7 @@ If a template has placeholder fields for personalised information such as name o
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     {"first_name", "Amala"},
-    {"application_date", "2018-01-01"}
+    {"application_date", "1 January 2018 at 01:00PM"}
 };
 ```
 
@@ -128,7 +128,7 @@ You can leave out this argument if a template does not have any placeholder fiel
 A unique identifier you can create if you need to. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```csharp
-string reference: "STRING";
+string reference: "my reference";
 ```
 You can leave out this argument if you do not have a reference.
 
@@ -244,7 +244,7 @@ If a template has placeholder fields for personalised information such as name o
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     {"first_name", "Amala"},
-    {"application_date", "2018-01-01"},
+    {"application_date", "1 January 2018 at 01:00PM"},
     // pass in a list and it will appear as bullet points in the message:
     {"required_documents", new List<string> {"passport", "utility bill", "other id"}}
 };
@@ -259,7 +259,7 @@ Find out how to [reduce the risk of malicious content injection in placeholders]
 A unique identifier you can create if you need to. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```csharp
-string reference: "STRING";
+string reference: "my reference";
 ```
 You can leave out this argument if you do not have a reference.
 
@@ -270,7 +270,7 @@ If you send subscription emails you must let recipients opt out of receiving the
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
 ```csharp
-string oneClickUnsubscribeURL : 'https://example.com/unsubscribe.html?opaque=123456789';
+string oneClickUnsubscribeURL : "https://example.com/unsubscribe.html?opaque=123456789";
 ```
 
 The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
@@ -434,8 +434,11 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
-    { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents)}
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"},
+    { "link_to_file", NotificationClient.PrepareUpload(
+        documentContents: documentContents)
+    }
 };
 ```
 
@@ -462,8 +465,12 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
-    { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents, filename = "2023-12-25-daily-report.csv")}
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"},
+    { "link_to_file", NotificationClient.PrepareUpload(
+        documentContents: documentContents, 
+        filename: "2023-12-25-daily-report.csv")
+    }
 };
 ```
 
@@ -494,8 +501,12 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
-    { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents, false, false)}
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"},
+    { "link_to_file", NotificationClient.PrepareUpload(
+        documentContents: documentContents, 
+        confirmEmailBeforeDownload: false)
+    }
 };
 ```
 
@@ -520,9 +531,35 @@ byte[] documentContents = File.ReadAllBytes("<file path>");
 
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
-    { "name", "Foo" },
-    { "link_to_file", NotificationClient.PrepareUpload(documentContents, false, true, "52 weeks")}
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"},
+    { "link_to_file", NotificationClient.PrepareUpload(
+        documentContents: documentContents, 
+        confirmEmailBeforeDownload: true, 
+        retentionPeriod: "52 weeks")
+    }
 };
+```
+
+#### Response
+```csharp
+public String id;
+public String reference;
+public String oneClickUnsubscribeURL;
+public String uri;
+public Template template;
+public EmailResponseContent content;
+
+public class Template{
+    public String id;
+    public String uri;
+    public Int32 version;
+}
+public class EmailResponseContent{
+  public String fromEmail;
+  public String body;
+  public String subject;
+}
 ```
 
 #### Error codes
@@ -561,6 +598,7 @@ To send Notify a request to go live:
 #### Method
 
 ```csharp
+string templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a"
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
     { "address_line_1", "The Occupier" }, // required
@@ -568,6 +606,7 @@ Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
     { "address_line_3", "SW14 6BF" }, // required
       ... // any other optional address lines, or personalisation fields found in your template
 };
+string reference = "my reference"
 
 LetterNotificationResponse response = client.SendLetter(templateId, personalisation, reference);
 ```
@@ -630,7 +669,7 @@ Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 A unique identifier you can create if you need to. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```csharp
-string reference: "STRING";
+string reference: "my reference";
 ```
 You can leave out this argument if you do not have a reference.
 
@@ -681,9 +720,9 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 
 ```csharp
 LetterNotificationsResponse response = client.SendPrecompiledLetter(
-    clientReference,
-    pdfContents,
-    postage
+    clientReference: "my reference",
+    pdfContents: File.ReadAllBytes("<PDF file path>"),
+    postage: "first"
     );
 ```
 
@@ -692,6 +731,10 @@ LetterNotificationsResponse response = client.SendPrecompiledLetter(
 ##### clientReference (required)
 
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address.
+
+```csharp
+string reference = "my reference";
+```
 
 ##### pdfContents (required for the SendPrecompiledLetter method)
 
@@ -705,6 +748,9 @@ byte[] pdfContents = File.ReadAllBytes("<PDF file path>");
 
 You can choose first class, second class or economy mail postage for your precompiled letter. Set the value to `first` for first class, `second` for second class or `economy` for economy mail. If you do not pass in this argument, the postage will default to second class.
 
+```csharp
+string postage = "first";
+```
 
 #### Response
 
@@ -747,7 +793,7 @@ You can only get the status of messages sent within the retention period. The de
 #### Method
 
 ```csharp
-Notification notification = client.GetNotificationById(notificationId);
+Notification notification = client.GetNotificationById(notificationId: "740e5834-3a29-46b4-9a6f-16142fde533a");
 ```
 
 #### Arguments
@@ -758,6 +804,10 @@ The ID of the notification. To find the notification ID, you can either:
 
 * check the response to the [original notification method call](#response)
 * [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page
+
+```csharp
+string notificationId = "740e5834-3a29-46b4-9a6f-16142fde533a";
+```
 
 #### Response
 
@@ -813,6 +863,12 @@ public class CostDetails
     public string postage;
 }
 ```
+For more information, see the:
+
+* [email status descriptions](#email-status-descriptions)
+* [text message status descriptions](#text-message-status-descriptions)
+* [letter status descriptions](#letter-status-descriptions)
+* [precompiled letter status descriptions](#precompiled-letter-status-descriptions)
 
 #### Error codes
 
@@ -835,7 +891,19 @@ You can only get messages that are within your data retention period. The defaul
 #### Method
 
 ```csharp
-NotificationList notifications = client.GetNotifications(templateType, status, reference, olderThanId, includeSpreadsheetUploads);
+NotificationList notifications = client.GetNotifications(
+    templateType, 
+    status, 
+    reference, 
+    olderThanId, 
+    includeSpreadsheetUploads);
+```
+
+For example:
+```csharp
+NotificationList notifications = client.GetNotifications(
+    templateType: "sms"
+);
 ```
 
 #### Arguments
@@ -866,7 +934,7 @@ You can leave out this argument to ignore this filter.
 A unique identifier you can create if you need to. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. For example:
 
 ```csharp
-string reference = "STRING";
+string reference = "my reference";
 ```
 
 ##### olderThanId (optional)
@@ -970,7 +1038,7 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 This returns the pdf contents of a letter notification.
 
 ```csharp
-byte[] pdfFile = client.GetPdfForLetter(notificationId);
+byte[] pdfFile = client.GetPdfForLetter(notificationId: "740e5834-3a29-46b4-9a6f-16142fde533a");
 ```
 
 #### Arguments
@@ -1012,7 +1080,7 @@ This returns the latest version of the template.
 
 ```csharp
 TemplateResponse response = client.GetTemplateById(
-    "templateId"
+    templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a"
 );
 ```
 
@@ -1062,8 +1130,8 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 
 ```csharp
 TemplateResponse response = client.GetTemplateByIdAndVersion(
-    "templateId",
-    1   // integer required for version number
+    templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a",
+    version: 1   // integer required for version number
 );
 ```
 
@@ -1118,7 +1186,7 @@ This returns the latest version of all templates.
 
 ```csharp
 TemplateList response = client.GetAllTemplates(
-    "sms" | "email" | "letter" // optional
+    templateType: "sms" // optional
 );
 ```
 
@@ -1153,9 +1221,15 @@ List<TemplateResponse> templates; // empty list of templates
 This generates a preview version of a template.
 
 ```csharp
+Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
+{
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"}
+};
+
 TemplatePreviewResponse response = client.GenerateTemplatePreview(
-    templateId,
-    personalisation
+    templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a",
+    personalisation: personalisation
 );
 ```
 
@@ -1178,7 +1252,8 @@ If a template has placeholder fields for personalised information such as name o
 ```csharp
 Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
 {
-    { "name", "someone" }
+    {"first_name", "Amala"},
+    {"application_date", "1 January 2018 at 01:00PM"}
 };
 ```
 
@@ -1228,7 +1303,7 @@ To receive text messages:
 #### Method
 
 ```csharp
-ReceivedTextListResponse response = client.GetReceivedTexts(olderThanId);
+ReceivedTextListResponse response = client.GetReceivedTexts(olderThanId: "e194efd1-c34d-49c9-9915-e4267e01e92e");
 ```
 
 #### Arguments
