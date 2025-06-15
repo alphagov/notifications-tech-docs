@@ -22,10 +22,16 @@ Refer to the [client changelog](https://github.com/alphagov/notifications-java-c
 
 ### Create a new instance of the client
 
+Import these classes:
+```java
+import uk.gov.service.notify.NotificationClient;
+import uk.gov.service.notify.NotificationClientException;
+import uk.gov.service.notify.SendSmsResponse;
+```
+
 Add this code to your application:
 
 ```java
-import uk.gov.service.notify.NotificationClient;
 NotificationClient client = new NotificationClient(apiKey);
 ```
 
@@ -36,7 +42,6 @@ To get an API key, [sign in to GOV.UK Notify](https://www.notifications.service.
 If you use a proxy you can pass it into the NotificationClient constructor.
 
 ```java
-import uk.gov.service.notify.NotificationClient;
 NotificationClient client = new NotificationClient(apiKey, proxy);
 ```
 
@@ -56,6 +61,8 @@ SendSmsResponse response = client.sendSms(
     reference,
     smsSenderId
 );
+
+System.out.println(response);
 ```
 
 #### Arguments
@@ -100,12 +107,12 @@ If a template does not have any placeholder fields for personalised information,
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. If you do not have a reference, you must pass in an empty string or `null`.
 
 ```java
-String reference='STRING';
+String reference="STRING";
 ```
 
 ##### smsSenderId (optional)
 
-A unique identifier of the sender of the text message notification.
+A unique identifier of the sender of the text message notification. It must be a UUID.
 
 To find the text message sender:
 
@@ -119,7 +126,7 @@ You can then either:
   - select __Change__ to change the default sender that the service will use, and select __Save__
 
 ```java
-String smsSenderId='8e222534-7f05-4972-86e3-17c5d9f894e2'
+String smsSenderId="8e222534-7f05-4972-86e3-17c5d9f894e2"
 ```
 
 
@@ -130,13 +137,15 @@ You can leave out this argument if your service only has one text message sender
 If the request to the client is successful, the client returns a `SendSmsResponse`:
 
 ```java
-UUID notificationId;
-Optional<String> reference;
-UUID templateId;
-int templateVersion;
-String templateUri;
-String body;
-Optional<String> fromNumber;
+{
+    notificationId=740e5834-3a29-46b4-9a6f-16142fde533a,
+    reference=STRING,
+    templateId=f33517ff-2a88-4f6e-b855-c550268ce08a,
+    templateVersion=1,
+    templateUri="//api.notifications.service.gov.uk/services/{service-id}/template/f33517ff-2a88-4f6e-b855-c550268ce08a",
+    "body"='MESSAGE TEXT',
+    fromNumber='SENDER'
+}
 ```
 
 If you are using the [test API key](#test), all your messages come back with a `delivered` status.
@@ -163,6 +172,8 @@ SendEmailResponse response = client.sendEmail(
     reference,
     emailReplyToId
 );
+
+System.out.println(response);
 ```
 
 #### Arguments
@@ -187,7 +198,7 @@ String templateId="f33517ff-2a88-4f6e-b855-c550268ce08a";
 The email address of the recipient.
 
 ```java
-String emailAddress='sender@something.com';
+String emailAddress="amala@something.com";
 ```
 
 ##### personalisation (required)
@@ -212,7 +223,7 @@ Find out how to [reduce the risk of malicious content injection in placeholders]
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. If you do not have a reference, you must pass in an empty string or `null`.
 
 ```java
-String reference='STRING';
+String reference="STRING";
 ```
 
 ##### oneClickUnsubscribeURL (recommended)
@@ -222,7 +233,7 @@ If you send subscription emails you must let recipients opt out of receiving the
 The one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.
 
 ```java
-URI oneClickUnsubscribeURL = 'https://example.com/unsubscribe.html?opaque=123456789'
+URI oneClickUnsubscribeURL = "https://example.com/unsubscribe.html?opaque=123456789";
 ```
 
 The one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.
@@ -248,7 +259,7 @@ To add a reply-to email address:
 1. Enter the email address you want to use, and select __Add__.
 
 ```java
-String emailReplyToId='8e222534-7f05-4972-86e3-17c5d9f894e2'
+String emailReplyToId="8e222534-7f05-4972-86e3-17c5d9f894e2";
 ```
 
 You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.
@@ -258,15 +269,17 @@ You can leave out this argument if your service only has one reply-to email addr
 If the request to the client is successful, the client returns a `SendEmailResponse`:
 
 ```java
-UUID notificationId;
-Optional<String> reference;
-Optional<URI> oneClickUnsubscribeURL;
-UUID templateId;
-int templateVersion;
-String templateUri;
-String body;
-String subject;
-Optional<String> fromEmail;
+{
+    notificationId=740e5834-3a29-46b4-9a6f-16142fde533a,
+    reference=STRING,
+    oneClickUnsubscribeURL="https://example.com/unsubscribe.html?opaque=123456789"
+    templateId=f33517ff-2a88-4f6e-b855-c550268ce08a,
+    templateVersion=1,
+    templateUri="//api.notifications.service.gov.uk/services/{service-id}/template/f33517ff-2a88-4f6e-b855-c550268ce08a",
+    "body"="MESSAGE TEXT",
+    subject="Subject"
+    fromEmail="Sender email"
+}
 ```
 
 #### Reducing the risk of malicious content injection in placeholders
@@ -563,7 +576,7 @@ If a template does not have any placeholder fields for personalised information,
 A unique identifier you create. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address. If you do not have a reference, you must pass in an empty string or `null`.
 
 ```java
-String reference='STRING';
+String reference="STRING";
 ```
 
 #### Response
@@ -659,9 +672,11 @@ You can choose first class, second class or economy mail postage for your precom
 If the request to the client is successful, the client returns a `LetterResponse`:
 
 ```java
-UUID notificationId;
-String reference;
-String postage
+{
+    notificationId=740e5834-3a29-46b4-9a6f-16142fde533a,
+    reference=STRING,
+    postage="first"
+}
 ```
 
 #### Error codes
@@ -791,7 +806,7 @@ You can filter by:
 A unique identifier you create if necessary. This reference identifies a single unique notification or a batch of notifications. It must not contain any personal information such as name or postal address.
 
 ```java
-String reference='STRING';
+String reference="STRING";
 ```
 
 ##### olderThanId (optional)
@@ -799,7 +814,7 @@ String reference='STRING';
 Input the ID of a notification into this argument. If you use this argument, the client returns the next 250 received notifications older than the given ID.
 
 ```java
-String olderThanId='8e222534-7f05-4972-86e3-17c5d9f894e2'
+String olderThanId="8e222534-7f05-4972-86e3-17c5d9f894e2";
 ```
 
 If you pass in an empty argument or `null`, the client returns the most recent 250 notifications.
@@ -876,7 +891,7 @@ If the request is not successful, the client returns an error. To learn more abo
 This returns the PDF contents of a letter notification.
 
 ```java
-byte[] pdfFile = client.getPdfForLetter(notificationId)
+byte[] pdfFile = client.getPdfForLetter(notificationId);
 ```
 
 #### Arguments
@@ -920,7 +935,7 @@ Template template = client.getTemplateById(templateId);
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
 
 ```
-String templateId='f33517ff-2a88-4f6e-b855-c550268ce08a';
+String templateId="f33517ff-2a88-4f6e-b855-c550268ce08a";
 ```
 
 #### Response
@@ -965,7 +980,7 @@ Template template = client.getTemplateVersion(templateId, version);
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
 
 ```java
-String templateId='f33517ff-2a88-4f6e-b855-c550268ce08a';
+String templateId="f33517ff-2a88-4f6e-b855-c550268ce08a";
 ```
 
 ##### version (required)
@@ -1051,7 +1066,7 @@ The parameters in the personalisation argument must match the placeholder fields
 The ID of the template. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __Templates__ page to find it.
 
 ```java
-String templateId='f33517ff-2a88-4f6e-b855-c550268ce08a';
+String templateId="f33517ff-2a88-4f6e-b855-c550268ce08a";
 ```
 
 ##### personalisation (required)
@@ -1121,7 +1136,7 @@ To get older messages, pass the ID of an older notification into the `olderThanI
 Input the ID of a received text message into this argument. If you use this argument, the client returns the next 250 received text messages older than the given ID.
 
 ```java
-String olderThanId='8e222534-7f05-4972-86e3-17c5d9f894e2'
+String olderThanId="8e222534-7f05-4972-86e3-17c5d9f894e2";
 ```
 
 If you pass in an empty argument or `null`, the client returns the most recent 250 text messages.
@@ -1167,27 +1182,29 @@ This error consists of:
 
 To access these details about the error, read its `httpResult` and `Message` fields, for example:
 
-TODO: describe error structure in Java.
-
-```python
-from notifications_python_client.errors import HTTPError
-
-try:
-  response = notifications_client.send_sms_notification(
-    phone_number="+447700900123",
-    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
-  )
-except HTTPError as e:
-  if e.status_code in range(500, 599):  # using status code for error handling
-    self.retry()
-  else:
-    print(e.message)  # accessing error details to debug
-
+```java
+    SendSmsResponse response;
+    try {
+        response = client.sendSms(
+            templateId,
+            phoneNumber,
+            personalisation,
+            reference,
+            smsSenderId
+        );
+        System.out.println(response);
+    } catch (NotificationClientException e) {
+        if (e.getHttpResult() >= 500) {
+            //retry logic
+        } else {
+            e.printStackTrace();
+        }
+    }
 ```
 
-Error's `message` field is a `dict`, for example:
+Error's `message` field is a `String`, for example:
 
-```python
+```java
 [{
   "error": "AuthError",
   "message": "Invalid token: API key not found",
