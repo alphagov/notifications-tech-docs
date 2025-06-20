@@ -1358,7 +1358,36 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Error: Your system clock must be accurate to within 30 seconds"`<br>`}]`|Check your system clock|
 |`403`|`[{`<br>`"error": "AuthError",`<br>`"message": "Invalid token: API key not found"`<br>`}]`|Use the correct API key. Refer to [API keys](#api-keys) for more information|
 
-<%= partial 'documentation/error_messages' %>
+## Errors
+### Error handling
+If the request is not successful, the client will throw a `Notify.Exceptions.NotifyClientException`. All information about the nature of the exception is found in the exceptions message attribute. It will start with the status code for the response, followed by a list of one or more errors:
+
+```csharp
+Status code 403. Error: {"errors":[{"error":"AuthError","message":"Invalid token: API key not found"}],"status_code":403}
+, Exception: Status code 403. The following errors occured [
+  {
+    "error": "AuthError",
+    "message": "Invalid token: API key not found"
+  }
+]
+```
+An illustration of error handling:
+
+```csharp
+try
+{
+    NotificationList notifications = client.GetNotifications(
+        templateType: "sms"
+    );
+}
+
+catch (NotifyClientException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+```
+
+<%= partial 'documentation/error_tables/generic_errors' %>
 <%= partial 'documentation/testing' %>
 <%= partial 'documentation/api_keys' %>
 <%= partial 'documentation/limits' %>
