@@ -1169,25 +1169,29 @@ To access these details about the error, read its `httpResult` and `Message` fie
 
 TODO: describe error structure in Java.
 
-```python
-from notifications_python_client.errors import HTTPError
-
-try:
-  response = notifications_client.send_sms_notification(
-    phone_number="+447700900123",
-    template_id="f33517ff-2a88-4f6e-b855-c550268ce08a",
-  )
-except HTTPError as e:
-  if e.status_code in range(500, 599):  # using status code for error handling
-    self.retry()
-  else:
-    print(e.message)  # accessing error details to debug
-
+```java
+    SendSmsResponse response;
+    try {
+        response = client.sendSms(
+            templateId,
+            phoneNumber,
+            personalisation,
+            reference,
+            smsSenderId
+        );
+        System.out.println(response);
+    } catch (NotificationClientException e) {
+        if (e.getHttpResult() >= 500) {
+            //retry logic
+        } else {
+            e.printStackTrace();
+        }
+    }
 ```
 
-Error's `message` field is a `dict`, for example:
+Error's `message` field is a `String`, for example:
 
-```python
+```java
 [{
   "error": "AuthError",
   "message": "Invalid token: API key not found",
