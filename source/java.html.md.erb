@@ -1165,9 +1165,7 @@ This error consists of:
 - an error type, for example `BadRequestError`
 - a message, for example `Mobile numbers can only include: 0 1 2 3 4 5 6 7 8 9 ( ) + -`
 
-To access these details about the error, read its `httpResult` and `Message` fields, for example:
-
-TODO: describe error structure in Java.
+To access these details about the exception, read its `getHttpResult()` and `getMessage()` methods, for example:
 
 ```java
     SendSmsResponse response;
@@ -1184,18 +1182,15 @@ TODO: describe error structure in Java.
         if (e.getHttpResult() >= 500) {
             //retry logic
         } else {
-            e.printStackTrace();
+            System.out.printf(e.getMessage());
         }
     }
 ```
 
-Error's `message` field is a `String`, for example:
+Exception's `getMessage()` method returns a `String`, for example:
 
 ```java
-[{
-  "error": "AuthError",
-  "message": "Invalid token: API key not found",
-}]
+Status code: 403 {"errors":[{"error":"AuthError","message":"Invalid token: API key not found"}],"status_code":403}
 ```
 
 <%= partial 'documentation/error_tables/generic_errors' %>
