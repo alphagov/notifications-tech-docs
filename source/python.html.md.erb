@@ -789,7 +789,9 @@ This API call returns one page of up to 250 messages and statuses. You can get e
 You can only get messages that are within your data retention period. The default data retention period is 7 days. It can be changed in your Service Settings.
 
 ```python
-response = notifications_client.get_all_notifications(template_type, status, reference, older_than, include_jobs)
+response = notifications_client.get_all_notifications(
+  template_type, status, reference, older_than, include_jobs
+)
 ```
 
 You can filter the returned messages by including the following optional arguments in the method:
@@ -799,6 +801,16 @@ You can filter the returned messages by including the following optional argumen
 - [`reference`](#get-the-status-of-multiple-messages-arguments-reference-optional)
 - [`older_than`](#older-than-optional)
 - [`include_jobs`](#include-jobs-optional)
+
+For example:
+
+```python
+response = notifications_client.get_all_notifications(
+  template_type="sms",
+  status="failed",
+  include_jobs=True,
+)
+```
 
 
 ##### All messages - as an iterator
