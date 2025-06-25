@@ -699,7 +699,14 @@ response = notifications_client.get_notification_by_id(notification_id)
 
 ##### notification_id (required)
 
-The ID of the notification. To find the notification ID, you can either:
+The ID of the notification, for example:
+
+```
+notification_id = "3d1ce039-5476-414c-99b2-fac1e6add62c"
+```
+
+
+To find the notification ID, you can either:
 
 * check the response to the [original notification method call](#response)
 * [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page
