@@ -522,9 +522,9 @@ To send Notify a request to go live:
     response = notifications_client.send_letter_notification(
         template_id="64415853-cb86-4cc4-b597-2aaa94ef8c39",
         personalisation={
-          "address_line_1": "Amala Bird"
-          "address_line_2": "123 High Street"
-          "address_line_3": "SW14 6BH"
+          "address_line_1": "Amala Bird",
+          "address_line_2": "123 High Street",
+          "address_line_3": "SW14 6BH",
         },
     )
 ```
@@ -699,7 +699,14 @@ response = notifications_client.get_notification_by_id(notification_id)
 
 ##### notification_id (required)
 
-The ID of the notification. To find the notification ID, you can either:
+The ID of the notification, for example:
+
+```python
+notification_id = "3d1ce039-5476-414c-99b2-fac1e6add62c"
+```
+
+
+To find the notification ID, you can either:
 
 * check the response to the [original notification method call](#response)
 * [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page
@@ -782,7 +789,9 @@ This API call returns one page of up to 250 messages and statuses. You can get e
 You can only get messages that are within your data retention period. The default data retention period is 7 days. It can be changed in your Service Settings.
 
 ```python
-response = notifications_client.get_all_notifications(template_type, status, reference, older_than, include_jobs)
+response = notifications_client.get_all_notifications(
+  template_type, status, reference, older_than, include_jobs
+)
 ```
 
 You can filter the returned messages by including the following optional arguments in the method:
@@ -792,6 +801,16 @@ You can filter the returned messages by including the following optional argumen
 - [`reference`](#get-the-status-of-multiple-messages-arguments-reference-optional)
 - [`older_than`](#older-than-optional)
 - [`include_jobs`](#include-jobs-optional)
+
+For example:
+
+```python
+response = notifications_client.get_all_notifications(
+  template_type="sms",
+  status="failed",
+  include_jobs=True,
+)
+```
 
 
 ##### All messages - as an iterator
