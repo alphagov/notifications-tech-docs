@@ -1289,7 +1289,43 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 
 ## Errors
 ### Error handling
-If the request is not successful, the client will throw a `Notify.Exceptions.NotifyClientException`. All information about the nature of the exception is found in the exceptions message attribute. It will start with the status code for the response, followed by a list of one or more errors:
+If the request is not successful, the client will throw a `Notify.Exceptions.NotifyClientException`.
+
+The exceptions message attribute is a string consisting of:
+
+- a status code, for example `400`
+- an error type, for example `BadRequestError`
+- a message, for example `Mobile numbers can only include: 0 1 2 3 4 5 6 7 8 9 ( ) + -`
+
+You can use a regex match to get specific information out of the exception's message attribute. 
+An illustration of error handling:
+
+```csharp
+try
+{
+    var response = client.SendSms(
+        mobileNumber,
+        templateId
+    );
+}
+catch (NotifyClientException ex)
+{
+    string pattern = """(?<=Status code )([0-9]+)""";
+    Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
+    Match match = r.Match(ex.Message);
+    int statusCode = Int32.Parse(match.Value);
+    if (statusCode >= 500)
+    {
+        //some retry logic goes here
+    }
+    else
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+```
+
+The exception's message attribute contains a `string`, for example:
 
 ```csharp
 Status code 403. Error: {"errors":[{"error":"AuthError","message":"Invalid token: API key not found"}],"status_code":403}
@@ -1299,21 +1335,6 @@ Status code 403. Error: {"errors":[{"error":"AuthError","message":"Invalid token
     "message": "Invalid token: API key not found"
   }
 ]
-```
-An illustration of error handling:
-
-```csharp
-try
-{
-    NotificationList notifications = client.GetNotifications(
-        templateType: "sms"
-    );
-}
-
-catch (NotifyClientException ex)
-{
-    Console.WriteLine(ex.Message);
-}
 ```
 
 <%= partial 'documentation/error_tables/generic_errors' %>
