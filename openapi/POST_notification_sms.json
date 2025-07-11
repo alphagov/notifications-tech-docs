@@ -29,10 +29,84 @@
                     "application/json": {
                         "schema": {
                             "$ref": "schema.json#/components/schemas/SendNotificaitonRequestError"
+                        },
+                        "examples": {
+                            "Too Many Digits": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "phone_number Too many digits"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Not Enough Digits": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "phone_number Not enough digits"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Not a UK mobile number": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "phone_number Not a UK mobile number"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Must not contain letters": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "phone_number Must not contain letters or symbols"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Not a valid country prefix": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "phone_number Not a valid country prefix"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Sender ID does not exist": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "sms_sender_id <sms_sender_id> does not exist in database for service id <service id>"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Trial mode": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "Cannot send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Cannot send to international": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "Cannot send to international mobile numbers"
+                                    }],
+                                    "status_code": 400
+                                }
+                            }
                         }
                     }
                 },
-                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+                "description": "Bad request. Check the `message` in the response to find out why your request failed.  In addition to the endpoint specific errors shown in the examples, you may also encounter various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type. You can find a list of these errors at https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "403": {
                 "content": {
@@ -42,7 +116,7 @@
                         }
                     }
                 },
-                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+                "description": "Auth error. Check the `message` in the response to find out why your request failed.  For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "429": {
                 "content": {
@@ -52,7 +126,7 @@
                         }
                     }
                 },
-                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed."
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "500": {
                 "content": {
@@ -62,7 +136,7 @@
                         }
                     }
                 },
-                "description": "Internal server error. Check the `message` in the response to find out why your request failed."
+                "description": "Internal server error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             }
         },
         "callbacks": {
