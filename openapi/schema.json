@@ -26,16 +26,16 @@
                                 "type": "string",
                                 "example": "Amala"
                             },
-                            "application_date": {
+                            "appointment_date": {
                                 "type": "string",
-                                "example": "2018-01-01"
+                                "example": "1 January 2018 at 1:00PM"
                             }
                         }
                     },
                     "reference": {
                         "type": "string",
                         "description": "You can leave out this argument if you do not have a reference. An identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
-                        "example": "STRING"
+                        "example": "your reference"
                     },
                     "sms_sender_id": {
                         "type": "string",
@@ -710,7 +710,7 @@
                     },
                     "reference": {
                         "type": "string",
-                        "example": "STRING"
+                        "example": "your reference"
                     },
                     "scheduled_for": {
                         "type": "string",
@@ -722,11 +722,11 @@
                         "properties": {
                             "body": {
                                 "type": "string",
-                                "example": "MESSAGE TEXT"
+                                "example": "Hi Amala, your appointment is on 1 January 2018 at 1:00PM"
                             },
                             "from_number": {
                                 "type": "string",
-                                "example": "SENDER"
+                                "example": "GOVUK"
                             }
                         }
                     },
@@ -743,11 +743,11 @@
                             },
                             "version": {
                                 "type": "number",
-                                "example": 1
+                                "example": 3
                             },
                             "uri": {
                                 "type": "string",
-                                "example": "https://api.notifications.service.gov.uk/v2/template/ceb50d92-100d-4b8b-b559-14fa3b091cd"
+                                "example": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
                             }
                         }
                     }
