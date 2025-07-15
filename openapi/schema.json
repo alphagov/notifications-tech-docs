@@ -1053,20 +1053,17 @@
                             "properties": {
                                 "error": {
                                     "type": "string",
-                                    "example": "ValidationError",
                                     "description": "Error type"
                                 },
                                 "message": {
                                     "type": "string",
-                                    "example": "X is a required property",
                                     "description": "Error message"
                                 }
                             }
                         }
                     },
                     "status_code": {
-                        "type": "integer",
-                        "example": 400
+                        "type": "integer"
                     }
                 }
             },
@@ -1246,7 +1243,7 @@
                             "properties": {
                                 "error": {
                                     "type": "string",
-                                    "example": "AuthError",
+                                    "example": "BadRequestErrorr",
                                     "description": "Error type"
                                 },
                                 "message": {
