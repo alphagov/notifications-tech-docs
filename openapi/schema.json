@@ -385,6 +385,62 @@
                 },
                 "required": []
             },
+            "LetterCallbackRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "3d1ce039-5476-414c-99b2-fac1e6add62c",
+                        "description": "Notify's ID for the returned letter"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "example": "your reference",
+                        "description": "The reference sent by the service"
+                    },
+                    "date_sent": {
+                        "type": "string",
+                        "example": "2023-09-16T16:50:09.090424Z",
+                        "description": "The time the letter was sent"
+                    },
+                    "sent_by": {
+                        "type": "string",
+                        "example": "hello@gov.uk or null",
+                        "description": "The email address of the service member who sent the letter"
+                    },
+                    "template_name": {
+                        "type": "string",
+                        "example": "Appointment confirmation",
+                        "description": "The name of the template that was used"
+                    },
+                    "template_id": {
+                        "type": "string",
+                        "example": "64415853-cb86-4cc4-b597-2aaa94ef8c39",
+                        "description": "The id of the template that was used"
+                    },
+                    "template_version": {
+                        "type": "number",
+                        "example": 3,
+                        "description": "The version number of the template that was used"
+                    },
+                    "spreadsheet_file_name": {
+                        "type": "string",
+                        "example": "contact_list.csv or null",
+                        "description": "The name of the uploaded spreadsheet"
+                    },
+                     "spreadsheet_row_number": {
+                        "type": "number",
+                        "example": 2,
+                        "description": "The row in the spreadsheet"
+                    },
+                    "upload_letter_file_name": {
+                        "type": "string",
+                        "example": "upload_letter.pdf or null",
+                        "description": "The name of the uploaded letter"
+                    }
+                },
+                "required": []
+            },
             "GetMultipleMessagesResponse": {
                 "type": "object",
                 "description": "The Send Text Message Response Payload",
