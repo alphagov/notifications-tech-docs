@@ -167,7 +167,7 @@
                         "properties": {
                             "address_line_1": {
                                 "type": "string",
-                                "example": "The Occupier"
+                                "example": "Amala Bird"
                             },
                             "address_line_2": {
                                 "type": "string",
@@ -193,11 +193,13 @@
                             },
                             "name": {
                                 "type": "string",
-                                "example": "John Smith"
+                                "example": "Amala",
+                                "description": "example of personalisation used by the template"
                             },
-                            "application_id": {
+                            "appointment_date": {
                                 "type": "string",
-                                "example": "4134325"
+                                "example": "1 January 2018 at 1:00PM",
+                                "description": "example of personalisation used by the template"
                             },
                             "required_documents": {
                                 "type": "array",
@@ -208,7 +210,8 @@
                                     "passport",
                                     "utility bill",
                                     "other id"
-                                ]
+                                ],
+                                "description": "example of personalisation used by the template"
                             }
                         },
                         "required": [
