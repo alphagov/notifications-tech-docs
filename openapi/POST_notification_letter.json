@@ -84,20 +84,141 @@
                     "application/json": {
                         "schema": {
                             "$ref": "schema.json#/components/schemas/SendNotificaitonRequestError"
+                        },
+                        "examples": {
+                            "Personalisation required property": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "personalisation address_line_1 is a required property"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Must be a real UK postcode": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "Must be a real UK postcode"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Must be a real address": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "Must be a real address"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Last line of address must be a postcode or country": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "Last line of address must be a real UK postcode or another country"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Last line of a BFPO address must not be a country": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "The last line of a BFPO address must not be a country"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Address must be at least 3 lines": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "Address must be at least 3 lines"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Address must be no more than 7 lines": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "Address must be no more than 7 lines"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Address lines most not start with special characters": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "Address lines must not start with any of the following characters: @ ( ) = [ ] \" \\ / , < >"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Postage invalid": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "postage invalid. It must be either first, second or economy"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Cannot send letters when service is in trial mode": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Service is not allowed to send letters": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "Service is not allowed to send letters"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Letter contact id does not exist": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "letter_contact_id <letter_contact_id> does not exist in database for service id <service id>"
+                                    }],
+                                    "status_code": 400
+                                }
+                            }
                         }
                     }
                 },
-                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+                "description": "Bad request. Check the `message` in the response to find out why your request failed. In addition to the endpoint specific errors shown in the examples, you may also encounter various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type. You can find a list of these errors at https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "403": {
                 "content": {
                     "application/json": {
                         "schema": {
                             "$ref": "schema.json#/components/schemas/AuthError"
+                        },
+                        "examples": {
+                            "Cannot send letters with a team api key": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "Cannot send letters with a team api key"
+                                    }],
+                                    "status_code": 403
+                                }
+                            }
                         }
                     }
                 },
-                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+                "description": "Auth error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "429": {
                 "content": {
@@ -107,7 +228,7 @@
                         }
                     }
                 },
-                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed."
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             }
         },
         "security": [

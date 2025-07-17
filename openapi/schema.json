@@ -194,7 +194,7 @@
                             "name": {
                                 "type": "string",
                                 "example": "Amala",
-                                "description": "example of personalisation used by the template"
+                                "description": "example of personalisation field used by the template"
                             },
                             "appointment_date": {
                                 "type": "string",
@@ -1246,7 +1246,7 @@
                             "properties": {
                                 "error": {
                                     "type": "string",
-                                    "example": "BadRequestErrorr",
+                                    "example": "BadRequestError",
                                     "description": "Error type"
                                 },
                                 "message": {
