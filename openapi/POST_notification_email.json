@@ -29,10 +29,57 @@
                     "application/json": {
                         "schema": {
                             "$ref": "schema.json#/components/schemas/SendNotificaitonRequestError"
+                        },
+                        "examples": {
+                            "Not a valid email address": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "email_address Not a valid email address"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Unsubscribe url invalid": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "one_click_unsubscribe_url is not a valid https url"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Email reply to id does not exist": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "email_reply_to_id <reply to id> does not exist in database for service id <service id>"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Email too large": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "Emails cannot be longer than 2000000 bytes. Your message is <rendered template size in bytes> bytes"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Cannot sent to recipient in trial mode": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "Cannot send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"
+                                    }],
+                                    "status_code": 400
+                                }
+                            }
                         }
                     }
                 },
-                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+                "description": "Bad request. Check the `message` in the response to find out why your request failed. In addition to the endpoint specific errors shown in the examples, you may also encounter various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type. You can find a list of these errors at https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "403": {
                 "content": {
@@ -42,7 +89,7 @@
                         }
                     }
                 },
-                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+                "description": "Auth error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "429": {
                 "content": {
@@ -52,7 +99,7 @@
                         }
                     }
                 },
-                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed."
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "500": {
                 "content": {
@@ -62,7 +109,7 @@
                         }
                     }
                 },
-                "description": "Internal server error. Check the `message` in the response to find out why your request failed."
+                "description": "Internal server error. Check the `message` in the response to find out why your request failed For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             }
         },
         "callbacks": {

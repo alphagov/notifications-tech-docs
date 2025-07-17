@@ -55,14 +55,14 @@
                     "email_address": {
                         "type": "string",
                         "description": "The email address of the recipient.",
-                        "example": "sender@something.com",
+                        "example": "amala@example.com",
                         "maxLength": 250,
                         "minLength": 5
                     },
                     "template_id": {
                         "type": "string",
                         "description": "To find the template ID:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Templates** page and select the relevant template.\n3.  Select **Copy template ID to clipboard**.",
-                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                        "example": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3"
                     },
                     "one_click_unsubscribe_url": {
                         "type": "string",
@@ -71,15 +71,15 @@
                     },
                     "personalisation": {
                         "type": "object",
-                        "description": "You can leave out this argument if a template does not have any placeholder fields for personalised information.\n\nIf a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:",
+                        "description": "You can leave out this argument if a template does not have any placeholder fields for personalised information.\n\nIf a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. Find out how to [reduce the risk of malicious content injection in placeholders](https://docs.notifications.service.gov.uk/rest-api.html#reducing-the-risk-of-malicious-content-injection-in-placeholders)",
                         "properties": {
                             "first_name": {
                                 "type": "string",
                                 "example": "Amala"
                             },
-                            "application_date": {
+                            "appointment_date": {
                                 "type": "string",
-                                "example": "2018-01-01"
+                                "example": "1 January 2018 at 1:00PM"
                             },
                             "required_documents": {
                                 "type": "array",
@@ -107,7 +107,7 @@
                                         "type": "string",
                                         "description": "File name",
                                         "maxLength": 100,
-                                        "example": "report.csv"
+                                        "example": "amala_pigeon_affairs_bureau_invite.csv"
                                     },
                                     "confirm_email_before_download": {
                                         "type": "boolean",
@@ -129,12 +129,12 @@
                     "reference": {
                         "type": "string",
                         "description": "You can leave out this argument if you do not have a reference.\n\nAn identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
-                        "example": "STRING"
+                        "example": "your reference"
                     },
                     "email_reply_to_id": {
                         "type": "string",
                         "description": "You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.\n\nThis is an email address specified by you to receive replies from your users. You must add at least one reply-to email address before your service can go live.\n\nTo add a reply-to email address:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Settings** page.\n3.  In the **Email** section, select **Manage** on the **Reply-to email addresses** row.\n4.  Select **Add reply-to address**.\n5.  Enter the email address you want to use, and select **Add**.",
-                        "example": "STRING"
+                        "example": "8e222534-7f05-4972-86e3-17c5d9f894e2"
                     }
                 },
                 "required": [
@@ -759,11 +759,11 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
+                        "example": "201b576e-c09b-467b-9dfa-9c3b689ee730"
                     },
                     "reference": {
                         "type": "string",
-                        "example": "STRING"
+                        "example": "your reference"
                     },
                     "scheduled_for": {
                         "type": "string",
@@ -775,15 +775,15 @@
                         "properties": {
                             "subject": {
                                 "type": "string",
-                                "example": "SUBJECT TEXT"
+                                "example": "Your upcoming pigeon registration appointment"
                             },
                             "body": {
                                 "type": "string",
-                                "example": "MESSAGE TEXT"
+                                "example": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 1:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau"
                             },
                             "from_email": {
                                 "type": "string",
-                                "example": "SENDER EMAIL"
+                                "example": "pigeon.affairs.bureau@notifications.service.gov.uk"
                             },
                             "one_click_unsubscribe_url": {
                                 "type": "string",
@@ -794,14 +794,14 @@
                     },
                     "uri": {
                         "type": "string",
-                        "example": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a"
+                        "example": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730"
                     },
                     "template": {
                         "type": "object",
                         "properties": {
                             "id": {
                                 "type": "string",
-                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                                "example": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3"
                             },
                             "version": {
                                 "type": "number",
@@ -809,7 +809,7 @@
                             },
                             "uri": {
                                 "type": "string",
-                                "example": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
+                                "example": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"
                             }
                         }
                     }
