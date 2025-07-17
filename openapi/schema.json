@@ -295,15 +295,15 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "75a36070-55dc-4dc1-ac33-89da9377d989"
+                        "example": "201b576e-c09b-467b-9dfa-9c3b689ee730"
                     },
                     "reference": {
                         "type": "string",
-                        "example": null
+                        "example": "your reference"
                     },
                     "to": {
                         "type": "string",
-                        "example": "example@mail.com"
+                        "example": "amala@example.com"
                     },
                     "status": {
                         "type": "string",
@@ -327,11 +327,11 @@
                     },
                     "template_id": {
                         "type": "string",
-                        "example": "8496188f-3f35-401b-9b8c-f97a528c5b76"
+                        "example": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3"
                     },
                     "template_version": {
                         "type": "number",
-                        "example": 2
+                        "example": 1
                     }
                 },
                 "required": []
