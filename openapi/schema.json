@@ -341,15 +341,15 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "75a36070-55dc-4dc1-ac33-89da9377d989"
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
                     },
                     "reference": {
                         "type": "string",
-                        "example": null
+                        "example": "your reference"
                     },
                     "to": {
                         "type": "string",
-                        "example": "07777777777"
+                        "example": "+447900900123"
                     },
                     "status": {
                         "type": "string",
@@ -373,11 +373,11 @@
                     },
                     "template_id": {
                         "type": "string",
-                        "example": "8496188f-3f35-401b-9b8c-f97a528c5b76"
+                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
                     },
                     "template_version": {
                         "type": "number",
-                        "example": 1
+                        "example": 3
                     }
                 },
                 "required": []
