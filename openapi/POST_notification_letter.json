@@ -231,6 +231,41 @@
                 "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             }
         },
+        "callbacks": {
+            "returnedLetter": {
+                "{$callback_url}": {
+                    "post": {
+                        "requestBody": {
+                            "description": "When a letter you sent is returned, Notify will send details of the returned letter to your callback URL.\n\nFind more [information about returned letters](https://www.notifications.service.gov.uk/using-notify/delivery-times#returned-mail). It can take a few weeks to receive information about a returned letter.\n\nThe callback message is formatted in JSON. The key, description and format of the callback message arguments will be:",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "schema.json#/components/schemas/LetterCallbackRequest"
+                                    }
+                                }
+                            }
+                        },
+                        "responses": {
+                            "2XX": {
+                                "description": "Success"
+                            },
+                            "4XX": {
+                                "description": "Failed"
+                            },
+                            "5XX": {
+                                "description": "Failed"
+                            }
+                        },
+                        "security": [
+                            {
+                                "BearerAuth": []
+                            }
+                        ],
+                        "summary": "Returned letter callback"
+                    }
+                }
+            }
+        },
         "security": [
             {
                 "BearerAuth": []
