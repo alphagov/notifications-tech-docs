@@ -139,7 +139,7 @@
                         },
                         "security": [
                             {
-                                "BearerAuth": []
+                                "BearerToken": []
                             }
                         ],
                         "summary": "Email callback"
