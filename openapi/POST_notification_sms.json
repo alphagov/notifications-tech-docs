@@ -166,7 +166,7 @@
                         },
                         "security": [
                             {
-                                "BearerAuth": []
+                                "BearerToken": []
                             }
                         ],
                         "summary": "Text message callback"

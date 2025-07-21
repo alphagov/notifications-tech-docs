@@ -245,7 +245,7 @@
                 "{$callback_url}": {
                     "post": {
                         "requestBody": {
-                            "description": "When a letter you sent is returned, Notify will send details of the returned letter to your callback URL.\n\nFind more [information about returned letters](https://www.notifications.service.gov.uk/using-notify/delivery-times#returned-mail). It can take a few weeks to receive information about a returned letter.\n\nThe callback message is formatted in JSON. The key, description and format of the callback message arguments will be:",
+                            "description": "When a letter you sent is returned, Notify will send details of the returned letter to your callback URL.\n\nFind more [information about returned letters](https://www.notifications.service.gov.uk/using-notify/delivery-times#returned-mail). It can take a few weeks to receive information about a returned letter.\n\n### Set up callbacks\n\nYou must provide:\n\n- a URL where Notify will post the callback to\n- a bearer token which Notify will put in the authorisation header of the requests\n\nTo do this:\n\n1. [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n1. Go to the __API integration__ page.\n1. Select __Callbacks__.\n\n### Retry callbacks\n\nIf Notify sends a `POST` request to your service, but the request fails then we will retry.\n\nWe will retry every 5 minutes, up to a maximum of 5 times.\n\n### Returned letters\n\nThe callback message is formatted in JSON. The key, description and format of the callback message arguments will be:",
                             "content": {
                                 "application/json": {
                                     "schema": {
@@ -267,7 +267,7 @@
                         },
                         "security": [
                             {
-                                "BearerAuth": []
+                                "BearerToken": []
                             }
                         ],
                         "summary": "Returned letter callback"
