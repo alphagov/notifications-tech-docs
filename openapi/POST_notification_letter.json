@@ -193,6 +193,15 @@
                                     }],
                                     "status_code": 400
                                 }
+                            },
+                            "Letter content is not a valid PDF": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "Letter content is not a valid PDF"
+                                    }],
+                                    "status_code": 400
+                                }
                             }
                         }
                     }
