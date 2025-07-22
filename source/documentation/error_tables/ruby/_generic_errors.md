@@ -20,11 +20,24 @@ Error message | How to fix
 **ServerError (status code 500)**|
 `Exception: Internal server error`|Notify was unable to process the request, resend your notification.|
 
-In addition to the above, you may also encounter:
+### Schema validation errors
 
-* various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type.
+The following are a few examples of schema validation errors you may encounter when making a request to a Notify endpoint.
 
-* endpoint-specific errors, which are listed under each relevant API endpoint section.
+Error message | How to fix
+---|---
+**BadRequestError (status code 400)**|
+`ValidationError: template_id is a required property`|Provide the missing argument.|
+`ValidationError: sms_sender_id is not a valid UUID`|Check the argument to make sure that it is valid for the given data type.|
+`ValidationError: personalisation <data type of argument you sent> is not of type object`|Provide argument in the correct type.|
+`ValidationError: reference <reference string you provided> is too long`|Provide a shorter string.|
+`ValidationError: template_type <invalid type> is not one of [sms, email, letter]`|Make sure that the argument matches one of the items in the list.|
+`ValidationError: Additional properties are not allowed (<list of unexpected properties> was unexpected)`|Only provide allowed arguments for the endpoint.|
+
+
+### Endpoint-specific errors
+
+In addition to the above, you may also encounter endpoint-specific errors, which are listed under each relevant API endpoint section.
 
 Find references for endpoint-specific errors in:
 
