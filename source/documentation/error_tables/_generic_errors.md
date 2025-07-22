@@ -32,7 +32,7 @@ Error message | How to fix
 `sms_sender_id is not a valid UUID`|Check the argument to make sure that it is valid for the given data type.|
 `personalisation <data type of argument you sent> is not of type object`|Provide argument in the correct type.|
 `reference <reference string you provided> is too long`|Provide a shorter string.|
-`template_type <invalid type> is not one of [sms, email, letter]`|Make sure that the argument matches one of the items in the list.|
+`type <invalid type> is not one of [sms, email, letter]`|Make sure that the argument matches one of the items in the list.|
 `Additional properties are not allowed (<list of unexpected properties> was unexpected)`|Only provide allowed arguments for the endpoint.|
 
 
