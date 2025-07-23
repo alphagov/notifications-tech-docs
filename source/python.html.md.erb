@@ -885,9 +885,9 @@ If you leave out this argument, the method only returns notifications sent using
 
 #### Response
 
-If the request to the client is successful, the client returns a `dict`.
+##### One page of up to 250 messages
 
-##### All messages
+If the request to the client is successful, the client returns a `dict`.
 
 ```python
 {
@@ -943,7 +943,9 @@ If the request to the client is successful, the client returns a `dict`.
 }
 ```
 
-##### One page of up to 250 messages
+##### All messages
+
+If the request to the client is successful, the client returns an iterator object which yields one notification at a time until it has yielded all your notifications. Each notification is a dict.
 
 ```python
 <generator object NotificationsAPIClient.get_all_notifications_iterator at 0x1026c7410>
