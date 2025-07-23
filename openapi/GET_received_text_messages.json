@@ -1,6 +1,6 @@
 {
     "get": {
-        "description": "**Get received text messages**\nThis API call returns one page of up to 250 received text messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the older_than argument.\nYou can only get the status of messages that are 7 days old or newer.\n**Enable received text messages**\nTo receive text messages:\n1.  Go to the **Text message settings** section of the **Settings** page.\n2.  Select **Change** on the **Receive text messages** row.",
+        "description": "**Get received text messages**\nThis API call returns one page of up to 250 received text messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the older_than argument.\nYou can only get the data for messages that are 7 days old or newer.\n**Enable received text messages**\nTo receive text messages:\n1.  Go to the **Text message settings** section of the **Settings** page.\n2.  Select **Change** on the **Receive text messages** row.",
         "operationId": "getReceivedMessagesStatus",
         "parameters": [
             {

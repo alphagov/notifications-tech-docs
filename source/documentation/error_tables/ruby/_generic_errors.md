@@ -42,6 +42,6 @@ In addition to the above, you may also encounter endpoint-specific errors, which
 Find references for endpoint-specific errors in:
 
 - [send a message](#send-a-message)
-- [get message status](#get-message-status)
+- [get message data](#get-message-data)
 - [get a template](#get-a-template)
 - [get received text messages](#get-received-text-messages)

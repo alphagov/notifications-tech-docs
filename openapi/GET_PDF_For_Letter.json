@@ -64,7 +64,7 @@
         ],
         "summary": "Get the the PDF contents of a letter",
         "tags": [
-            "Get message status"
+            "Get message data"
         ]
     }
 }

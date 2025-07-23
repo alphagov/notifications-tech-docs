@@ -24,8 +24,8 @@
             "description": "Send a message."
         },
         {
-            "name": "Get message status",
-            "description": "Get message status"
+            "name": "Get message data",
+            "description": "Get message data"
         },
         {
             "name": "Get a template",

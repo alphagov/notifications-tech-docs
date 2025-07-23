@@ -1,6 +1,6 @@
 {
     "get": {
-        "description": "This API call returns one page of up to 250 messages and statuses. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `older_than` argument.<br />You can only get the status of messages that are 7 days old or newer.<br />This will return all your messages with statuses. They will display in pages of up to 250 messages each.<br />You can omit any of these arguments to ignore these filters.",
+        "description": "This API call returns one page with data for up to 250 messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `older_than` argument.<br />You can only get the data for messages that are 7 days old or newer.<br />This will return all your messages with statuses. They will display in pages of up to 250 messages each.<br />You can omit any of these arguments to ignore these filters.",
         "operationId": "getMultipleMessagesStatus",
         "parameters": [
             {
@@ -133,9 +133,9 @@
                 "BearerAuth": []
             }
         ],
-        "summary": "Get the status of multiple messages",
+        "summary": "Get the data for multiple messages",
         "tags": [
-            "Get message status"
+            "Get message data"
         ]
     }
 }

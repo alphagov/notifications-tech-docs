@@ -24,7 +24,7 @@ You can use these smoke test numbers and addresses with any [type of API key](#a
 
 You can smoke test all Notify API client functions except:
 
-- Get the status of one message
+- Get the data for one message
 - Get the status of all messages
 
 You cannot use the smoke test phone numbers or email address with these functions because they return a fake `notification_ID`. If you need to test these functions, use a test API key and any other phone number or email.
