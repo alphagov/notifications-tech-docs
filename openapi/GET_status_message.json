@@ -1,6 +1,6 @@
 {
     "get": {
-        "description": "You can use this endpoint to get status of one message. Message status depends on the type of message you have sent.<br />You can only get the data for messages sent within the retention period. The default retention period is 7 days.<br />You can omit any of these optional arguments to ignore these filters.",
+        "description": "You can use this endpoint to get the data for one message. The data includes the status of the message. The status will vary depending on the type of message you have sent.<br />You can only get the data for messages sent within the retention period. The default retention period is 7 days.<br />You can omit any of these optional arguments to ignore these filters.",
         "operationId": "getMessageStatus",
         "parameters": [
             {
