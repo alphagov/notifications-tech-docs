@@ -25,7 +25,7 @@
         },
         {
             "name": "Get message data",
-            "description": "Get message data"
+            "description": "Get message status"
         },
         {
             "name": "Get a template",
@@ -47,10 +47,10 @@
             "$ref": "POST_notification_letter.json"
         },
         "/v2/notifications/{notification_id}": {
-            "$ref": "GET_status_message.json"
+            "$ref": "GET_data_for_message.json"
         },
         "/v2/notifications": {
-            "$ref": "GET_status_messages.json"
+            "$ref": "GET_data_for_messages.json"
         },
         "/v2/notifications/{notification_id}/pdf": {
             "$ref": "GET_PDF_For_Letter.json"
