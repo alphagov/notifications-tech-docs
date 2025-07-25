@@ -13,6 +13,6 @@ Use the status_code or the error instead, as these will not change.
 Find error codes in:
 
 - [send a message](#send-a-message)
-- [get message status](#get-message-status)
+- [get message data](#get-message-data)
 - [get a template](#get-a-template)
 - [get received text messages](#get-received-text-messages)

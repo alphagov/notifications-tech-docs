@@ -760,12 +760,12 @@ If the request is not successful, the promise fails with an `err`. To learn more
 <%= partial 'documentation/error_tables/send_a_precompiled_letter' %>
 
 
-## Get message status
+## Get message data
 
 
-### Get the status of one message
+### Get the data for one message
 
-You can only get the status of messages sent within the retention period. The default retention period is 7 days.
+You can only get the data for messages sent within the retention period. The default retention period is 7 days.
 
 #### Method
 
@@ -842,12 +842,12 @@ If the request is not successful, the promise fails with an `err`. To learn more
 
 Error message|How to fix|
 |:---|:---|
-<%= partial 'documentation/error_tables/get_the_status_of_one_message' %>
+<%= partial 'documentation/error_tables/get_the_data_for_one_message' %>
 
 
-### Get the status of multiple messages
+### Get the data for multiple messages
 
-This API call returns one page of up to 250 messages and statuses. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the [`olderThan`](#olderthan-optional) argument.
+This API call returns one page with data for up to 250 messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the [`olderThan`](#olderthan-optional) argument.
 
 You can only get messages that are within your data retention period. The default data retention period is 7 days. It can be changed in your Service Settings.
 
@@ -970,7 +970,7 @@ If the request is not successful, the promise fails with an `err`. To learn more
 
 |Error message|How to fix|
 |:---|:---|
-<%= partial 'documentation/error_tables/get_the_status_of_multiple_messages' %>
+<%= partial 'documentation/error_tables/get_the_data_for_multiple_messages' %>
 
 
 ### Email status descriptions

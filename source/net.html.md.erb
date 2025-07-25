@@ -743,10 +743,10 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 |:---|:---|
 <%= partial 'documentation/error_tables/send_a_precompiled_letter' %>
 
-## Get message status
-### Get the status of one message
+## Get message data
+### Get the data for one message
 
-You can only get the status of messages sent within the retention period. The default retention period is 7 days.
+You can only get the data for messages sent within the retention period. The default retention period is 7 days.
 
 #### Method
 
@@ -834,12 +834,12 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 
 Error message|How to fix|
 |:---|:---|
-<%= partial 'documentation/error_tables/get_the_status_of_one_message' %>
+<%= partial 'documentation/error_tables/get_the_data_for_one_message' %>
 
 
-### Get the status of multiple messages
+### Get the data for multiple messages
 
-This API call returns the status of multiple messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `olderThanId` argument.
+This API call returns the data for multiple messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `olderThanId` argument.
 
 You can only get messages that are within your data retention period. The default data retention period is 7 days. It can be changed in your Service Settings.
 
@@ -935,7 +935,7 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 
 |Error message|How to fix|
 |:---|:---|
-<%= partial 'documentation/error_tables/get_the_status_of_multiple_messages' %>
+<%= partial 'documentation/error_tables/get_the_data_for_multiple_messages' %>
 
 ### Email status descriptions
 
@@ -1224,7 +1224,7 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 
 This API call returns one page of up to 250 received text messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `olderThanId` argument.
 
-You can only get the status of messages that are 7 days old or newer.
+You can only get the data for messages that are 7 days old or newer.
 
 You can also set up [callbacks](#callbacks) for received text messages.
 

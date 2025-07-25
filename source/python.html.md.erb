@@ -683,11 +683,11 @@ If the request is not successful, the client returns an error. To learn more abo
 <%= partial 'documentation/error_tables/send_a_precompiled_letter' %>
 
 
-## Get message status
+## Get message data
 
-### Get the status of one message
+### Get the data for one message
 
-You can only get the status of messages sent within the retention period. The default retention period is 7 days.
+You can only get the data for messages sent within the retention period. The default retention period is 7 days.
 
 #### Method
 
@@ -771,22 +771,19 @@ If the request is not successful, the client returns an error. To learn more abo
 
 |Error message|How to fix|
 |:---|:---|
-<%= partial 'documentation/error_tables/get_the_status_of_one_message' %>
+<%= partial 'documentation/error_tables/get_the_data_for_one_message' %>
 
 
-### Get the status of multiple messages
+### Get the data for multiple messages
 
-This API call returns one page of up to 250 messages and statuses. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `older_than` argument.
-
-You can only get the status of messages sent within the retention period. The default retention period is 7 days.
+You can only get the data for messages sent within the retention period. The default retention period is 7 days. It can be changed in your Service Settings.
 
 #### Method
 
 ##### One page of up to 250 messages
 
-This API call returns one page of up to 250 messages and statuses. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `older_than` argument.
+This API call returns one page with data for up to 250 messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `older_than` argument.
 
-You can only get messages that are within your data retention period. The default data retention period is 7 days. It can be changed in your Service Settings.
 
 ```python
 response = notifications_client.get_all_notifications(
@@ -888,9 +885,9 @@ If you leave out this argument, the method only returns notifications sent using
 
 #### Response
 
-If the request to the client is successful, the client returns a `dict`.
+##### One page of up to 250 messages
 
-##### All messages
+If the request to the client is successful, the client returns a `dict`.
 
 ```python
 {
@@ -946,7 +943,9 @@ If the request to the client is successful, the client returns a `dict`.
 }
 ```
 
-##### One page of up to 250 messages
+##### All messages
+
+If the request to the client is successful, the client returns an iterator object which yields one notification at a time until it has yielded all your notifications. Each notification is a dict.
 
 ```python
 <generator object NotificationsAPIClient.get_all_notifications_iterator at 0x1026c7410>
@@ -965,7 +964,7 @@ If the request is not successful, the client returns an error. To learn more abo
 
 |Error message|How to fix|
 |:---|:---|
-<%= partial 'documentation/error_tables/get_the_status_of_multiple_messages' %>
+<%= partial 'documentation/error_tables/get_the_data_for_multiple_messages' %>
 
 ### Email status descriptions
 
@@ -1286,7 +1285,7 @@ If the request is not successful, the client returns an error. To learn more abo
 
 This API call returns one page of up to 250 received text messages. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the older_than argument.
 
-You can only get the status of messages that are 7 days old or newer.
+You can only get the data for messages that are 7 days old or newer.
 
 ### Enable received text messages
 

@@ -1,7 +1,7 @@
 {
     "get": {
-        "description": "You can use this endpoint to get status of one message. Message status depends on the type of message you have sent.<br />You can only get the status of messages sent within the retention period. The default retention period is 7 days.<br />You can omit any of these optional arguments to ignore these filters.",
-        "operationId": "getMessageStatus",
+        "description": "You can use this endpoint to get the data for one message. The data includes the status of the message. The status will vary depending on the type of message you have sent.<br />You can only get the data for messages sent within the retention period. The default retention period is 7 days.<br />You can omit any of these optional arguments to ignore these filters.",
+        "operationId": "getMessageData",
         "parameters": [
             {
                 "description": "The ID of the notification. You can find the notification ID in the response to the original notification method call.",
@@ -61,9 +61,9 @@
                 "BearerAuth": []
             }
         ],
-        "summary": "Get the status of one message",
+        "summary": "Get the data for one message",
         "tags": [
-            "Get message status"
+            "Get message data"
         ]
     }
 }
