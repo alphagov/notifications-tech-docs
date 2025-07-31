@@ -155,7 +155,7 @@
                                     "errors":
                                     [{
                                         "error":"ValidationError",
-                                        "message":"type pigeon is not one of [sms, email, letter, broadcast]"
+                                        "message":"type pigeon is not one of [sms, email, letter]"
                                     }],
                                     "status_code": 400
                         }
