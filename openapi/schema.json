@@ -1086,7 +1086,7 @@
                                 },
                                 "message": {
                                     "type": "string",
-                                    "example": "type pigeon is not one of [sms, email, letter, broadcast]",
+                                    "example": "type pigeon is not one of [sms, email, letter]",
                                     "description": "Error message"
                                 }
                             }
