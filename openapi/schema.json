@@ -473,212 +473,592 @@
                 }
             },
             "GetOneMessageResponse": {
-                "type": "object",
-                "description": "The Send Email Response Payload",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Required - notification ID",
-                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
-                    },
-                    "reference": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Optional",
-                        "example": "STRING"
-                    },
-                    "email_address": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Required for emails",
-                        "example": "sender@something.com"
-                    },
-                    "phone_number": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Required for text messages",
-                        "example": "+447900900123"
-                    },
-                    "line_1": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Required for letter",
-                        "example": "ADDRESS LINE 1"
-                    },
-                    "line_2": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Required for letter",
-                        "example": "ADDRESS LINE 2"
-                    },
-                    "line_3": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Required for letter",
-                        "example": "ADDRESS LINE 3"
-                    },
-                    "line_4": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Required for letter",
-                        "example": "ADDRESS LINE 4"
-                    },
-                    "line_5": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Required for letter",
-                        "example": "ADDRESS LINE 5"
-                    },
-                    "line_6": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Required for letter",
-                        "example": "ADDRESS LINE 6"
-                    },
-                    "postcode": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Required for letter",
-                        "example": "NW1 2TZ"
-                    },
-                    "postage": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Required for letter",
-                        "enum": [
-                            "first",
-                            "second",
-                            "economy",
-                            "europe",
-                            "rest-of-world"
-                        ],
-                        "example": "first / second / economy / europe / rest-of-world"
-                    },
-                    "type": {
-                        "type": "string",
-                        "description": "Required",
-                        "enum": [
-                            "sms",
-                            "letter",
-                            "email"
-                        ],
-                        "example": "sms / letter / email"
-                    },
-                    "status": {
-                        "type": "string",
-                        "description": "Required",
-                        "example": "sending / delivered / permanent-failure / temporary-failure / technical-failure"
-                    },
-                    "template": {
+                "oneOf": [
+                    {
+                        "title": "sms",
                         "type": "object",
+                        "description": "Get status of SMS - response payload",
                         "properties": {
                             "id": {
                                 "type": "string",
-                                "description": "Required - template ID",
-                                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
+                                "description": "required string - notification ID",
+                                "example": "740e5834-3a29-46b4-9a6f-16142fde533a"
                             },
-                            "version": {
-                                "type": "number",
-                                "example": 1
-                            },
-                            "uri": {
+                            "reference": {
                                 "type": "string",
-                                "description": "Required",
-                                "example": "/v2/template/{id}/{version}"
-                            }
-                        }
-                    },
-                    "body": {
-                        "type": "string",
-                        "description": "Required - body of notification",
-                        "example": "STRING"
-                    },
-                    "subject": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Required for email- subject of email",
-                        "example": "STRING"
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "description": "Required - date and time notification created",
-                        "example": "2024-05-17T15:58:38.342838Z"
-                    },
-                    "created_by_name": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Optional - name of the person who sent the notification if sent manually",
-                        "example": "STRING"
-                    },
-                    "sent_at": {
-                        "type": "string",
-                        "description": "Optional - date and time notification sent to provider",
-                        "example": "2024-05-17T15:58:30.143000Z"
-                    },
-                    "completed_at": {
-                        "type": "string",
-                        "description": "Optional - date and time notification delivered or failed",
-                        "example": "2024-05-17T15:59:10.321000Z"
-                    },
-                    "scheduled_for": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Optional - date and time notification has been scheduled to be sent at",
-                        "example": "2024-05-17T09:00:00.000000Z"
-                    },
-                    "one_click_unsubscribe_url": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Optional - URL that you provided so your recipients can unsubscribe",
-                        "example": "STRING"
-                    },
-                    "is_cost_data_ready": {
-                        "type": "boolean",
-                        "description": "`true` if cost data is ready, and `false` if it isn't",
-                        "example": true
-                    },
-                    "cost_in_pounds": {
-                        "type": "number",
-                        "format": "float",
-                        "description": "Optional - cost of the notification in pounds. The cost does not take free allowance into account",
-                        "example": 0.0027
-                    },
-                    "cost_details": {
-                        "oneOf": [
-                            {
+                                "nullable": true,
+                                "description": "optional string - reference you provided when sending the message",
+                                "example": "your reference"
+                            },
+                            "email_address": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for SMS",
+                                "example": null
+                            },
+                            "phone_number": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string for text messages",
+                                "example": "+447900900123"
+                            },
+                            "line_1": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for SMS",
+                                "example": null
+                            },
+                            "line_2": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for SMS",
+                                "example": null
+                            },
+                            "line_3": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for SMS",
+                                "example": null
+                            },
+                            "line_4": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for SMS",
+                                "example": null
+                            },
+                            "line_5": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for SMS",
+                                "example": null
+                            },
+                            "line_6": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for SMS",
+                                "example": null
+                            },
+                            "postcode": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for SMS",
+                                "example": null
+                            },
+                            "postage": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for SMS",
+                                "enum": [
+                                    "first",
+                                    "second",
+                                    "economy",
+                                    "europe",
+                                    "rest-of-world"
+                                ],
+                                "example": null
+                            },
+                            "type": {
+                                "type": "string",
+                                "description": "required string",
+                                "enum": [
+                                    "sms",
+                                    "letter",
+                                    "email"
+                                ],
+                                "example": "sms"
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "required string - see [REST API document](https://docs.notifications.service.gov.uk/rest-api.html#text-message-status-descriptions) for a detailed description.",
+                                "enum": [
+                                    "created",
+                                    "sending",
+                                    "pending",
+                                    "sent",
+                                    "delivered",
+                                    "permanent-failure",
+                                    "temporary-failure",
+                                    "technical-failure"
+                                ],
+                                "example": "delivered"
+                            },
+                            "template": {
                                 "type": "object",
-                                "title": "sms",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "required string - template ID",
+                                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08aa"
+                                    },
+                                    "version": {
+                                        "type": "number",
+                                        "description": "required integer",
+                                        "example": 3
+                                    },
+                                    "uri": {
+                                        "type": "string",
+                                        "description": "required string",
+                                        "example": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a/version/3"
+                                    }
+                                }
+                            },
+                            "body": {
+                                "type": "string",
+                                "description": "required string - body of notification",
+                                "example": "Hi Amala, your appointment is on 1 January 2018 at 1:00PM"
+                            },
+                            "subject": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for SMS",
+                                "example": null
+                            },
+                            "created_at": {
+                                "type": "string",
+                                "description": "required string - date and time notification created",
+                                "example": "2024-05-17T15:58:38.342838Z"
+                            },
+                            "created_by_name": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - name of the person who sent the notification if sent manually",
+                                "example": "Charlie Smith"
+                            },
+                            "sent_at": {
+                                "type": "string",
+                                "description": "optional string - date and time notification sent to provider",
+                                "example": "2024-05-17T15:58:30.143000Z"
+                            },
+                            "completed_at": {
+                                "type": "string",
+                                "description": "optional string - date and time notification delivered or failed",
+                                "example": "2024-05-17T15:59:10.321000Z"
+                            },
+                            "scheduled_for": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - date and time notification has been scheduled to be sent at",
+                                "example": "2024-05-17T09:00:00.000000Z"
+                            },
+                            "one_click_unsubscribe_url": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for SMS",
+                                "example": null
+                            },
+                            "is_cost_data_ready": {
+                                "type": "boolean",
+                                "description": "required boolean, this field is `true` if cost data is ready, and `false` if it isn't",
+                                "example": true
+                            },
+                            "cost_in_pounds": {
+                                "type": "number",
+                                "format": "float",
+                                "description": "optional number - cost of the notification in pounds. The cost does not take free allowance into account",
+                                "example": 0.0233
+                            },
+                            "cost_details": {
+                                "type": "object",
                                 "properties": {
                                     "billable_sms_fragments": {
                                         "type": "number",
-                                        "description": "Optional - for text messages, number of billable sms fragments in your text message",
+                                        "description": "optional integer - number of billable sms fragments in your text message",
                                         "example": 1
                                     },
                                     "international_rate_multiplier": {
                                         "type": "number",
-                                        "description": "Optional - for text messages, for international sms rate is multiplied by this value",
-                                        "example": 1
+                                        "format": "float",
+                                        "description": "optional integer - for international sms rate is multiplied by this value",
+                                        "example": 1.0
                                     },
                                     "sms_rate": {
                                         "type": "number",
                                         "format": "float",
-                                        "description": "Optional - for text messages, cost of 1 sms fragment",
-                                        "example": 0.0027
+                                        "description": "optional number - cost of 1 sms fragment",
+                                        "example": 0.0233
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "email",
+                        "type": "object",
+                        "description": "Get status of email - response payload",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "required string - notification ID",
+                                "example": "201b576e-c09b-467b-9dfa-9c3b689ee730"
+                            },
+                            "reference": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - reference you provided when sending the message",
+                                "example": "your reference"
+                            },
+                            "email_address": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string for emails",
+                                "example": "amala@example.com"
+                            },
+                            "phone_number": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for emails",
+                                "example": null
+                            },
+                            "line_1": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for emails",
+                                "example": null
+                            },
+                            "line_2": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for emails",
+                                "example": null
+                            },
+                            "line_3": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for emails",
+                                "example": null
+                            },
+                            "line_4": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for emails",
+                                "example": null
+                            },
+                            "line_5": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for emails",
+                                "example": null
+                            },
+                            "line_6": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for emails",
+                                "example": null
+                            },
+                            "postcode": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for emails",
+                                "example": null
+                            },
+                            "postage": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for emails",
+                                "enum": [
+                                    "first",
+                                    "second",
+                                    "economy",
+                                    "europe",
+                                    "rest-of-world"
+                                ],
+                                "example": null
+                            },
+                            "type": {
+                                "type": "string",
+                                "description": "required string",
+                                "enum": [
+                                    "sms",
+                                    "letter",
+                                    "email"
+                                ],
+                                "example": "email"
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "required string - see [REST API document](https://docs.notifications.service.gov.uk/rest-api.html#email-status-descriptions) for a detailed description.",
+                                "enum": [
+                                    "created",
+                                    "sending",
+                                    "delivered",
+                                    "permanent-failure",
+                                    "temporary-failure",
+                                    "technical-failure"
+                                ],
+                                "example": "delivered"
+                            },
+                            "template": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "required string - template ID",
+                                        "example": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3a"
+                                    },
+                                    "version": {
+                                        "type": "number",
+                                        "description": "required integer",
+                                        "example": 1
+                                    },
+                                    "uri": {
+                                        "type": "string",
+                                        "description": "required string",
+                                        "example": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3/version/1"
                                     }
                                 }
                             },
-                            {
+                            "body": {
+                                "type": "string",
+                                "description": "required string - body of notification",
+                                "example": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 1:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau"
+                            },
+                            "subject": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string - email subject",
+                                "example": "Your upcoming pigeon registration appointment"
+                            },
+                            "created_at": {
+                                "type": "string",
+                                "description": "required string - date and time notification created",
+                                "example": "2024-05-17T15:58:38.342838Z"
+                            },
+                            "created_by_name": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - name of the person who sent the notification if sent manually",
+                                "example": "Charlie Smith"
+                            },
+                            "sent_at": {
+                                "type": "string",
+                                "description": "optional string - date and time notification sent to provider",
+                                "example": "2024-05-17T15:58:30.143000Z"
+                            },
+                            "completed_at": {
+                                "type": "string",
+                                "description": "optional string - date and time notification delivered or failed",
+                                "example": "2024-05-17T15:59:10.321000Z"
+                            },
+                            "scheduled_for": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - date and time notification has been scheduled to be sent at",
+                                "example": "2024-05-17T09:00:00.000000Z"
+                            },
+                            "one_click_unsubscribe_url": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - URL that you provided so your recipients can unsubscribe",
+                                "example": "https://example.com/unsubscribe.html?opaque=123456789"
+                            },
+                            "is_cost_data_ready": {
+                                "type": "boolean",
+                                "description": "required boolean, this field is `true` if cost data is ready, and `false` if it isn't",
+                                "example": true
+                            },
+                            "cost_in_pounds": {
+                                "type": "number",
+                                "format": "float",
+                                "description": "optional number - cost of the notification in pounds. The cost does not take free allowance into account",
+                                "example": 0.0
+                            },
+                            "cost_details": {
                                 "type": "object",
-                                "title": "letter",
+                                "properties": {
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "letter",
+                        "type": "object",
+                        "description": "Get status of letter - response payload",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "required string - notification ID",
+                                "example": "3d1ce039-5476-414c-99b2-fac1e6add62c"
+                            },
+                            "reference": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - reference you provided when sending the message",
+                                "example": "your reference"
+                            },
+                            "email_address": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for letters",
+                                "example": null
+                            },
+                            "phone_number": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for letters",
+                                "example": null
+                            },
+                            "line_1": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string",
+                                "example": "Amala Bird"
+                            },
+                            "line_2": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string",
+                                "example": "123 High Street"
+                            },
+                            "line_3": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string",
+                                "example": "Richmond upon Thames"
+                            },
+                            "line_4": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string",
+                                "example": "Middlesex"
+                            },
+                            "line_5": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string",
+                                "example": "SW14 6BF"
+                            },
+                            "line_6": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string",
+                                "example": null
+                            },
+                            "postcode": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string",
+                                "example": null
+                            },
+                            "postage": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string",
+                                "enum": [
+                                    "first",
+                                    "second",
+                                    "economy",
+                                    "europe",
+                                    "rest-of-world"
+                                ],
+                                "example": "second"
+                            },
+                            "type": {
+                                "type": "string",
+                                "description": "required string",
+                                "enum": [
+                                    "sms",
+                                    "letter",
+                                    "email"
+                                ],
+                                "example": "letter"
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "required string - see [REST API document](https://docs.notifications.service.gov.uk/rest-api.html#letter-status-descriptions) for a detailed description.",
+                                "enum": [
+                                    "accepted",
+                                    "received",
+                                    "cancelled",
+                                    "permanent-failure",
+                                    "technical-failure"
+                                ],
+                                "example": "accepted"
+                            },
+                            "template": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "required string - template ID",
+                                        "example": "64415853-cb86-4cc4-b597-2aaa94ef8c39"
+                                    },
+                                    "version": {
+                                        "type": "number",
+                                        "description": "required integer",
+                                        "example": 3
+                                    },
+                                    "uri": {
+                                        "type": "string",
+                                        "description": "required string",
+                                        "example": "https://api.notifications.service.gov.uk/v2/template/64415853-cb86-4cc4-b597-2aaa94ef8c39/version/3"
+                                    }
+                                }
+                            },
+                            "body": {
+                                "type": "string",
+                                "description": "required string - body of notification",
+                                "example": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 1:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau"
+                            },
+                            "subject": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string - letter heading",
+                                "example": "Your upcoming pigeon registration appointment"
+                            },
+                            "created_at": {
+                                "type": "string",
+                                "description": "required string - date and time notification created",
+                                "example": "2024-05-17T15:58:38.342838Z"
+                            },
+                            "created_by_name": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - name of the person who sent the notification if sent manually",
+                                "example": "Charlie Smith"
+                            },
+                            "sent_at": {
+                                "type": "string",
+                                "description": "optional string - date and time notification sent to provider",
+                                "example": "2024-05-17T15:58:30.143000Z"
+                            },
+                            "completed_at": {
+                                "type": "string",
+                                "description": "optional string - date and time notification delivered or failed",
+                                "example": "2024-05-17T15:59:10.321000Z"
+                            },
+                            "scheduled_for": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - date and time notification has been scheduled to be sent at",
+                                "example": "2024-05-17T09:00:00.000000Z"
+                            },
+                            "one_click_unsubscribe_url": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for letters",
+                                "example": null
+                            },
+                            "is_cost_data_ready": {
+                                "type": "boolean",
+                                "description": "required boolean, this field is `true` if cost data is ready, and `false` if it isn't",
+                                "example": true
+                            },
+                            "cost_in_pounds": {
+                                "type": "number",
+                                "format": "float",
+                                "description": "optional number - cost of the notification in pounds. The cost does not take free allowance into account",
+                                "example": 0.68
+                            },
+                            "cost_details": {
+                                "type": "object",
                                 "properties": {
                                     "billable_sheets_of_paper": {
                                         "type": "number",
-                                        "description": "Optional - for letters, number of sheets of paper in the letter you sent",
-                                        "example": 2
+                                        "description": "optional integer - number of billable sheets of paper in your letter",
+                                        "example": 1
                                     },
                                     "postage": {
                                         "type": "string",
-                                        "description": "Optional - for letters",
                                         "enum": [
                                             "first",
                                             "second",
@@ -686,18 +1066,221 @@
                                             "europe",
                                             "rest-of-world"
                                         ],
-                                        "example": "first / second / economy / europe / rest-of-world"
+                                        "description": "optional string",
+                                        "example": "second"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "precompiled letter",
+                        "type": "object",
+                        "description": "Get status of precompiled letter - response payload",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "required string - notification ID",
+                                "example": "1d986ba7-fba6-49fb-84e5-75038a1dd968"
+                            },
+                            "reference": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - reference you provided when sending the message",
+                                "example": "your reference"
+                            },
+                            "email_address": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for letters",
+                                "example": null
+                            },
+                            "phone_number": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for letters",
+                                "example": null
+                            },
+                            "line_1": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string for precompiled letter - may be \"Provided as PDF\" until the PDF is processed Notify",
+                                "example": "Amala Bird"
+                            },
+                            "line_2": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string for letter - may be null if line_1 is \"Provided as PDF\"",
+                                "example": "123 High Street"
+                            },
+                            "line_3": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string for letter - may be null if line_1 is \"Provided as PDF\"",
+                                "example": "Richmond upon Thames"
+                            },
+                            "line_4": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string for letter",
+                                "example": "Middlesex"
+                            },
+                            "line_5": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string for letter",
+                                "example": "SW14 6BF"
+                            },
+                            "line_6": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string for letter",
+                                "example": null
+                            },
+                            "postcode": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string for letter",
+                                "example": null
+                            },
+                            "postage": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string for letter",
+                                "enum": [
+                                    "first",
+                                    "second",
+                                    "economy",
+                                    "europe",
+                                    "rest-of-world"
+                                ],
+                                "example": "first"
+                            },
+                            "type": {
+                                "type": "string",
+                                "description": "required string",
+                                "enum": [
+                                    "sms",
+                                    "letter",
+                                    "email"
+                                ],
+                                "example": "letter"
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "required string - see [REST API document](https://docs.notifications.service.gov.uk/rest-api.html#precompiled-letter-status-descriptions) for a detailed description.",
+                                "enum": [
+                                    "accepted",
+                                    "received",
+                                    "cancelled",
+                                    "pending-virus-check",
+                                    "virus-scan-failed",
+                                    "validation-failed",
+                                    "permanent-failure",
+                                    "technical-failure"
+                                ],
+                                "example": "accepted"
+                            },
+                            "template": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "required string - template ID - This is an internal Notify template for precompiled letters",
+                                        "example": "92b24f9c-bee1-47f8-a387-f19feb302d70"
+                                    },
+                                    "version": {
+                                        "type": "number",
+                                        "description": "required integer",
+                                        "example": 1
+                                    },
+                                    "uri": {
+                                        "type": "string",
+                                        "description": "required string - This is an internal Notify template for precompiled letters",
+                                        "example": "https://api.notifications.service.gov.uk/v2/template/92b24f9c-bee1-47f8-a387-f19feb302d70/version/1"
                                     }
                                 }
                             },
-                            {
+                            "body": {
+                                "type": "string",
+                                "description": "empty string for precompiled letter",
+                                "example": ""
+                            },
+                            "subject": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "required string for precompiled letters - always set to \"Pre-compiled PDF\"",
+                                "example": "Pre-compiled PDF"
+                            },
+                            "created_at": {
+                                "type": "string",
+                                "description": "required string - date and time notification created",
+                                "example": "2024-05-17T15:58:38.342838Z"
+                            },
+                            "created_by_name": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - name of the person who sent the notification if sent manually",
+                                "example": null
+                            },
+                            "sent_at": {
+                                "type": "string",
+                                "description": "optional string - date and time notification sent to provider",
+                                "example": "2024-05-17T15:58:30.143000Z"
+                            },
+                            "completed_at": {
+                                "type": "string",
+                                "description": "optional string - date and time notification delivered or failed",
+                                "example": "2024-05-17T15:59:10.321000Z"
+                            },
+                            "scheduled_for": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "optional string - date and time notification has been scheduled to be sent at",
+                                "example": null
+                            },
+                            "one_click_unsubscribe_url": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "not required for letters",
+                                "example": null
+                            },
+                            "is_cost_data_ready": {
+                                "type": "boolean",
+                                "description": "required boolean, this field is `true` if cost data is ready, and `false` if it isn't",
+                                "example": true
+                            },
+                            "cost_in_pounds": {
+                                "type": "number",
+                                "format": "float",
+                                "description": "optional number - cost of the notification in pounds. The cost does not take free allowance into account",
+                                "example": 0.68
+                            },
+                            "cost_details": {
                                 "type": "object",
-                                "title": "email",
-                                "properties": {}
+                                "properties": {
+                                    "billable_sheets_of_paper": {
+                                        "type": "number",
+                                        "description": "optional integer - number of billable sheets of paper in your letter",
+                                        "example": 1
+                                    },
+                                    "postage": {
+                                        "type": "string",
+                                        "enum": [
+                                            "first",
+                                            "second",
+                                            "economy",
+                                            "europe",
+                                            "rest-of-world"
+                                        ],
+                                        "description": "optional string",
+                                        "example": "second"
+                                    }
+                                }
                             }
-                        ]
-                    }
-                }
+                        }
+                    }   
+                ]
             },
             "GetReceivedTextMessageResponse": {
                 "type": "object",
