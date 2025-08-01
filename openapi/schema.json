@@ -1858,12 +1858,11 @@
                             "properties": {
                                 "error": {
                                     "type": "string",
-                                    "example": "NoResultFound"
+                                    "description": "Error type"
                                 },
                                 "message": {
                                     "type": "string",
-                                    "example": "id is not a valid UUID",
-                                    "description": "Check the notification ID"
+                                    "description": "Error message"
                                 }
                             }
                         }
