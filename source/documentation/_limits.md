@@ -2,7 +2,7 @@
 
 ### Rate limits
 
-You’re limited to sending 3,000 messages per minute.
+You’re limited to sending 3,000 messages per minute. You should avoid sending messages in large spikes. 
 
 This limit is calculated on a rolling basis, per API key type. If you exceed the limit, you will get a `429` error `RateLimitError`.
 
