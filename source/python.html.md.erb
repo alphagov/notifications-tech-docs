@@ -306,28 +306,29 @@ The malicious content could be:
 
 An example of how malicious content can be injected into Notify personalisation:
 
-**Template in Notify**:
-
-```python
-Hello ((name))
-```
-
-**Personalisation**: 
-
-```python
-{name: "Anne Example, now [click this evil link](https://malicious.link)"}
-```
-
-**Email will appear as**: 
-
-<pre>
- <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
-</pre>
-
+> Template in Notify:
+> 
+> ```python
+> Hello ((name))
+> ```
+> 
+> Personalisation:
+> 
+> ```
+> {name: "Anne Example, now [click this evil link](https://malicious.link)"}
+> ```
+> 
+> Email will appear as: 
+> 
+> <pre>
+>  <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
+> </pre>
 
 We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content. 
 You can use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape). 
 The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
+
+##### Sanitise placeholder content
 
 You can also use a dedicated API client function, `sanitise_text`, to prevent placeholder injection. This function will escape all `Markdown` characters, and remove any url links from the text you pass to it. For example:
 
@@ -336,16 +337,13 @@ You can also use a dedicated API client function, `sanitise_text`, to prevent pl
 name = "Anne Example, now [click this evil link](https://malicious.link)"
 sanitised_name = sanitise_text(name)
 
-print(sanitised_name)
 # gets sanitised to:
-"Anne Example, now \[click this evil link\]\(\)"
+print(sanitised_name) --> "Anne Example, now \[click this evil link\]\(\)"
+
+# email will appear as: 
+Dear Anne Example, now [click this evil link]()
 ```
 
-**Email will appear as**: 
-
-<pre>
- <small>Dear Anne Example, now [click this evil link]()</small>
-</pre>
 
 Example use when sending an email:
 
@@ -363,6 +361,7 @@ response = my_notify_client.send_email(
     }
 )
 ```
+
 
 ### Send a file by email
 
