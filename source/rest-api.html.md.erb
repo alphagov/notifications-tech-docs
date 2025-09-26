@@ -328,6 +328,16 @@ If the request is successful, the response body is `json` with a status code of 
 }
 ```
 
+#### Error codes
+
+If the request is not successful, the API returns `json` containing the relevant error code.
+To learn more about error structure, go to [Errors section](#errors).
+
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/send_an_email' %>
+
+
 #### Reducing the risk of malicious content injection in placeholders
 
 Notify lets you [personalise messages](https://www.notifications.service.gov.uk/using-notify/personalisation) using placeholders.
@@ -367,14 +377,41 @@ You can use a backslash to escape [individual characters](https://www.markdowngu
 The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
 
 
-#### Error codes
+You can also use a dedicated parameter on Notify's email sending API endpoint, `sanitise_text_for`, to prevent placeholder injection. With this parameter, you can escape all `Markdown` characters, and remove any url links from the text for chosen placeholders. For example:
 
-If the request is not successful, the API returns `json` containing the relevant error code.
-To learn more about error structure, go to [Errors section](#errors).
+```python
+# malicious markdown
+name = "Anne Example, now [click this evil link](https://malicious.link)"
 
-|Error message|How to fix|
-|:---|:---|
-<%= partial 'documentation/error_tables/send_an_email' %>
+# gets sanitised to:
+"Anne Example, now \[click this evil link\]\(\)"
+
+```
+
+**Email will appear as**: 
+
+<pre>
+ <small>Dear Anne Example, now [click this evil link]()</small>
+</pre>
+
+
+Example use when sending an email:
+
+```python
+# endpoint
+POST /v2/notifications/email
+
+# Request body
+{
+  "email_address": "amala@example.com",
+  "template_id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
+  "personalisation": {
+        "user_name": "user name from a form",
+        "sign_up_link": "link generated in your system"
+    },
+  "sanitise_text_for": ["user_name"]
+}
+```
 
 
 ### Send a file by email

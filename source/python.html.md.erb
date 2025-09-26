@@ -329,6 +329,40 @@ We recommend you sanitise all input from untrusted sources to prevent the inject
 You can use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape). 
 The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
 
+You can also use a dedicated API client function, `sanitise_text`, to prevent placeholder injection. This function will escape all `Markdown` characters, and remove any url links from the text you pass to it. For example:
+
+```python
+# malicious markdown
+name = "Anne Example, now [click this evil link](https://malicious.link)"
+sanitised_name = sanitise_text(name)
+
+print(sanitised_name)
+# gets sanitised to:
+"Anne Example, now \[click this evil link\]\(\)"
+```
+
+**Email will appear as**: 
+
+<pre>
+ <small>Dear Anne Example, now [click this evil link]()</small>
+</pre>
+
+Example use when sending an email:
+
+```python
+from notify_api_client import NotifyAPIClient, sanitise_text
+
+my_notify_client = NotifyAPIClient("my_api_key")
+
+response = my_notify_client.send_email(
+    email_address=form.user_email,
+    template_id="my_template_id",
+    personalisation={
+        "user_name": sanitise_text(form.user_name),
+        "sign_up_link": create_sign_up_link(form.user_email)
+    }
+)
+```
 
 ### Send a file by email
 
