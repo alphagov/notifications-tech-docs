@@ -85,10 +85,30 @@
                     "application/json": {
                         "schema": {
                             "$ref": "schema.json#/components/schemas/GetMessageValidationError"
+                        },
+                        "examples": {
+                            "Invalid status": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "status 'elephant' is not one of [cancelled, created, sending, sent, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure, pending-virus-check, validation-failed, virus-scan-failed, returned-letter, accepted, received]"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Invalid template_type": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "'Apple' is not one of [sms, email, letter]"
+                                    }],
+                                    "status_code": 400
+                                }
+                            }
                         }
                     }
                 },
-                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+                "description": "Bad request. Check the `message` in the response to find out why your request failed. In addition to the endpoint specific errors shown in the examples, you may also encounter various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type. You can find a list of these errors at https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "403": {
                 "content": {
