@@ -32,9 +32,17 @@ The Notify PHP Client is based on a [PSR-7 HTTP model](https://www.php-fig.org/p
 
 To get an API key, [sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and go to the __API integration__ page. You can find more information in the [API keys](#api-keys) section of this documentation.
 
-## Send a message
+## Sending messages
 
-You can use GOV.UK Notify to send text messages, emails and letters.
+You can use GOV.UK Notify to send emails, text messages and letters.
+
+### Bulk sending
+
+You cannot use a single API call to send messages in bulk.
+
+To send a batch of messages, use the API to loop over your recipient list, sending one message at a time to each recipient.
+
+Make sure you do not exceed our rate limits.
 
 ### Send a text message
 
