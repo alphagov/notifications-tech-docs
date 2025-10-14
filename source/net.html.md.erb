@@ -79,6 +79,14 @@ var client = new NotificationClient(httpClientWithProxy, apiKey);
 
 You can use GOV.UK Notify to send emails, text messages and letters.
 
+### Bulk sending
+
+You cannot use a single API call to send messages in bulk.
+
+To send a batch of messages, use the API to loop over your recipient list, sending one message at a time to each recipient.
+
+Make sure you do not exceed our [rate limits](#rate-limits).
+
 ### Send a text message
 
 #### Method
