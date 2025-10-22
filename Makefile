@@ -31,11 +31,6 @@ development: ## Set environment to development
 	$(eval export HOST='http://localhost:4567')
 	@true
 
-.PHONY: preview
-preview: ## Set environment to preview
-	$(eval export HOST='https://docs.notify.works')
-	@true
-
 .PHONY: production
 production: ## Set environment to production
 	$(eval export HOST='https://docs.notifications.service.gov.uk')
