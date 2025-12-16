@@ -42,7 +42,7 @@ You do not have to revoke test keys.
 
 ### Team and guest list
 
-A team and guest list key lets you send real messages to your team members and addresses/numbers on your guest list while your service is still in trial mode.
+A team and guest list key lets you send real messages to your team members and 5 other email addresses or phone numbers while you're still in trial mode. 
 
 You will get an error if you use these keys to send messages to anyone who is not on your team or your guest list.
 
