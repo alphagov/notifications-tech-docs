@@ -336,6 +336,16 @@ If the request is successful, the response body is `json` with a status code of 
 }
 ```
 
+#### Error codes
+
+If the request is not successful, the API returns `json` containing the relevant error code.
+To learn more about error structure, go to [Errors section](#errors).
+
+|Error message|How to fix|
+|:---|:---|
+<%= partial 'documentation/error_tables/send_an_email' %>
+
+
 #### Reducing the risk of malicious content injection in placeholders
 
 Notify lets you [personalise messages](https://www.notifications.service.gov.uk/using-notify/personalisation) using placeholders.
@@ -351,38 +361,62 @@ The malicious content could be:
 
 An example of how malicious content can be injected into Notify personalisation:
 
-**Template in Notify**:
-
-```javascript
-Hello ((name))
-```
-
-**Personalisation**:
-
-```javascript
-{name: "Anne Example, now [click this evil link](https://malicious.link)"}
-```
-
-**Email will appear as**:
-
-<pre>
- <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
-</pre>
-
+> Template in Notify:
+> 
+> ```javascript
+> Hello ((name))
+> ```
+> 
+> Personalisation:
+> 
+> ```javascript
+> {name: "Anne Example, now [click this evil link](https://malicious.link)"}
+> ```
+> 
+> Email will appear as:
+> 
+> <pre>
+>  <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
+> </pre>
 
 We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content.
 You can use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape).
 The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
 
+##### Sanitise placeholder content
 
-#### Error codes
+You can also use a dedicated parameter on Notify's email sending API endpoint, `sanitise_text_for`, to prevent placeholder injection. With this parameter, you can escape all `Markdown` characters, and remove any url links from the text for chosen placeholders.
 
-If the request is not successful, the API returns `json` containing the relevant error code.
-To learn more about error structure, go to [Errors section](#errors).
+For example:
 
-|Error message|How to fix|
-|:---|:---|
-<%= partial 'documentation/error_tables/send_an_email' %>
+```python
+# malicious markdown
+name = "Anne Example, now [click this evil link](https://malicious.link)"
+
+# gets sanitised to:
+"Anne Example, now \[click this evil link\]\(\)"
+
+# email will appear as: 
+Dear Anne Example, now [click this evil link]()
+```
+
+How to apply it when sending an email:
+
+```python
+# endpoint
+POST /v2/notifications/email
+
+# Request body
+{
+  "email_address": "amala@example.com",
+  "template_id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
+  "personalisation": {
+        "user_name": "user name from a form",
+        "sign_up_link": "link generated in your system"
+    },
+  "sanitise_text_for": ["user_name"]
+}
+```
 
 
 ### Send a file by email
