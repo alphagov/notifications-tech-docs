@@ -267,7 +267,7 @@
             },
             "TemplateByIdRequest": {
                 "type": "string",
-                "example": "b7a59abd-0ab2-4538-b619-8da9f9089e08"
+                "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
             },
             "TemplateByIdAndVersionRequest": {
                 "type": "integer",
@@ -588,7 +588,7 @@
                                     "id": {
                                         "type": "string",
                                         "description": "required string - template ID",
-                                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08aa"
+                                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"
                                     },
                                     "version": {
                                         "type": "number",
@@ -1551,91 +1551,282 @@
                 }
             },
             "TemplateResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "example": "f33517ff-2a88-4f6e-b855-c550268ce08a",
-                        "description": "required string - template ID"
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "Test template",
-                        "description": "required string - template name"
-                    },
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "sms",
-                            "email",
-                            "letter"
-                        ],
-                        "example": "sms",
-                        "description": "required string"
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "example": "2024-08-12T10:40:20.000000Z",
-                        "description": "required string - date and time template created"
-                    },
-                    "updated_at": {
-                        "type": "string",
-                        "example": "2024-08-12T10:45:47.890097Z",
-                        "description": "required string - date and time template last updated"
-                    },
-                    "version": {
-                        "type": "integer",
-                        "example": 3
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "example": "someone@example.com",
-                        "description": "required string"
-                    },
-                    "body": {
-                        "type": "string",
-                        "example": "Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
-                        "description": "required string - body of notification"
-                    },
-                    "subject": {
-                        "type": "string",
-                        "nullable": true,
-                        "example": "Test",
-                        "description": "required string for email - subject of email, otherwise null"
-                    },
-                    "postage": {
-                        "type": "string",
-                        "enum": [
-                            "first",
-                            "second",
-                            "economy",
-                            "europe",
-                            "rest-of-world",
-                            null
-                        ],
-                        "nullable": true,
-                        "example": "second",
-                        "description": "required string for letter - postage type, otherwise null"
-                    },
-                    "personalisation": {
-                        "type": "object",
-                        "example": {
-                            "date": {
-                                "required": true
-                            },
-                            "firstname": {
-                                "required": true
-                            }
+                "oneOf": [
+                {
+                    "title" : "sms",
+                    "type": "object",
+                    "description": "Get SMS template - response payload",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "example": "f33517ff-2a88-4f6e-b855-c550268ce08a",
+                            "description": "required string - template ID"
                         },
-                        "description": "object containaing personalisation parameters - empty if no personalisation in the template"
-                    },
-                    "letter_contact_block": {
-                        "type": "string",
-                        "nullable": true,
-                        "example": "",
-                        "description": "optional string - null if not a letter template or contact block not set"
+                        "name": {
+                            "type": "string",
+                            "example": "Pigeon registration - appointment SMS",
+                            "description": "required string - template name"
+                        },
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "sms",
+                                "email",
+                                "letter"
+                            ],
+                            "example": "sms",
+                            "description": "required string"
+                        },
+                        "created_at": {
+                            "type": "string",
+                            "example": "2024-05-10 10:30:31.142535Z",
+                            "description": "required string - date and time template created"
+                        },
+                        "updated_at": {
+                            "type": "string",
+                            "example": "2024-08-25 13:00:09.123234Z",
+                            "nullable": true,
+                            "description": "date and time template last updated or null"
+                        },
+                        "version": {
+                            "type": "integer",
+                            "example": 3
+                        },
+                        "created_by": {
+                            "type": "string",
+                            "example": "charlie.smith@pigeons.gov.uk",
+                            "description": "required string"
+                        },
+                        "body": {
+                            "type": "string",
+                            "example": "Hi ((firstname)), your appointment is on ((date))",
+                            "description": "required string - body of notification"
+                        },
+                        "subject": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null,
+                            "description": "null for SMS templates"
+                        },
+                        "postage": {
+                            "type": "string",
+                            "enum": [
+                                "first",
+                                "second",
+                                "economy",
+                                "europe",
+                                "rest-of-world",
+                                null
+                            ],
+                            "nullable": true,
+                            "example": null,
+                            "description": "null for SMS templates"
+                        },
+                        "personalisation": {
+                            "type": "object",
+                            "example": {
+                                "date": {
+                                    "required": true
+                                },
+                                "firstname": {
+                                    "required": true
+                                }
+                            },
+                            "description": "object containing personalisation parameters - empty if no personalisation in the template"
+                        },
+                        "letter_contact_block": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null,
+                            "description": "null for SMS templates"
+                        }
+                    }
+                },
+                {
+                    "title" : "email",
+                    "type": "object",
+                    "description": "Get Email template - response payload",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "example": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3a",
+                            "description": "required string - template ID"
+                        },
+                        "name": {
+                            "type": "string",
+                            "example": "Pigeon registration - appointment email",
+                            "description": "required string - template name"
+                        },
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "sms",
+                                "email",
+                                "letter"
+                            ],
+                            "example": "email",
+                            "description": "required string"
+                        },
+                        "created_at": {
+                            "type": "string",
+                            "example": "2024-05-10 10:30:31.142535Z",
+                            "description": "required string - date and time template created"
+                        },
+                        "updated_at": {
+                            "type": "string",
+                            "example": null,
+                            "nullable": true,
+                            "description": "date and time template last updated or null"
+                        },
+                        "version": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "created_by": {
+                            "type": "string",
+                            "example": "charlie.smith@pigeons.gov.uk",
+                            "description": "required string"
+                        },
+                        "body": {
+                            "type": "string",
+                            "example": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",
+                            "description": "required string - body of notification"
+                        },
+                        "subject": {
+                            "type": "string",
+                            "example": "Your upcoming pigeon registration appointment",
+                            "description": "required string for email templates - email subject"
+                        },
+                        "postage": {
+                            "type": "string",
+                            "enum": [
+                                "first",
+                                "second",
+                                "economy",
+                                "europe",
+                                "rest-of-world",
+                                null
+                            ],
+                            "nullable": true,
+                            "example": null,
+                            "description": "null for email templates"
+                        },
+                        "personalisation": {
+                            "type": "object",
+                            "example": {
+                                "appointment_date": {
+                                    "required": true
+                                },
+                                "first_name": {
+                                    "required": true
+                                },
+                                "required_documents": {
+                                    "required": true
+                                }
+                            },
+                            "description": "object containing personalisation parameters - empty if no personalisation in the template"
+                        },
+                        "letter_contact_block": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null,
+                            "description": "null for email templates"
+                        }
+                    }
+                },
+                {
+                    "title" : "letter",
+                    "type": "object",
+                    "description": "Get Letter template - response payload",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "example": "64415853-cb86-4cc4-b597-2aaa94ef8c39",
+                            "description": "required string - template ID"
+                        },
+                        "name": {
+                            "type": "string",
+                            "example": "Pigeon registration - appointment letter",
+                            "description": "required string - template name"
+                        },
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "sms",
+                                "email",
+                                "letter"
+                            ],
+                            "example": "letter",
+                            "description": "required string"
+                        },
+                        "created_at": {
+                            "type": "string",
+                            "example": "2024-05-10 10:30:31.142535Z",
+                            "description": "required string - date and time template created"
+                        },
+                        "updated_at": {
+                            "type": "string",
+                            "example": "2024-08-25 13:00:09.123234Z",
+                            "nullable": true,
+                            "description": "date and time template last updated or null"
+                        },
+                        "version": {
+                            "type": "integer",
+                            "example": 3
+                        },
+                        "created_by": {
+                            "type": "string",
+                            "example": "charlie.smith@pigeons.gov.uk",
+                            "description": "required string"
+                        },
+                        "body": {
+                            "type": "string",
+                            "example": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",
+                            "description": "required string - body of notification"
+                        },
+                        "subject": {
+                            "type": "string",
+                            "example": "Your upcoming pigeon registration appointment",
+                            "description": "required string for letter templates - letter heading"
+                        },
+                        "postage": {
+                            "type": "string",
+                            "enum": [
+                                "first",
+                                "second",
+                                "economy",
+                                "europe",
+                                "rest-of-world",
+                                null
+                            ],
+                            "nullable": true,
+                            "example": "second",
+                            "description": "required string for letter templates - default postage"
+                        },
+                        "personalisation": {
+                            "type": "object",
+                            "example": {
+                                "appointment_date": {
+                                    "required": true
+                                },
+                                "first_name": {
+                                    "required": true
+                                },
+                                "required_documents": {
+                                    "required": true
+                                }
+                            },
+                            "description": "object containing personalisation parameters - empty if no personalisation in the template"
+                        },
+                        "letter_contact_block": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF",
+                            "description": "optional string for letter templates - sender address"
+                        }
                     }
                 }
+            ]
             },
             "TemplatePreviewResponse": {
                 "type": "object",
