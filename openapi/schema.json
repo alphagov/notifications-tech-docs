@@ -1545,7 +1545,82 @@
                     "templates": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/TemplateResponse"
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "description": "required string - template ID"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "required string - template name"
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "sms",
+                                        "email",
+                                        "letter"
+                                    ],
+                                    "description": "required string"
+                                },
+                                "created_at": {
+                                    "type": "string",
+                                    "description": "required string - date and time template created"
+                                },
+                                "updated_at": {
+                                    "type": "string",
+                                    "nullable": true,
+                                    "description": "date and time template last updated or null"
+                                },
+                                "version": {
+                                    "type": "integer",
+                                    "description": "required integer"
+                                },
+                                "created_by": {
+                                    "type": "string",
+                                    "description": "required string"
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "description": "required string - body of notification"
+                                },
+                                "subject": {
+                                    "type": "string",
+                                    "nullable": true,
+                                    "description": "required string for emails and letters, nul for SMS"
+                                },
+                                "postage": {
+                                    "type": "string",
+                                    "enum": [
+                                        "first",
+                                        "second",
+                                        "economy",
+                                        "europe",
+                                        "rest-of-world",
+                                        null
+                                    ],
+                                    "nullable": true,
+                                    "description": "required string for letter, null for other template types"
+                                },
+                                "personalisation": {
+                                    "type": "object",
+                                    "example": {
+                                        "date": {
+                                            "required": true
+                                        },
+                                        "firstname": {
+                                            "required": true
+                                        }
+                                    },
+                                    "description": "object containing personalisation parameters - empty if no personalisation in the template"
+                                },
+                                "letter_contact_block": {
+                                    "type": "string",
+                                    "nullable": true,
+                                    "description": "optional string for letters, null for other template types"
+                                }
+                            }
                         }
                     }
                 }
