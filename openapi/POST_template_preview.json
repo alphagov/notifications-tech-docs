@@ -10,7 +10,7 @@
             "schema": {
                 "$ref": "schema.json#/components/schemas/TemplateByIdRequest"
             },
-            "example": "b7a59abd-0ab2-4538-b619-8da9f9089e08"  
+            "example": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3a"  
         }],
         "requestBody": {
             "content": {
@@ -32,7 +32,7 @@
                         }
                     }
                 },
-                "description": "Created"
+                "description": "If the request is successful, the response body is `json` and the status code is `200`"
             },
             "400": {
                 "content": {
@@ -42,7 +42,7 @@
                         }
                     }
                 },
-                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+                "description": "Bad request. Check the `message` in the response to find out why your request failed. In addition to the endpoint specific errors shown in the examples, you may also encounter various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type. You can find a list of these errors at https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "403": {
                 "content": {
@@ -52,7 +52,7 @@
                         }
                     }
                 },
-                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+                "description": "Auth error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "429": {
                 "content": {
@@ -62,7 +62,7 @@
                         }
                     }
                 },
-                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed."
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "500": {
                 "content": {
@@ -72,7 +72,7 @@
                         }
                     }
                 },
-                "description": "Internal server error. Check the `message` in the response to find out why your request failed."
+                "description": "Internal server error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             }
         },
         "security": [

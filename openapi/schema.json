@@ -279,15 +279,19 @@
                 "properties": {
                     "personalisation": {
                         "type": "object",
-                        "description": "You can leave out this argument if a template does not have any placeholder fields for personalised information.<br/>If a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. For example:",
+                        "description": "The keys in the personalisation argument must match the placeholder fields in the actual template. The API will ignore any extra keys in the personalisation argument.",
                         "properties": {
-                            "firstname": {
+                            "first_name": {
                                 "type": "string",
                                 "example": "Amala"
                             },
-                            "date": {
+                            "appointment_date": {
                                 "type": "string",
-                                "example": "19/08/2024"
+                                "example": "1 January 2018 at 1:00pm"
+                            },
+                            "required_documents":  {
+                                "type": "array",
+                                "example": ["passport", "utility bill", "other id"] 
                             }
                         }
                     }
@@ -1905,11 +1909,12 @@
             },
             "TemplatePreviewResponse": {
                 "type": "object",
-                "description": "If the request is successful, the response body is json and the status code is 200",
+                "description": "If the request is successful, the response body is `json` and the status code is `200`",
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "b7a59abd-0ab2-4538-b619-8da9f9089e08"
+                        "example": "740e5834-3a29-46b4-9a6f-16142fde533a",
+                        "description": "required string - notification ID"
                     },
                     "type": {
                         "type": "string",
@@ -1918,28 +1923,29 @@
                             "email",
                             "letter"
                         ],
-                        "example": "sms",
+                        "example": "email",
                         "description": "required string"
                     },
                     "version": {
                         "type": "integer",
-                        "example": 2
+                        "example": 3,
+                        "description": "required string - version of template"
                     },
                     "body": {
                         "type": "string",
-                        "example": "Hi Amala, We have received your letter dated 19/08/2024.  No further action is required.",
-                        "description": "required string - body of notification"
+                        "example": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 1:00PM.\r\n\r\n Here is a link to your invitation document:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nPlease bring the invite with you to the appointment.\r\n\r\nYours,\r\nPigeon Affairs Bureau",
+                        "description": "required string - Unformatted content of the notification"
                     },
                     "html": {
                         "type": "string",
                         "nullable": true,
-                        "example": null,
-                        "description": "html representation of the notification to be sent - null for sms"
+                        "example": "<p style=\"Margin: 0 0 20px 0; font-size: 19px; line-height: 25px; color: #0B0C0C;\">Dear Amala</p> ... [snippet truncated for readability]",
+                        "description": "required string for emails, empty for SMS and letters. - body of notification"
                     },
                     "subject": {
                         "type": "string",
                         "nullable": true,
-                        "example": null,
+                        "example": "Your upcoming pigeon registration appointment",
                         "description": "required string for email - subject of email, otherwise null"
                     },
                     "postage": {
@@ -2060,7 +2066,7 @@
             },
             "TemplatePreviewRequestError": {
                 "type": "object",
-                "description": "Bad request error response",
+                "description": "Bad request. Check the `message` in the response to find out why your request failed. In addition to the endpoint specific errors shown in the examples, you may also encounter various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type. You can find a list of these errors at https://docs.notifications.service.gov.uk/rest-api.html#general-errors.",
                 "properties": {
                     "errors": {
                         "type": "array",
@@ -2069,13 +2075,11 @@
                             "properties": {
                                 "error": {
                                     "type": "string",
-                                    "example": "BadRequestError",
-                                    "description": "Error type"
+                                    "example": "BadRequestError"
                                 },
                                 "message": {
                                     "type": "string",
-                                    "example": "Missing personalisation: [PERSONALISATION FIELD]",
-                                    "description": "Error message"
+                                    "example": "Missing personalisation: [PERSONALISATION FIELD]"
                                 }
                             }
                         }
@@ -2141,7 +2145,7 @@
             },
             "AuthError": {
                 "type": "object",
-                "description": "Auth error response",
+                "description": "Auth error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors.",
                 "properties": {
                     "errors": {
                         "type": "array",
@@ -2150,13 +2154,11 @@
                             "properties": {
                                 "error": {
                                     "type": "string",
-                                    "example": "BadRequestError",
-                                    "description": "Error type"
+                                    "example": "BadRequestError"
                                 },
                                 "message": {
                                     "type": "string",
-                                    "example": "Error: Your system clock must be accurate to within 30 seconds",
-                                    "description": "Error string"
+                                    "example": "Error: Your system clock must be accurate to within 30 seconds"
                                 }
                             }
                         }
@@ -2169,7 +2171,7 @@
             },
             "LimitError": {
                 "type": "object",
-                "description": "Rate or service limit error response",
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors.",
                 "properties": {
                     "errors": {
                         "type": "array",
@@ -2178,13 +2180,11 @@
                             "properties": {
                                 "error": {
                                     "type": "string",
-                                    "example": "TooManyRequestsError",
-                                    "description": "Error type"
+                                    "example": "TooManyRequestsError"
                                 },
                                 "message": {
                                     "type": "string",
-                                    "example": "Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds",
-                                    "description": "Error string"
+                                    "example": "Exceeded rate limit for key type TEAM/TEST/LIVE of 3000 requests per 60 seconds"
                                 }
                             }
                         }
@@ -2197,7 +2197,7 @@
             },
             "ServerError": {
                 "type": "array",
-                "description": "Rate or service limit error response",
+                "description": "Internal server error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors.",
                 "items": {
                     "type": "object",
                     "properties": {
@@ -2207,8 +2207,7 @@
                         },
                         "message": {
                             "type": "string",
-                            "example": "Internal server error",
-                            "description": "Notify was unable to process the request, resend your notification."
+                            "example": "Internal server error"
                         }
                     }
                 }
