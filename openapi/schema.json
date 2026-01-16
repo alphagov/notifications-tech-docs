@@ -470,7 +470,7 @@
                             "next": {
                                 "type": "string",
                                 "description": "Optional property, only included if the query parameter filers return some data",
-                                "example": "https://api.notifications.service.gov.uk/v2/notifications?older_than=last_id_in_list&template_type=sms&status=delivered"
+                                "example": "https://api.notifications.service.gov.uk/v2/notifications?older_than=740e5834-3a29-46b4-9a6f-16142fde533a&template_type=sms&status=delivered"
                             }
                         }
                     }
