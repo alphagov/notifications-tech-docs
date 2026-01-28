@@ -145,7 +145,7 @@ GEM
     minitest (5.25.5)
     multi_json (1.15.0)
     mutex_m (0.3.0)
-    nokogiri (1.18.8-arm64-darwin)
+    nokogiri (1.19.0-arm64-darwin)
       racc (~> 1.4)
     openapi3_parser (0.9.2)
       commonmarker (~> 0.17)
