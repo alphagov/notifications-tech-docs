@@ -1,5 +1,5 @@
 ##### Ruby Build Image ########################################################
-FROM ruby:3.2-slim-bookworm as ruby_build
+FROM ruby:3.4-slim-bookworm AS ruby_build
 
 RUN \
 	echo "Install Debian packages" \
@@ -21,7 +21,7 @@ RUN bundle exec middleman build
 RUN mv build/ production/build/
 
 ##### Production Build Image ##################################################
-FROM nginx:1.25-bookworm as production
+FROM nginx:1.25-bookworm AS production
 
 RUN mkdir -p /etc/nginx/production_static_files
 
