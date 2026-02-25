@@ -545,6 +545,8 @@ The personalisation argument always contains the following parameters for the le
 
 The address must have at least 3 lines.
 
+The first 2 lines of the address must include alphanumeric characters.
+
 The last line needs to be a real UK postcode or the name of a country outside the UK.
 
 Notify checks for international addresses and will automatically charge you the correct postage.
@@ -555,8 +557,8 @@ Any other placeholder fields included in the letter template also count as requi
 
 ```java
 Map<String, Object> personalisation = new HashMap<>();
-personalisation.put("address_line_1", "The Occupier"); // mandatory address field
-personalisation.put("address_line_2", "Flat 2"); // mandatory address field
+personalisation.put("address_line_1", "The Occupier"); // mandatory address field, must contain at least one alphanumeric character
+personalisation.put("address_line_2", "Flat 2"); // mandatory address field, must contain at least one alphanumeric character
 personalisation.put("address_line_3", "SW14 6BH"); // mandatory address field, must be a real UK postcode
 personalisation.put("first_name", "Amala"); // field from template
 personalisation.put("application_date", "2018-01-01"); // field from template

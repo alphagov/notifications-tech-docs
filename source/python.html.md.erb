@@ -568,6 +568,8 @@ The personalisation argument always contains the following parameters for the le
 
 The address must have at least 3 lines.
 
+The first 2 lines of the address must include alphanumeric characters.
+
 The last line needs to be a real UK postcode or the name of a country outside the UK.
 
 Notify checks for international addresses and will automatically charge you the correct postage.
@@ -578,8 +580,8 @@ Any other placeholder fields included in the letter template also count as requi
 
 ```python
 personalisation={
-  "address_line_1": "Amala Bird",  # required string
-  "address_line_2": "123 High Street",  # required string
+  "address_line_1": "Amala Bird",  # required string, must contain at least one alphanumeric character
+  "address_line_2": "123 High Street",  # required string, must contain at least one alphanumeric character
   "address_line_3": "Richmond upon Thames",  # required string
   "address_line_4": "Middlesex",
   "address_line_5": "SW14 6BF",  # last line of address you include must be a postcode or a country name  outside the UK
