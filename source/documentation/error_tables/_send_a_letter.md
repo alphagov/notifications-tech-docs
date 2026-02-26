@@ -1,5 +1,6 @@
 **ValidationError (status code 400)**|
 `personalisation address_line_1 is a required property`|Ensure that your template has a field for the first line of the address, check [personalisation](#personalisation-required) for more information.|
+`The first 2 lines of the address must include alphanumeric characters`|Ensure that lines 1 and 2 both contain at least one alphanumeric character.|
 `Must be a real UK postcode`|Ensure that the value for the last line of the address is a real UK postcode.|
 `Must be a real address`|Provide a real recipient address. We do not accept letters for "no fixed abode" addresses, as those cannot be delivered.|
 `Last line of address must be a real UK postcode or another country`|Ensure that the value for the last line of the address is a real UK postcode or the name of a country outside the UK.|
