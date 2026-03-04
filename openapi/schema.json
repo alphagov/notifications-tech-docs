@@ -392,7 +392,7 @@
             "LetterCallbackRequest": {
                 "type": "object",
                 "properties": {
-                    "id": {
+                    "notification_id": {
                         "type": "string",
                         "example": "3d1ce039-5476-414c-99b2-fac1e6add62c",
                         "description": "Notify's ID for the returned letter"
