@@ -67,7 +67,7 @@
                                     "status_code": 400
                                 }
                             },
-                            "Cannot sent to recipient in trial mode": {
+                            "Cannot send to recipient in trial mode": {
                                 "value": {
                                     "errors": [{
                                         "error": "BadRequestError",
