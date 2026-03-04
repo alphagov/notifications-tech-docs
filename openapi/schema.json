@@ -163,15 +163,17 @@
                     },
                     "personalisation": {
                         "type": "object",
-                        "description": "The personalisation argument always contains the following parameters for the letter recipient’s address:\n\n**The address must have at least 3 lines.**\n\nThe last line needs to be a real UK postcode or the name of a country outside the UK.\n\nNotify checks for international addresses and will automatically charge you the correct postage.\n\nThe `postcode` personalisation argument has been replaced. If your template still uses `postcode`, Notify will treat it as the last line of the address.\n\nAny other placeholder fields included in the letter template also count as required parameters. You need to provide their values in a dictionary with key value pairs. For example:",
+                        "description": "The personalisation argument always contains the following parameters for the letter recipient’s address:\n\n**The address must have at least 3 lines.**\n\nThe first 2 lines of the address must include alphanumeric characters.\n\nThe last line needs to be a real UK postcode or the name of a country outside the UK.\n\nNotify checks for international addresses and will automatically charge you the correct postage.\n\nThe `postcode` personalisation argument has been replaced. If your template still uses `postcode`, Notify will treat it as the last line of the address.\n\nAny other placeholder fields included in the letter template also count as required parameters. You need to provide their values in a dictionary with key value pairs. For example:",
                         "properties": {
                             "address_line_1": {
                                 "type": "string",
-                                "example": "Amala Bird"
+                                "example": "Amala Bird",
+                                "description": "must contain at least one alphanumeric character"
                             },
                             "address_line_2": {
                                 "type": "string",
-                                "example": "123 High Street"
+                                "example": "123 High Street",
+                                "description": "must contain at least one alphanumeric character"
                             },
                             "address_line_3": {
                                 "type": "string",

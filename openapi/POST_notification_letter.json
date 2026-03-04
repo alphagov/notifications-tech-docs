@@ -95,6 +95,15 @@
                                     "status_code": 400
                                 }
                             },
+                            "First two lines must include an alphanumeric character": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "The first 2 lines of the address must both include at least one alphanumeric character"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
                             "Must be a real UK postcode": {
                                 "value": {
                                     "errors": [{
