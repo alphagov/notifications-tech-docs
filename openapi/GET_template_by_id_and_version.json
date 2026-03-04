@@ -10,7 +10,7 @@
             "schema": {
                 "$ref": "schema.json#/components/schemas/TemplateByIdRequest"
             },
-            "example": "b7a59abd-0ab2-4538-b619-8da9f9089e08"  
+            "example": "f33517ff-2a88-4f6e-b855-c550268ce08a"  
         },
         {
             "name": "version",
@@ -20,7 +20,7 @@
             "schema": {
                 "$ref": "schema.json#/components/schemas/TemplateByIdAndVersionRequest"
             },
-            "example": 1
+            "example": 3
         }],
         "responses": {
             "200": {
@@ -28,20 +28,6 @@
                     "application/json": {
                         "schema": {
                             "$ref": "schema.json#/components/schemas/TemplateResponse"
-                        },
-                        "example": {
-                                "id":"b7a59abd-0ab2-4538-b619-8da9f9089e08",
-                                "name":"Test SMS Template",
-                                "type":"sms",
-                                "created_at":"2024-08-12T11:03:12.000000Z",
-                                "updated_at":"2024-08-12T11:03:34.994540Z",
-                                "version":2,
-                                "created_by":"someone@example.com",
-                                "body":"Hi ((firstname)), We have received your letter dated ((date)).  No further action is required.",
-                                "subject":null,
-                                "postage":null,
-                                "letter_contact_block":null,
-                                "personalisation":{"date": {"required": true},"firstname": {"required": true}}
                         }
                     }
                 },
@@ -63,7 +49,7 @@
                         }
                     }
                 },
-                "description": "Make sure that the provided type is one of: email, sms, letter"
+                "description": "Bad request. Check the `message` in the response to find out why your request failed. In addition to the endpoint specific errors shown in the examples, you may also encounter various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type. You can find a list of these errors at https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "403": {
                 "content": {
@@ -73,7 +59,7 @@
                         }
                     }
                 },
-                "description": "Auth error. Check the `message` in the response to find out why your request failed."
+                "description": "Auth error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "404": {
                 "content": {
@@ -91,7 +77,7 @@
                         }
                     }
                 },
-                "description": "Check your template ID and version"
+                "description": "Check your template ID. Check the `message` in the response to find out why your request failed. In addition to the endpoint specific errors shown in the examples, you may also encounter various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type. You can find a list of these errors at https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "429": {
                 "content": {
@@ -101,7 +87,7 @@
                         }
                     }
                 },
-                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed."
+                "description": "Rate or service limit error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "500": {
                 "content": {
@@ -111,7 +97,7 @@
                         }
                     }
                 },
-                "description": "Internal server error. Check the `message` in the response to find out why your request failed."
+                "description": "Internal server error. Check the `message` in the response to find out why your request failed. For more examples please see https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             }
         },
         "security": [

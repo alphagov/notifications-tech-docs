@@ -5,7 +5,7 @@
         "parameters": [
             {
                 "description": "The ID of the notification. You can find the notification ID in the response to the original notification method call.\nYou can also find it by [signing in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in) and going to the **API integration** page.",
-                "example": "740e5834-3a29-46b4-9a6f-16142fde533a",
+                "example": "3d1ce039-5476-414c-99b2-fac1e6add62c",
                 "in": "path",
                 "name": "notification_id",
                 "schema": {
@@ -24,17 +24,64 @@
                         }
                     }
                 },
-                "description": "If the request to the client is successful, the client will return bytes representing the raw PDF data."
+                "description": "If the request to the API is successful, the API will return bytes representing the raw PDF data"
             },
             "400": {
                 "content": {
                     "application/json": {
                         "schema": {
                             "$ref": "schema.json#/components/schemas/GetMessageValidationError"
+                        },
+                        "examples": {
+                            "ID is not a valid ID": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "ValidationError",
+                                        "message": "id is not a valid UUID"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "PDF not available yet": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "PDFNotReadyError",
+                                        "message": "PDF not available yet, try again later"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "File did not pass the virus scan": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "File did not pass the virus scan"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "PDF not available for letters": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "PDF not available for letters in technical-failure"
+                                    }],
+                                    "status_code": 400
+                                }
+                            },
+                            "Notification is not a letter": {
+                                "value": {
+                                    "errors": [{
+                                        "error": "BadRequestError",
+                                        "message": "Notification is not a letter"
+                                    }],
+                                    "status_code": 400
+                                }
+                            }
                         }
                     }
                 },
-                "description": "Bad request. Check the `message` in the response to find out why your request failed."
+                "description": "Bad request. Check the `message` in the response to find out why your request failed.  In addition to the endpoint specific errors shown in the examples, you may also encounter various schema validation errors, for example when you forget to pass in an argument, or pass in an argument of a wrong type. You can find a list of these errors at https://docs.notifications.service.gov.uk/rest-api.html#general-errors."
             },
             "403": {
                 "content": {
