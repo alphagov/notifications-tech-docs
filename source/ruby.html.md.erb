@@ -262,6 +262,8 @@ For example:
 email_reply_to_id: "8e222534-7f05-4972-86e3-17c5d9f894e2"
 ```
 
+You can leave out this argument if your service only has one email reply-to address, or you want to use the default email address.
+
 #### Reducing the risk of malicious content injection in placeholders
 
 Notify lets you [personalise messages](https://www.notifications.service.gov.uk/using-notify/personalisation) using placeholders.
@@ -298,9 +300,6 @@ Hello ((name))
 We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content. 
 You can use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape). 
 The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
-
-
-You can leave out this argument if your service only has one email reply-to address, or you want to use the default email address.
 
 #### Response
 
