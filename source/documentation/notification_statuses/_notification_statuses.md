@@ -29,7 +29,7 @@
 |#`accepted`|GOV.UK Notify has sent the letter to the provider to be printed.|
 |#`received`|The provider has printed and dispatched the letter.|
 |#`cancelled`|Sending cancelled. The letter will not be printed or dispatched.|
-|#`technical-failure`|GOV.UK Notify had an unexpected error while sending the letter to our printing provider.|
+|#`technical-failure`|Your letter was not sent because there was a problem between Notify and the provider. We are working on a fix. We’ll contact you if we need your help. Do not try to send the letter again.|
 |#`permanent-failure`|The provider cannot print the letter. Your letter will not be dispatched.|
 
 ### Precompiled letter status descriptions
@@ -42,5 +42,5 @@
 |#`pending-virus-check`|GOV.UK Notify has not completed a virus scan of the precompiled letter file.|
 |#`virus-scan-failed`|GOV.UK Notify found a potential virus in the precompiled letter file.|
 |#`validation-failed`|Content in the precompiled letter file failed validation. This can happen if:<ul><li>content is outside the printable area. See the [GOV.UK Notify letter specification](https://www.notifications.service.gov.uk/using-notify/guidance/letter-specification) for more information.</li><li>the last line of the address is not a UK postcode or another country</li></ul>|
-|#`technical-failure`|GOV.UK Notify had an unexpected error while sending the letter to our printing provider.|
+|#`technical-failure`|Your letter was not sent because there was a problem between Notify and the provider. We are working on a fix. We’ll contact you if we need your help. Do not try to send the letter again.|
 |#`permanent-failure`|The provider cannot print the letter. Your letter will not be dispatched.|
