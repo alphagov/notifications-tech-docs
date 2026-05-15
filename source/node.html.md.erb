@@ -317,6 +317,16 @@ let options = {
 
 You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.
 
+##### sanitiseContentFor (optional)
+
+```javascript
+let options = {
+    sanitiseContentFor:["name"]
+};
+```
+
+An array of personalisation key strings to be sanitised. See [Sanitise placeholder content](#sanitise-placeholder-content) section
+
 #### Response
 
 If the request is successful, the promise resolves with a `response` `object`. For example, the `response.data` property will look like this:
@@ -374,8 +384,66 @@ Hello ((name))
 </pre>
 
 
+#### Sanitise placeholder content
 We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content.
-You can use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape).
+
+To escape all Markdown characters, and remove any URL links you can:
+
+##### 1. Tell us which personalisation to sanitise
+When sending emails via API, pass in the `sanitiseContentFor` argument, and choose which personalisation you want to sanitise.
+
+For all personalisation you tell us to sanitise, we will:
+
+* escape all Markdown characters
+* remove any url links from the text
+* tell you what content we’ve sanitised
+
+For example, when you make the following API call:
+
+```javascript
+# endpoint
+POST /v2/notifications/email
+
+## Request body
+{
+  "email address": "amalaexample@example.com"
+  "template_id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3"
+  "personalisation": {
+    "name": "user name from a form"
+    "sign_up_link": "link generated in your system"
+  }, 
+  "sanitiseContentFor": ["name"]
+}
+```
+
+Notify will sanitise the specificed placeholders, like this:
+
+```javascript
+# malicious markdown:
+name = "Anne Example, now [click this evil link](https://evil.link)"
+
+# gets sanitised to:
+"Anne Example, now \[click this evil link\]\(\)"
+
+# email will appear as:
+Anne Example, now [click this evil link]()
+```
+
+The response will include the content that we've sanitised:
+
+```javascript
+{
+  "sanitised_content": {
+    "name": {
+      "unsanitised": "Anne Example, now [click this evil link](https://evil.link)"
+      "sanitised": "Anne Example, now \[click this evil link\]\(\)\"
+    }
+  }
+}
+```
+
+##### 2. Use a backslash
+Add this in front of [individual Markdown characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape) to escape them.
 The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
 
 #### Error codes
