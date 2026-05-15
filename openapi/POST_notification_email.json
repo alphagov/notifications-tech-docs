@@ -23,7 +23,7 @@
                                         "other id"
                                     ],
                                     "link_to_file": {
-                                        "file": "file as base64 encoded string",
+                                        "file": "aGVsbG8sYWxhbGEK",
                                         "filename": "amala_pigeon_affairs_bureau_invite.csv",
                                         "confirm_email_before_download": false,
                                         "retention_period": "4 weeks"
@@ -47,7 +47,7 @@
                                         "other id"
                                     ],
                                     "link_to_file": {
-                                        "file": "file as base64 encoded string",
+                                        "file": "aGVsbG8sYWxhbGEK",
                                         "filename": "amala_pigeon_affairs_bureau_invite.csv",
                                         "confirm_email_before_download": false,
                                         "retention_period": "4 weeks"
