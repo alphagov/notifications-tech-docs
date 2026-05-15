@@ -7,10 +7,60 @@
                 "application/json": {
                     "schema": {
                         "$ref": "schema.json#/components/schemas/SendEmailRequest"
+                    },
+                    "examples": {
+                        "Personalised email without sanitised field": {
+                            "value": {
+                                "email_address": "amala@example.com",
+                                "template_id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
+                                "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",
+                                "personalisation": {
+                                    "first_name": "Amala",
+                                    "appointment_date": "1 January 2018 at 1:00PM",
+                                    "required_documents": [
+                                        "passport",
+                                        "utility bill",
+                                        "other id"
+                                    ],
+                                    "link_to_file": {
+                                        "file": "file as base64 encoded string",
+                                        "filename": "amala_pigeon_affairs_bureau_invite.csv",
+                                        "confirm_email_before_download": false,
+                                        "retention_period": "4 weeks"
+                                    }
+                                },
+                                "reference": "your reference",
+                                "email_reply_to_id": "8e222534-7f05-4972-86e3-17c5d9f894e2"
+                            }
+                        },
+                        "Personalised email with sanitised field": {
+                            "value": {
+                                "email_address": "amala@example.com",
+                                "template_id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
+                                "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789",
+                                "personalisation": {
+                                    "first_name": "Amala, now [click this evil link](https://evil.link)",
+                                    "appointment_date": "1 January 2018 at 1:00PM",
+                                    "required_documents": [
+                                        "passport",
+                                        "utility bill",
+                                        "other id"
+                                    ],
+                                    "link_to_file": {
+                                        "file": "file as base64 encoded string",
+                                        "filename": "amala_pigeon_affairs_bureau_invite.csv",
+                                        "confirm_email_before_download": false,
+                                        "retention_period": "4 weeks"
+                                    }
+                                },
+                                "sanitise_content_for": ["first_name"],
+                                "reference": "your reference",
+                                "email_reply_to_id": "8e222534-7f05-4972-86e3-17c5d9f894e2"
+                            }
+                        }
                     }
                 }
             },
-            "description": "requestPayload",
             "required": true
         },
         "responses": {
@@ -19,6 +69,53 @@
                     "application/json": {
                         "schema": {
                             "$ref": "schema.json#/components/schemas/SendEmailResponse"
+                        },
+                        "examples": {
+                            "Personalised email without sanitised field": {
+                                "value": {
+                                    "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",
+                                    "reference": "your reference",
+                                    "scheduled_for": null,
+                                    "content": {
+                                        "subject": "Your upcoming pigeon registration appointment",
+                                        "body": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 1:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",
+                                        "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",
+                                        "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789"
+                                    },
+                                    "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730",
+                                    "template": {
+                                        "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
+                                        "version": 1,
+                                        "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"
+                                    },
+                                    "sanitised_content": {}                                
+                                }
+                            },
+                            "Personalised email with sanitised field": {
+                                "value": {
+                                    "id": "201b576e-c09b-467b-9dfa-9c3b689ee730",
+                                    "reference": "your reference",
+                                    "scheduled_for": null,
+                                    "content": {
+                                        "subject": "Your upcoming pigeon registration appointment",
+                                        "body": "Dear Amala, now \\[click this evil link\\]\\(\\)\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 1:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau",
+                                        "from_email": "pigeon.affairs.bureau@notifications.service.gov.uk",
+                                        "one_click_unsubscribe_url": "https://example.com/unsubscribe.html?opaque=123456789"
+                                    },
+                                    "uri": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730",
+                                    "template": {
+                                        "id": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
+                                        "version": 1,
+                                        "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"
+                                    },
+                                    "sanitised_content": {
+                                        "first_name": {
+                                            "unsanitised": "Amala, now [click this evil link](https://evil.link)",
+                                            "sanitised": "Amala, now \\[click this evil link\\]\\(\\)"
+                                        }
+                                    }                                
+                                }
+                            }                        
                         }
                     }
                 },

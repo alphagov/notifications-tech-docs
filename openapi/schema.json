@@ -55,43 +55,33 @@
                     "email_address": {
                         "type": "string",
                         "description": "The email address of the recipient.",
-                        "example": "amala@example.com",
                         "maxLength": 250,
                         "minLength": 5
                     },
                     "template_id": {
                         "type": "string",
-                        "description": "To find the template ID:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Templates** page and select the relevant template.\n3.  Select **Copy template ID to clipboard**.",
-                        "example": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3"
+                        "description": "To find the template ID:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Templates** page and select the relevant template.\n3.  Select **Copy template ID to clipboard**."
                     },
                     "one_click_unsubscribe_url": {
                         "type": "string",
-                        "description": "You can leave out this argument if the email being sent is not a subscription email.\n\nIf you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).\n\nThe one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.\n\nThe one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.\n\nYour unsubscribe URL and response must comply with the guidance specified in [Section 3.1 of IETF RFC 8058](https://www.rfcreader.com/#rfc8058_line139).\n\n**Unsubscribe link at the bottom of the email (recommended)**\n\nTo add an unsubscribe link at the bottom of your email, use square brackets around the link text and round brackets around the URL. Make sure there are no spaces between the brackets or the link will not work.\n\nUse this example if you have a webpage for users to manage their email subscriptions:\n\n```json\n[Unsubscribe](https://www.example.gov.uk/unsubscribe)\n```\nYour webpage should ask the recipients to confirm that they want to unsubscribe. \n\nIf you do not have your own webpage, you can add a ‘mailto’ link to let users send an email to your team instead. For example:\n\n```json\n[Unsubscribe](mailto:example@gov.uk?subject=unsubscribe)\n```\nThe email address should be a shared inbox managed by your team, not your own email address.",
-                        "example": "https://example.com/unsubscribe.html?opaque=123456789"
+                        "description": "You can leave out this argument if the email being sent is not a subscription email.\n\nIf you send subscription emails you must let recipients opt out of receiving them. Read our Using Notify page for more information about [unsubscribe links](https://www.notifications.service.gov.uk/using-notify/unsubscribe-links).\n\nThe one-click unsubscribe URL will be added to the headers of your email. Email clients will use it to add an unsubscribe button.\n\nThe one-click unsubscribe URL must respond to an empty `POST` request by unsubscribing the user from your emails. You can include query parameters to help you identify the user.\n\nYour unsubscribe URL and response must comply with the guidance specified in [Section 3.1 of IETF RFC 8058](https://www.rfcreader.com/#rfc8058_line139).\n\n**Unsubscribe link at the bottom of the email (recommended)**\n\nTo add an unsubscribe link at the bottom of your email, use square brackets around the link text and round brackets around the URL. Make sure there are no spaces between the brackets or the link will not work.\n\nUse this example if you have a webpage for users to manage their email subscriptions:\n\n```json\n[Unsubscribe](https://www.example.gov.uk/unsubscribe)\n```\nYour webpage should ask the recipients to confirm that they want to unsubscribe. \n\nIf you do not have your own webpage, you can add a ‘mailto’ link to let users send an email to your team instead. For example:\n\n```json\n[Unsubscribe](mailto:example@gov.uk?subject=unsubscribe)\n```\nThe email address should be a shared inbox managed by your team, not your own email address."
                     },
                     "personalisation": {
                         "type": "object",
                         "description": "You can leave out this argument if a template does not have any placeholder fields for personalised information.\n\nIf a template has placeholder fields for personalised information such as name or reference number, you must provide their values in a dictionary with key value pairs. Find out how to [reduce the risk of malicious content injection in placeholders](https://docs.notifications.service.gov.uk/rest-api.html#reducing-the-risk-of-malicious-content-injection-in-placeholders)",
                         "properties": {
                             "first_name": {
-                                "type": "string",
-                                "example": "Amala"
+                                "type": "string"
                             },
                             "appointment_date": {
-                                "type": "string",
-                                "example": "1 January 2018 at 1:00PM"
+                                "type": "string"
                             },
                             "required_documents": {
                                 "type": "array",
                                 "description": "Pass in a list and it will appear as bullet points in the message.",
                                 "items": {
                                     "type": "string"
-                                },
-                                "example": [
-                                    "passport",
-                                    "utility bill",
-                                    "other id"
-                                ]
+                                }
                             },
                             "link_to_file": {
                                 "type": "object",
@@ -100,24 +90,20 @@
                                     "file": {
                                         "type": "string",
                                         "format": "byte",
-                                        "description": "File as base64 encoded string",
-                                        "example": "file as base64 encoded string"
+                                        "description": "File as base64 encoded string"
                                     },
                                     "filename": {
                                         "type": "string",
                                         "description": "File name",
-                                        "maxLength": 100,
-                                        "example": "amala_pigeon_affairs_bureau_invite.csv"
+                                        "maxLength": 100
                                     },
                                     "confirm_email_before_download": {
                                         "type": "boolean",
-                                        "description": "To let the recipient download the file without confirming their email address, set the `confirm_email_before_download` flag to `false`.",
-                                        "example": false
+                                        "description": "To let the recipient download the file without confirming their email address, set the `confirm_email_before_download` flag to `false`."
                                     },
                                     "retention_period": {
                                         "type": "string",
-                                        "description": "The length of time that a file is available to download in weeks.  Choose between <code>1 week</code> and <code>26 weeks</code>",
-                                        "example": "4 weeks"
+                                        "description": "The length of time that a file is available to download in weeks.  Choose between <code>1 week</code> and <code>26 weeks</code>"
                                     }
                                 },
                                 "required": [
@@ -126,15 +112,20 @@
                             }
                         }
                     },
+                    "sanitise_content_for": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "You can leave out this property if a template does not have any placeholder fields for personalised information, or if you do not need to sanitise any personalised fields.\n\nWhen sending emails via API, pass in the `sanitise_content_for` argument, and choose which personalisation you want to sanitise.\n\nFor all personalisation you tell us to sanitise, we will:\n\n* escape all Markdown characters\n\n* remove any url links from the text\n\n* tell you what content we’ve sanitised.\n\nFor more information please see: https://docs.notifications.service.gov.uk/rest-api.html#reducing-the-risk-of-malicious-content-injection-in-placeholders "                         
+                    },
                     "reference": {
                         "type": "string",
-                        "description": "You can leave out this argument if you do not have a reference.\n\nAn identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address.",
-                        "example": "your reference"
+                        "description": "You can leave out this argument if you do not have a reference.\n\nAn identifier you can create if necessary. This reference identifies a single notification or a batch of notifications. It must not contain any personal information such as name or postal address."
                     },
                     "email_reply_to_id": {
                         "type": "string",
-                        "description": "You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.\n\nThis is an email address specified by you to receive replies from your users. You must add at least one reply-to email address before your service can go live.\n\nTo add a reply-to email address:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Settings** page.\n3.  In the **Email** section, select **Manage** on the **Reply-to email addresses** row.\n4.  Select **Add reply-to address**.\n5.  Enter the email address you want to use, and select **Add**.",
-                        "example": "8e222534-7f05-4972-86e3-17c5d9f894e2"
+                        "description": "You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.\n\nThis is an email address specified by you to receive replies from your users. You must add at least one reply-to email address before your service can go live.\n\nTo add a reply-to email address:\n\n1.  [Sign in to GOV.UK Notify](https://www.notifications.service.gov.uk/sign-in).\n2.  Go to the **Settings** page.\n3.  In the **Email** section, select **Manage** on the **Reply-to email addresses** row.\n4.  Select **Add reply-to address**.\n5.  Enter the email address you want to use, and select **Add**." 
                     }
                 },
                 "required": [
@@ -1412,61 +1403,67 @@
                 "description": "The Send Email Response Payload",
                 "properties": {
                     "id": {
-                        "type": "string",
-                        "example": "201b576e-c09b-467b-9dfa-9c3b689ee730"
+                        "type": "string"
                     },
                     "reference": {
-                        "type": "string",
-                        "example": "your reference"
+                        "type": "string"
                     },
                     "scheduled_for": {
                         "type": "string",
-                        "nullable": true,
-                        "example": null
+                        "nullable": true
                     },
                     "content": {
                         "type": "object",
                         "properties": {
                             "subject": {
-                                "type": "string",
-                                "example": "Your upcoming pigeon registration appointment"
+                                "type": "string"
                             },
                             "body": {
-                                "type": "string",
-                                "example": "Dear Amala\r\n\r\nYour pigeon registration appointment is scheduled for 1 January 2018 at 1:00PM.\r\n\r\nPlease bring:\r\n\n\n* passport\n* utility bill\n* other id\r\n\r\nYours,\r\nPigeon Affairs Bureau"
+                                "type": "string"
                             },
                             "from_email": {
-                                "type": "string",
-                                "example": "pigeon.affairs.bureau@notifications.service.gov.uk"
+                                "type": "string"
                             },
                             "one_click_unsubscribe_url": {
                                 "type": "string",
-                                "example": "https://example.com/unsubscribe.html?opaque=123456789",
                                 "nullable": true
                             }
                         }
                     },
                     "uri": {
-                        "type": "string",
-                        "example": "https://api.notifications.service.gov.uk/v2/notifications/201b576e-c09b-467b-9dfa-9c3b689ee730"
+                        "type": "string"
                     },
                     "template": {
                         "type": "object",
                         "properties": {
                             "id": {
-                                "type": "string",
-                                "example": "9d751e0e-f929-4891-82a1-a3e1c3c18ee3"
+                                "type": "string"
                             },
                             "version": {
-                                "type": "number",
-                                "example": 1
+                                "type": "number"
                             },
                             "uri": {
-                                "type": "string",
-                                "example": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"
+                                "type": "string"
                             }
                         }
-                    }
+                    },
+                    "sanitised_content": {
+                        "type": "object",
+                        "nullable": true,
+                        "properties": {
+                            "first_name": {
+                                "type": "object",
+                                "properties": {
+                                    "unsanitised": {
+                                        "type": "string"
+                                    },
+                                    "sanitised": {
+                                        "type": "string"
+                                    }
+                                }        
+                            }
+                        }
+                    }   
                 }
             },
             "SendLetterResponse": {
