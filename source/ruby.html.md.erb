@@ -264,6 +264,16 @@ email_reply_to_id: "8e222534-7f05-4972-86e3-17c5d9f894e2"
 
 You can leave out this argument if your service only has one email reply-to address, or you want to use the default email address.
 
+##### sanitise_content_for (optional)
+
+An array of personalisation placeholder keys (as strings) to sanitise when sending email. For example:
+
+```ruby
+sanitise_content_for: ["name"]
+```
+
+See [Sanitise placeholder content](#sanitise-placeholder-content).
+
 #### Reducing the risk of malicious content injection in placeholders
 
 Notify lets you [personalise messages](https://www.notifications.service.gov.uk/using-notify/personalisation) using placeholders.
@@ -297,8 +307,62 @@ Hello ((name))
  <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
 </pre>
 
-We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content. 
-You can use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape). 
+#### Sanitise placeholder content
+
+We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content.
+
+To escape all Markdown characters, and remove any URL links you can:
+
+##### 1. Tell us which personalisation to sanitise
+When sending emails via API, pass in the `sanitise_content_for` argument, and choose which personalisation you want to sanitise.
+
+For all personalisation you tell us to sanitise, we will:
+
+* escape all Markdown characters
+* remove any url links from the text
+* tell you what content we’ve sanitised
+
+For example, when you make the following API call:
+
+```ruby
+emailresponse = client.send_email(
+  email_address: "amalaexample@example.com",
+  template_id: "9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
+  personalisation: {
+    name: "user name from a form",
+    sign_up_link: "link generated in your system",
+  },
+  sanitise_content_for: ["name"],
+)
+```
+
+Notify will sanitise the specificed placeholders, like this:
+
+```ruby
+# malicious markdown in personalisation:
+name = "Anne Example, now [click this evil link](https://evil.link)"
+
+# gets sanitised to:
+"Anne Example, now \\[click this evil link\\]\\(\\)"
+
+# email will appear as:
+Anne Example, now [click this evil link]()
+```
+
+The response includes the content that we've sanitised, which returns a hash like:
+
+```ruby
+{
+  "name" => {
+    "unsanitised" => "Anne Example, now [click this evil link](https://evil.link)",
+    "sanitised" => "Anne Example, now \\[click this evil link\\]\\(\\)"
+  }
+}
+```
+
+##### 2. Use a backslash
+
+Add this in front of [individual Markdown characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape) to escape them.
 The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
 
 #### Response
@@ -314,6 +378,7 @@ You can then call different methods on this object to return the requested infor
 |#`emailresponse.content`|- `body`: Message body<br>- `subject`: Message subject<br>- `from_email`: From email address of your service found on the **Settings** page|Hash|
 |#`emailresponse.template`|Contains the `id`, `version` and `uri` of the template|Hash|
 |#`emailresponse.uri`|Notification URL|String|
+|#`emailresponse.sanitised_content`|For each sanitised placeholder, the unsanitised and sanitised values (see [Sanitise placeholder content](#sanitise-placeholder-content))|Hash|
 
 #### Error codes
 
