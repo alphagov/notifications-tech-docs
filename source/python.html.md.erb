@@ -332,9 +332,62 @@ Hello ((name))
  <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
 </pre>
 
-
+#### Sanitise placeholder content
 We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content. 
-You can use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape). 
+
+To escape all Markdown characters, and remove any URL links you can:
+
+##### 1. Tell us which personalisation to sanitise
+When sending emails via API, pass in the `sanitise_content_for` argument, and choose which personalisation you want to sanitise.
+
+For all personalisation you tell us to sanitise, we will:
+
+* escape all Markdown characters
+* remove any url links from the text
+* tell you what content we’ve sanitised
+
+For example, when you make the following API call:
+
+```python
+response = notifications_client.send_email_notification(
+    email_address="amala@example.com",
+    template_id="9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
+    "personalisation": {
+        "name": "user name from a form"
+        "sign_up_link": "link generated in your system"
+    },
+    "sanitise_content_for": ["name"]
+)
+```
+
+Notify will sanitise the specificed placeholders, like this:
+
+```python
+# malicious markdown:
+name = "Anne Example, now [click this evil link](https://evil.link)"
+
+# gets sanitised to:
+"Anne Example, now \[click this evil link\]\(\)"
+
+# email will appear as:
+Anne Example, now [click this evil link]()
+```
+
+The response will include the content that we've sanitised:
+
+```python
+{
+  "sanitised_content": {
+    "name": {
+      "unsanitised": "Anne Example, now [click this evil link](https://evil.link)"
+      "sanitised": "Anne Example, now \[click this evil link\]\(\)\"
+    }
+  }
+}
+```
+
+##### 2. Use a backslash
+Add this in front of [individual Markdown characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape) to escape them.
 The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
 
 
