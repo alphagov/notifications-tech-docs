@@ -244,9 +244,9 @@ Your unsubscribe URL and response must comply with the guidance specified in [Se
 
 You can leave out this argument if the email being sent is not a subscription email.
 
-You must also add an unsubscribe link to the bottom of your email. The unsubscribe link at the bottom of your email should take the email recipient to a webpage where they can confirm that they want to unsubscribe.  
+You must also add an unsubscribe link to the bottom of your email. The unsubscribe link at the bottom of your email should take the email recipient to a webpage where they can confirm that they want to unsubscribe.
 
-Find out how to add a link when you create a __New template__ or __Edit__ an email template. 
+Find out how to add a link when you create a __New template__ or __Edit__ an email template.
 
 ##### email_reply_to_id (optional)
 
@@ -303,13 +303,13 @@ If the request is not successful, the client returns an error. To learn more abo
 
 Notify lets you [personalise messages](https://www.notifications.service.gov.uk/using-notify/personalisation) using placeholders.
 
-You can [format](https://www.notifications.service.gov.uk/using-notify/formatting) content or add links and urls into placeholders using Markdown. 
+You can [format](https://www.notifications.service.gov.uk/using-notify/formatting) content or add links and urls into placeholders using Markdown.
 
-If you pass in information from untrusted sources (such as online forms) into your Notify template using personalisation, this may be used to add malicious content and links to notifications you send via Notify. 
+If you pass in information from untrusted sources (such as online forms) into your Notify template using personalisation, this may be used to add malicious content and links to notifications you send via Notify.
 
 The malicious content could be:
 
-  * Markdown syntax intended to be rendered into HTML 
+  * Markdown syntax intended to be rendered into HTML
   * a plain text URL which would be rendered into a clickable phishing link
 
 An example of how malicious content can be injected into Notify personalisation:
@@ -320,21 +320,65 @@ An example of how malicious content can be injected into Notify personalisation:
 Hello ((name))
 ```
 
-**Personalisation**: 
+**Personalisation**:
 
 ```python
 {name: "Anne Example, now [click this evil link](https://malicious.link)"}
 ```
 
-**Email will appear as**: 
+**Email will appear as**:
 
 <pre>
  <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
 </pre>
 
+#### Sanitise placeholder content
+We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content.
 
-We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content. 
-You can use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape). 
+To escape all Markdown characters, and remove any URLs you can:
+
+##### 1. Tell us which personalisation to sanitise
+When sending emails via API, pass in the `sanitise_content_for` argument, and choose which personalisation you want to sanitise.
+
+For all personalisation you tell us to sanitise, we will:
+
+* escape all Markdown characters
+* remove any URLs from the text
+* tell you what content we’ve sanitised
+
+For example, when you make the following API call:
+
+```python
+response = notifications_client.send_email_notification(
+    email_address="amala@example.com",
+    template_id="9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
+    "personalisation": {
+        "name": "Anne Example, now [click this evil link](https://evil.link)"
+        "sign_up_link": "link generated in your system"
+    },
+    "sanitise_content_for": ["name"]
+)
+```
+
+Notify will sanitise the content of the `name` placeholder. In the email it will appear as:
+
+```text
+Anne Example, now [click this evil link]()
+```
+
+The `"sanitised_content"` field of `response` shows how Notify has sanitised the content:
+
+```python
+{
+  "name": {
+    "unsanitised": "Anne Example, now [click this evil link](https://evil.link)"
+    "sanitised": "Anne Example, now \[click this evil link\]\(\)"
+  }
+}
+```
+
+##### 2. Use a backslash
+Add this in front of [individual Markdown characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape) to escape them.
 The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
 
 
@@ -377,7 +421,7 @@ You can upload the following file types:
 - Microsoft Word Document (.doc, .docx)
 - PDF (.pdf)
 - text (.json, .odt, .rtf, .txt)
-  
+
 Your file must be smaller than 2MB. [Contact the GOV.UK Notify team](https://www.notifications.service.gov.uk/support) if you need to send other file types.
 
 Pass the file object as a value into the personalisation argument. For example:
