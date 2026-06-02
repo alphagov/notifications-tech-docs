@@ -213,7 +213,7 @@ EmailNotificationResponse response = client.SendEmail(emailAddress, templateId, 
 
 ```csharp
 client.SendEmail(
-    emailAddress: "sender@something.com",
+    emailAddress: "amala@example.com",
     templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a"
 );
 ```
@@ -225,7 +225,7 @@ client.SendEmail(
 The email address of the recipient. For example:
 
 ```csharp
-string emailAddress: "sender@something.com";
+string emailAddress: "amala@example.com";
 ```
 
 ##### templateId (required)
@@ -334,44 +334,6 @@ public class EmailResponseContent{
 }
 ```
 
-#### Reducing the risk of malicious content injection in placeholders
-
-Notify lets you [personalise messages](https://www.notifications.service.gov.uk/using-notify/personalisation) using placeholders.
-
-You can [format](https://www.notifications.service.gov.uk/using-notify/formatting) content or add links and urls into placeholders using Markdown. 
-
-If you pass in information from untrusted sources (such as online forms) into your Notify template using personalisation, this may be used to add malicious content and links to notifications you send via Notify. 
-
-The malicious content could be:
-
-  * Markdown syntax intended to be rendered into HTML 
-  * a plain text URL which would be rendered into a clickable phishing link
-
-An example of how malicious content can be injected into Notify personalisation:
-
-**Template in Notify**:
-
-```csharp
-Hello ((name))
-```
-
-**Personalisation**: 
-
-```csharp
-{name: "Anne Example, now [click this evil link](https://malicious.link)"}
-```
-
-**Email will appear as**: 
-
-<pre>
- <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
-</pre>
-
-
-We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content. 
-You can use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape). 
-The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
-
 #### Error codes
 
 If the request is not successful, the client returns a `Notify.Exceptions.NotifyClientException` containing the relevant error code. To learn more about error structure, go to [Errors section](#errors).
@@ -379,6 +341,92 @@ If the request is not successful, the client returns a `Notify.Exceptions.Notify
 |Error message|How to fix|
 |:---|:---|
 <%= partial 'documentation/error_tables/send_an_email' %>
+
+#### Reducing the risk of malicious content injection in placeholders
+
+Notify lets you [personalise messages](https://www.notifications.service.gov.uk/using-notify/personalisation) using placeholders.
+
+You can [format](https://www.notifications.service.gov.uk/using-notify/formatting) content or add links and urls into placeholders using Markdown.
+
+If you pass in information from untrusted sources (such as online forms) into your Notify template using personalisation, this may be used to add malicious content and links to notifications you send via Notify.
+
+The malicious content could be:
+
+  * Markdown syntax intended to be rendered into HTML
+  * a plain text URL which would be rendered into a clickable phishing link
+
+An example of how malicious content can be injected into Notify personalisation:
+
+Template in Notify:
+
+```text
+Hello ((name))
+```
+
+Personalisation:
+
+```csharp
+{name,  "Anne Example, now [click this evil link](https://malicious.link)"}
+```
+
+Email will appear as:
+
+<pre>
+ <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
+</pre>
+
+#### Sanitise placeholder content
+We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content.
+
+To escape all Markdown characters, and remove any URLs you can:
+
+##### 1. Tell us which personalisation to sanitise
+When sending emails via API, pass in the `sanitiseContentFor` argument, and choose which personalisation you want to sanitise.
+
+For all personalisation you tell us to sanitise, we will:
+
+* escape all Markdown characters
+* remove any URLs from the text
+* tell you what content we’ve sanitised
+
+For example, when you make the following API call:
+
+```csharp
+Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
+{
+    {"name", "Anne Example, now [click this evil link](https://evil.link)"}
+};
+List<string> sanitiseContentFor = new List<string> {"name"};
+
+client.SendEmail(
+    emailAddress: "anne@example.com",
+    templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a",
+    personalisation: personalisation,
+    sanitiseContentFor: sanitiseContentFor
+);
+```
+
+Notify will sanitise the content of the `name` placeholder. In the email it will appear as:
+
+```text
+Anne Example, now [click this evil link]()
+```
+
+The `"sanitisedContent"` field of `EmailNotificationResponse` object shows how Notify has sanitised the content:
+
+```csharp
+public Dictionary<string, Dictionary<string, string>> sanitisedContent;
+{
+  "name", {
+    "unsanitised", "Anne Example, now [click this evil link](https://evil.link)"
+    "sanitised", "Anne Example, now \[click this evil link\]\(\)"
+  }
+}
+```
+
+##### 2. Use a backslash
+Add this in front of [individual Markdown characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape) to escape them.
+The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
 
 ### Send a file by email
 
