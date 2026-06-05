@@ -310,6 +310,53 @@ string emailReplyToId: "8e222534-7f05-4972-86e3-17c5d9f894e2";
 
 You can leave out this argument if your service only has one email reply-to address, or you want to use the default email address.
 
+##### sanitiseContentFor (optional)
+
+A list of personalisation keys you want Notify to sanitise.
+See also: [Reducing the risk of malicious content injection in placeholders for more information](#reducing-the-risk-of-malicious-content-injection-in-placeholders).
+
+For all personalisation you tell us to sanitise, we will:
+
+* escape all Markdown characters
+* remove any URLs from the text
+* tell you what content we’ve sanitised
+
+For example, when you make the following API call:
+
+```csharp
+Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
+{
+    {"name", "Anne Example, now [click this evil link](https://evil.link)"}
+};
+List<string> sanitiseContentFor = new List<string> {"name"};
+
+client.SendEmail(
+    emailAddress: "anne@example.com",
+    templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a",
+    personalisation: personalisation,
+    sanitiseContentFor: sanitiseContentFor
+);
+```
+
+Notify will sanitise the content of the `name` placeholder. In the email it will appear as:
+
+```text
+Anne Example, now [click this evil link]()
+```
+
+The `"sanitisedContent"` field of `EmailNotificationResponse` object shows how Notify has sanitised the content:
+
+```csharp
+public Dictionary<string, Dictionary<string, string>> sanitisedContent;
+{
+  "name", {
+    "unsanitised", "Anne Example, now [click this evil link](https://evil.link)"
+    "sanitised", "Anne Example, now \[click this evil link\]\(\)"
+  }
+}
+```
+The field is empty if `sanitiseContentFor` didn't change any personalisation.
+
 #### Response
 
 If the request to the client is successful, the client returns an `EmailNotificationResponse`:
@@ -321,6 +368,7 @@ public String oneClickUnsubscribeURL;
 public String uri;
 public Template template;
 public EmailResponseContent content;
+public Dictionary<string, Dictionary<string, string>> sanitisedContent;
 
 public class Template{
     public String id;
@@ -366,7 +414,10 @@ Hello ((name))
 Personalisation:
 
 ```csharp
-{name,  "Anne Example, now [click this evil link](https://malicious.link)"}
+Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
+{
+    {name,  "Anne Example, now [click this evil link](https://malicious.link)"}
+};
 ```
 
 Email will appear as:
@@ -375,58 +426,15 @@ Email will appear as:
  <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
 </pre>
 
-#### Sanitise placeholder content
+##### Sanitise placeholder content
 We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content.
 
 To escape all Markdown characters, and remove any URLs you can:
 
-##### 1. Tell us which personalisation to sanitise
-When sending emails via API, pass in the `sanitiseContentFor` argument, and choose which personalisation you want to sanitise.
+1. Tell us which personalisation to sanitise by passing in [sanitiseContentFor argument](#sanitisecontentfor-optional) when sending emails via API.
 
-For all personalisation you tell us to sanitise, we will:
 
-* escape all Markdown characters
-* remove any URLs from the text
-* tell you what content we’ve sanitised
-
-For example, when you make the following API call:
-
-```csharp
-Dictionary<String, dynamic> personalisation = new Dictionary<String, dynamic>
-{
-    {"name", "Anne Example, now [click this evil link](https://evil.link)"}
-};
-List<string> sanitiseContentFor = new List<string> {"name"};
-
-client.SendEmail(
-    emailAddress: "anne@example.com",
-    templateId: "f33517ff-2a88-4f6e-b855-c550268ce08a",
-    personalisation: personalisation,
-    sanitiseContentFor: sanitiseContentFor
-);
-```
-
-Notify will sanitise the content of the `name` placeholder. In the email it will appear as:
-
-```text
-Anne Example, now [click this evil link]()
-```
-
-The `"sanitisedContent"` field of `EmailNotificationResponse` object shows how Notify has sanitised the content:
-
-```csharp
-public Dictionary<string, Dictionary<string, string>> sanitisedContent;
-{
-  "name", {
-    "unsanitised", "Anne Example, now [click this evil link](https://evil.link)"
-    "sanitised", "Anne Example, now \[click this evil link\]\(\)"
-  }
-}
-```
-
-##### 2. Use a backslash
-Add this in front of [individual Markdown characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape) to escape them.
-The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
+2. Add a backslash in front of [individual Markdown characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape) to escape them. The characters of most concern are those that could be used to add a link such as `[`, `]`, `(` or `)`.
 
 ### Send a file by email
 
