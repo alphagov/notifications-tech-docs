@@ -381,7 +381,7 @@ We recommend you sanitise all input from untrusted sources to prevent the inject
 
 To escape all Markdown characters, and remove any URLs you can:
 
-1. Tell us which personalisation to sanitise by passing in [sanitise_content_for argument](#sanitise-content-for-optional) when sending emails via API.
+1. Tell us which personalisation to sanitise by using the [`sanitise_content_for` argument](#sanitise-content-for-optional) when sending emails via API.
 
 2. Add a backslash in front of [individual Markdown characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape) to escape them. The characters of most concern are those that could be used to add a link such as `[`, `]`, `(` or `)`.
 
