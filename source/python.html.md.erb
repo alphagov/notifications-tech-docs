@@ -283,13 +283,13 @@ For example, when you make the following API call:
 
 ```python
 response = notifications_client.send_email_notification(
-    email_address="amala@example.com",
+    email_address="anne.example@example.com",
     template_id="9d751e0e-f929-4891-82a1-a3e1c3c18ee3",
-    "personalisation": {
+    personalisation={
         "name": "Anne Example, now [click this evil link](https://evil.link)"
         "sign_up_link": "link generated in your system"
     },
-    "sanitise_content_for": ["name"]
+    sanitise_content_for=["name"]
 )
 ```
 
@@ -331,7 +331,7 @@ If the request to the client is successful, the client returns a `dict`:
     "version": 1,  # required integer
     "uri": "https://api.notifications.service.gov.uk/v2/template/9d751e0e-f929-4891-82a1-a3e1c3c18ee3"  # required string
 },
-  "sanitised_content": {},
+  "sanitised_content": {}
 }
 ```
 
