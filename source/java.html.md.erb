@@ -261,6 +261,51 @@ String emailReplyToId='8e222534-7f05-4972-86e3-17c5d9f894e2'
 
 You can leave out this argument if your service only has one reply-to email address, or you want to use the default email address.
 
+##### sanitiseContentFor (optional)
+
+A list of personalisation keys you want Notify to sanitise.
+See also: [Reducing the risk of malicious content injection in placeholders for more information](#reducing-the-risk-of-malicious-content-injection-in-placeholders).
+
+For all personalisation you tell us to sanitise, we will:
+
+* escape all Markdown characters
+* remove any URLs from the text
+* tell you what content we’ve sanitised
+
+For example, when you make the following API call:
+
+```java
+Map<String, Object> personalisation = new HashMap<>();
+personalisation.put("name", "Anne Example, now [click this evil link](https://malicious.link)");
+String[] placeholdersToSanitise = {"name"};
+List<String> sanitiseContentFor = Arrays.asList(placeholdersToSanitise);
+
+SendEmailResponse response = client.sendEmail(
+    templateId,
+    emailAddress,
+    personalisation,
+    sanitiseContentFor
+);
+```
+
+Notify will sanitise the content of the `name` placeholder. In the email it will appear as:
+
+```text
+Anne Example, now [click this evil link]()
+```
+
+The `"sanitised_content"` field of `SendEmailResponse` shows how Notify has sanitised the content:
+
+```java
+{
+  "name": {
+    "unsanitised": "Anne Example, now [click this evil link](https://evil.link)"
+    "sanitised": "Anne Example, now \[click this evil link\]\(\)"
+  }
+}
+```
+The field is empty if `sanitiseContentFor` didn't change any personalisation.
+
 #### Response
 
 If the request to the client is successful, the client returns a `SendEmailResponse`:
@@ -275,6 +320,7 @@ String templateUri;
 String body;
 String subject;
 Optional<String> fromEmail;
+JSONObject sanitisedContent;
 ```
 
 #### Reducing the risk of malicious content injection in placeholders
@@ -292,29 +338,32 @@ The malicious content could be:
 
 An example of how malicious content can be injected into Notify personalisation:
 
-**Template in Notify**:
+Template in Notify:
 
 ```java
 Hello ((name))
 ```
 
-**Personalisation**: 
+Personalisation:
 
 ```java
 {name: "Anne Example, now [click this evil link](https://malicious.link)"}
 ```
 
-**Email will appear as**: 
+Email will appear as:
 
 <pre>
  <small>Dear Anne Example, now <a href="https://malicious.link>click this evil link">click this evil link</a></small>
 </pre>
 
-
+##### Sanitise placeholder content
 We recommend you sanitise all input from untrusted sources to prevent the injection of malicious content. 
-You can use a backslash to escape [individual characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape). 
-The characters of most concern are those that could be used to add a URL link such as `[`, `]`, `(` or `)`.
 
+To escape all Markdown characters, and remove any URLs you can:
+
+1. Tell us which personalisation to sanitise by using the [`sanitiseContentFor` argument](#sanitisecontentfor-optional) when sending emails via API.
+
+2. Add a backslash in front of [individual Markdown characters](https://www.markdownguide.org/basic-syntax/#characters-you-can-escape) to escape them. The characters of most concern are those that could be used to add a link such as `[`, `]`, `(` or `)`.
 #### Error codes
 
 If the request is not successful, the client returns an error. To learn more about error structure, go to [Errors section](#errors).
