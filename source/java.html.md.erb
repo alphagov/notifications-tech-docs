@@ -284,6 +284,7 @@ SendEmailResponse response = client.sendEmail(
     templateId,
     emailAddress,
     personalisation,
+    reference,
     sanitiseContentFor
 );
 ```
@@ -299,7 +300,7 @@ The `"sanitised_content"` field of `SendEmailResponse` shows how Notify has sani
 ```java
 {
   "name": {
-    "unsanitised": "Anne Example, now [click this evil link](https://evil.link)"
+    "unsanitised": "Anne Example, now [click this evil link](https://evil.link)",
     "sanitised": "Anne Example, now \[click this evil link\]\(\)"
   }
 }
