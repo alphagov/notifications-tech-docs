@@ -97,8 +97,8 @@ GEM
     json (2.21.2)
     kramdown (2.5.2)
       rexml (>= 3.4.4)
-    libv8-node (18.16.0.0-aarch64-linux)
-    libv8-node (18.16.0.0-arm64-darwin)
+    libv8-node (24.12.0.1-aarch64-linux)
+    libv8-node (24.12.0.1-arm64-darwin)
     listen (3.10.0)
       logger
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -158,8 +158,8 @@ GEM
     middleman-syntax (3.6.1)
       middleman-core (>= 3.2)
       rouge (~> 3.2)
-    mini_racer (0.8.0)
-      libv8-node (~> 18.16.0.0)
+    mini_racer (0.22.0)
+      libv8-node (~> 24.12.0.1)
     minitest (6.0.6)
       drb (~> 2.0)
       prism (~> 1.5)
@@ -230,7 +230,7 @@ PLATFORMS
 
 DEPENDENCIES
   govuk_tech_docs (~> 6.3.0)
-  mini_racer (~> 0.8.0)
+  mini_racer (~> 0.22.0)
 
 BUNDLED WITH
    2.4.19
