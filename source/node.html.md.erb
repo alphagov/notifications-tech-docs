@@ -1121,6 +1121,11 @@ If the request is successful, the promise resolves with a `response` `object`. F
     "created_by": "charlie.smith@pigeons.gov.uk", // required string
     "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
     "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+    "personalisation": { // placeholders in the template - empty if none
+        "first_name": {"required": true},
+        "appointment_date": {"required": true},
+        "required_documents": {"required": true}
+    },
     "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
 }
 ```
@@ -1179,6 +1184,11 @@ If the request is successful, the promise resolves with a `response` `object`. F
     "created_by": "charlie.smith@pigeons.gov.uk", // required string
     "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
     "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+    "personalisation": { // placeholders in the template - empty if none
+        "first_name": {"required": true},
+        "appointment_date": {"required": true},
+        "required_documents": {"required": true}
+    },
     "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
 }
 ```
@@ -1237,6 +1247,11 @@ If the request is successful, the promise resolves with a `response` `object`. F
             "created_by": "charlie.smith@pigeons.gov.uk", // required string
             "subject": "Your upcoming pigeon registration appointment",  // required string for email and letter - subject of email / heading of letter
             "body": "Dear ((first_name))\r\n\r\nYour pigeon registration appointment is scheduled for ((appointment_date)).\r\n\r\nPlease bring:\r\n\n\n((required_documents))\r\n\r\nYours,\r\nPigeon Affairs Bureau",  // required string - body of notification
+            "personalisation": { // placeholders in the template - empty if none
+                "first_name": {"required": true},
+                "appointment_date": {"required": true},
+                "required_documents": {"required": true}
+            },
             "letter_contact_block": "Pigeons Affairs Bureau\n10 Whitechapel High Street\nLondon\nE1 8EF" // optional string - present for letter templates where contact block is set, otherwise null
         },
         {
