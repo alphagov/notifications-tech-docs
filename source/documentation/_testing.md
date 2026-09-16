@@ -20,7 +20,7 @@ If you need to [smoke test](https://www.gov.uk/service-manual/technology/deployi
 
 The smoke test phone numbers and email addresses will validate the request and simulate a successful response, but will not send a real message, produce a delivery receipt or persist the notification to the database.
 
-You can use these smoke test numbers and addresses with any [type of API key](#api-keys).
+You can use these smoke test numbers and addresses with a team and live [API key](#api-keys).
 
 You can smoke test all Notify API client functions except:
 
