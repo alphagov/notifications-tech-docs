@@ -1,5 +1,5 @@
 ##### Ruby Build Image ########################################################
-FROM ruby:3.4-slim-bookworm AS ruby_build
+FROM ruby:3.4-slim-trixie AS ruby_build
 
 RUN \
 	echo "Install Debian packages" \
