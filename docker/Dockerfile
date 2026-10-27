@@ -4,6 +4,7 @@ FROM ruby:3.4-slim-trixie AS ruby_build
 RUN \
 	echo "Install Debian packages" \
 	&& apt-get update \
+	&& apt-get upgrade -y \
 	&& apt-get install -y --no-install-recommends \
 		build-essential ruby-dev \
 	&& gem install bundler:2.3.22
@@ -22,6 +23,8 @@ RUN mv build/ production/build/
 
 ##### Production Build Image ##################################################
 FROM nginx:1.25-bookworm AS production
+
+RUN apt-get update && apt-get upgrade -y
 
 RUN mkdir -p /etc/nginx/production_static_files
 
