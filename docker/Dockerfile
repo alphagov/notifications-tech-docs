@@ -22,7 +22,7 @@ RUN bundle exec middleman build
 RUN mv build/ production/build/
 
 ##### Production Build Image ##################################################
-FROM nginx:1.25-bookworm AS production
+FROM nginx:1.31.9-trixie AS production
 
 RUN apt-get update && apt-get upgrade -y
 
